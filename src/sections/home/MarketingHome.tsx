@@ -8,7 +8,7 @@ import { TrustedBySection } from "@/components/sections/home/TrustedBySection";
 
 export function MarketingHome() {
   return (
-    <main id="main">
+    <main id="main" className="home-main">
       <HeroSection />
       <div id="trusted">
         <TrustedBySection />

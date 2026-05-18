@@ -17,11 +17,6 @@
   }
 }
 
-.app-sticky-nav--scrolled {
-  background-color: color-mix(in srgb, color(black) 60%, transparent);
-  backdrop-filter: blur(16px) saturate(1.1);
-}
-
 .app-sticky-nav--inactive {
   pointer-events: none;
 }
@@ -213,7 +208,12 @@ body.has-mobile-nav-open {
   overflow: hidden;
 }
 
-// Offset page content for fixed nav bar
+// Offset page content for the fixed nav bar. The home page hero is
+// full-bleed under a transparent nav, so it opts out of the offset.
 main#main {
   padding-top: spacer(10);
+
+  &.home-main {
+    padding-top: 0;
+  }
 }

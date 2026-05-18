@@ -25,7 +25,8 @@ type AppStickyNavProps = {
   showSectionNumerals?: boolean;
 };
 
-const SCROLL_BLUR_PX = 80;
+// Below this scroll position the nav is always shown (hero in view).
+const SCROLL_REVEAL_TOP_PX = 80;
 
 export function AppStickyNav({
   visible,
@@ -34,11 +35,24 @@ export function AppStickyNav({
 }: AppStickyNavProps) {
   const { pathname, hash } = useNavHash();
   const ink = surface === "ink";
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SCROLL_BLUR_PX);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      // Always visible near the top (over the hero); otherwise hide when
+      // scrolling down and reveal when scrolling up.
+      if (y <= SCROLL_REVEAL_TOP_PX) {
+        setHidden(false);
+      } else if (y > lastY) {
+        setHidden(true);
+      } else if (y < lastY) {
+        setHidden(false);
+      }
+      lastY = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -55,13 +69,19 @@ export function AppStickyNav({
         className={cx(
           "app-sticky-nav",
           ink && "app-sticky-nav--ink",
-          scrolled && "app-sticky-nav--scrolled",
-          !visible && "app-sticky-nav--inactive",
+          (!visible || hidden) && "app-sticky-nav--inactive",
         )}
         initial={false}
-        animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : -10 }}
+        animate={{
+          opacity: visible && !hidden ? 1 : 0,
+          y: visible && !hidden ? 0 : "-100%",
+        }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        aria-hidden={!visible}
+        // When the bar is hidden (scrolled away or not visible) `inert`
+        // takes its links out of the tab order and hides them from
+        // assistive tech, so focus can never land on an off-screen
+        // control. Supersedes aria-hidden + pointer-events:none.
+        inert={!visible || hidden}
       >
         <div className="app-sticky-nav__inner is-flex is-justify-between is-align-start has-gap-3">
           <div className="app-sticky-nav__left is-flex is-flex-column has-gap-2">
@@ -71,7 +91,17 @@ export function AppStickyNav({
               className="app-sticky-nav__wordmark"
               aria-label="Davide Domenghini home"
             >
-              <span className="app-sticky-nav__wordmark-prefix is-accent">{NAV_WORDMARK.prefix}</span>
+              <span
+                className={cx(
+                  "app-sticky-nav__wordmark-prefix",
+                  // accent on the ink nav is 4.42:1 (just under AA for
+                  // 14px text); brand.md rule 89 says use cream for meta
+                  // on ink. accent stays on the light/paper nav.
+                  ink ? "is-cream" : "is-accent",
+                )}
+              >
+                {NAV_WORDMARK.prefix}
+              </span>
               <span className="app-sticky-nav__wordmark-sep"> {NAV_WORDMARK.separator} </span>
               <span className={ink ? "is-white" : "is-text"}>{NAV_WORDMARK.suffix}</span>
             </Link>
