@@ -7,6 +7,8 @@ import { useLenisRef } from "@/components/motion/lenis-context";
 
 type HorizontalScrollSectionProps = {
   children: ReactNode;
+  /** Pinned alongside the track so it stays visible during horizontal scroll. */
+  header?: ReactNode;
   className?: string;
   id?: string;
 };
@@ -18,7 +20,12 @@ function readIsDesktop() {
 }
 
 /** Pin section and map vertical scroll to horizontal movement on desktop (framer-motion). */
-export function HorizontalScrollSection({ children, className, id }: HorizontalScrollSectionProps) {
+export function HorizontalScrollSection({
+  children,
+  header,
+  className,
+  id,
+}: HorizontalScrollSectionProps) {
   const reduceMotion = useReducedMotion();
   const lenisRef = useLenisRef();
   const containerRef = useRef<HTMLElement>(null);
@@ -80,6 +87,7 @@ export function HorizontalScrollSection({ children, className, id }: HorizontalS
   if (!usePinnedScroll) {
     return (
       <section ref={containerRef} id={id} className={cx("horizontal-scroll-section", className)}>
+        {header ? <div className="horizontal-scroll-section__header">{header}</div> : null}
         <motion.div ref={trackRef} className={"horizontal-scroll-section__track"}>
           {children}
         </motion.div>
@@ -99,6 +107,7 @@ export function HorizontalScrollSection({ children, className, id }: HorizontalS
       style={pinHeightStyle}
     >
       <motion.div className={"horizontal-scroll-section__sticky"}>
+        {header ? <div className="horizontal-scroll-section__header">{header}</div> : null}
         <motion.div ref={trackRef} className={"horizontal-scroll-section__track"} style={{ x }}>
           {children}
         </motion.div>

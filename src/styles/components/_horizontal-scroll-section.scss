@@ -14,19 +14,25 @@
   top: var(--site-nav-offset, 0px);
   height: calc(100vh - var(--site-nav-offset, 0px));
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: spacer(5);
   overflow: hidden;
+}
+
+.horizontal-scroll-section__header {
+  flex: 0 0 auto;
 }
 
 .horizontal-scroll-section__track {
   display: flex;
+  align-items: stretch;
   gap: spacer(4);
-  padding: spacer(6) spacer(4);
+  padding-inline: spacer(4);
   width: max-content;
 
   @include max(bp(md)) {
     flex-direction: column;
     width: 100%;
-    padding-inline: spacer(4);
   }
 }
