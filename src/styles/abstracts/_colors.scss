@@ -41,18 +41,5 @@ $theme-colors: (
   @return map-get($theme-colors, $name);
 }
 
-@each $name, $value in $theme-colors {
-  $key: '' + $name;
-
-  .bg-#{$key} {
-    background-color: $value;
-  }
-
-  .is-#{$key} {
-    color: $value;
-  }
-
-  .has-border-#{$key} {
-    border-color: $value;
-  }
-}
+// The .bg-* / .is-* / .has-border-* utility classes are generated from
+// $theme-colors in utilities/_colors.scss. This abstract emits no CSS.

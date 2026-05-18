@@ -27,7 +27,7 @@
 .site-footer__link {
   color: color(cream);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
   cursor: pointer;
 
   &:hover {
@@ -36,13 +36,13 @@
 
   &:focus-visible {
     outline: 2px solid color(accent);
-    outline-offset: 3px;
+    outline-offset: $underline-offset;
   }
 }
 
 .site-footer__footer-link {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
   cursor: pointer;
 
   &:hover {
@@ -51,7 +51,7 @@
 
   &:focus-visible {
     outline: 2px solid color(cream);
-    outline-offset: 3px;
+    outline-offset: $underline-offset;
   }
 }
 

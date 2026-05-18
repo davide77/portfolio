@@ -4,8 +4,8 @@
   position: relative;
   display: grid;
   flex-shrink: 0;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: $control-min-size;
+  height: $control-min-size;
   place-items: center;
 }
 
@@ -14,7 +14,7 @@
   grid-area: 1 / 1;
   font-family: $font-family-headline;
   font-weight: font-weight(semibold);
-  font-size: 1.5rem;
+  font-size: font-size(xl);
   line-height: 1;
   letter-spacing: -0.04em;
   user-select: none;

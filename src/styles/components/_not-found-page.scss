@@ -2,7 +2,7 @@
 
 .not-found-page__link {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
   cursor: pointer;
 
   &:hover {

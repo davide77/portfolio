@@ -30,6 +30,15 @@ $radius-full: 9999px;
 
 // Layout (monopo-style content well, mapped to our system)
 $layout-page-max: 1078px;
+$layout-aside-col: 280px; // Fixed sidebar / thumbnail column width
+$layout-measure: 720px; // Readable text measure / small container
+
+// Minimum accessible interactive control size (WCAG 2.5.8). Used for
+// tap targets across header, nav, brand mark, and contact controls.
+$control-min-size: 44px;
+
+// Project-wide text underline / focus outline offset.
+$underline-offset: 3px;
 
 // Card styling
 $card-border: 1.5px solid color(border);

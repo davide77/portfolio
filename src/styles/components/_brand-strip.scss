@@ -31,7 +31,7 @@
 }
 
 .brand-strip__pill {
-  min-height: 44px;
+  min-height: $control-min-size;
   letter-spacing: 0.01em;
   border-radius: $radius-full;
   border: 1.5px solid color-mix(in srgb, color(primary) 28%, color(border));

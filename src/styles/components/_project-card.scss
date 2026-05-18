@@ -116,7 +116,7 @@
 
   &:hover {
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: $underline-offset;
   }
 
   &:focus-visible {
@@ -126,7 +126,7 @@
 
 .project-card__link-secondary {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
   cursor: pointer;
 
   &:hover {

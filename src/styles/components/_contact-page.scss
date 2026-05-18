@@ -55,7 +55,7 @@
 }
 
 .contact-page__mail-cta {
-  min-height: 44px;
+  min-height: $control-min-size;
   color: color-mix(in srgb, color(cream) 94%, color(primary));
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -73,7 +73,7 @@
 .contact-page__phone-link {
   color: color-mix(in srgb, color(cream) 70%, transparent);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
 
   &:hover {
     color: color(cream);
@@ -91,7 +91,7 @@
   a {
     color: inherit;
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: $underline-offset;
 
     &:hover {
       color: color(cream);

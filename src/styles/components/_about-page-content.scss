@@ -5,7 +5,7 @@
   gap: spacer(6);
 
   @include min(bp(lg)) {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: $layout-aside-col 1fr;
     align-items: start;
   }
 }

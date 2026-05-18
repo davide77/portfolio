@@ -102,7 +102,7 @@ $text-aligns: (left, center, right, justify);
 .measure-52ch { max-width: 52ch; }
 .measure-62ch { max-width: 62ch; }
 .measure-72ch { max-width: 72ch; }
-.max-w-720 { max-width: 720px; }
+.max-w-720 { max-width: $layout-measure; }
 
 .is-mx-auto { margin-inline: auto; }
 .is-inline-block { display: inline-block; }

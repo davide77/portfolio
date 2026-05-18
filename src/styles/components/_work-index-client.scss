@@ -4,7 +4,7 @@
   border: 0;
   background: transparent;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: $underline-offset;
   cursor: pointer;
   color: color(primary);
 
@@ -58,14 +58,14 @@
   color: inherit;
 
   @include min(bp(lg)) {
-    grid-template-columns: auto 1fr 280px;
+    grid-template-columns: auto 1fr $layout-aside-col;
     align-items: start;
   }
 }
 
 .work-index-client__card-reverse .work-index-client__card-link {
   @include min(bp(lg)) {
-    grid-template-columns: auto 1fr 280px;
+    grid-template-columns: auto 1fr $layout-aside-col;
   }
 }
 
@@ -83,5 +83,5 @@
 }
 
 .work-index-client__thumb {
-  max-width: 280px;
+  max-width: $layout-aside-col;
 }

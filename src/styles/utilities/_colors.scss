@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+// Colour utility classes generated from the $theme-colors map.
+// One map change updates every .bg-*, .is-*, .has-border-* class.
+// This loop lives in the utilities layer (where CSS output belongs);
+// abstracts/_colors.scss holds only the map and the color() accessor
+// so abstracts emits zero CSS.
+@each $name, $value in $theme-colors {
+  $key: '' + $name;
+
+  .bg-#{$key} {
+    background-color: $value;
+  }
+
+  .is-#{$key} {
+    color: $value;
+  }
+
+  .has-border-#{$key} {
+    border-color: $value;
+  }
+}
