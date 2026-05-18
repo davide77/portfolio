@@ -1,5 +1,5 @@
 export const ABOUT_PAGE = {
-  eyebrow: "About",
+  eyebrow: "Who you'd be hiring",
   cvLabel: "Download CV (PDF)",
   timelineTitle: "Career timeline",
   headline: "Twenty years of front-end work. Still sweating the details.",

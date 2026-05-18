@@ -8,15 +8,15 @@ export const HOME_SECTIONS = {
     cta: "View all work",
   },
   capabilities: {
-    eyebrow: "03 - Capabilities",
-    title: "Capabilities",
+    eyebrow: "03 - What I ship",
+    title: "What I ship",
   },
   manifesto: {
-    eyebrow: "04 - Approach",
+    eyebrow: "04 - How I work",
     cta: PROFILE.manifestoCta,
   },
   closing: {
-    eyebrow: "05 - Contact",
+    eyebrow: "05 - Work with me",
   },
 } as const;
 
@@ -31,13 +31,13 @@ export const FEATURED_WORK_SECTION = {
 export const BRAND_STRIP = { title: "", kicker: "", names: TRUSTED_BY_CLIENTS } as const;
 export const ABOUT_SECTION = { title: "About", paragraphs: [PROFILE.subhead] as const };
 export const EXPERIENCE_SECTION = {
-  title: "Experience",
+  title: "Where I have shipped",
   ariaLabel: "About and experience",
   intro: "",
   items: [] as readonly { period: string; title: string; org: string; summary: string }[],
 };
 export const SKILLS_SECTION = {
-  title: "Skills",
+  title: "The stack I work in",
   groups: [] as readonly { title: string; items: readonly string[] }[],
 };
 export const CONTACT_SECTION = {
