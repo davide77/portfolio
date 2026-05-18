@@ -4,7 +4,7 @@
 
 ## Positioning
 
-> **Senior front-end engineer who ships full products, not just screens.**
+> **Senior front-end engineer who ships whole products, end to end.**
 >
 > London-based. Twenty years in high-traffic web work, now leading own products (Nannynow) and flagship sites (Striver.Football, Cheam Sports FC) with the same rigour as enterprise lending and luxury retail.
 
