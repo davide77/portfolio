@@ -1,10 +1,15 @@
 @use '../abstracts' as *;
 
+.about-page-content {
+  container-type: inline-size;
+  container-name: about-content;
+}
+
 .about-page-content__hero {
   display: grid;
   gap: spacer(6);
 
-  @include min(bp(lg)) {
+  @include container-min(about-content, 900px) {
     grid-template-columns: $layout-aside-col 1fr;
     align-items: start;
   }
@@ -59,7 +64,7 @@
   display: grid;
   gap: spacer(4);
 
-  @include min(bp(md)) {
+  @include container-min(about-content, 600px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }

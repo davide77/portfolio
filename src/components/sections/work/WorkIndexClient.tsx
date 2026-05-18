@@ -22,7 +22,7 @@ export function WorkIndexClient() {
   );
 
   return (
-    <div className="container-atmosphere has-py-8">
+    <div className="work-index-client container-atmosphere has-py-8">
       <EyebrowLabel>{WORK_INDEX.eyebrow}</EyebrowLabel>
       <DisplayText as="h1" className="has-mt-4">
         {WORK_INDEX.headline}

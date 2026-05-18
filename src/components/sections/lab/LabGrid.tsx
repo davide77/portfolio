@@ -6,13 +6,15 @@ import { cx } from "@/components/cx";
 
 export function LabGrid() {
   return (
-    <ul className={"lab-grid__grid"}>
-      {EXPERIMENTS.map((exp) => (
-        <li key={exp.id}>
-          <LabTile experiment={exp} />
-        </li>
-      ))}
-    </ul>
+    <div className={"lab-grid"}>
+      <ul className={"lab-grid__grid"}>
+        {EXPERIMENTS.map((exp) => (
+          <li key={exp.id}>
+            <LabTile experiment={exp} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

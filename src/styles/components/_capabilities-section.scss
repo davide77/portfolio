@@ -2,6 +2,8 @@
 
 .capabilities-section {
   padding-block: spacer(8);
+  container-type: inline-size;
+  container-name: capabilities;
 }
 
 .capabilities-section__grid {
@@ -11,11 +13,11 @@
   list-style: none;
   padding: 0;
 
-  @include min(bp(md)) {
+  @include container-min(capabilities, 600px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include min(bp(lg)) {
+  @include container-min(capabilities, 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -47,16 +47,18 @@
 .featured-work__stack {
   position: relative;
   z-index: 1;
+  container-type: inline-size;
+  container-name: featured-work;
 }
 
 .featured-work__grid {
   grid-template-columns: 1fr;
 
-  @include min(bp(md)) {
+  @include container-min(featured-work, 600px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include min(bp(lg)) {
+  @include container-min(featured-work, 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
 }

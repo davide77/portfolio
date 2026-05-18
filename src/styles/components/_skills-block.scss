@@ -4,16 +4,18 @@
   padding-block: spacer(11);
   background-color: transparent;
   color: color(cream);
+  container-type: inline-size;
+  container-name: skills;
 }
 
 .skills-block__grid {
   grid-template-columns: 1fr;
 
-  @include min(bp(md)) {
+  @include container-min(skills, 600px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include min(bp(lg)) {
+  @include container-min(skills, 900px) {
     grid-template-columns: repeat(4, 1fr);
   }
 }

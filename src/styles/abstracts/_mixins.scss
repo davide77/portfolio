@@ -14,6 +14,22 @@
   }
 }
 
+/// Container query for reusable components. They respond to their own
+/// container's inline size, not the viewport (the documented
+/// architecture). The wrapper must set `container-type: inline-size`
+/// and a `container-name`; pass that name and the min inline size.
+@mixin container-min($name, $size) {
+  @container #{$name} (min-width: #{$size}) {
+    @content;
+  }
+}
+
+@mixin container-max($name, $size) {
+  @container #{$name} (max-width: #{$size - 1}) {
+    @content;
+  }
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;

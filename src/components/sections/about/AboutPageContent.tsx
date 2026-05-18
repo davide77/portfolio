@@ -11,7 +11,7 @@ import { ROUTES } from "@/constants/routes";
 
 export function AboutPageContent() {
   return (
-    <div className="container-atmosphere has-py-8 is-flex is-flex-column has-gap-10">
+    <div className="about-page-content container-atmosphere has-py-8 is-flex is-flex-column has-gap-10">
       <section className={"about-page-content__hero"}>
         <div className={"about-page-content__portrait"}>
           <Image

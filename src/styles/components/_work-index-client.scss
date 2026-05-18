@@ -1,5 +1,10 @@
 @use '../abstracts' as *;
 
+.work-index-client {
+  container-type: inline-size;
+  container-name: work-index;
+}
+
 .work-index-client__filter-toggle {
   border: 0;
   background: transparent;
@@ -57,14 +62,14 @@
   text-decoration: none;
   color: inherit;
 
-  @include min(bp(lg)) {
+  @include container-min(work-index, 900px) {
     grid-template-columns: auto 1fr $layout-aside-col;
     align-items: start;
   }
 }
 
 .work-index-client__card-reverse .work-index-client__card-link {
-  @include min(bp(lg)) {
+  @include container-min(work-index, 900px) {
     grid-template-columns: auto 1fr $layout-aside-col;
   }
 }
