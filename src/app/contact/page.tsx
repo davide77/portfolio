@@ -20,7 +20,7 @@ export default function ContactPage() {
     <main id="main" className="container-atmosphere has-py-8">
       <header className="is-flex is-flex-column has-gap-3 has-mb-8">
         <h1 className={"contact-page__headline"}>{CONTACT_PAGE.headline}</h1>
-        <StatusPill label={PROFILE.availabilityLabel} />
+        <StatusPill label={PROFILE.availabilityLabel} tone="paper" />
         <p className="text-sm is-text-muted">{CONTACT_PAGE.responseTime}</p>
       </header>
 

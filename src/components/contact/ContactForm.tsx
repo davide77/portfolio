@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CONTACT_PAGE } from "@/constants/content/contact-page";
-import { cx } from "@/components/cx";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -21,6 +20,7 @@ type FormValues = z.infer<typeof schema>;
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const {
     register,
     handleSubmit,
@@ -37,10 +37,20 @@ export function ContactForm() {
     setStatus(res.ok ? "success" : "error");
   };
 
+  // Move focus to the success heading so screen-reader and keyboard
+  // users are told the submission worked (the form is swapped out).
+  useEffect(() => {
+    if (status === "success") {
+      successHeadingRef.current?.focus();
+    }
+  }, [status]);
+
   if (status === "success") {
     return (
-      <div className={"contact-form__success"}>
-        <h2 className="text-3xl">{CONTACT_PAGE.form.successTitle}</h2>
+      <div className={"contact-form__success"} role="status">
+        <h2 className="text-3xl" ref={successHeadingRef} tabIndex={-1}>
+          {CONTACT_PAGE.form.successTitle}
+        </h2>
         <p className="text-lg">{CONTACT_PAGE.form.successBody}</p>
       </div>
     );
@@ -56,22 +66,52 @@ export function ContactForm() {
         aria-hidden
         {...register("website")}
       />
-      <label className={"contact-form__field"}>
-        <span>{CONTACT_PAGE.form.nameLabel}</span>
-        <input type="text" {...register("name")} />
-        {errors.name ? <span className={"contact-form__error"}>{errors.name.message}</span> : null}
-      </label>
-      <label className={"contact-form__field"}>
-        <span>{CONTACT_PAGE.form.emailLabel}</span>
-        <input type="email" {...register("email")} />
-        {errors.email ? <span className={"contact-form__error"}>{errors.email.message}</span> : null}
-      </label>
-      <label className={"contact-form__field"}>
-        <span>{CONTACT_PAGE.form.companyLabel}</span>
-        <input type="text" {...register("company")} />
-      </label>
+      <div className={"contact-form__field"}>
+        <label htmlFor="contact-name">
+          <span>{CONTACT_PAGE.form.nameLabel}</span>{" "}
+          <span className="contact-form__required">{CONTACT_PAGE.form.requiredHint}</span>
+        </label>
+        <input
+          id="contact-name"
+          type="text"
+          aria-required="true"
+          aria-invalid={errors.name ? "true" : undefined}
+          aria-describedby={errors.name ? "contact-name-error" : undefined}
+          {...register("name")}
+        />
+        {errors.name ? (
+          <span id="contact-name-error" className={"contact-form__error"} role="alert">
+            {errors.name.message}
+          </span>
+        ) : null}
+      </div>
+      <div className={"contact-form__field"}>
+        <label htmlFor="contact-email">
+          <span>{CONTACT_PAGE.form.emailLabel}</span>{" "}
+          <span className="contact-form__required">{CONTACT_PAGE.form.requiredHint}</span>
+        </label>
+        <input
+          id="contact-email"
+          type="email"
+          aria-required="true"
+          aria-invalid={errors.email ? "true" : undefined}
+          aria-describedby={errors.email ? "contact-email-error" : undefined}
+          {...register("email")}
+        />
+        {errors.email ? (
+          <span id="contact-email-error" className={"contact-form__error"} role="alert">
+            {errors.email.message}
+          </span>
+        ) : null}
+      </div>
+      <div className={"contact-form__field"}>
+        <label htmlFor="contact-company">
+          <span>{CONTACT_PAGE.form.companyLabel}</span>
+        </label>
+        <input id="contact-company" type="text" {...register("company")} />
+      </div>
       <fieldset className={"contact-form__field"}>
-        <legend className="text-sm has-font-medium">Project type</legend>
+        <legend className="text-sm has-font-medium">{CONTACT_PAGE.form.projectTypeLabel}</legend>
         <div className={"contact-form__chips"}>
           {CONTACT_PAGE.form.projectTypes.map((type) => (
             <label key={type} className={"contact-form__chip"}>
@@ -81,20 +121,38 @@ export function ContactForm() {
           ))}
         </div>
       </fieldset>
-      <label className={"contact-form__field"}>
-        <span>{CONTACT_PAGE.form.messageLabel}</span>
-        <textarea rows={5} {...register("message")} />
-        {errors.message ? <span className={"contact-form__error"}>{errors.message.message}</span> : null}
-      </label>
-      <label className={"contact-form__field"}>
-        <span>{CONTACT_PAGE.form.budgetLabel}</span>
-        <input type="text" {...register("budget")} />
-      </label>
+      <div className={"contact-form__field"}>
+        <label htmlFor="contact-message">
+          <span>{CONTACT_PAGE.form.messageLabel}</span>{" "}
+          <span className="contact-form__required">{CONTACT_PAGE.form.requiredHint}</span>
+        </label>
+        <textarea
+          id="contact-message"
+          rows={5}
+          aria-required="true"
+          aria-invalid={errors.message ? "true" : undefined}
+          aria-describedby={errors.message ? "contact-message-error" : undefined}
+          {...register("message")}
+        />
+        {errors.message ? (
+          <span id="contact-message-error" className={"contact-form__error"} role="alert">
+            {errors.message.message}
+          </span>
+        ) : null}
+      </div>
+      <div className={"contact-form__field"}>
+        <label htmlFor="contact-budget">
+          <span>{CONTACT_PAGE.form.budgetLabel}</span>
+        </label>
+        <input id="contact-budget" type="text" {...register("budget")} />
+      </div>
       <button type="submit" className={"contact-form__submit"} disabled={isSubmitting} data-magnetic data-cursor-text="Send">
         {CONTACT_PAGE.form.submitLabel}
       </button>
       {status === "error" ? (
-        <p className={"contact-form__error"}>Something went wrong. Email davide@domenghini.com directly.</p>
+        <p className={"contact-form__error"} role="alert">
+          {CONTACT_PAGE.form.errorBody}
+        </p>
       ) : null}
     </form>
   );

@@ -18,6 +18,10 @@ html[data-theme='paper'] body {
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  // Keep anchored and focused content clear of the fixed sticky nav so
+  // it is never obscured behind the bar (WCAG 2.2 SC 2.4.11). Matches
+  // the nav offset applied to main#main.
+  scroll-padding-top: spacer(10);
 }
 
 @media (prefers-reduced-motion: reduce) {

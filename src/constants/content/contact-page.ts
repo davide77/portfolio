@@ -1,3 +1,5 @@
+import { SITE } from "@/constants/site";
+
 export const CONTACT_PAGE = {
   headline: "Let's build something.",
   responseTime: "I reply within 24 hours, weekdays.",
@@ -25,6 +27,9 @@ export const CONTACT_PAGE = {
     messageLabel: "Message",
     budgetLabel: "Budget (optional)",
     submitLabel: "Send brief",
+    projectTypeLabel: "Project type",
+    requiredHint: "(required)",
+    errorBody: `Something went wrong. Email ${SITE.email} directly.`,
     successTitle: "Message received.",
     successBody: "I will reply within one working day.",
     projectTypes: [

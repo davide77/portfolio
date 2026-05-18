@@ -23,7 +23,7 @@
   input,
   textarea {
     padding: spacer(3);
-    border: 1px solid color(border);
+    border: 1px solid color(control-border);
     border-radius: $radius-sm;
     font-family: $font-family-body;
     font-size: font-size(base);
@@ -46,7 +46,7 @@
   align-items: center;
   gap: spacer(1);
   padding: spacer(1) spacer(3);
-  border: 1px solid color(border);
+  border: 1px solid color(control-border);
   border-radius: $radius-full;
   font-size: font-size(sm);
   cursor: pointer;
@@ -71,8 +71,13 @@
   }
 }
 
+.contact-form__required {
+  color: color(text-muted);
+  font-size: font-size(sm);
+}
+
 .contact-form__error {
-  color: color(accent);
+  color: color(accent-strong);
   font-size: font-size(sm);
 }
 

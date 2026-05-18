@@ -69,11 +69,12 @@ All HEX values are canonical. Mirror them exactly in [src/styles/abstracts/_colo
 ### Secondary (complementary, smaller scale)
 
 - **White** `#ffffff` - cards, raised surfaces.
-- **Stone** `#6f6a63` - secondary text on light surfaces.
+- **Stone** `#6f6a63` - secondary text on light surfaces. Also the **control border** colour: the hairline `border #e0dbd4` is decorative only and fails the 3:1 a non-text UI boundary needs (WCAG 1.4.11), so interactive control bounds (inputs, chips, secondary buttons) use Stone instead (5.36:1 on white).
 
 ### Accents (subtle, never on logo)
 
-- **Signal** `#c45c3e` - small highlights, hover emphasis, micro-labels on **light** surfaces only.
+- **Signal** `#c45c3e` - small highlights, hover emphasis, micro-labels on **light** surfaces only. Use for large text and non-text accents; it does not meet 4.5:1 for normal-size body text.
+- **Signal strong** `#b04f33` - the accessible-text shade of Signal, derived for normal-size text on white or paper (5.23:1 on white, 4.65:1 on paper). Used for form error text and the skip-link surface. Same hue family as Signal, only darker for contrast; not a new brand colour.
 
 ### Hero orb (WebGL only)
 

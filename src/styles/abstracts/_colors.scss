@@ -12,6 +12,10 @@ $theme-colors: (
 
   // Accents
   accent:       #c45c3e,
+  // Darker accent for normal-size text on white/cream (WCAG 1.4.3:
+  // 5.23:1 on white, 4.65:1 on cream). Use accent itself only for
+  // large text and non-text.
+  accent-strong: #b04f33,
 
   // Hero orb (WebGL shader material only - never type/UI/washes)
   orb-void:     #000000,
@@ -23,6 +27,10 @@ $theme-colors: (
   text:         #101214,
   text-muted:   #6f6a63,
   border:       #e0dbd4,
+  // Decorative hairline border only. For interactive control bounds
+  // (inputs, chips, secondary buttons) use control-border, which
+  // reaches the 3:1 the border colour cannot (WCAG 1.4.11).
+  control-border: #6f6a63,
 );
 
 @function color($name) {

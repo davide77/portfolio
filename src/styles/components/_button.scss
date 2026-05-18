@@ -48,7 +48,7 @@
 .button--secondary {
   background-color: color(white);
   color: color(text);
-  border: 1.5px solid color(border);
+  border: 1.5px solid color(control-border);
 
   &:hover:not(:disabled) {
     border-color: color(text);

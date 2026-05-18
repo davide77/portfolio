@@ -19,7 +19,7 @@ export default function StyleguidePage() {
       <section className="is-flex is-flex-column has-gap-3">
         <EyebrowLabel>01 - Component preview</EyebrowLabel>
         <DisplayText as="h2">{PROFILE.headline}</DisplayText>
-        <StatusPill label={PROFILE.availabilityLabel} />
+        <StatusPill label={PROFILE.availabilityLabel} tone="paper" />
         <MagneticButton href={BOOKING_URL} cursorText="Book" external>
           Book a call
         </MagneticButton>

@@ -6,8 +6,19 @@
   gap: spacer(2);
   padding: spacer(1) spacer(3);
   border-radius: $radius-full;
+}
+
+// Dark surfaces (footer, closing CTA): cream on ink reads at 16.7:1.
+.status-pill--ink {
   border: 1px solid color-mix(in srgb, color(cream) 25%, transparent);
   color: color(cream);
+}
+
+// Light surfaces (contact, styleguide): cream on white is invisible
+// (1.13:1), so use body text on the accessible control border instead.
+.status-pill--paper {
+  border: 1px solid color(control-border);
+  color: color(text);
 }
 
 .status-pill__dot {
