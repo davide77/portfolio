@@ -2,92 +2,127 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { cx } from "@/components/cx";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { useSiteTheme } from "@/components/theme/ThemeProvider";
+import { SectionNumerals } from "@/components/ui/SectionNumerals";
+import { MobileNavMenu } from "@/components/nav/MobileNavMenu";
+import { isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
 import { BOOKING_URL } from "@/constants/config";
-import { HEADER_CTA, PRIMARY_NAV } from "@/constants/nav";
+import {
+  HEADER_CTA,
+  MOBILE_NAV,
+  NAV_WORDMARK,
+  PRIMARY_NAV,
+} from "@/constants/nav";
 import { ROUTES } from "@/constants/routes";
-import { SITE } from "@/constants/site";
-import { isNavItemActive, useNavHash } from "./useNavHash";
-import styles from "./AppStickyNav.module.scss";
 
 type NavSurface = "paper" | "ink";
 
 type AppStickyNavProps = {
   visible: boolean;
   surface?: NavSurface;
+  showSectionNumerals?: boolean;
 };
 
-export function AppStickyNav({ visible, surface = "paper" }: AppStickyNavProps) {
+const SCROLL_BLUR_PX = 80;
+
+export function AppStickyNav({
+  visible,
+  surface = "paper",
+  showSectionNumerals = false,
+}: AppStickyNavProps) {
   const { pathname, hash } = useNavHash();
-  const { theme, toggleTheme } = useSiteTheme();
   const ink = surface === "ink";
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_BLUR_PX);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("has-mobile-nav-open", menuOpen);
+    return () => document.body.classList.remove("has-mobile-nav-open");
+  }, [menuOpen]);
 
   return (
-    <motion.header
-      className={cx(styles.root, ink ? styles.rootInk : styles.rootPaper)}
-      initial={false}
-      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : -8 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      style={{ pointerEvents: visible ? "auto" : "none" }}
-      aria-hidden={!visible}
-    >
-      <div
+    <>
+      <motion.header
         className={cx(
-          styles.inner,
-          "is-flex is-justify-between is-align-center is-flex-wrap has-gap-3",
+          "app-sticky-nav",
+          ink && "app-sticky-nav--ink",
+          scrolled && "app-sticky-nav--scrolled",
+          !visible && "app-sticky-nav--inactive",
         )}
+        initial={false}
+        animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : -10 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        aria-hidden={!visible}
       >
-        <Link
-          href={ROUTES.home}
-          className={cx(styles.brand, "is-flex is-align-center has-gap-3", ink ? styles.brandInk : styles.brandPaper)}
-          aria-label={`${SITE.name} home`}
-        >
-          <span className={cx(styles.mark, ink ? styles.markInk : styles.markPaper)}>{SITE.monogram}</span>
-          <span className={cx(styles.wordmark, "text-lg has-font-semibold")}>{SITE.name}</span>
-        </Link>
-        <nav aria-label="Primary" className={cx(styles.nav, "is-flex is-align-center has-gap-2")}>
-          {PRIMARY_NAV.map((item) => {
-            const active = isNavItemActive(item.href, pathname, hash);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cx(
-                  styles.navLink,
-                  "is-inline-flex is-align-center text-sm has-font-medium has-px-2",
-                  ink ? styles.navLinkInk : styles.navLinkPaper,
-                  active &&
-                    (ink
-                      ? cx(styles.navLinkActiveInk, "is-cream has-font-semibold")
-                      : cx(styles.navLinkActivePaper, "is-primary has-font-semibold")),
-                )}
-                aria-current={active ? "page" : undefined}
+        <div className="app-sticky-nav__inner is-flex is-justify-between is-align-start has-gap-3">
+          <div className="app-sticky-nav__left is-flex is-flex-column has-gap-2">
+            {showSectionNumerals ? <SectionNumerals className="app-sticky-nav__numerals" /> : null}
+            <Link
+              href={ROUTES.home}
+              className="app-sticky-nav__wordmark"
+              aria-label="Davide Domenghini home"
+            >
+              <span className="app-sticky-nav__wordmark-prefix is-accent">{NAV_WORDMARK.prefix}</span>
+              <span className="app-sticky-nav__wordmark-sep"> {NAV_WORDMARK.separator} </span>
+              <span className={ink ? "is-white" : "is-text"}>{NAV_WORDMARK.suffix}</span>
+            </Link>
+          </div>
+
+          <div className="app-sticky-nav__right">
+            <nav className="app-sticky-nav__nav is-flex is-align-center" aria-label="Primary">
+              <ul className="app-sticky-nav__nav-list is-flex is-flex-column has-gap-1">
+                {PRIMARY_NAV.map((item) => {
+                  const active = isNavItemActive(item.href, pathname, hash);
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={cx(
+                          "app-sticky-nav__nav-link",
+                          "uppercase",
+                          active && "app-sticky-nav__nav-link--active",
+                          ink ? "app-sticky-nav__nav-link--ink" : "app-sticky-nav__nav-link--paper",
+                        )}
+                        data-magnetic
+                        aria-current={active ? "page" : undefined}
+                      >
+                        {active ? <span className="app-sticky-nav__active-dot" aria-hidden /> : null}
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <MagneticButton
+                href={BOOKING_URL}
+                variant={ink ? "ghostOnInk" : "primary"}
+                cursorText={HEADER_CTA.cursorText}
+                external
+                className="app-sticky-nav__book-cta"
               >
-                {item.label}
-              </Link>
-            );
-          })}
-          <button
-            type="button"
-            className={cx(styles.themeToggle, "text-sm has-font-medium")}
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === "paper" ? "ink" : "paper"} theme`}
-          >
-            {theme === "paper" ? "Ink" : "Paper"}
-          </button>
-          <MagneticButton
-            href={BOOKING_URL}
-            variant={ink ? "ghostOnInk" : "primary"}
-            cursorText={HEADER_CTA.cursorText}
-            external
-            className={styles.bookCta}
-          >
-            {HEADER_CTA.label}
-          </MagneticButton>
-        </nav>
-      </div>
-    </motion.header>
+                {HEADER_CTA.label}
+              </MagneticButton>
+            </nav>
+            <button
+              type="button"
+              className="app-sticky-nav__burger"
+              onClick={() => setMenuOpen(true)}
+              aria-expanded={menuOpen}
+              aria-label={MOBILE_NAV.openLabel}
+            />
+          </div>
+        </div>
+      </motion.header>
+      <MobileNavMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+    </>
   );
 }

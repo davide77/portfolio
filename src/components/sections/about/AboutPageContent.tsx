@@ -8,19 +8,18 @@ import { ABOUT_PAGE } from "@/constants/content/about-page";
 import { TIMELINE } from "@/constants/content/timeline";
 import { CV_PDF_PATH } from "@/constants/config";
 import { ROUTES } from "@/constants/routes";
-import styles from "./AboutPageContent.module.scss";
 
 export function AboutPageContent() {
   return (
     <div className="container-atmosphere has-py-8 is-flex is-flex-column has-gap-10">
-      <section className={styles.hero}>
-        <div className={styles.portrait}>
+      <section className={"about-page-content__hero"}>
+        <div className={"about-page-content__portrait"}>
           <Image
             src={ABOUT_PAGE.portraitSrc}
             alt={ABOUT_PAGE.portraitAlt}
             width={480}
             height={600}
-            className={styles.portraitImg}
+            className={"about-page-content__portrait-img"}
             priority
           />
         </div>
@@ -39,11 +38,11 @@ export function AboutPageContent() {
       </section>
 
       {ABOUT_PAGE.principles.map((principle) => (
-        <section key={principle.id} id={principle.id} className={styles.principle}>
+        <section key={principle.id} id={principle.id} className={"about-page-content__principle"}>
           <StickyScene
             headline={principle.title}
             paragraphs={[principle.body]}
-            className={styles.stickyScene}
+            className={"about-page-content__sticky-scene"}
           />
         </section>
       ))}
@@ -52,10 +51,10 @@ export function AboutPageContent() {
         <h2 id="timeline-title" className="text-3xl">
           Career timeline
         </h2>
-        <ol className={styles.timeline}>
+        <ol className={"about-page-content__timeline"}>
           {TIMELINE.map((entry) => (
-            <li key={`${entry.year}-${entry.company}`} className={styles.timelineItem}>
-              <span className={styles.timelineYear}>{entry.year}</span>
+            <li key={`${entry.year}-${entry.company}`} className={"about-page-content__timeline-item"}>
+              <span className={"about-page-content__timeline-year"}>{entry.year}</span>
               <div>
                 <h3 className="text-lg has-font-semibold">{entry.company}</h3>
                 <p className="text-sm is-text-muted">{entry.role}</p>
@@ -73,7 +72,7 @@ export function AboutPageContent() {
 
       <section>
         <h2 className="text-2xl">{ABOUT_PAGE.tools.title}</h2>
-        <ul className={styles.tools}>
+        <ul className={"about-page-content__tools"}>
           {ABOUT_PAGE.tools.groups.map((group) => (
             <li key={group.label}>
               <h3 className="text-sm has-font-semibold uppercase">{group.label}</h3>

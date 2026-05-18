@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davide Domenghini — Senior Front-End Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       VISUAL DIRECTION — sharp, defined, high-contrast.
+       NO canvas blur. NO ambient warm wash. NO soft halo bleed.
+       The shader carries the entire look — do not add filters.
+       ============================================================ */
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #020100; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: white; }
+
+    .hero { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+    /* Canvas — NO filter:blur(), NO ambient gradients */
+    #webgl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; }
+
+    nav {
+      position: absolute; top: 40px; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 0 48px; z-index: 10; pointer-events: none;
+    }
+    .wordmark { font-size: 14px; letter-spacing: 0.02em; font-weight: 400; }
+    .wordmark .accent { color: #e89548; }
+    .wordmark .name { opacity: 0.9; margin-left: 8px; }
+    .lang { font-size: 11px; letter-spacing: 0.2em; opacity: 0.7; padding-top: 2px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .lang .muted { opacity: 0.5; }
+    .right-nav { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; font-size: 11px; letter-spacing: 0.18em; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .right-nav .cta {
+      margin-top: 12px; padding: 8px 18px;
+      border: 0.5px solid rgba(255,255,255,0.45);
+      border-radius: 99px; pointer-events: auto; cursor: pointer;
+      transition: all 240ms ease;
+    }
+    .right-nav .cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.85); }
+
+    .hero-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; text-align: center; max-width: 80%; pointer-events: none; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.32em; opacity: 0.55; margin-bottom: 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .display { font-size: clamp(2.2rem, 5.5vw, 5rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.05; }
+    .display em { font-style: italic; font-weight: 300; }
+
+    .scroll-badge { position: absolute; bottom: 40px; left: 40px; width: 90px; height: 90px; z-index: 10; }
+    .scroll-badge svg { width: 100%; height: 100%; animation: spin 18s linear infinite; }
+    .scroll-badge text { fill: rgba(255,255,255,0.75); font-size: 9px; letter-spacing: 2.5px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .scroll-badge .dot { position: absolute; top: 50%; left: 50%; width: 5px; height: 5px; background: white; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+
+    .vertical-text {
+      position: absolute; right: -40px; top: 50%;
+      transform: rotate(90deg); transform-origin: center;
+      font-size: 10px; letter-spacing: 0.45em; opacity: 0.4;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      white-space: nowrap; z-index: 10;
+    }
+
+    .floating-dot {
+      position: absolute; top: 30%; right: 14%;
+      width: 5px; height: 5px; background: white; border-radius: 50%;
+      box-shadow: 0 0 12px rgba(255,255,255,0.6);
+      animation: float 4s ease-in-out infinite; z-index: 5;
+    }
+
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; } 50% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.5; } }
+    @keyframes float { 0%,100% { transform: translate(0, 0); } 50% { transform: translate(16px, -20px); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-badge svg, .scroll-badge .dot, .floating-dot { animation: none; }
+      #webgl { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero">
+    <canvas id="webgl"></canvas>
+
+    <nav>
+      <div class="wordmark"><span class="accent">dd</span><span class="name">domenghini</span></div>
+      <div class="lang">|&nbsp;&nbsp;EN&nbsp;&nbsp;·&nbsp;&nbsp;<span class="muted">IT</span></div>
+      <div class="right-nav">
+        <div>WORK</div>
+        <div>ABOUT</div>
+        <div>LAB</div>
+        <div>CONTACT</div>
+        <div class="cta">Book a call</div>
+      </div>
+    </nav>
+
+    <div class="hero-text">
+      <div class="eyebrow">01 — SENIOR FRONT-END · FOUNDER</div>
+      <div class="display">Frontend that <em>ships</em><br/>product, not just code.</div>
+    </div>
+
+    <div class="scroll-badge">
+      <svg viewBox="0 0 100 100">
+        <defs>
+          <path id="circle-path" d="M 50, 50 m -36, 0 a 36, 36 0 1, 1 72, 0 a 36, 36 0 1, 1 -72, 0" fill="none" />
+        </defs>
+        <text><textPath href="#circle-path">SCROLL DOWN · SCROLL DOWN · </textPath></text>
+      </svg>
+      <div class="dot"></div>
+    </div>
+
+    <div class="vertical-text">EST · 2006 — LONDON · ROMA</div>
+    <div class="floating-dot"></div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      /* ============================================================
+         TUNING DIALS
+         ============================================================ */
+      const CONFIG = {
+        // Composition — asymmetric off-frame planets
+        d1: { pos: [-1.3, 0.4, 0.3],  rot: 0.18,  scale: 2.3 },
+        d2: { pos: [ 1.7, -0.5, -0.4], rot: -0.28, scale: 1.8 },
+
+        // Colour palette — pure black core, hot rim peaks (high contrast)
+        colorCore:   0x000000,
+        colorMid:    0x2c1505,
+        colorBright: 0xd07a25,
+        colorRim:    0xffc080,
+
+        // Motion
+        parallaxStrength: 0.06,
+        parallaxLerp: 0.02,
+        wobbleAmp: 0.15,
+      };
+
+      const canvas = document.getElementById('webgl');
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+      camera.position.set(0, 0, 8);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      // Bumped to 3 for sharpness — DO NOT lower
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 3));
+      renderer.setSize(width, height);
+      renderer.setClearColor(0x000000, 0);
+
+      /* ---------- D-shape geometry — SMALL bevel for sharp edges ---------- */
+      function makeDShape() {
+        const shape = new THREE.Shape();
+        shape.moveTo(-0.7, 1.2);
+        shape.lineTo(-0.1, 1.2);
+        shape.bezierCurveTo(0.55, 1.2, 1.0, 0.65, 1.0, 0);
+        shape.bezierCurveTo(1.0, -0.65, 0.55, -1.2, -0.1, -1.2);
+        shape.lineTo(-0.7, -1.2);
+        shape.lineTo(-0.7, 1.2);
+        const hole = new THREE.Path();
+        hole.moveTo(-0.35, 0.82);
+        hole.lineTo(-0.1, 0.82);
+        hole.bezierCurveTo(0.3, 0.82, 0.65, 0.45, 0.65, 0);
+        hole.bezierCurveTo(0.65, -0.45, 0.3, -0.82, -0.1, -0.82);
+        hole.lineTo(-0.35, -0.82);
+        hole.lineTo(-0.35, 0.82);
+        shape.holes.push(hole);
+        return shape;
+      }
+
+      const dGeometry = new THREE.ExtrudeGeometry(makeDShape(), {
+        depth: 0.5,
+        bevelEnabled: true,
+        bevelSegments: 6,
+        bevelSize: 0.06,           // KEEP SMALL — large bevels = soft edges
+        bevelThickness: 0.06,
+        curveSegments: 40,
+      });
+      dGeometry.center();
+
+      /* ---------- Shaders ---------- */
+      const noiseGLSL = `
+        vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+        vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+        float snoise(vec3 v){
+          const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+          const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+          vec3 i = floor(v + dot(v, C.yyy));
+          vec3 x0 = v - i + dot(i, C.xxx);
+          vec3 g = step(x0.yzx, x0.xyz);
+          vec3 l = 1.0 - g;
+          vec3 i1 = min(g.xyz, l.zxy);
+          vec3 i2 = max(g.xyz, l.zxy);
+          vec3 x1 = x0 - i1 + C.xxx;
+          vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+          vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+          i = mod(i, 289.0);
+          vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+          float n_ = 1.0/7.0;
+          vec3 ns = n_ * D.wyz - D.xzx;
+          vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+          vec4 x_ = floor(j * ns.z);
+          vec4 y_ = floor(j - 7.0 * x_);
+          vec4 x = x_ * ns.x + ns.yyyy;
+          vec4 y = y_ * ns.x + ns.yyyy;
+          vec4 h = 1.0 - abs(x) - abs(y);
+          vec4 b0 = vec4(x.xy, y.xy);
+          vec4 b1 = vec4(x.zw, y.zw);
+          vec4 s0 = floor(b0)*2.0 + 1.0;
+          vec4 s1 = floor(b1)*2.0 + 1.0;
+          vec4 sh = -step(h, vec4(0.0));
+          vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+          vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+          vec3 p0 = vec3(a0.xy, h.x);
+          vec3 p1 = vec3(a0.zw, h.y);
+          vec3 p2 = vec3(a1.xy, h.z);
+          vec3 p3 = vec3(a1.zw, h.w);
+          vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+          p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+          vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+          m = m * m;
+          return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+        }
+      `;
+
+      const vertexShader = `
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        varying vec3 vViewPosition;
+        uniform float uTime;
+        ${noiseGLSL}
+        void main() {
+          float n = snoise(position * 0.5 + vec3(uTime * 0.06));
+          vec3 displaced = position + normal * n * 0.04;
+          vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
+          vViewPosition = -mvPosition.xyz;
+          vNormal = normalize(normalMatrix * normal);
+          vPosition = displaced;
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `;
+
+      // HIGH-CONTRAST fragment shader.
+      // Three smoothstep zones (dark wells / bright ridges / specular peaks)
+      // produce the defined liquid-metal look. Do NOT smooth this with pow().
+      const fragmentShader = `
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        varying vec3 vViewPosition;
+        uniform float uTime;
+        uniform vec3 uColorCore;
+        uniform vec3 uColorMid;
+        uniform vec3 uColorBright;
+        uniform vec3 uColorRim;
+        ${noiseGLSL}
+        void main() {
+          vec3 viewDir = normalize(vViewPosition);
+
+          // Domain warping — creates the liquid flow
+          float warpX = snoise(vPosition * 0.7 + vec3(uTime * 0.07, 0.0, 0.0));
+          float warpY = snoise(vPosition * 0.7 + vec3(0.0, uTime * 0.05, 0.0));
+          vec3 warped = vPosition + vec3(warpX, warpY, 0.0) * 0.7;
+
+          float n1 = snoise(warped * 0.85 + vec3(uTime * 0.08));
+          float n2 = snoise(warped * 1.6 + vec3(uTime * 0.05, 0.0, uTime * 0.06));
+
+          // Band pattern — sin → 3 narrow smoothstep zones for crisp transitions
+          float rawBand = sin(n1 * 4.5 + length(vPosition) * 1.4 + uTime * 0.18) * 0.5 + 0.5;
+          float darkWell     = smoothstep(0.0, 0.35, rawBand);
+          float brightRidge  = smoothstep(0.55, 0.85, rawBand);
+          float specularPeak = smoothstep(0.8, 0.98, rawBand);
+
+          // Build up in defined layers from pure black
+          vec3 color = uColorCore;
+          float radial = length(vPosition.xy) * 0.4 + n2 * 0.18;
+          color = mix(color, uColorMid,    darkWell     * smoothstep(0.15, 0.55, radial));
+          color = mix(color, uColorBright, brightRidge  * smoothstep(0.25, 0.70, radial));
+          color = mix(color, uColorRim,    specularPeak * smoothstep(0.40, 0.85, radial));
+
+          // Tight fresnel rim — defined edge, NOT soft halo bleed
+          float fresnelRaw = 1.0 - max(dot(vNormal, viewDir), 0.0);
+          float fresnel = smoothstep(0.3, 0.95, fresnelRaw);
+          color = mix(color, uColorRim, fresnel * 0.55);
+
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `;
+
+      const material = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uColorCore:   { value: new THREE.Color(CONFIG.colorCore) },
+          uColorMid:    { value: new THREE.Color(CONFIG.colorMid) },
+          uColorBright: { value: new THREE.Color(CONFIG.colorBright) },
+          uColorRim:    { value: new THREE.Color(CONFIG.colorRim) },
+        },
+        vertexShader,
+        fragmentShader,
+      });
+
+      /* ---------- Two meshes — asymmetric off-frame placement ---------- */
+      const d1 = new THREE.Mesh(dGeometry, material);
+      d1.position.set(...CONFIG.d1.pos);
+      d1.rotation.z = CONFIG.d1.rot;
+      d1.scale.setScalar(CONFIG.d1.scale);
+
+      const d2 = new THREE.Mesh(dGeometry, material);
+      d2.position.set(...CONFIG.d2.pos);
+      d2.rotation.z = CONFIG.d2.rot;
+      d2.scale.setScalar(CONFIG.d2.scale);
+
+      const group = new THREE.Group();
+      group.add(d1);
+      group.add(d2);
+      scene.add(group);
+
+      /* ---------- Mouse parallax ---------- */
+      const mouse = { x: 0, y: 0 };
+      const target = { x: 0, y: 0 };
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      });
+
+      /* ---------- Loop ---------- */
+      const clock = new THREE.Clock();
+      function animate() {
+        const t = clock.getElapsedTime();
+        material.uniforms.uTime.value = t;
+
+        target.x += (mouse.y * CONFIG.parallaxStrength - target.x) * CONFIG.parallaxLerp;
+        target.y += (mouse.x * CONFIG.parallaxStrength * 1.6 - target.y) * CONFIG.parallaxLerp;
+
+        group.rotation.x = target.x;
+        group.rotation.y = target.y;
+
+        d1.rotation.z = CONFIG.d1.rot + Math.sin(t * 0.11) * 0.04;
+        d1.rotation.y = Math.sin(t * 0.07) * CONFIG.wobbleAmp;
+        d1.rotation.x = Math.cos(t * 0.05) * CONFIG.wobbleAmp * 0.65;
+
+        d2.rotation.z = CONFIG.d2.rot + Math.cos(t * 0.09) * 0.05;
+        d2.rotation.y = Math.cos(t * 0.10) * CONFIG.wobbleAmp * 1.2;
+        d2.rotation.x = Math.sin(t * 0.06) * CONFIG.wobbleAmp * 0.65;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      /* ---------- Resize ---------- */
+      window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+    })();
+  </script>
+</body>
+</html>

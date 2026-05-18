@@ -1,6 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cx } from "./cx";
-import styles from "./Button.module.scss";
 
 type Variant = "primary" | "secondary" | "ghost" | "ghostOnInk";
 
@@ -17,7 +16,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cx(styles.button, styles[`button--${variant}`], className)}
+      className={cx("button", `button--${variant}`, className)}
       {...rest}
     >
       {children}

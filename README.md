@@ -1,105 +1,73 @@
-# Starter kit
+# Davide Domenghini - Portfolio
 
-Opinionated Next.js 16 + TypeScript + Sass starter pre-wired with the conventions used across the projects in this Documents folder.
+Personal portfolio site for [domenghini.com](https://domenghini.com). I built it to show selected work, how I think about front-end engineering, and the easiest way to get in touch.
 
-## What is in this kit
+I'm a senior front-end engineer and founder based in London. I've spent twenty years shipping high-traffic web products for Sky, Estée Lauder Companies, Liberty Global, Bristol City Council, EE, and A+E Networks. Right now I'm leading frontend at Liberty Blume and building [Nannynow.co.uk](https://nannynow.co.uk) end to end.
 
-```
-starter-kit/
-  brand.md                        Fillable brand source-of-truth (positioning, voice, colours, type)
-  package.json                    Next.js 16, React 19, TypeScript, Sass
-  tsconfig.json
-  next.config.ts
-  next-env.d.ts
-  eslint.config.mjs
-  .gitignore
+## What's on the site
 
-  src/
-    app/
-      layout.tsx
-      page.tsx
-    components/
-      Button.tsx
-      Button.module.scss
-      cx.ts                       Conditional className helper
-    styles/
-      main.scss
-      abstracts/                  Maps + accessor functions, NO CSS output
-        _index.scss               @forwards the layer
-        _breakpoints.scss         bp(name) viewport map
-        _spacers.scss             spacer(n) scale
-        _colors.scss              $theme-colors + color() + .bg-/.is-/.has-border- utilities
-        _typography.scss          font stacks, font-size/weight/line-height maps + accessors
-        _variables.scss           radii, transitions, focus ring, z-index
-        _mixins.scss              min/max media, focus-ring, flex-center
-      base/                       Element-level resets and defaults
-        _index.scss
-        _reset.scss
-        _base.scss                emits the gap, text-size, font-weight, leading utilities
-        _headings.scss
-        _measures.scss            margin/padding utility classes (responsive)
-      layout/
-        _index.scss
-        _container.scss
-      utilities/
-        _index.scss
-        _flex.scss                .is-flex / is-justify- / is-align- / responsive variants
-        _display.scss
-        _radius.scss
-        _sr-only.scss             screen-reader only + skip-link
-      components/
-        _index.scss               Empty starter
+- **Home** - positioning, selected case studies, capabilities, and contact prompts
+- **Work** - featured projects with live links and case study pages
+- **Archive** - long-form gallery of earlier client and campaign work
+- **About** - background, principles, career timeline, and CV download
+- **Lab** - motion and WebGL experiments kept separate from production work
+- **Contact** - booking link, brief form, and direct channels
 
-  public/                         Static assets (favicon etc.)
-```
+Case studies cover enterprise lending (Liberty Blume), luxury retail (Estée Lauder EMEA), public sector (Bristol City Council), and founder-led products (Nannynow, Striver.Football, Cheam Sports FC).
 
-## How to use
+## Stack
+
+Next.js 16 · React 19 · TypeScript · Sass (token-driven 7-1 architecture) · Framer Motion · Three.js · Resend (contact form)
+
+Design tokens, voice, and visual rules live in [brand.md](brand.md). That file is the source of truth for colours, typography, and copy tone across the site.
+
+## Local development
 
 ```bash
-# 1. Copy this folder for the new project
-cp -r starter-kit ~/Documents/my-new-project
-
-# 2. Initialise git
-cd ~/Documents/my-new-project
-git init
-git add .
-git commit -m "Initial commit"
-
-# 3. Replace the {{PLACEHOLDERS}}
-#    - Edit brand.md (positioning, voice, colours, type)
-#    - Edit package.json (rename "name")
-#    - Edit src/styles/abstracts/_colors.scss with the brand palette
-#    - Edit src/styles/abstracts/_typography.scss with the brand fonts
-#    - Edit src/app/layout.tsx (load fonts via next/font)
-
-# 4. Install and run
 npm install
 npm run dev
 ```
 
-## Project conventions (already wired)
+Open [http://localhost:3000](http://localhost:3000).
 
-- **Token-driven SCSS:** every colour, spacer, font-size, etc. goes through a map and accessor function. See [src/styles/abstracts](src/styles/abstracts).
-- **Utility-first JSX:** layout, spacing, text size, colour live as classes in JSX, not as component SCSS. Prefer existing utilities in `src/styles/base` and `src/styles/utilities` over new component SCSS for layout-only rules.
-- **No inline styles:** except for framer-motion `MotionValue`s and per-instance CSS custom properties.
-- **No em-dashes or en-dashes:** anywhere, in code or copy. Plain hyphens only.
-- **No co-author trailers:** in commits or PR bodies.
-- **BEM CSS modules:** every component has a sibling `.module.scss` file.
+Other scripts:
 
-## Optional modules (copy in when needed)
+```bash
+npm run build    # production build
+npm run lint     # ESLint
+npm run start    # serve production build
+```
 
-These are not pre-wired to keep the starter lean. Add per project:
+Optional capture scripts regenerate project screenshots with Playwright:
 
-| Module | Add when | Reference |
-| --- | --- | --- |
-| Stripe + payments | Selling something | `cheamsportsfc` |
-| Drizzle + MySQL | Need a relational DB | `cheamsportsfc` |
-| Better Auth | Need authenticated users | `cheamsportsfc` |
-| Playwright | Want E2E tests | `cheamsportsfc` |
-| framer-motion | Want animation | `striver.football`, `origin-social-club` |
-| `gray-matter` + markdown content | Long-form content / blog | `striver.football` |
-| `@vercel/og` | Need OG image generation | `striver.football`, `cheamsportsfc` |
+```bash
+npm run capture:projects
+npm run capture:estee-lauder
+```
 
-## Next.js 16 heads-up
+## Environment
 
-Next.js 16 changed several conventions vs 15: Turbopack is the default, `params` are async, `middleware.ts` was renamed to `proxy.ts`, and `next lint` was removed (use `eslint` directly). Read the upgrade notes before touching framework-level config.
+Create `.env.local` for production contact delivery:
+
+- `RESEND_API_KEY` - contact form delivery via Resend
+- `CONTACT_TO_EMAIL` - inbox for form submissions (defaults to davide@domenghini.com)
+- `CONTACT_FROM_EMAIL` - sender address (defaults to portfolio@domenghini.com)
+
+In development the contact form logs submissions to the console when `RESEND_API_KEY` is unset.
+
+## Project structure
+
+```
+src/
+  app/              Next.js routes (home, work, about, contact, lab, archive)
+  components/       UI, layout, motion, case study templates
+  constants/        Site copy, projects, navigation, and content
+  styles/           SCSS abstracts, base, utilities, and components
+public/
+  images/           Project shots, archive gallery, portraits
+brand.md            Brand positioning, voice, colours, and typography
+```
+
+## Licence
+
+Private repository. Content and case study assets belong to their respective clients unless otherwise noted.

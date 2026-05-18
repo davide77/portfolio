@@ -1,0 +1,286 @@
+<h2 class="sr-only">Fourth iteration with high-contrast shader producing defined dark wells and bright ridges instead of uniform soft glow.</h2>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @keyframes ddhc-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes ddhc-pulse { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; } 50% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.5; } }
+  @keyframes ddhc-float { 0%,100% { transform: translate(0, 0); } 50% { transform: translate(14px, -18px); } }
+  @keyframes ddhc-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  #ddhc-wrap { animation: ddhc-fade-in 1000ms ease-out both; }
+</style>
+
+<div style="background: var(--color-background-secondary); padding: 12px; border-radius: var(--border-radius-lg);">
+  <div id="ddhc-wrap" style="position: relative; width: 100%; height: 540px; background: #020100; border-radius: 8px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: white;">
+
+    <canvas id="ddhc-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1;"></canvas>
+
+    <nav style="position: absolute; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 10; pointer-events: none;">
+      <div style="font-size: 13px; letter-spacing: 0.02em; font-weight: 400;">
+        <span style="color: #e89548;">dd</span><span style="opacity: 0.85; margin-left: 6px;">domenghini</span>
+      </div>
+      <div style="font-size: 10px; letter-spacing: 0.2em; opacity: 0.7; padding-top: 2px; font-family: ui-monospace, 'JetBrains Mono', monospace;">
+        |&nbsp;&nbsp;EN&nbsp;&nbsp;·&nbsp;&nbsp;<span style="opacity: 0.5;">IT</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 7px; font-size: 10px; letter-spacing: 0.18em; font-family: ui-monospace, 'JetBrains Mono', monospace;">
+        <div>WORK</div>
+        <div>ABOUT</div>
+        <div>LAB</div>
+        <div>CONTACT</div>
+        <div style="margin-top: 6px; padding: 6px 14px; border: 0.5px solid rgba(255,255,255,0.4); border-radius: 99px; pointer-events: auto;">Book a call</div>
+      </div>
+    </nav>
+
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5; text-align: center; max-width: 80%; pointer-events: none;">
+      <div style="font-size: 10px; letter-spacing: 0.32em; opacity: 0.5; margin-bottom: 22px; font-family: ui-monospace, 'JetBrains Mono', monospace;">01 — SENIOR FRONT-END · FOUNDER</div>
+      <div style="font-size: 44px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.05;">
+        Frontend that <em style="font-style: italic; font-weight: 300;">ships</em><br/>product, not just code.
+      </div>
+    </div>
+
+    <div style="position: absolute; bottom: 22px; left: 22px; width: 72px; height: 72px; z-index: 10;">
+      <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; animation: ddhc-spin 18s linear infinite;">
+        <defs>
+          <path id="ddhc-circle-path" d="M 50, 50 m -36, 0 a 36, 36 0 1, 1 72, 0 a 36, 36 0 1, 1 -72, 0" fill="none" />
+        </defs>
+        <text fill="rgba(255,255,255,0.75)" style="font-size: 9px; letter-spacing: 2.5px; font-family: ui-monospace, 'JetBrains Mono', monospace;">
+          <textPath href="#ddhc-circle-path">SCROLL DOWN · SCROLL DOWN · </textPath>
+        </text>
+      </svg>
+      <div style="position: absolute; top: 50%; left: 50%; width: 5px; height: 5px; background: white; border-radius: 50%; animation: ddhc-pulse 2s ease-in-out infinite;"></div>
+    </div>
+
+    <div style="position: absolute; right: -38px; top: 50%; transform: rotate(90deg); transform-origin: center; font-size: 9px; letter-spacing: 0.45em; opacity: 0.4; font-family: ui-monospace, 'JetBrains Mono', monospace; white-space: nowrap; z-index: 10;">
+      EST · 2006 — LONDON · ROMA
+    </div>
+
+    <div style="position: absolute; top: 26%; right: 14%; width: 5px; height: 5px; background: white; border-radius: 50%; box-shadow: 0 0 10px rgba(255,255,255,0.6); animation: ddhc-float 4s ease-in-out infinite; z-index: 5;"></div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+  function init() {
+    const canvas = document.getElementById('ddhc-canvas');
+    const container = document.getElementById('ddhc-wrap');
+    if (!canvas || !container || typeof THREE === 'undefined') { setTimeout(init, 100); return; }
+    let width = container.clientWidth;
+    let height = container.clientHeight;
+    if (width === 0 || height === 0) { setTimeout(init, 100); return; }
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+    camera.position.set(0, 0, 8);
+
+    // BUMPED pixel ratio for max sharpness in the constrained widget viewport
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 3));
+    renderer.setSize(width, height);
+    renderer.setClearColor(0x000000, 0);
+
+    function makeDShape() {
+      const shape = new THREE.Shape();
+      shape.moveTo(-0.7, 1.2);
+      shape.lineTo(-0.1, 1.2);
+      shape.bezierCurveTo(0.55, 1.2, 1.0, 0.65, 1.0, 0);
+      shape.bezierCurveTo(1.0, -0.65, 0.55, -1.2, -0.1, -1.2);
+      shape.lineTo(-0.7, -1.2);
+      shape.lineTo(-0.7, 1.2);
+      const hole = new THREE.Path();
+      hole.moveTo(-0.35, 0.82);
+      hole.lineTo(-0.1, 0.82);
+      hole.bezierCurveTo(0.3, 0.82, 0.65, 0.45, 0.65, 0);
+      hole.bezierCurveTo(0.65, -0.45, 0.3, -0.82, -0.1, -0.82);
+      hole.lineTo(-0.35, -0.82);
+      hole.lineTo(-0.35, 0.82);
+      shape.holes.push(hole);
+      return shape;
+    }
+
+    // SMALLER bevel — sharper geometric edges
+    const dGeometry = new THREE.ExtrudeGeometry(makeDShape(), {
+      depth: 0.5,
+      bevelEnabled: true,
+      bevelSegments: 6,
+      bevelSize: 0.06,
+      bevelThickness: 0.06,
+      curveSegments: 40,
+    });
+    dGeometry.center();
+
+    const noiseGLSL = [
+      'vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}',
+      'vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}',
+      'float snoise(vec3 v){',
+      '  const vec2 C = vec2(1.0/6.0, 1.0/3.0);',
+      '  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);',
+      '  vec3 i = floor(v + dot(v, C.yyy));',
+      '  vec3 x0 = v - i + dot(i, C.xxx);',
+      '  vec3 g = step(x0.yzx, x0.xyz);',
+      '  vec3 l = 1.0 - g;',
+      '  vec3 i1 = min(g.xyz, l.zxy);',
+      '  vec3 i2 = max(g.xyz, l.zxy);',
+      '  vec3 x1 = x0 - i1 + C.xxx;',
+      '  vec3 x2 = x0 - i2 + 2.0 * C.xxx;',
+      '  vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;',
+      '  i = mod(i, 289.0);',
+      '  vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));',
+      '  float n_ = 1.0/7.0;',
+      '  vec3 ns = n_ * D.wyz - D.xzx;',
+      '  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);',
+      '  vec4 x_ = floor(j * ns.z);',
+      '  vec4 y_ = floor(j - 7.0 * x_);',
+      '  vec4 x = x_ * ns.x + ns.yyyy;',
+      '  vec4 y = y_ * ns.x + ns.yyyy;',
+      '  vec4 h = 1.0 - abs(x) - abs(y);',
+      '  vec4 b0 = vec4(x.xy, y.xy);',
+      '  vec4 b1 = vec4(x.zw, y.zw);',
+      '  vec4 s0 = floor(b0)*2.0 + 1.0;',
+      '  vec4 s1 = floor(b1)*2.0 + 1.0;',
+      '  vec4 sh = -step(h, vec4(0.0));',
+      '  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;',
+      '  vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;',
+      '  vec3 p0 = vec3(a0.xy, h.x);',
+      '  vec3 p1 = vec3(a0.zw, h.y);',
+      '  vec3 p2 = vec3(a1.xy, h.z);',
+      '  vec3 p3 = vec3(a1.zw, h.w);',
+      '  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));',
+      '  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;',
+      '  vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);',
+      '  m = m * m;',
+      '  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));',
+      '}'
+    ].join('\n');
+
+    const vertexShader = [
+      'varying vec3 vNormal;',
+      'varying vec3 vPosition;',
+      'varying vec3 vViewPosition;',
+      'uniform float uTime;',
+      noiseGLSL,
+      'void main() {',
+      '  float n = snoise(position * 0.5 + vec3(uTime * 0.06));',
+      '  vec3 displaced = position + normal * n * 0.04;',
+      '  vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);',
+      '  vViewPosition = -mvPosition.xyz;',
+      '  vNormal = normalize(normalMatrix * normal);',
+      '  vPosition = displaced;',
+      '  gl_Position = projectionMatrix * mvPosition;',
+      '}'
+    ].join('\n');
+
+    // HIGH-CONTRAST shader — defined dark wells + sharp bright ridges
+    const fragmentShader = [
+      'varying vec3 vNormal;',
+      'varying vec3 vPosition;',
+      'varying vec3 vViewPosition;',
+      'uniform float uTime;',
+      'uniform vec3 uColorCore;',
+      'uniform vec3 uColorMid;',
+      'uniform vec3 uColorBright;',
+      'uniform vec3 uColorRim;',
+      noiseGLSL,
+      'void main() {',
+      '  vec3 viewDir = normalize(vViewPosition);',
+      // Domain warping
+      '  float warpX = snoise(vPosition * 0.7 + vec3(uTime * 0.07, 0.0, 0.0));',
+      '  float warpY = snoise(vPosition * 0.7 + vec3(0.0, uTime * 0.05, 0.0));',
+      '  vec3 warped = vPosition + vec3(warpX, warpY, 0.0) * 0.7;',
+      '  float n1 = snoise(warped * 0.85 + vec3(uTime * 0.08));',
+      '  float n2 = snoise(warped * 1.6 + vec3(uTime * 0.05, 0.0, uTime * 0.06));',
+      // Band pattern with SHARP transitions via smoothstep with narrow range
+      '  float rawBand = sin(n1 * 4.5 + length(vPosition) * 1.4 + uTime * 0.18) * 0.5 + 0.5;',
+      '  float darkWell = smoothstep(0.0, 0.35, rawBand);',     // creates sharp dark zones
+      '  float brightRidge = smoothstep(0.55, 0.85, rawBand);', // creates sharp bright zones
+      '  float specularPeak = smoothstep(0.8, 0.98, rawBand);', // hottest highlights
+      // Start from pure black
+      '  vec3 color = uColorCore;',
+      // Build up in defined layers, no smooth blending
+      '  float radial = length(vPosition.xy) * 0.4 + n2 * 0.18;',
+      '  color = mix(color, uColorMid, darkWell * smoothstep(0.15, 0.55, radial));',
+      '  color = mix(color, uColorBright, brightRidge * smoothstep(0.25, 0.7, radial));',
+      '  color = mix(color, uColorRim, specularPeak * smoothstep(0.4, 0.85, radial));',
+      // TIGHT fresnel — defined edge, not soft halo bleed
+      '  float fresnelRaw = 1.0 - max(dot(vNormal, viewDir), 0.0);',
+      '  float fresnel = smoothstep(0.3, 0.95, fresnelRaw);',
+      '  color = mix(color, uColorRim, fresnel * 0.55);',
+      '  gl_FragColor = vec4(color, 1.0);',
+      '}'
+    ].join('\n');
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uColorCore: { value: new THREE.Color(0x000000) },         // pure black wells
+        uColorMid: { value: new THREE.Color(0x2c1505) },
+        uColorBright: { value: new THREE.Color(0xd07a25) },
+        uColorRim: { value: new THREE.Color(0xffc080) },           // very hot peaks
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    });
+
+    // Slightly smaller forms — more detail per pixel, less cropped
+    const d1 = new THREE.Mesh(dGeometry, material);
+    d1.position.set(-1.3, 0.4, 0.3);
+    d1.rotation.z = 0.18;
+    d1.scale.set(2.3, 2.3, 2.3);
+
+    const d2 = new THREE.Mesh(dGeometry, material);
+    d2.position.set(1.7, -0.5, -0.4);
+    d2.rotation.z = -0.28;
+    d2.scale.set(1.8, 1.8, 1.8);
+
+    const group = new THREE.Group();
+    group.add(d1);
+    group.add(d2);
+    scene.add(group);
+
+    const mouse = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+
+    container.addEventListener('mousemove', function(e) {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    });
+    container.addEventListener('mouseleave', function() { mouse.x = 0; mouse.y = 0; });
+
+    const clock = new THREE.Clock();
+    function animate() {
+      const t = clock.getElapsedTime();
+      material.uniforms.uTime.value = t;
+
+      target.x += (mouse.y * 0.06 - target.x) * 0.02;
+      target.y += (mouse.x * 0.1 - target.y) * 0.02;
+
+      group.rotation.x = target.x;
+      group.rotation.y = target.y;
+
+      d1.rotation.z = 0.18 + Math.sin(t * 0.11) * 0.04;
+      d1.rotation.y = Math.sin(t * 0.07) * 0.15;
+      d1.rotation.x = Math.cos(t * 0.05) * 0.1;
+
+      d2.rotation.z = -0.28 + Math.cos(t * 0.09) * 0.05;
+      d2.rotation.y = Math.cos(t * 0.1) * 0.18;
+      d2.rotation.x = Math.sin(t * 0.06) * 0.1;
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    const ro = new ResizeObserver(function() {
+      width = container.clientWidth;
+      height = container.clientHeight;
+      if (width === 0 || height === 0) return;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
+    ro.observe(container);
+  }
+  init();
+})();
+</script>

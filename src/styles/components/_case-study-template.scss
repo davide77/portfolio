@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+.case-study-template__back {
+  text-decoration: none;
+}
+
+.case-study-template__tag {
+  border: 1px solid color(border);
+  border-radius: $radius-sm;
+  background-color: color(cream);
+}
+
+.case-study-template__hero-image {
+  width: 100%;
+}
+
+.case-study-template__work-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(5);
+}
+
+.case-study-template__work-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: spacer(4);
+}
+
+.case-study-template__work-index {
+  font-variant-numeric: tabular-nums;
+  font-size: font-size(sm);
+  font-weight: font-weight(semibold);
+  color: color(stone-gray);
+}
+
+.case-study-template__artefacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(6);
+}
+
+.case-study-template__next {
+  padding-top: spacer(6);
+  border-top: 1px solid color(border);
+}
+
+.case-study-template__next-link {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+  margin-top: spacer(3);
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: color(primary);
+  }
+}

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cx } from "@/components/cx";
-import styles from "./Cursor.module.scss";
 
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -69,9 +68,9 @@ export function Cursor() {
 
   return (
     <>
-      <div ref={dotRef} className={styles.dot} aria-hidden />
-      <div ref={ringRef} className={cx(styles.ring, magnetic && styles.ringMagnetic)} aria-hidden>
-        {label ? <span className={styles.ringLabel}>{label}</span> : null}
+      <div ref={dotRef} className={"cursor__dot"} aria-hidden />
+      <div ref={ringRef} className={cx("cursor__ring", magnetic && "cursor__ring--magnetic")} aria-hidden>
+        {label ? <span className={"cursor__ring-label"}>{label}</span> : null}
       </div>
     </>
   );

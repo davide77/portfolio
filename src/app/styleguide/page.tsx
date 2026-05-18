@@ -17,7 +17,7 @@ export default function StyleguidePage() {
     <main id="main" className="container-atmosphere has-py-8 is-flex is-flex-column has-gap-8">
       <h1 className="text-3xl">Styleguide</h1>
       <section className="is-flex is-flex-column has-gap-3">
-        <EyebrowLabel>01 — Component preview</EyebrowLabel>
+        <EyebrowLabel>01 - Component preview</EyebrowLabel>
         <DisplayText as="h2">{PROFILE.headline}</DisplayText>
         <StatusPill label={PROFILE.availabilityLabel} />
         <MagneticButton href={BOOKING_URL} cursorText="Book" external>

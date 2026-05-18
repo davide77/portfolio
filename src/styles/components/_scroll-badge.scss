@@ -1,0 +1,66 @@
+@use '../abstracts' as *;
+
+.scroll-badge {
+  position: absolute;
+  left: spacer(4);
+  bottom: spacer(5);
+  z-index: 2;
+  width: 96px;
+  height: 96px;
+  opacity: var(--scroll-badge-opacity, 1);
+  transition: opacity $transition-base;
+
+  @include max(bp(md)) {
+    display: none;
+  }
+}
+
+.scroll-badge__ring {
+  animation: scroll-badge-spin 18s linear infinite;
+  fill: none;
+}
+
+.scroll-badge__text {
+  fill: color-mix(in srgb, color(cream) 70%, transparent);
+  text-transform: uppercase;
+  font-family: $font-family-mono;
+  font-size: font-size(xs);
+  letter-spacing: 0.25em;
+}
+
+.scroll-badge__chevron {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-right: 1.5px solid color(cream);
+  border-bottom: 1.5px solid color(cream);
+  transform: rotate(45deg);
+  animation: scroll-badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scroll-badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scroll-badge-pulse {
+  0%,
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(45deg) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-badge__ring,
+  .scroll-badge__chevron {
+    animation: none;
+  }
+}

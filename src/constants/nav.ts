@@ -13,3 +13,14 @@ export const HEADER_CTA = {
   href: BOOKING_URL,
   cursorText: "Book",
 } as const;
+
+export const NAV_WORDMARK = {
+  prefix: "dd",
+  separator: "·",
+  suffix: "domenghini",
+} as const;
+
+export const MOBILE_NAV = {
+  openLabel: "Open menu",
+  closeLabel: "Close menu",
+} as const;

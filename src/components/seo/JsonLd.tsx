@@ -1,4 +1,7 @@
-import { SITE } from "@/constants/site";
+import type { CaseStudy } from "@/constants/content/projects";
+import { SITE, SOCIAL_PROFILES } from "@/constants/site";
+import { ROUTES } from "@/constants/routes";
+import { siteUrl } from "@/lib/seo";
 
 type JsonLdProps = {
   data: Record<string, unknown>;
@@ -24,6 +27,8 @@ export function HomeJsonLd() {
             name: SITE.name,
             jobTitle: SITE.role,
             email: SITE.email,
+            url: siteUrl(),
+            sameAs: SOCIAL_PROFILES.map((profile) => profile.href),
             address: {
               "@type": "PostalAddress",
               addressLocality: "London",
@@ -33,10 +38,36 @@ export function HomeJsonLd() {
           {
             "@type": "WebSite",
             name: SITE.name,
-            url: "https://domenghini.com",
+            url: siteUrl(),
           },
         ],
       }}
     />
   );
+}
+
+export function caseStudyJsonLd(project: CaseStudy) {
+  const pageUrl = siteUrl(ROUTES.work(project.slug));
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        name: project.title,
+        description: project.summary,
+        url: pageUrl,
+        image: siteUrl(project.imageSrc),
+        author: { "@type": "Person", name: SITE.name, url: siteUrl() },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteUrl() },
+          { "@type": "ListItem", position: 2, name: "Work", item: siteUrl(ROUTES.workIndex) },
+          { "@type": "ListItem", position: 3, name: project.title, item: pageUrl },
+        ],
+      },
+    ],
+  };
 }

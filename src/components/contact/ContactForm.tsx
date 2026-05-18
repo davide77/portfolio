@@ -6,7 +6,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CONTACT_PAGE } from "@/constants/content/contact-page";
 import { cx } from "@/components/cx";
-import styles from "./ContactForm.module.scss";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -40,7 +39,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className={styles.success}>
+      <div className={"contact-form__success"}>
         <h2 className="text-3xl">{CONTACT_PAGE.form.successTitle}</h2>
         <p className="text-lg">{CONTACT_PAGE.form.successBody}</p>
       </div>
@@ -48,54 +47,54 @@ export function ContactForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className={"contact-form__form"} onSubmit={handleSubmit(onSubmit)} noValidate>
       <input
         type="text"
         tabIndex={-1}
         autoComplete="off"
-        className={styles.honeypot}
+        className={"contact-form__honeypot"}
         aria-hidden
         {...register("website")}
       />
-      <label className={styles.field}>
+      <label className={"contact-form__field"}>
         <span>{CONTACT_PAGE.form.nameLabel}</span>
         <input type="text" {...register("name")} />
-        {errors.name ? <span className={styles.error}>{errors.name.message}</span> : null}
+        {errors.name ? <span className={"contact-form__error"}>{errors.name.message}</span> : null}
       </label>
-      <label className={styles.field}>
+      <label className={"contact-form__field"}>
         <span>{CONTACT_PAGE.form.emailLabel}</span>
         <input type="email" {...register("email")} />
-        {errors.email ? <span className={styles.error}>{errors.email.message}</span> : null}
+        {errors.email ? <span className={"contact-form__error"}>{errors.email.message}</span> : null}
       </label>
-      <label className={styles.field}>
+      <label className={"contact-form__field"}>
         <span>{CONTACT_PAGE.form.companyLabel}</span>
         <input type="text" {...register("company")} />
       </label>
-      <fieldset className={styles.field}>
+      <fieldset className={"contact-form__field"}>
         <legend className="text-sm has-font-medium">Project type</legend>
-        <div className={styles.chips}>
+        <div className={"contact-form__chips"}>
           {CONTACT_PAGE.form.projectTypes.map((type) => (
-            <label key={type} className={styles.chip}>
+            <label key={type} className={"contact-form__chip"}>
               <input type="radio" value={type} {...register("projectType")} />
               {type}
             </label>
           ))}
         </div>
       </fieldset>
-      <label className={styles.field}>
+      <label className={"contact-form__field"}>
         <span>{CONTACT_PAGE.form.messageLabel}</span>
         <textarea rows={5} {...register("message")} />
-        {errors.message ? <span className={styles.error}>{errors.message.message}</span> : null}
+        {errors.message ? <span className={"contact-form__error"}>{errors.message.message}</span> : null}
       </label>
-      <label className={styles.field}>
+      <label className={"contact-form__field"}>
         <span>{CONTACT_PAGE.form.budgetLabel}</span>
         <input type="text" {...register("budget")} />
       </label>
-      <button type="submit" className={styles.submit} disabled={isSubmitting} data-magnetic data-cursor-text="Send">
+      <button type="submit" className={"contact-form__submit"} disabled={isSubmitting} data-magnetic data-cursor-text="Send">
         {CONTACT_PAGE.form.submitLabel}
       </button>
       {status === "error" ? (
-        <p className={styles.error}>Something went wrong. Email davide@domenghini.com directly.</p>
+        <p className={"contact-form__error"}>Something went wrong. Email davide@domenghini.com directly.</p>
       ) : null}
     </form>
   );

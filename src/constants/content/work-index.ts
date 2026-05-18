@@ -1,7 +1,7 @@
 export const WORK_INDEX = {
-  eyebrow: "02 — Lavori selezionati / Selected work",
-  headline: "Twenty years. Six industries. One thread: making complex things feel inevitable.",
+  eyebrow: "02 - Selected work",
+  headline: "From regulated lending to grassroots club platforms.",
   description:
-    "Case studies across enterprise lending, luxury retail, public sector, founder-led products, and sports platforms.",
+    "Case studies across enterprise lending, luxury retail, public sector, founder-led products, and sport - one craft standard throughout.",
   filterToggleLabel: "Filter by sector",
 } as const;

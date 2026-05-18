@@ -5,13 +5,12 @@ import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { FEATURED_WORK_SECTION } from "@/constants/content/home";
 import { getFeaturedCaseStudies } from "@/constants/content/projects";
 import { ROUTES } from "@/constants/routes";
-import styles from "./FeaturedWorkSection.module.scss";
 
 export function FeaturedWorkSection() {
   const projects = getFeaturedCaseStudies();
 
   return (
-    <section id="work" className={styles.root} aria-labelledby="featured-work-title">
+    <section id="work" className={"featured-work-section"} aria-labelledby="featured-work-title">
       <div className="container-atmosphere has-pb-5">
         <EyebrowLabel>{FEATURED_WORK_SECTION.kicker}</EyebrowLabel>
         <h2 id="featured-work-title" className="text-3xl has-mt-3">
@@ -26,7 +25,7 @@ export function FeaturedWorkSection() {
       </div>
       <HorizontalScrollSection>
         {projects.map((project) => (
-          <div key={project.slug} className={styles.cardWrap}>
+          <div key={project.slug} className={"featured-work-section__card-wrap"}>
             <ProjectCard project={project} tone="ink" />
           </div>
         ))}

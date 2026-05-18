@@ -3,8 +3,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "@/components/cx";
-import buttonStyles from "@/components/Button.module.scss";
-import styles from "./MagneticButton.module.scss";
 
 type Variant = "primary" | "ghost" | "ghostOnInk";
 
@@ -31,9 +29,9 @@ export function MagneticButton({
   external,
 }: MagneticButtonProps) {
   const cls = cx(
-    buttonStyles.button,
-    buttonStyles[`button--${variant}`],
-    styles.root,
+    "button",
+    `button--${variant}`,
+    "magnetic-button",
     className,
   );
   const data = {

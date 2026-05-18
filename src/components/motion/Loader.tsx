@@ -6,7 +6,6 @@ import { LOADER_STORAGE_KEY } from "@/constants/config";
 import { SITE } from "@/constants/site";
 import { cx } from "@/components/cx";
 import { DURATION_CURTAIN, EASE_EDITORIAL } from "@/lib/motion";
-import styles from "./Loader.module.scss";
 
 type LoaderProps = {
   onComplete: () => void;
@@ -53,25 +52,25 @@ export function Loader({ onComplete }: LoaderProps) {
 
   return (
     <motion.div
-      className={cx(styles.overlay, "bg-black is-flex is-flex-column is-align-center is-justify-center")}
+      className={cx("loader__overlay", "bg-black is-flex is-flex-column is-align-center is-justify-center")}
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "exit" ? 0 : 1 }}
       transition={{ duration: 0.4, ease: EASE_EDITORIAL }}
       role="presentation"
     >
       <motion.h1
-        className={cx(styles.name, "is-cream has-m-0")}
+        className={cx("loader__name", "is-cream has-m-0")}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE_EDITORIAL }}
       >
         {SITE.name}
       </motion.h1>
-      <p className={cx(styles.counter, "text-sm has-font-medium is-cream tabular-nums")} aria-live="polite">
+      <p className={cx("loader__counter", "text-sm has-font-medium is-cream tabular-nums")} aria-live="polite">
         {String(progress).padStart(2, "0")}
       </p>
       <motion.div
-        className={styles.curtain}
+        className={"loader__curtain"}
         initial={{ y: "100%" }}
         animate={phase === "exit" ? { y: "-100%" } : { y: "100%" }}
         transition={{ duration: DURATION_CURTAIN, ease: EASE_EDITORIAL }}

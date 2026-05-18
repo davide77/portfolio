@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+.brand-mark__mark {
+  position: relative;
+  display: grid;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+}
+
+.brand-mark__letter,
+.brand-mark__letter-alt {
+  grid-area: 1 / 1;
+  font-family: $font-family-headline;
+  font-weight: font-weight(semibold);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+.brand-mark__letter {
+  transform: translate(-0.14em, -0.02em);
+}
+
+.brand-mark__letter-alt {
+  transform: translate(0.16em, 0.04em);
+}
+
+.brand-mark__mark--ink {
+  color: color(cream);
+
+  .brand-mark__letter-alt {
+    color: color-mix(in srgb, color(cream) 62%, color(primary));
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+    pointer-events: none;
+  }
+}
+
+.brand-mark__mark--paper {
+  color: color(text);
+
+  .brand-mark__letter-alt {
+    color: color(primary);
+    opacity: 0.92;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, color(primary) 18%, color(border));
+    pointer-events: none;
+  }
+}

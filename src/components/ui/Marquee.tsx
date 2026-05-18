@@ -1,5 +1,4 @@
 import { cx } from "@/components/cx";
-import styles from "./Marquee.module.scss";
 
 type MarqueeProps = {
   items: readonly string[];
@@ -19,10 +18,10 @@ export function Marquee({
   const doubled = `${text}${separator}${text}`;
 
   return (
-    <div className={cx(styles.root, className)} aria-label={ariaLabel}>
-      <div className={styles.track}>
-        <span className={styles.content}>{doubled}</span>
-        <span className={styles.content} aria-hidden>
+    <div className={cx("marquee", className)} aria-label={ariaLabel}>
+      <div className={"marquee__track"}>
+        <span className={"marquee__content"}>{doubled}</span>
+        <span className={"marquee__content"} aria-hidden>
           {doubled}
         </span>
       </div>

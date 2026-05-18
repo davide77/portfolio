@@ -1,0 +1,35 @@
+@use '../abstracts' as *;
+
+.floating-accent-dot {
+  position: fixed;
+  right: 8%;
+  top: 42%;
+  z-index: z(fixed);
+  width: 6px;
+  height: 6px;
+  border-radius: $radius-full;
+  background-color: color(white);
+  box-shadow: 0 0 12px color-mix(in srgb, color(white) 40%, transparent);
+  animation: floating-dot-drift 3.6s ease-in-out infinite alternate;
+  pointer-events: none;
+
+  @include max(bp(md)) {
+    display: none;
+  }
+}
+
+@keyframes floating-dot-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-20px, 20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-accent-dot {
+    display: none;
+  }
+}

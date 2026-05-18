@@ -1,7 +1,6 @@
 import { AppStickyNav } from "@/components/nav/AppStickyNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { cx } from "@/components/cx";
-import styles from "./SiteChrome.module.scss";
 
 type SiteChromeProps = {
   children: React.ReactNode;
@@ -12,10 +11,10 @@ type SiteChromeProps = {
  */
 export function SiteChrome({ children }: SiteChromeProps) {
   return (
-    <div className={cx(styles.stack, "is-flex is-flex-column")}>
+    <div className={cx("site-chrome__stack", "is-flex is-flex-column")}>
       <AppStickyNav visible surface="ink" />
-      <div className={styles.backdrop}>
-        <div className={styles.backdropInner}>{children}</div>
+      <div className={"site-chrome__backdrop"}>
+        <div className={"site-chrome__backdrop-inner"}>{children}</div>
       </div>
       <SiteFooter />
     </div>

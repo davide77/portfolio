@@ -1,0 +1,47 @@
+@use '../abstracts' as *;
+
+.case-study-body__hero-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  min-height: 200px;
+  max-height: 520px;
+  background-color: color(cream);
+}
+
+.case-study-body__hero-image {
+  object-fit: cover;
+}
+
+.case-study-body__back {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.case-study-body__tag {
+  border-radius: $radius-full;
+  border: 1px solid color(border);
+}
+
+.case-study-body__section {
+  padding-top: spacer(6);
+  border-top: 1.5px solid color(border);
+}
+
+.case-study-body__list {
+  margin-top: spacer(4);
+  padding-left: spacer(4);
+  border-left: 3px solid color(primary);
+}
+
+.case-study-body__actions {
+  flex-wrap: wrap;
+}

@@ -1,0 +1,13 @@
+@use '../abstracts' as *;
+
+.page-transition__content {
+  min-height: 100%;
+}
+
+.page-transition__curtain {
+  position: fixed;
+  inset: 0;
+  z-index: z(modal);
+  background-color: color(black);
+  pointer-events: none;
+}

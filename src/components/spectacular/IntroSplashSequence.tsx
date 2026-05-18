@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { SPECTACULAR } from "@/constants/spectacular";
 import { SITE } from "@/constants/site";
 import { cx } from "@/components/cx";
-import styles from "./IntroSplashSequence.module.scss";
 
 type Phase = "in" | "out";
 
@@ -70,17 +69,17 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
 
   return (
     <motion.div
-      className={cx(styles.overlay, "is-flex is-align-center is-justify-center bg-black")}
+      className={cx("intro-splash-sequence__overlay", "is-flex is-align-center is-justify-center bg-black")}
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "out" ? 0 : 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       role="presentation"
     >
-      <div className={styles.wash} aria-hidden />
+      <div className={"intro-splash-sequence__wash"} aria-hidden />
 
-      <div className={cx(styles.stage, "is-flex is-flex-column is-align-center has-gap-3 text-center has-px-4")}>
+      <div className={cx("intro-splash-sequence__stage", "is-flex is-flex-column is-align-center has-gap-3 text-center has-px-4")}>
         <motion.p
-          className={cx(styles.kicker, "has-m-0 text-xs has-font-semibold uppercase")}
+          className={cx("intro-splash-sequence__kicker", "has-m-0 text-xs has-font-semibold uppercase")}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
@@ -88,7 +87,7 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
           {SITE.role}
         </motion.p>
         <motion.h1
-          className={cx(styles.name, "has-m-0 is-cream")}
+          className={cx("intro-splash-sequence__name", "has-m-0 is-cream")}
           initial={{ opacity: 0, y: 22 }}
           animate={{
             opacity: phase === "out" ? 0 : 1,
@@ -99,7 +98,7 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
           {SITE.name}
         </motion.h1>
         <motion.p
-          className={cx(styles.meta, "has-m-0 text-sm has-font-medium")}
+          className={cx("intro-splash-sequence__meta", "has-m-0 text-sm has-font-medium")}
           initial={{ opacity: 0 }}
           animate={{ opacity: phase === "out" ? 0 : 1 }}
           transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
@@ -108,8 +107,8 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
         </motion.p>
       </div>
 
-      <div className={styles.skipWrap}>
-        <button type="button" className={cx(styles.skip, "text-sm has-font-medium has-p-2")} onClick={() => complete(true)}>
+      <div className={"intro-splash-sequence__skip-wrap"}>
+        <button type="button" className={cx("intro-splash-sequence__skip", "text-sm has-font-medium has-p-2")} onClick={() => complete(true)}>
           {SPECTACULAR.skipIntroCta}
         </button>
       </div>

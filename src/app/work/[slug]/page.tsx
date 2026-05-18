@@ -1,6 +1,8 @@
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, caseStudyJsonLd } from "@/components/seo/JsonLd";
 import { CASE_STUDIES, getCaseStudyBySlug } from "@/constants/content/projects";
+import { ROUTES } from "@/constants/routes";
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -18,10 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) {
     return {};
   }
-  return {
+  return pageMetadata({
     title: project.title,
     description: project.summary,
-  };
+    path: ROUTES.work(project.slug),
+    ogImage: { path: project.imageSrc, alt: project.imageAlt },
+  });
 }
 
 export default async function WorkCaseStudyPage({ params }: Props) {
@@ -32,15 +36,7 @@ export default async function WorkCaseStudyPage({ params }: Props) {
   }
   return (
     <>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "CreativeWork",
-          name: project.title,
-          description: project.summary,
-          author: { "@type": "Person", name: "Davide Domenghini" },
-        }}
-      />
+      <JsonLd data={caseStudyJsonLd(project)} />
       <CaseStudyTemplate project={project} />
     </>
   );

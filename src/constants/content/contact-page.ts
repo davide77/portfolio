@@ -1,6 +1,5 @@
 export const CONTACT_PAGE = {
-  headlineEn: "Let's build something.",
-  headlineIt: "Costruiamo qualcosa.",
+  headline: "Let's build something.",
   responseTime: "I reply within 24 hours, weekdays.",
   backHomeLabel: "Back to home",
   pageIntro:
@@ -16,7 +15,7 @@ export const CONTACT_PAGE = {
     },
     dm: {
       title: "Direct message",
-      body: "LinkedIn, email, or GitHub if you prefer async.",
+      body: "LinkedIn, X, Facebook, email, or GitHub if you prefer async.",
     },
   },
   form: {

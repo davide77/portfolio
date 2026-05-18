@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { AboutPageContent } from "@/components/sections/about/AboutPageContent";
 import { ABOUT_PAGE } from "@/constants/content/about-page";
-import { SITE } from "@/constants/site";
+import { ROUTES } from "@/constants/routes";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
-  description: `${ABOUT_PAGE.headline} · ${SITE.name}`,
-};
+  description: `${ABOUT_PAGE.headline} Twenty years of React, Next.js, and TypeScript across enterprise, luxury retail, and founder-led products.`,
+  path: ROUTES.about,
+});
 
 export default function AboutPage() {
   return (

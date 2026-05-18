@@ -1,0 +1,7 @@
+@use '../abstracts' as *;
+
+.eyebrow-label {
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: color(stone-gray);
+}

@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { EXPERIMENTS } from "@/constants/content/experiments";
 import { cx } from "@/components/cx";
-import styles from "./LabGrid.module.scss";
 
 export function LabGrid() {
   return (
-    <ul className={styles.grid}>
+    <ul className={"lab-grid__grid"}>
       {EXPERIMENTS.map((exp) => (
         <li key={exp.id}>
           <LabTile experiment={exp} />
@@ -33,14 +32,14 @@ function LabTile({ experiment }: { experiment: (typeof EXPERIMENTS)[number] }) {
   }, []);
 
   return (
-    <article className={styles.tile} ref={ref}>
+    <article className={"lab-grid__tile"} ref={ref}>
       <div
-        className={cx(styles.canvas, styles[`canvas--${experiment.id}`], active && styles.canvasActive)}
+        className={cx("lab-grid__canvas", `canvas--${experiment.id}`, active && "lab-grid__canvas--active")}
         aria-hidden
       />
       <h2 className="text-lg has-font-semibold has-mt-3">{experiment.title}</h2>
       <p className="text-sm is-text-muted">{experiment.caption}</p>
-      <p className={styles.attr}>{experiment.attribution}</p>
+      <p className={"lab-grid__attr"}>{experiment.attribution}</p>
     </article>
   );
 }

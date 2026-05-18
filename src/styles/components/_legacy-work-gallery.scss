@@ -1,0 +1,126 @@
+@use '../abstracts' as *;
+
+.legacy-work-gallery__section {
+  position: relative;
+  padding-block: spacer(11);
+  isolation: isolate;
+  background-color: transparent;
+  color: color(cream);
+}
+
+.legacy-work-gallery__section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+  @include brand-atmospheric-band;
+}
+
+.legacy-work-gallery__section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: calc(0.45 * var(--brand-atmosphere-strength, 1));
+  pointer-events: none;
+  z-index: 0;
+  @include ink-atmosphere-wash-background;
+}
+
+.legacy-work-gallery__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.legacy-work-gallery__kicker {
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, color(cream) 58%, transparent);
+}
+
+.legacy-work-gallery__kicker-rule {
+  width: spacer(6);
+  height: 2px;
+  background-color: color-mix(in srgb, color(accent) 85%, color(cream));
+}
+
+.legacy-work-gallery__intro {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.legacy-work-gallery__header-row {
+  margin-bottom: spacer(7);
+}
+
+.legacy-work-gallery__intro {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.legacy-work-gallery__bento {
+  grid-template-columns: 1fr;
+
+  @include min(bp(sm)) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: spacer(4);
+  }
+
+  @include min(bp(lg)) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+    gap: spacer(4);
+  }
+}
+
+.legacy-work-gallery__tile {
+  position: relative;
+  border-radius: $radius-card-glass;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+  backdrop-filter: blur(12px);
+  min-height: 140px;
+  box-shadow: none;
+
+  @include min(bp(lg)) {
+    min-height: 160px;
+  }
+}
+
+.legacy-work-gallery__tile-wide {
+  @include min(bp(sm)) {
+    grid-column: span 2;
+  }
+}
+
+.legacy-work-gallery__tile-tall {
+  @include min(bp(sm)) {
+    grid-row: span 2;
+    min-height: 300px;
+  }
+
+  @include min(bp(lg)) {
+    min-height: 340px;
+  }
+}
+
+.legacy-work-gallery__frame {
+  position: absolute;
+  inset: 0;
+}
+
+.legacy-work-gallery__image {
+  object-fit: cover;
+  transition: transform $transition-slow;
+
+  .legacy-work-gallery__tile:hover & {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    .legacy-work-gallery__tile:hover & {
+      transform: none;
+    }
+  }
+}

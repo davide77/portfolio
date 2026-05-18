@@ -1,14 +1,14 @@
 export const PROFILE = {
-  eyebrow: "01 — Senior Front-End Engineer · Founder",
-  headline: "Frontend that ships product, not just code.",
+  eyebrow: "01 - Senior front-end engineer · Founder",
+  headline: "Senior front-end engineer who ships full products, not just screens.",
   subhead:
-    "20+ years building scalable, high-performance web apps for Sky, Estée Lauder Companies, Liberty Global, Bristol City Council, EE and A+E Networks. Currently leading frontend at Liberty Blume and building Nannynow.co.uk.",
+    "London-based. Twenty years in high-traffic web work; now leading frontend at Liberty Blume and building Nannynow.co.uk.",
   verticalStrip: "EST. 2006 · LONDON · ROMA",
   primaryCta: "Book a call",
   secondaryCta: "See selected work",
   manifestoQuote:
-    "AI doesn't replace senior engineering judgement, it amplifies it.",
-  manifestoCta: "Read the approach",
+    "Ship the hard path. Make it feel simple.",
+  manifestoCta: "Read how I work",
   closingHeadline: "Hiring a senior engineer? Building a product?",
   statusLabel: "Open to senior roles & advisory · London / Remote",
   availabilityLabel: "Available for senior roles & advisory",
@@ -32,9 +32,9 @@ export const TRUSTED_BY_CLIENTS = [
 ] as const;
 
 export const POSITIONING = {
-  headline: "What sets me apart is range.",
+  headline: "Regulated lending one day, WebGL experiments the next.",
   paragraphs: [
-    "I can architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next.",
+    "I can architect a 12-step financial lending platform and prototype an experimental WebGL interface in the same week when the brief demands it.",
     "The through-line is judgement: knowing when to optimise, when to ship, and when a calm interface is worth more than another feature.",
   ],
 } as const;
@@ -61,7 +61,7 @@ export const CAPABILITIES = [
     body: "WCAG 2.1 AA as a floor, AAA on brand-critical surfaces",
   },
   {
-    title: "AI-assisted delivery",
-    body: "Cursor, Claude Code, Copilot — senior judgement, machine speed",
+    title: "End-to-end delivery",
+    body: "Product direction, UX, API integration, and deployment in one stack",
   },
 ] as const;

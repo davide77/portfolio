@@ -6,7 +6,6 @@ import { RevealImage } from "@/components/motion/RevealImage";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { cx } from "@/components/cx";
-import styles from "./CaseStudyTemplate.module.scss";
 
 type CaseStudyTemplateProps = {
   project: CaseStudy;
@@ -19,7 +18,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
     <article>
       <main id="main">
         <div className="container-atmosphere has-py-8">
-          <Link href={ROUTES.workIndex} className={cx(styles.back, "text-sm has-font-semibold is-primary")}>
+          <Link href={ROUTES.workIndex} className={cx("case-study-template__back", "text-sm has-font-semibold is-primary")}>
             Back to work
           </Link>
           <header className="is-flex is-flex-column has-gap-3 has-mt-5">
@@ -32,7 +31,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             </p>
             <ul className="is-flex is-flex-wrap has-gap-2" aria-label="Technologies">
               {project.tags.map((tag) => (
-                <li key={tag} className={cx(styles.tag, "text-xs has-font-medium has-py-1 has-px-2")}>
+                <li key={tag} className={cx("case-study-template__tag", "text-xs has-font-medium has-py-1 has-px-2")}>
                   {tag}
                 </li>
               ))}
@@ -46,7 +45,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             width={1400}
             height={900}
             priority
-            className={styles.heroImage}
+            className={"case-study-template__hero-image"}
           />
         </div>
         <div className="container-sm has-py-8 is-flex is-flex-column has-gap-8">
@@ -56,10 +55,10 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
           </section>
           <section>
             <h2 className="text-2xl has-mb-4">The work</h2>
-            <ol className={styles.workList}>
+            <ol className={"case-study-template__work-list"}>
               {project.workPoints.map((point, i) => (
-                <li key={point.title} className={styles.workItem}>
-                  <span className={styles.workIndex}>{String(i + 1).padStart(2, "0")}</span>
+                <li key={point.title} className={"case-study-template__work-item"}>
+                  <span className={"case-study-template__work-index"}>{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-lg has-font-semibold">{point.title}</h3>
                     <p className="text-md leading-relaxed is-text-muted has-m-0">{point.body}</p>
@@ -80,9 +79,9 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
           ))}
           <section aria-label="Selected artefacts">
             <h2 className="text-2xl has-mb-4">Selected screens</h2>
-            <ul className={styles.artefacts}>
+            <ul className={"case-study-template__artefacts"}>
               {project.artefacts.map((art) => (
-                <li key={art.src} className={styles.artefact}>
+                <li key={art.src} className="case-study-template__artefact">
                   <RevealImage src={art.src} alt={art.alt} width={1200} height={800} />
                   <p className="text-sm is-text-muted has-mt-2">{art.caption}</p>
                 </li>
@@ -95,9 +94,9 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             </MagneticButton>
           </div>
           {next ? (
-            <section className={styles.next}>
+            <section className={"case-study-template__next"}>
               <EyebrowLabel>Next project</EyebrowLabel>
-              <Link href={ROUTES.work(next.slug)} className={styles.nextLink}>
+              <Link href={ROUTES.work(next.slug)} className={"case-study-template__next-link"}>
                 <span className="text-2xl">{next.title}</span>
                 <span className="text-sm is-text-muted">{next.outcome}</span>
               </Link>

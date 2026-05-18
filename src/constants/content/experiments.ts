@@ -20,7 +20,7 @@ export const EXPERIMENTS = [
 ] as const;
 
 export const LAB_PAGE = {
-  eyebrow: "03 — Lab",
+  eyebrow: "03 - Lab",
   headline: "Where ideas get tested before they earn production.",
   description: "WebGL, canvas, and motion experiments. Lazy-loaded and paused off-screen.",
 } as const;

@@ -11,7 +11,6 @@ import { useRef, useState } from "react";
 import { cx } from "@/components/cx";
 import { DisplayText } from "@/components/ui/DisplayText";
 import { EASE_EDITORIAL } from "@/lib/motion";
-import styles from "./StickyScene.module.scss";
 
 type StickySceneProps = {
   headline: string;
@@ -40,8 +39,8 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
 
   if (reduceMotion) {
     return (
-      <section ref={sectionRef} className={cx(styles.root, styles.rootReduced, className)}>
-        <div className={styles.inner}>
+      <section ref={sectionRef} className={cx("sticky-scene", "sticky-scene--reduced", className)}>
+        <div className={"sticky-scene__inner"}>
           <DisplayText as="h2">{headline}</DisplayText>
           <div className="is-flex is-flex-column has-gap-4 has-mt-4">
             {paragraphs.map((p) => (
@@ -56,16 +55,16 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
   }
 
   return (
-    <section ref={sectionRef} className={cx(styles.root, className)}>
-      <div className={styles.inner}>
-        <div className={styles.headline}>
+    <section ref={sectionRef} className={cx("sticky-scene", className)}>
+      <div className={"sticky-scene__inner"}>
+        <div className={"sticky-scene__headline"}>
           <DisplayText as="h2">{headline}</DisplayText>
         </div>
-        <div className={styles.body}>
+        <div className={"sticky-scene__body"}>
           {paragraphs.map((p, i) => (
             <motion.p
               key={p}
-              className={cx(styles.paragraph, "text-lg leading-relaxed")}
+              className={cx("sticky-scene__paragraph", "text-lg leading-relaxed")}
               initial={false}
               animate={{
                 opacity: i === activeIndex ? 1 : 0,

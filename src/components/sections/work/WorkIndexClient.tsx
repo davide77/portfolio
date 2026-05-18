@@ -13,7 +13,6 @@ import {
 import { WORK_INDEX } from "@/constants/content/work-index";
 import { ROUTES } from "@/constants/routes";
 import { cx } from "@/components/cx";
-import styles from "./WorkIndexClient.module.scss";
 
 export function WorkIndexClient() {
   const [filter, setFilter] = useState<string>("all");
@@ -31,7 +30,7 @@ export function WorkIndexClient() {
       <p className="has-mt-4">
         <button
           type="button"
-          className={cx(styles.filterToggle, "text-sm has-font-medium")}
+          className={cx("work-index-client__filter-toggle", "text-sm has-font-medium")}
           onClick={() => setShowFilters((v) => !v)}
           aria-expanded={showFilters}
         >
@@ -39,12 +38,12 @@ export function WorkIndexClient() {
         </button>
       </p>
       {showFilters ? (
-        <ul className={cx(styles.filters, "is-flex is-flex-wrap has-gap-2 has-mt-3")}>
+        <ul className={cx("work-index-client__filters", "is-flex is-flex-wrap has-gap-2 has-mt-3")}>
           {PROJECT_FILTERS.map((f) => (
             <li key={f.id}>
               <button
                 type="button"
-                className={cx(styles.chip, filter === f.id && styles.chipActive)}
+                className={cx("work-index-client__chip", filter === f.id && "work-index-client__chip-active")}
                 onClick={() => setFilter(f.id)}
               >
                 {f.label}
@@ -53,17 +52,17 @@ export function WorkIndexClient() {
           ))}
         </ul>
       ) : null}
-      <ul className={styles.grid}>
+      <ul className={"work-index-client__grid"}>
         {projects.map((project, index) => (
           <li
             key={project.slug}
-            className={cx(styles.card, index % 2 === 1 && styles.cardReverse)}
+            className={cx("work-index-client__card", index % 2 === 1 && "work-index-client__card-reverse")}
             data-magnetic
             data-cursor-text="View"
           >
-            <Link href={ROUTES.work(project.slug)} className={styles.cardLink}>
-              <span className={styles.index}>{String(project.order).padStart(2, "0")}</span>
-              <div className={styles.copy}>
+            <Link href={ROUTES.work(project.slug)} className={"work-index-client__card-link"}>
+              <span className={"work-index-client__index"}>{String(project.order).padStart(2, "0")}</span>
+              <div className="work-index-client__copy">
                 <p className="text-xs is-text-muted">
                   {project.period} · {project.client}
                 </p>
@@ -71,7 +70,7 @@ export function WorkIndexClient() {
                 <p className="text-md is-text-muted">{project.outcome}</p>
                 <ul className="is-flex is-flex-wrap has-gap-2 has-mt-3">
                   {project.tags.slice(0, 4).map((tag) => (
-                    <li key={tag} className={styles.tag}>
+                    <li key={tag} className={"work-index-client__tag"}>
                       {tag}
                     </li>
                   ))}
@@ -82,7 +81,7 @@ export function WorkIndexClient() {
                 alt={project.imageAlt}
                 width={800}
                 height={600}
-                className={styles.thumb}
+                className={"work-index-client__thumb"}
               />
             </Link>
           </li>

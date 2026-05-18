@@ -1,30 +1,31 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { BOOKING_URL } from "@/constants/config";
 import { CONTACT_PAGE } from "@/constants/content/contact-page";
 import { PROFILE } from "@/constants/content/profile";
+import { ROUTES } from "@/constants/routes";
+import { pageMetadata } from "@/lib/seo";
 import { SITE, SOCIAL_LINKS } from "@/constants/site";
-import styles from "./contact.module.scss";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-  description: CONTACT_PAGE.pageIntro,
-};
+  description:
+    "Book a call, send a project brief, or email Davide Domenghini directly. Senior front-end engineer in London - replies within 24 hours on weekdays.",
+  path: ROUTES.contact,
+});
 
 export default function ContactPage() {
   return (
     <main id="main" className="container-atmosphere has-py-8">
       <header className="is-flex is-flex-column has-gap-3 has-mb-8">
-        <h1 className={styles.headlineEn}>{CONTACT_PAGE.headlineEn}</h1>
-        <p className={styles.headlineIt}>{CONTACT_PAGE.headlineIt}</p>
+        <h1 className={"contact-page__headline"}>{CONTACT_PAGE.headline}</h1>
         <StatusPill label={PROFILE.availabilityLabel} />
         <p className="text-sm is-text-muted">{CONTACT_PAGE.responseTime}</p>
       </header>
 
-      <div className={styles.grid}>
-        <section id="book" className={styles.card}>
+      <div className={"contact-page__grid"}>
+        <section id="book" className={"contact-page__card"}>
           <h2 className="text-xl has-font-semibold">{CONTACT_PAGE.cards.book.title}</h2>
           <p className="text-md is-text-muted">{CONTACT_PAGE.cards.book.body}</p>
           <div className="has-mt-4">
@@ -35,18 +36,18 @@ export default function ContactPage() {
           <iframe
             title="Book a call with Davide Domenghini"
             src={BOOKING_URL}
-            className={styles.calEmbed}
+            className={"contact-page__cal-embed"}
             loading="lazy"
           />
         </section>
 
-        <section className={styles.card}>
+        <section className={"contact-page__card"}>
           <h2 className="text-xl has-font-semibold">{CONTACT_PAGE.cards.brief.title}</h2>
           <p className="text-md is-text-muted">{CONTACT_PAGE.cards.brief.body}</p>
           <ContactForm />
         </section>
 
-        <section className={styles.card}>
+        <section className={"contact-page__card"}>
           <h2 className="text-xl has-font-semibold">{CONTACT_PAGE.cards.dm.title}</h2>
           <p className="text-md is-text-muted">{CONTACT_PAGE.cards.dm.body}</p>
           <ul className="is-flex is-flex-column has-gap-3 has-mt-4">

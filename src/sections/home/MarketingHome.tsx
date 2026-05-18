@@ -10,12 +10,22 @@ export function MarketingHome() {
   return (
     <main id="main">
       <HeroSection />
-      <TrustedBySection />
-      <PositioningSection />
-      <FeaturedWorkSection />
-      <CapabilitiesSection />
-      <ManifestoTeaserSection />
-      <ClosingCtaSection />
+      <div id="trusted">
+        <TrustedBySection />
+      </div>
+      <div id="positioning">
+        <PositioningSection />
+      </div>
+      <div id="work">
+        <FeaturedWorkSection />
+      </div>
+      <div id="capabilities">
+        <CapabilitiesSection />
+      </div>
+      <div id="contact">
+        <ManifestoTeaserSection />
+        <ClosingCtaSection />
+      </div>
     </main>
   );
 }

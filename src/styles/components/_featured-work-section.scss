@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.featured-work-section {
+  padding-block: spacer(8);
+  background-color: color(black);
+}
+
+.featured-work-section__card-wrap {
+  flex: 0 0 min(85vw, 420px);
+
+  @include max(bp(md)) {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

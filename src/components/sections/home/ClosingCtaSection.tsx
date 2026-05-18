@@ -5,14 +5,13 @@ import { BOOKING_URL } from "@/constants/config";
 import { HOME_SECTIONS } from "@/constants/content/home";
 import { PROFILE } from "@/constants/content/profile";
 import { SITE } from "@/constants/site";
-import styles from "./ClosingCtaSection.module.scss";
 
 export function ClosingCtaSection() {
   return (
-    <section className={styles.root} aria-labelledby="closing-cta">
+    <section className={"closing-cta-section"} aria-labelledby="closing-cta">
       <div className="container-atmosphere is-flex is-flex-column has-gap-5">
         <EyebrowLabel className="is-cream">{HOME_SECTIONS.closing.eyebrow}</EyebrowLabel>
-        <h2 id="closing-cta" className={styles.headline}>
+        <h2 id="closing-cta" className={"closing-cta-section__headline"}>
           {PROFILE.closingHeadline}
         </h2>
         <StatusPill label={PROFILE.statusLabel} />

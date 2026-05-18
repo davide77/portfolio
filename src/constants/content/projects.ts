@@ -38,11 +38,11 @@ export const CASE_STUDIES = [
     tagline: "Multi-step lending platform for Liberty Global.",
     outcome: "Supported multi-million-euro revenue across a regulated lending journey.",
     period: "03/2025 - present",
-    role: "Senior front-end developer",
+    role: "Senior front-end engineer",
     industry: "fintech",
     order: 1,
     liveUrl: "https://www.libertyglobal.com",
-    liveLabel: "Liberty Global",
+    liveLabel: "Open live site",
     imageSrc: "/images/projects/liberty-blume/review-offer.png",
     imageAlt: "Liberty Blume lending journey review offer step",
     tags: ["React", "Context API", "SCSS", "GCP", "Docker"],
@@ -53,11 +53,11 @@ export const CASE_STUDIES = [
     workPoints: [
       {
         title: "12+ step journey architecture",
-        body: "Architected a scalable React application using context-based state management across interconnected steps, supporting complex loan workflows.",
+        body: "Architected a React application with context-based state across interconnected steps, supporting complex loan workflows.",
       },
       {
         title: "7-1 SCSS and BEM",
-        body: "Designed a scalable SCSS architecture using the 7-1 pattern and BEM, delivering responsive, accessible UI components the wider team now uses as the standard.",
+        body: "Designed a 7-1 SCSS architecture with BEM, delivering responsive, accessible UI components the wider team now uses as the standard.",
       },
       {
         title: "Performance and DevOps",
@@ -114,7 +114,7 @@ export const CASE_STUDIES = [
     imageAlt: "Screenshot of the Nannynow website homepage",
     tags: ["Next.js", "React", "TypeScript", "Product"],
     summary:
-      "Founder build: product direction, UX, API integration, and full front-end delivery with AI-assisted prototyping compressing iteration cycles.",
+      "Founder build: product direction, UX, API integration, and full front-end delivery from data model to deployment.",
     brief:
       "Families need a calm, trustworthy way to find childcare. Nannynow reduces cognitive load and surfaces verification clearly on mid-range phones.",
     workPoints: [
@@ -123,13 +123,13 @@ export const CASE_STUDIES = [
         body: "Data model, API contracts, frontend, and deployment owned in one coherent stack.",
       },
       {
-        title: "AI-assisted delivery",
-        body: "Cursor and Claude Code used to prototype flows fast while keeping accessibility and performance as gates.",
+        title: "Rapid iteration",
+        body: "Short feedback loops from prototype to production, with accessibility and performance treated as gates, not afterthoughts.",
       },
     ],
     highlights: [
       "Next.js and TypeScript product architecture.",
-      "AI-assisted prototyping compressed weeks into days.",
+      "Tight iteration cycles from first wireframe to live deployment.",
       "Mobile-first journeys with verification at the centre.",
     ],
     sections: [
@@ -202,11 +202,11 @@ export const CASE_STUDIES = [
     tagline: "Luxury retail frontend across seven brands.",
     outcome: "40% reduction in dev time on pilot markets; blueprint for global rollout.",
     period: "05/2022 - 02/2025",
-    role: "Senior front-end developer, EMEA",
+    role: "Senior front-end engineer, EMEA",
     industry: "luxury",
     order: 4,
     liveUrl: "https://www.esteelauder.co.uk",
-    liveLabel: "Estée Lauder UK",
+    liveLabel: "Open live site",
     imageSrc: "/images/projects/estee-lauder-emea/estee-lauder-uk.jpg",
     imageAlt: "Estée Lauder UK ecommerce homepage",
     tags: ["React", "Luxury retail", "i18n", "Design systems"],
@@ -333,11 +333,11 @@ export const CASE_STUDIES = [
     tagline: "GOV.UK-aligned React design system.",
     outcome: "WCAG 2.1 AA across components; 500,000+ residents served.",
     period: "12/2021 - 05/2022",
-    role: "Senior front-end developer",
+    role: "Senior front-end engineer",
     industry: "public",
     order: 6,
     liveUrl: "https://www.bristol.gov.uk",
-    liveLabel: "Bristol City Council",
+    liveLabel: "Open live site",
     imageSrc: "/images/projects/bristol.jpg",
     imageAlt: "Bristol City Council website homepage",
     tags: ["React", "Docusaurus", "GOV.UK", "Accessibility"],

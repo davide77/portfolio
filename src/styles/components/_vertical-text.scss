@@ -1,0 +1,9 @@
+@use '../abstracts' as *;
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  color: color(stone-gray);
+}

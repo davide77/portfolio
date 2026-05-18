@@ -1,28 +1,28 @@
 export const ABOUT_PAGE = {
   eyebrow: "About",
-  headline: "Senior engineering judgement, amplified by AI.",
+  headline: "Twenty years of front-end work. Still obsessed with the details.",
   intro:
     "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript. I come alive when design, engineering and commercial outcomes all have to land at once.",
   portraitAlt: "Portrait of Davide Domenghini",
   portraitSrc: "/images/about/portrait.jpg",
   principles: [
     {
-      id: "ai",
-      title: "Senior engineering judgement, amplified by AI",
+      id: "judgement",
+      title: "Judgement over volume",
       body:
-        "I've spent the past two years embedding AI tools into my workflow as a force multiplier, not a shortcut. AI doesn't replace senior engineering judgement, it amplifies it. I treat AI output with the scepticism I'd apply to a mid-level pull request: fast to generate, slower to verify.",
+        "Twenty years in high-traffic web work taught me where speed helps and where it costs. I optimise for the outcome: fewer regressions, clearer interfaces, and code the next engineer can pick up without a tour.",
     },
     {
       id: "range",
       title: "Range is the differentiator",
       body:
-        "What sets me apart is range. I can architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next. I lead frontend on enterprise platforms generating multi-million euro revenue, and I'm equally at home mentoring juniors and turning a rough idea into a working MVP.",
+        "I can architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next. I lead front-end on enterprise platforms generating multi-million-euro revenue, and I'm equally at home mentoring juniors and turning a rough idea into a working MVP.",
     },
     {
       id: "ship",
-      title: "Ship product, not just code",
+      title: "Ship product end to end",
       body:
-        "I'm building Nannynow.co.uk end-to-end because the best engineers know how to ship product, not just code. Cheam Sports FC and Striver.Football are the same proof point: with AI in the loop, one senior engineer can deliver what used to need a small cross-functional team.",
+        "Nannynow.co.uk is the live proof: product direction, UX, API integration, and deployment in one stack. Cheam Sports FC and Striver.Football show the same pattern - one senior engineer with clear ownership delivering what used to need a small cross-functional team.",
     },
   ],
   beyond: {

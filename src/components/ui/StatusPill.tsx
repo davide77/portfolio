@@ -1,5 +1,4 @@
 import { cx } from "@/components/cx";
-import styles from "./StatusPill.module.scss";
 
 type StatusPillProps = {
   label: string;
@@ -9,8 +8,8 @@ type StatusPillProps = {
 /** Animated availability indicator. */
 export function StatusPill({ label, className }: StatusPillProps) {
   return (
-    <span className={cx(styles.root, "text-xs has-font-medium", className)}>
-      <span className={styles.dot} aria-hidden />
+    <span className={cx("status-pill", "text-xs has-font-medium", className)}>
+      <span className={"status-pill__dot"} aria-hidden />
       {label}
     </span>
   );

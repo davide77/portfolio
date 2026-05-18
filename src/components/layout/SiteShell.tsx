@@ -15,7 +15,11 @@ export function SiteShell({ children }: SiteShellProps) {
 
   return (
     <>
-      <AppStickyNav visible surface={inkNav ? "ink" : "paper"} />
+      <AppStickyNav
+        visible
+        surface={inkNav ? "ink" : "paper"}
+        showSectionNumerals={inkNav}
+      />
       {children}
       <SiteFooter />
     </>

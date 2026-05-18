@@ -1,0 +1,66 @@
+@use '../abstracts' as *;
+
+// Monopo-style ink band: atmospheric horizontal gradient + frosted project cards below hero.
+.featured-work__section {
+  position: relative;
+  isolation: isolate;
+  padding-block: spacer(11);
+  background-color: color(black);
+  color: color(cream);
+}
+
+.featured-work__section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.42;
+  pointer-events: none;
+  z-index: 0;
+  @include brand-atmospheric-band;
+}
+
+.featured-work__section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  @include ink-atmosphere-wash-background;
+}
+
+.featured-work__kicker {
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, color(cream) 58%, transparent);
+}
+
+.featured-work__kicker-rule {
+  width: spacer(6);
+  height: 2px;
+  background-color: color-mix(in srgb, color(accent) 85%, color(cream));
+}
+
+.featured-work__intro {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.featured-work__stack {
+  position: relative;
+  z-index: 1;
+}
+
+.featured-work__grid {
+  grid-template-columns: 1fr;
+
+  @include min(bp(md)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include min(bp(lg)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.featured-work__reveal-stretch {
+  height: 100%;
+}

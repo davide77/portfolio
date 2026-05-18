@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "./cx";
-import styles from "./Button.module.scss";
 
 type Variant = "primary" | "secondary" | "ghost" | "ghostOnInk";
 
@@ -22,7 +21,7 @@ export function ButtonLink({
   variant = "primary",
   className,
 }: ButtonLinkProps) {
-  const cls = cx(styles.button, styles[`button--${variant}`], className);
+  const cls = cx("button", `button--${variant}`, className);
 
   if (isExternalHref(href) || href.startsWith("mailto:")) {
     return (

@@ -1,0 +1,28 @@
+@use '../abstracts' as *;
+
+.capabilities-section {
+  padding-block: spacer(8);
+}
+
+.capabilities-section__grid {
+  display: grid;
+  gap: spacer(4);
+  margin-top: spacer(6);
+  list-style: none;
+  padding: 0;
+
+  @include min(bp(md)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include min(bp(lg)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.capabilities-section__tile {
+  padding: spacer(5);
+  border: 1px solid color(border);
+  border-radius: $radius-card;
+  background-color: color(white);
+}

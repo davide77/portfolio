@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: z(sticky);
+  background-color: rgba(color(white), 0.92);
+  border-bottom: 1.5px solid color(border);
+  backdrop-filter: blur(10px);
+}
+
+.site-header__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-block: spacer(3);
+  padding-inline: spacer(3);
+
+  @include min(bp(lg)) {
+    padding-inline: spacer(5);
+  }
+}
+
+.site-header__brand {
+  font-family: $font-family-headline;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  border-radius: $radius-sm;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.site-header__nav-link {
+  min-height: 44px;
+  border-radius: $radius-sm;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: color(primary);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.site-header__nav-link-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}

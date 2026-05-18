@@ -1,13 +1,16 @@
-import type { Metadata } from "next";
 import { LabGrid } from "@/components/sections/lab/LabGrid";
 import { LAB_PAGE } from "@/constants/content/experiments";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { DisplayText } from "@/components/ui/DisplayText";
+import { ROUTES } from "@/constants/routes";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Lab",
-  description: LAB_PAGE.description,
-};
+  description:
+    "WebGL, canvas, and motion experiments from Davide Domenghini. Prototypes for scroll masks, shader gradients, and interaction patterns before they ship to production.",
+  path: ROUTES.lab,
+});
 
 export default function LabPage() {
   return (

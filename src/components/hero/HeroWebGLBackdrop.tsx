@@ -13,7 +13,6 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
-import styles from "../Hero.module.scss";
 
 function hexToUnitRgb(hex: string): Vector3 {
   const h = hex.replace("#", "");
@@ -258,5 +257,5 @@ export function HeroWebGLBackdrop() {
     };
   }, []);
 
-  return <div ref={wrapRef} className={styles.webGlLayer} />;
+  return <div ref={wrapRef} className={"hero__web-gl-layer"} />;
 }

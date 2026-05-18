@@ -1,46 +1,40 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useReducedMotion } from "framer-motion";
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
-import { DisplayText } from "@/components/ui/DisplayText";
-import { MagneticButton } from "@/components/ui/MagneticButton";
+import { useEffect, useState } from "react";
+import { HeroWebGLLayer } from "@/components/hero/HeroWebGLLayer";
+import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
+import { HeroHeadline } from "@/components/sections/home/HeroHeadline";
+import { FloatingAccentDot } from "@/components/ui/FloatingAccentDot";
+import { ScrollBadge } from "@/components/ui/ScrollBadge";
 import { VerticalText } from "@/components/ui/VerticalText";
-import { BOOKING_URL } from "@/constants/config";
-import { PROFILE } from "@/constants/content/profile";
-import { ROUTES } from "@/constants/routes";
+import { HERO_DISPLAY } from "@/constants/content/hero-section";
+import { HERO_ORB } from "@/constants/hero-webgl";
 import { cx } from "@/components/cx";
-import styles from "./HeroSection.module.scss";
-
-const HeroWebGLBackdrop = dynamic(
-  () => import("@/components/hero/HeroWebGLBackdrop").then((m) => m.HeroWebGLBackdrop),
-  { ssr: false },
-);
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
+  const [headlineReady, setHeadlineReady] = useState(reduceMotion);
+
+  const handleCanvasReady = () => {
+    window.setTimeout(() => setHeadlineReady(true), HERO_ORB.canvasFadeMs);
+  };
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const fallback = window.setTimeout(() => setHeadlineReady(true), HERO_ORB.canvasFadeMs + 400);
+    return () => window.clearTimeout(fallback);
+  }, [reduceMotion]);
 
   return (
-    <section className={cx(styles.root, "bg-black")} aria-labelledby="hero-heading">
-      {!reduceMotion ? <HeroWebGLBackdrop /> : null}
-      <div className={cx(styles.inner, "container-atmosphere")}>
-        <EyebrowLabel className="is-cream">{PROFILE.eyebrow}</EyebrowLabel>
-        <DisplayText as="h1" className={styles.headline}>
-          {PROFILE.headline}
-        </DisplayText>
-        <p id="hero-heading" className={cx(styles.subhead, "text-lg leading-relaxed is-cream measure-62ch")}>
-          {PROFILE.subhead}
-        </p>
-        <div className="is-flex is-flex-wrap has-gap-3 has-mt-5">
-          <MagneticButton href={BOOKING_URL} variant="primary" cursorText="Book" external>
-            {PROFILE.primaryCta}
-          </MagneticButton>
-          <MagneticButton href={ROUTES.workIndex} variant="ghostOnInk" cursorText="Work">
-            {PROFILE.secondaryCta}
-          </MagneticButton>
-        </div>
-        <VerticalText className={styles.strip}>{PROFILE.verticalStrip}</VerticalText>
+    <section id="hero" className={cx("hero-section", "bg-black")} aria-labelledby="hero-heading">
+      <HeroWebGLLayer className="hero-section__canvas" onCanvasReady={handleCanvasReady} />
+      <div className={cx("hero-section__inner", "container-atmosphere")}>
+        <p className="hero-section__eyebrow">{HERO_DISPLAY.eyebrow}</p>
+        <HeroHeadline ready={headlineReady} />
       </div>
+      <VerticalText className="hero-section__edge">{HERO_DISPLAY.verticalEdge}</VerticalText>
+      <ScrollBadge />
+      <FloatingAccentDot />
     </section>
   );
 }

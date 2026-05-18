@@ -26,9 +26,6 @@ export function isNavItemActive(href: string, pathname: string, hash: string) {
   if (href === ROUTES.hash.work) {
     return pathname.startsWith("/work") || (pathname === "/" && hash === "#work");
   }
-  if (href === ROUTES.archive) {
-    return pathname === "/archive";
-  }
   if (href === ROUTES.about) {
     return pathname === "/about";
   }

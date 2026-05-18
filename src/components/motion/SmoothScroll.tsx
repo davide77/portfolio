@@ -1,7 +1,9 @@
 "use client";
 
 import Lenis from "lenis";
+import { cancelFrame, frame } from "motion-dom";
 import { useEffect, useRef, type ReactNode } from "react";
+import { LenisProvider } from "@/components/motion/lenis-context";
 
 type SmoothScrollProps = {
   children: ReactNode;
@@ -21,23 +23,23 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,
+      autoRaf: false,
     });
 
     lenisRef.current = lenis;
 
-    let frame = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      frame = requestAnimationFrame(raf);
+    const onFrame = (data: { timestamp: number }) => {
+      lenis.raf(data.timestamp);
     };
-    frame = requestAnimationFrame(raf);
+
+    frame.update(onFrame, true);
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelFrame(onFrame);
       lenis.destroy();
       lenisRef.current = null;
     };
   }, []);
 
-  return <>{children}</>;
+  return <LenisProvider lenisRef={lenisRef}>{children}</LenisProvider>;
 }

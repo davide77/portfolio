@@ -14,7 +14,7 @@ export const TIMELINE = [
   {
     year: "2025",
     company: "Liberty Blume, Liberty Global",
-    role: "Senior front-end developer",
+    role: "Senior front-end engineer",
     outcome: "12+ step lending platform supporting multi-million-euro revenue.",
   },
   {
@@ -26,13 +26,13 @@ export const TIMELINE = [
   {
     year: "2022",
     company: "Estée Lauder Companies",
-    role: "Senior front-end developer, EMEA",
+    role: "Senior front-end engineer, EMEA",
     outcome: "Frontend modernisation across seven luxury brands; French and German pilot markets.",
   },
   {
     year: "2021",
     company: "Bristol City Council",
-    role: "Senior front-end developer",
+    role: "Senior front-end engineer",
     outcome: "GOV.UK-aligned React design system; WCAG 2.1 AA for 500,000+ residents.",
   },
   {

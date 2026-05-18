@@ -22,7 +22,7 @@
 .DS_Store
 *.pem
 
-# Claude project instructions (local only; do not commit)
+# Local IDE config (do not commit)
 CLAUDE.md
 .claude/
 

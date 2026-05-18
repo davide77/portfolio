@@ -1,0 +1,46 @@
+@use '../abstracts' as *;
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  border-block: 1px solid color-mix(in srgb, color(border) 80%, transparent);
+  padding-block: spacer(3);
+
+  &:hover .marquee__track,
+  &:focus-within .marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+
+.marquee__content {
+  flex-shrink: 0;
+  padding-inline: spacer(4);
+  font-size: font-size(sm);
+  font-weight: font-weight(medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color(stone-gray);
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,55 @@
+@use '../abstracts' as *;
+
+.brand-strip__section {
+  position: relative;
+  padding-block: spacer(9);
+  border-bottom: 1.5px solid color(border);
+  background-color: color-mix(in srgb, color(white) 65%, color(cream));
+}
+
+.brand-strip__header-block {
+  max-width: 40ch;
+}
+
+.brand-strip__kicker {
+  letter-spacing: 0.14em;
+}
+
+.brand-strip__kicker-rule {
+  width: spacer(6);
+  height: 2px;
+  background-color: color(accent);
+}
+
+.brand-strip__title {
+  font-family: $font-family-headline;
+  letter-spacing: -0.02em;
+}
+
+.brand-strip__pill-wrap {
+  list-style: none;
+}
+
+.brand-strip__pill {
+  min-height: 44px;
+  letter-spacing: 0.01em;
+  border-radius: $radius-full;
+  border: 1.5px solid color-mix(in srgb, color(primary) 28%, color(border));
+  background-color: color(white);
+  box-shadow: 0 4px 18px color-mix(in srgb, color(black) 4%, transparent);
+  transition: border-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    border-color: color(primary);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px color-mix(in srgb, color(black) 5%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: border-color $transition-fast;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

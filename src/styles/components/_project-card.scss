@@ -1,0 +1,139 @@
+@use '../abstracts' as *;
+
+.project-card__card {
+  container-type: inline-size;
+  height: 100%;
+  background-color: color-mix(in srgb, color(white) 72%, color(cream));
+  border-radius: $radius-card;
+  border: $card-border;
+  overflow: hidden;
+  transition: border-color $transition-base;
+
+  &:hover {
+    border-color: color(primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.project-card__card--ink {
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+  backdrop-filter: blur(16px);
+  border-radius: $radius-card-glass;
+  border: 1px solid color-mix(in srgb, color(cream) 28%, transparent);
+  box-shadow: none;
+
+  &:hover {
+    border-color: color-mix(in srgb, color(cream) 48%, transparent);
+  }
+
+  .project-card__title-link {
+    color: color(cream);
+
+    &:hover {
+      color: color-mix(in srgb, color(cream) 88%, color(primary));
+    }
+  }
+
+  .project-card__meta {
+    color: color-mix(in srgb, color(cream) 58%, transparent);
+  }
+
+  .project-card__summary {
+    color: color-mix(in srgb, color(cream) 70%, transparent);
+  }
+
+  .project-card__tag {
+    border-color: color-mix(in srgb, color(cream) 22%, transparent);
+    color: color-mix(in srgb, color(cream) 72%, transparent);
+  }
+
+  .project-card__link-primary {
+    color: color-mix(in srgb, color(cream) 92%, color(primary));
+
+    &:hover {
+      color: color(cream);
+    }
+  }
+
+  .project-card__link-secondary {
+    color: color-mix(in srgb, color(cream) 62%, transparent);
+
+    &:hover {
+      color: color(cream);
+    }
+  }
+}
+
+.project-card__image-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.project-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background-color: color(cream);
+}
+
+.project-card__image {
+  object-fit: cover;
+}
+
+.project-card__tag {
+  border-radius: $radius-full;
+  border: 1px solid color(border);
+}
+
+.project-card__links {
+  margin-top: auto;
+}
+
+.project-card__title-link {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: color(primary);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.project-card__link-primary {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.project-card__link-secondary {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+
+  &:hover {
+    color: color(primary);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}

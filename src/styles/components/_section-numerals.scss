@@ -1,0 +1,8 @@
+@use '../abstracts' as *;
+
+.section-numerals {
+  font-family: $font-family-mono;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, color(cream) 55%, transparent);
+  font-variant-numeric: tabular-nums;
+}

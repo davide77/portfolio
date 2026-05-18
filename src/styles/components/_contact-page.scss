@@ -1,0 +1,105 @@
+@use '../abstracts' as *;
+
+.contact-page__headline {
+  font-family: $font-family-headline;
+  font-size: clamp(#{font-size(2xl)}, 5vw, #{font-size(4xl)});
+  margin: 0;
+}
+
+.contact-page__grid {
+  display: grid;
+  gap: spacer(6);
+
+  @include min(bp(lg)) {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+
+.contact-page__card {
+  padding: spacer(5);
+  border: 1px solid color(border);
+  border-radius: $radius-card;
+  background: color(white);
+}
+
+.contact-page__cal-embed {
+  width: 100%;
+  min-height: 520px;
+  margin-top: spacer(4);
+  border: 0;
+  border-radius: $radius-sm;
+}
+
+.contact-page__wrap {
+  padding-block: spacer(11);
+}
+
+.contact-page__panel {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: spacer(8);
+  border-radius: $radius-card-glass;
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+  border: 1px solid color-mix(in srgb, color(cream) 28%, transparent);
+  backdrop-filter: blur(18px);
+  color: color(cream);
+}
+
+.contact-page__lead {
+  color: color-mix(in srgb, color(cream) 78%, transparent);
+}
+
+.contact-page__body {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.contact-page__mail-cta {
+  min-height: 44px;
+  color: color-mix(in srgb, color(cream) 94%, color(primary));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: color(cream);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+  }
+}
+
+.contact-page__phone-link {
+  color: color-mix(in srgb, color(cream) 70%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover {
+    color: color(cream);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+  }
+}
+
+.contact-page__back-link {
+  color: color-mix(in srgb, color(cream) 58%, transparent);
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: color(cream);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+    }
+  }
+}

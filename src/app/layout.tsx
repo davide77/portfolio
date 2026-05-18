@@ -1,34 +1,29 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { HomeJsonLd } from "@/components/seo/JsonLd";
 import { PLAUSIBLE_DOMAIN } from "@/constants/config";
+import { rootMetadata } from "@/lib/seo";
 import { Providers } from "./providers";
 import Script from "next/script";
 import "../styles/main.scss";
 import "lenis/dist/lenis.css";
-import { SITE } from "@/constants/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-headline",
   display: "swap",
+  weight: ["400", "600"],
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://domenghini.com"),
-  title: {
-    default: `${SITE.name} · ${SITE.role}`,
-    template: `%s · ${SITE.name}`,
-  },
-  description: SITE.oneLineDescription,
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -38,7 +33,6 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className={`${fraunces.variable} ${dmSans.variable}`} data-theme="paper">
       <body>
-        <HomeJsonLd />
         {process.env.NODE_ENV === "production" ? (
           <Script defer data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js" />
         ) : null}

@@ -1,0 +1,80 @@
+@use '../abstracts' as *;
+
+// Monopo-style ink hero typography: DM Sans light headline, mono meta (see brand.md).
+
+.hero-section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: spacer(10) spacer(8);
+  overflow: hidden;
+}
+
+.hero-section__canvas {
+  z-index: 0;
+}
+
+.hero-section__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: spacer(4);
+  text-align: center;
+  min-height: 70svh;
+  padding-block: spacer(8);
+  pointer-events: none;
+}
+
+.hero-section__eyebrow {
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xs);
+  font-weight: font-weight(regular);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 50%, transparent);
+}
+
+.hero-section__headline {
+  margin: 0;
+  color: color(white);
+  max-width: 18ch;
+  font-family: $font-family-body;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: font-weight(light);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hero-section__word {
+  display: inline-block;
+}
+
+.hero-section__word--emphasis {
+  font-style: italic;
+  font-weight: font-weight(light);
+}
+
+.hero-section__edge {
+  position: absolute;
+  right: spacer(2);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-family: $font-family-mono;
+  font-size: font-size(xs);
+  letter-spacing: 0.45em;
+  color: color-mix(in srgb, color(cream) 40%, transparent);
+
+  @include max(bp(md)) {
+    display: none;
+  }
+}
