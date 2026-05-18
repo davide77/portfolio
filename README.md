@@ -6,7 +6,6 @@ Opinionated Next.js 16 + TypeScript + Sass starter pre-wired with the convention
 
 ```
 starter-kit/
-  CLAUDE.md                       Project instructions for Claude Code (rules below)
   brand.md                        Fillable brand source-of-truth (positioning, voice, colours, type)
   package.json                    Next.js 16, React 19, TypeScript, Sass
   tsconfig.json
@@ -14,13 +13,6 @@ starter-kit/
   next-env.d.ts
   eslint.config.mjs
   .gitignore
-
-  .claude/
-    settings.local.json           Empty allow list (extend per project)
-    skills/
-      brand-guidelines/SKILL.md   Visual brand styling (defers to brand.md)
-      brand-voice/SKILL.md        Voice and copy auditing (defers to brand.md)
-      scss-utility-architecture/SKILL.md   Token + utility + BEM conventions
 
   src/
     app/
@@ -75,7 +67,6 @@ git commit -m "Initial commit"
 
 # 3. Replace the {{PLACEHOLDERS}}
 #    - Edit brand.md (positioning, voice, colours, type)
-#    - Edit CLAUDE.md (search for {{PROJECT_NAME}})
 #    - Edit package.json (rename "name")
 #    - Edit src/styles/abstracts/_colors.scss with the brand palette
 #    - Edit src/styles/abstracts/_typography.scss with the brand fonts
@@ -89,10 +80,10 @@ npm run dev
 ## Project conventions (already wired)
 
 - **Token-driven SCSS:** every colour, spacer, font-size, etc. goes through a map and accessor function. See [src/styles/abstracts](src/styles/abstracts).
-- **Utility-first JSX:** layout, spacing, text size, colour live as classes in JSX, not as component SCSS. See [CLAUDE.md](CLAUDE.md) "Utility classes over component SCSS".
+- **Utility-first JSX:** layout, spacing, text size, colour live as classes in JSX, not as component SCSS. Prefer existing utilities in `src/styles/base` and `src/styles/utilities` over new component SCSS for layout-only rules.
 - **No inline styles:** except for framer-motion `MotionValue`s and per-instance CSS custom properties.
 - **No em-dashes or en-dashes:** anywhere, in code or copy. Plain hyphens only.
-- **No AI co-author trailer:** in commits or PR bodies.
+- **No co-author trailers:** in commits or PR bodies.
 - **BEM CSS modules:** every component has a sibling `.module.scss` file.
 
 ## Optional modules (copy in when needed)
