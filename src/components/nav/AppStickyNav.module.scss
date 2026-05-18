@@ -1,0 +1,151 @@
+@use '../../styles/abstracts' as *;
+
+.root {
+  position: sticky;
+  top: 0;
+  z-index: z(sticky);
+}
+
+.rootPaper {
+  border-bottom: 1px solid color-mix(in srgb, color(primary) 18%, color(border));
+  background-color: color-mix(in srgb, color(cream) 94%, color(black));
+  backdrop-filter: blur(16px);
+}
+
+.rootInk {
+  border-bottom: 1px solid color-mix(in srgb, color(cream) 14%, transparent);
+  background-color: color-mix(in srgb, color(black) 72%, transparent);
+  backdrop-filter: blur(20px);
+}
+
+.inner {
+  max-width: $layout-page-max;
+  margin-inline: auto;
+  padding-block: spacer(3);
+  padding-inline: spacer(3);
+
+  @include min(bp(lg)) {
+    padding-inline: spacer(5);
+  }
+}
+
+.brand {
+  text-decoration: none;
+  border-radius: $radius-sm;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: spacer(2);
+  border-radius: $radius-sm;
+  font-family: $font-family-headline;
+  font-weight: font-weight(semibold);
+  font-size: font-size(sm);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.markInk {
+  color: color(cream);
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+  border: 1px solid color-mix(in srgb, color(cream) 28%, transparent);
+}
+
+.markPaper {
+  color: color(text);
+  background-color: color-mix(in srgb, color(cream) 50%, color(white));
+  border: 1px solid color-mix(in srgb, color(primary) 15%, color(border));
+}
+
+.brandPaper {
+  color: color(text);
+}
+
+.brandInk {
+  color: color(cream);
+}
+
+.wordmark {
+  font-family: $font-family-headline;
+  letter-spacing: -0.02em;
+}
+
+.nav {
+  gap: spacer(2);
+
+  @include min(bp(md)) {
+    gap: spacer(4);
+  }
+}
+
+.navLink {
+  min-height: 44px;
+  cursor: pointer;
+  border-radius: $radius-pill-cta;
+  text-decoration: none;
+  transition: color $transition-fast, background-color $transition-fast;
+}
+
+.navLinkPaper {
+  color: color(text-muted);
+
+  &:hover {
+    color: color(primary);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.navLinkInk {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+
+  &:hover {
+    color: color(cream);
+    background-color: color-mix(in srgb, color(white) 6%, transparent);
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid color-mix(in srgb, color(cream) 45%, transparent);
+    outline-offset: $focus-ring-offset;
+  }
+}
+
+.navLinkActivePaper {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.navLinkActiveInk {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.themeToggle {
+  min-height: 44px;
+  padding-inline: spacer(2);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: $radius-pill-cta;
+  color: inherit;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.bookCta {
+  font-size: font-size(sm);
+  padding: spacer(2) spacer(4);
+}

@@ -1,0 +1,64 @@
+@use '../../styles/abstracts' as *;
+
+.back {
+  text-decoration: none;
+}
+
+.tag {
+  border: 1px solid color(border);
+  border-radius: $radius-sm;
+  background-color: color(cream);
+}
+
+.heroImage {
+  width: 100%;
+}
+
+.workList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(5);
+}
+
+.workItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: spacer(4);
+}
+
+.workIndex {
+  font-variant-numeric: tabular-nums;
+  font-size: font-size(sm);
+  font-weight: font-weight(semibold);
+  color: color(stone-gray);
+}
+
+.artefacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(6);
+}
+
+.next {
+  padding-top: spacer(6);
+  border-top: 1px solid color(border);
+}
+
+.nextLink {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+  margin-top: spacer(3);
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: color(primary);
+  }
+}

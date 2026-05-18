@@ -1,0 +1,87 @@
+@use '../../../styles/abstracts' as *;
+
+.filterToggle {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  color: color(primary);
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.filters {
+  list-style: none;
+  padding: 0;
+}
+
+.chip {
+  border: 1px solid color(border);
+  border-radius: $radius-full;
+  padding: spacer(1) spacer(3);
+  background: color(white);
+  cursor: pointer;
+  font-size: font-size(sm);
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.chipActive {
+  background: color(primary);
+  color: color(white);
+  border-color: color(primary);
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: spacer(8) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(8);
+}
+
+.card {
+  border-top: 1px solid color(border);
+  padding-top: spacer(6);
+}
+
+.cardLink {
+  display: grid;
+  gap: spacer(5);
+  text-decoration: none;
+  color: inherit;
+
+  @include min(bp(lg)) {
+    grid-template-columns: auto 1fr 280px;
+    align-items: start;
+  }
+}
+
+.cardReverse .cardLink {
+  @include min(bp(lg)) {
+    grid-template-columns: auto 1fr 280px;
+  }
+}
+
+.index {
+  font-variant-numeric: tabular-nums;
+  font-size: font-size(sm);
+  color: color(stone-gray);
+}
+
+.tag {
+  font-size: font-size(xs);
+  padding: spacer(1) spacer(2);
+  border: 1px solid color(border);
+  border-radius: $radius-sm;
+}
+
+.thumb {
+  max-width: 280px;
+}

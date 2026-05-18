@@ -1,0 +1,31 @@
+@use '../../styles/abstracts' as *;
+
+.root {
+  overflow: hidden;
+}
+
+.rootPinned {
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: spacer(4);
+  padding: spacer(6) spacer(4);
+  width: max-content;
+
+  @include max(bp(md)) {
+    flex-direction: column;
+    width: 100%;
+    padding-inline: spacer(4);
+  }
+}

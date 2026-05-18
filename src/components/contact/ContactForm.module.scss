@@ -1,0 +1,83 @@
+@use '../../styles/abstracts' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(4);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+
+  input,
+  textarea {
+    padding: spacer(3);
+    border: 1px solid color(border);
+    border-radius: $radius-sm;
+    font-family: $font-family-body;
+    font-size: font-size(base);
+    background: color(white);
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacer(2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: spacer(1);
+  padding: spacer(1) spacer(3);
+  border: 1px solid color(border);
+  border-radius: $radius-full;
+  font-size: font-size(sm);
+  cursor: pointer;
+}
+
+.submit {
+  align-self: flex-start;
+  padding: spacer(3) spacer(5);
+  border: 0;
+  border-radius: $radius-pill-cta;
+  background: color(primary);
+  color: color(white);
+  font-weight: font-weight(semibold);
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.error {
+  color: color(accent);
+  font-size: font-size(sm);
+}
+
+.success {
+  padding: spacer(6);
+  border: 1px solid color(border);
+  border-radius: $radius-card;
+}

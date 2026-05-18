@@ -1,0 +1,15 @@
+@use '../styles/abstracts' as *;
+
+.link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+
+  &:hover {
+    color: color(black);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}

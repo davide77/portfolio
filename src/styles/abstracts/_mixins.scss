@@ -1,0 +1,64 @@
+@use 'breakpoints' as *;
+@use 'variables' as *;
+@use 'colors' as *;
+
+@mixin min($bp) {
+  @media only screen and (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin max($bp) {
+  @media only screen and (max-width: $bp - 1) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin focus-ring {
+  outline: $focus-ring-width solid $focus-ring-color;
+  outline-offset: $focus-ring-offset;
+}
+
+/// Multi-layer wash for ink bands (footer, any future full-bleed ink strip).
+/// Opacity is controlled in the caller (e.g. `opacity` + `--brand-atmosphere-strength`).
+@mixin ink-atmosphere-wash-background {
+  background:
+    linear-gradient(
+      95deg,
+      color-mix(in srgb, color(primary) 8%, transparent) 0%,
+      transparent 45%,
+      color-mix(in srgb, color(accent) 7%, transparent) 100%
+    ),
+    radial-gradient(ellipse 80% 50% at 0% 100%, color-mix(in srgb, color(primary) 10%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, color-mix(in srgb, color(cream) 10%, transparent), transparent 50%);
+}
+
+/// Soft sculpt for paper/cream sections (e.g. archive). Forest, Signal, Cream stops at 12% or below.
+@mixin paper-atmosphere-wash-background {
+  background:
+    linear-gradient(
+      108deg,
+      color-mix(in srgb, color(primary) 6%, transparent) 0%,
+      transparent 48%,
+      color-mix(in srgb, color(accent) 5%, transparent) 100%
+    ),
+    radial-gradient(ellipse 85% 55% at 12% 8%, color-mix(in srgb, color(primary) 7%, transparent), transparent 52%),
+    radial-gradient(ellipse 75% 50% at 88% 92%, color-mix(in srgb, color(cream) 12%, transparent), transparent 50%);
+}
+
+/// Horizontal atmospheric band: maps monopo "Deep Ocean" *role* to Forest, Paper, Signal only (no foreign RGB).
+/// Use on ink behind frosted UI; pair with low `opacity` in the caller when layering.
+@mixin brand-atmospheric-band {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, color(primary) 22%, transparent) 0%,
+    color-mix(in srgb, color(cream) 12%, transparent) 45%,
+    color-mix(in srgb, color(accent) 18%, transparent) 100%
+  );
+}

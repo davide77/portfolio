@@ -1,0 +1,44 @@
+// Mirror brand.md exactly.
+
+$theme-colors: (
+  // Primary (dominant)
+  black:        #101214,
+  white:        #ffffff,
+  primary:      #2a6b5e,
+
+  // Secondary
+  cream:        #f5f1ea,
+  stone-gray:   #6f6a63,
+
+  // Accents
+  accent:       #c45c3e,
+
+  // Semantic UI
+  text:         #101214,
+  text-muted:   #6f6a63,
+  border:       #e0dbd4,
+);
+
+@function color($name) {
+  @if not map-has-key($theme-colors, $name) {
+    @error 'Color `#{$name}` not found in $theme-colors map.';
+  }
+
+  @return map-get($theme-colors, $name);
+}
+
+@each $name, $value in $theme-colors {
+  $key: '' + $name;
+
+  .bg-#{$key} {
+    background-color: $value;
+  }
+
+  .is-#{$key} {
+    color: $value;
+  }
+
+  .has-border-#{$key} {
+    border-color: $value;
+  }
+}

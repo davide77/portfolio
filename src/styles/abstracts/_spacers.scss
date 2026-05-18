@@ -1,0 +1,25 @@
+// Spacing scale. Used for margin, padding, gap. Generates utility classes
+// `has-m*-N`, `has-p*-N`, `has-gap-N` via base/_measures.scss and base/_base.scss.
+
+$spacers: (
+  0: 0,
+  1: 5px,
+  2: 10px,
+  3: 16px,
+  4: 20px,
+  5: 24px,
+  6: 32px,
+  7: 40px,
+  8: 48px,
+  9: 64px,
+  10: 80px,
+  11: 46px,
+);
+
+@function spacer($n) {
+  @if not map-has-key($spacers, $n) {
+    @error 'Spacer `#{$n}` not found in $spacers map.';
+  }
+
+  @return map-get($spacers, $n);
+}

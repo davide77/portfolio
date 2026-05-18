@@ -1,0 +1,15 @@
+@use '../../../styles/abstracts' as *;
+
+.root {
+  padding-block: spacer(8);
+  background-color: color(black);
+}
+
+.cardWrap {
+  flex: 0 0 min(85vw, 420px);
+
+  @include max(bp(md)) {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

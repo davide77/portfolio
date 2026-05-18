@@ -1,0 +1,39 @@
+@use '../../styles/abstracts' as *;
+
+// Full-bleed ink canvas between sticky nav and footer (matches home marketing stack).
+.backdrop {
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 auto;
+  min-height: 0;
+  background-color: color(black);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    @include brand-atmospheric-band;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: calc(0.55 * var(--brand-atmosphere-strength, 1));
+    @include ink-atmosphere-wash-background;
+  }
+}
+
+.backdropInner {
+  position: relative;
+  z-index: 1;
+}
+
+.stack {
+  min-height: 100vh;
+}

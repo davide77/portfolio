@@ -1,0 +1,65 @@
+@use '../../styles/abstracts' as *;
+
+:global(html.has-custom-cursor) {
+  &,
+  * {
+    cursor: none !important;
+  }
+
+  input,
+  textarea,
+  select,
+  [contenteditable='true'] {
+    cursor: text !important;
+  }
+}
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: z(tooltip);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  background-color: color(primary);
+}
+
+.ring {
+  width: 8px;
+  height: 8px;
+  border: 1px solid color-mix(in srgb, color(primary) 60%, transparent);
+  border-radius: $radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width $transition-base, height $transition-base, border-color $transition-base;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.ringMagnetic {
+  width: 60px;
+  height: 60px;
+  border-color: color-mix(in srgb, color(cream) 40%, transparent);
+  background-color: color-mix(in srgb, color(black) 75%, transparent);
+}
+
+.ringLabel {
+  font-size: font-size(xs);
+  font-weight: font-weight(medium);
+  color: color(cream);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: line-height(tight);
+  padding: spacer(1);
+}

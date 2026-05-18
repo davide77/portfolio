@@ -1,0 +1,41 @@
+@use '../abstracts' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-headline;
+  font-weight: font-weight(bold);
+  line-height: line-height(snug);
+  color: color(text);
+}
+
+h1 {
+  font-size: clamp(font-size(2xl), 7vw, font-size(5xl));
+}
+
+h2 {
+  font-size: clamp(font-size(2xl), 5vw, font-size(3xl));
+}
+
+h3 {
+  font-size: clamp(font-size(xl), 3.5vw, font-size(2xl));
+}
+
+h4 {
+  font-size: font-size(lg);
+
+  @include max(bp(md)) {
+    font-size: font-size(md);
+  }
+}
+
+h5 {
+  font-size: font-size(md);
+}
+
+h6 {
+  font-size: font-size(base);
+}

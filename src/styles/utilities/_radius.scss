@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+$radii: (
+  sm: $radius-sm,
+  btn: $radius-btn,
+  card: $radius-card,
+  full: $radius-full,
+  none: 0,
+);
+
+@each $name, $value in $radii {
+  .has-radius-#{$name} {
+    border-radius: $value;
+  }
+}

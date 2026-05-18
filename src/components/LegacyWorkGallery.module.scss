@@ -1,0 +1,126 @@
+@use '../styles/abstracts' as *;
+
+.section {
+  position: relative;
+  padding-block: spacer(11);
+  isolation: isolate;
+  background-color: transparent;
+  color: color(cream);
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 0;
+  @include brand-atmospheric-band;
+}
+
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: calc(0.45 * var(--brand-atmosphere-strength, 1));
+  pointer-events: none;
+  z-index: 0;
+  @include ink-atmosphere-wash-background;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.kicker {
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, color(cream) 58%, transparent);
+}
+
+.kickerRule {
+  width: spacer(6);
+  height: 2px;
+  background-color: color-mix(in srgb, color(accent) 85%, color(cream));
+}
+
+.intro {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.headerRow {
+  margin-bottom: spacer(7);
+}
+
+.intro {
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.bento {
+  grid-template-columns: 1fr;
+
+  @include min(bp(sm)) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: spacer(4);
+  }
+
+  @include min(bp(lg)) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+    gap: spacer(4);
+  }
+}
+
+.tile {
+  position: relative;
+  border-radius: $radius-card-glass;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+  backdrop-filter: blur(12px);
+  min-height: 140px;
+  box-shadow: none;
+
+  @include min(bp(lg)) {
+    min-height: 160px;
+  }
+}
+
+.tileWide {
+  @include min(bp(sm)) {
+    grid-column: span 2;
+  }
+}
+
+.tileTall {
+  @include min(bp(sm)) {
+    grid-row: span 2;
+    min-height: 300px;
+  }
+
+  @include min(bp(lg)) {
+    min-height: 340px;
+  }
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform $transition-slow;
+
+  .tile:hover & {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    .tile:hover & {
+      transform: none;
+    }
+  }
+}

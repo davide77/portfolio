@@ -1,0 +1,13 @@
+@use '../../styles/abstracts' as *;
+
+.frame {
+  overflow: hidden;
+  border-radius: $radius-card;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

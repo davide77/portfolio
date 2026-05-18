@@ -1,0 +1,34 @@
+@use '../../styles/abstracts' as *;
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: spacer(2);
+  padding: spacer(1) spacer(3);
+  border-radius: $radius-full;
+  border: 1px solid color-mix(in srgb, color(cream) 25%, transparent);
+  color: color(cream);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  background-color: color(primary);
+  animation: pulse 2s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}

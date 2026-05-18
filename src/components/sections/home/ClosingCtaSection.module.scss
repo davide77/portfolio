@@ -1,0 +1,15 @@
+@use '../../../styles/abstracts' as *;
+
+.root {
+  padding-block: spacer(10);
+  background-color: color(black);
+}
+
+.headline {
+  margin: 0;
+  font-family: $font-family-headline;
+  font-size: clamp(#{font-size(2xl)}, 5vw, #{font-size(5xl)});
+  line-height: line-height(tight);
+  color: color(cream);
+  max-width: 18ch;
+}
