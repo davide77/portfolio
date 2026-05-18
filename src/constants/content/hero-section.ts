@@ -3,9 +3,9 @@ import { PROFILE } from "./profile";
 export const HERO_DISPLAY = {
   eyebrow: PROFILE.eyebrow,
   /** Word-level hero line; "ships" is emphasised in JSX */
-  words: ["Frontend", "that", "ships", "product,", "not", "just", "code."] as const,
+  words: ["Frontend", "that", "ships", "whole", "products,", "end", "to", "end."] as const,
   emphasisWord: "ships",
-  verticalEdge: "EST · 2006 - LONDON · ROMA",
+  verticalEdge: "EST · 2006 · LONDON · ROME",
 } as const;
 
 export const SCROLL_BADGE = {

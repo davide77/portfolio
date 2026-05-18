@@ -1,9 +1,9 @@
 export const PROFILE = {
   eyebrow: "01 - Senior front-end engineer · Founder",
-  headline: "Senior front-end engineer who ships full products, not just screens.",
+  headline: "Senior front-end engineer who ships whole products, end to end.",
   subhead:
     "London-based. Twenty years in high-traffic web work; now leading frontend at Liberty Blume and building Nannynow.co.uk.",
-  verticalStrip: "EST. 2006 · LONDON · ROMA",
+  verticalStrip: "EST · 2006 · LONDON · ROME",
   primaryCta: "Book a call",
   secondaryCta: "See selected work",
   manifestoQuote:

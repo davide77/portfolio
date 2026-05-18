@@ -9,7 +9,7 @@ export const CONTACT_PAGE = {
   cards: {
     book: {
       title: "Book a call",
-      body: "Pick a slot that suits your timezone. Best for hiring leads and founders.",
+      body: "Pick a slot that suits your time zone. Best for hiring leads and founders.",
     },
     brief: {
       title: "Send a brief",

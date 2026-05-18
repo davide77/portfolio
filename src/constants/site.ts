@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Davide Domenghini",
   monogram: "DD",
-  role: "Senior Front-End Engineer",
+  role: "Senior front-end engineer",
   founderLine: "Founder, Nannynow.co.uk",
   location: "London, UK",
   oneLineDescription:

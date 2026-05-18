@@ -1,8 +1,8 @@
 export const ABOUT_PAGE = {
   eyebrow: "About",
-  headline: "Twenty years of front-end work. Still obsessed with the details.",
+  headline: "Twenty years of front-end work. Still sweating the details.",
   intro:
-    "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript. I come alive when design, engineering and commercial outcomes all have to land at once.",
+    "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript. I do my best work when design, engineering and commercial outcomes all have to land at once.",
   portraitAlt: "Portrait of Davide Domenghini",
   portraitSrc: "/images/about/portrait.jpg",
   principles: [
@@ -28,7 +28,7 @@ export const ABOUT_PAGE = {
   beyond: {
     title: "Beyond work",
     body:
-      "For six years I've coached a youth team at Cheam Sports FC. Understanding how to motivate different personalities shapes how I mentor developers and lead teams. Outside client work I keep my hands dirty with Three.js, WebGL and Framer Motion, testing ideas that later show up, more disciplined, in production.",
+      "For six years I've coached a youth team at Cheam Sports FC. Understanding how to motivate different personalities shapes how I mentor developers and lead teams. Outside client work I keep building with Three.js, WebGL and Framer Motion, testing ideas that later show up, more disciplined, in production.",
   },
   tools: {
     title: "Tools and stack",

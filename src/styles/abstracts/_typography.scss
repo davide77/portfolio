@@ -1,8 +1,11 @@
 // Font stacks. CSS variables are injected by next/font in src/app/layout.tsx.
 // Replace the var() names per project to match the fonts loaded in layout.tsx.
 
-$font-family-body: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-family-headline: var(--font-headline), -apple-system, sans-serif;
+// Fallbacks mirror brand.md Typography: DM Sans -> system-ui, sans-serif;
+// Fraunces -> Georgia, serif (a serif fallback so a Fraunces load
+// failure does not swap the headline to a sans-serif face).
+$font-family-body: var(--font-body), system-ui, sans-serif;
+$font-family-headline: var(--font-headline), Georgia, serif;
 $font-family-accent: $font-family-body;
 $font-family-mono: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
 
