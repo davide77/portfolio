@@ -40,10 +40,11 @@ Direct sentences. Evidence over adjectives. British spelling. Name the stack, th
 
 1. **No em-dashes (`—`) or en-dashes (`–`) anywhere.** Use plain hyphens with spaces where a break is needed.
 2. **British English only.** colour, behaviour, organise, centre.
-3. **Sentence case for UI and headings by default.** Title Case only for proper nouns (brand names, product names).
-4. **One core message at a time.** Headline plus one supporting line, not a paragraph in the hero.
-5. **Filler ban list:** revolutionise, game-changer, synergy, unleash, elevate, leverage, cutting-edge, robust, seamless, intuitive, empower, world-class.
-6. **Banned framings:** "It's not just X, it's Y", empty three-part lists, "In today's world...", "We're on a mission to...".
+3. **English only on the site.** No Italian (or other) subtitles, stacked translations, or bilingual titles under headings. One language in UI and marketing copy.
+4. **Sentence case for UI and headings by default.** Title Case only for proper nouns (brand names, product names).
+5. **One core message at a time.** Headline plus one supporting line, not a paragraph in the hero.
+6. **Filler ban list:** revolutionise, game-changer, synergy, unleash, elevate, leverage, cutting-edge, robust, seamless, intuitive, empower, world-class.
+7. **Banned framings:** "It's not just X, it's Y", empty three-part lists, "In today's world...", "We're on a mission to...".
 
 ### Do say
 
@@ -73,6 +74,15 @@ All HEX values are canonical. Mirror them exactly in [src/styles/abstracts/_colo
 ### Accents (subtle, never on logo)
 
 - **Signal** `#c45c3e` - small highlights, hover emphasis, micro-labels on **light** surfaces only.
+
+### Hero orb (WebGL only)
+
+The home hero's celestial "DD" forms are a shader surface, not a CSS surface. They use a self-contained warm-amber ramp that exists **only** for the WebGL orb material - never for type, UI, washes, or any CSS. It does not relax the "no colours outside this palette" rule for the rest of the site.
+
+- **Orb void** `#000000` - pure black core of the forms. Design-mandated; not Ink.
+- **Orb shadow** `#2c1505` - the dark warm bands between ridges.
+- **Orb amber** `#d07a25` - the bright ridges.
+- **Orb flare** `#ffc080` - the hot rim peaks.
 
 ### Rules
 
@@ -117,7 +127,7 @@ Fallbacks:
 
 - Strong typographic hierarchy over decorative illustration.
 - Generous spacing, one focal column on case studies.
-- Avoid: purple-on-purple "AI slop" gradients, fake device frames, meaningless icon grids.
+- Avoid: generic purple-on-purple SaaS gradients, fake device frames, meaningless icon grids.
 
 ## Content pillars
 
@@ -151,7 +161,8 @@ Fallbacks:
 
 1. Em-dashes, en-dashes, or decorative substitutes.
 2. British spelling.
-3. Banned words and framings.
-4. Superlatives without evidence.
-5. Generic CTAs ("Learn more", "Click here").
-6. Copy that could belong to any developer CV.
+3. Non-English or bilingual UI (subtitles, stacked translations).
+4. Banned words and framings.
+5. Superlatives without evidence.
+6. Generic CTAs ("Learn more", "Click here").
+7. Copy that could belong to any developer CV.

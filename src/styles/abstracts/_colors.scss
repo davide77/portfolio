@@ -13,6 +13,12 @@ $theme-colors: (
   // Accents
   accent:       #c45c3e,
 
+  // Hero orb (WebGL shader material only - never type/UI/washes)
+  orb-void:     #000000,
+  orb-shadow:   #2c1505,
+  orb-amber:    #d07a25,
+  orb-flare:    #ffc080,
+
   // Semantic UI
   text:         #101214,
   text-muted:   #6f6a63,
