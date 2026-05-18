@@ -6,6 +6,46 @@ Audit scored the system 7.5/10. Strong token discipline and a11y groundwork; hel
 
 WCAG target: 2.2 AA. Motion/WebGL internals out of scope (reduced-motion + focus impact in scope).
 
+## STATUS: COMPLETE (2026-05-18)
+
+All six phases implemented and committed on branch `design-audit-overhaul`
+(commits 01d5735, eca3db8, 66f6614, 330f858, f92619c, e5c9416, 84ddfd2,
+4ee20d3). Build, TypeScript, and the full verification gate pass.
+
+### Documented exceptions / deferred (by design or decision)
+
+- **C7 nav wordmark prefix:** no accent shade meets 4.5:1 on black; per
+  brand.md rule 89 the prefix is cream on the ink nav, accent on the
+  light nav. Resolved, not deferred.
+- **E3 minor mixed rules (~6):** font-variant-numeric alongside a
+  movable font-size/colour. Left intact per CLAUDE.md "do not split a
+  rule that must stay in SCSS". Accepted minor debt.
+- **E6 inline SEO metadata strings** (contact/lab/about route
+  descriptions): Minor-tier SEO copy, left as a documented nit.
+- **C8 / m1 eyebrow numbering:** content-architecture decision (home
+  section index vs standalone-page eyebrows), left as a documented nit.
+- **Phase F, 8th component** `_featured-work-section.scss`: horizontal-
+  scroll carousel item sized to viewport by design and entangled with
+  separate uncommitted WIP. Justified exception, not migrated.
+
+### Out of band: pre-existing WIP (not authored in this overhaul)
+
+Two bodies of pre-existing uncommitted work were found in the tree at
+session start and kept separate from the audit fixes:
+1. Sticky-nav hide-on-scroll behaviour - committed in 330f858 with
+   explicit attribution (it shared a file with the B7 a11y fix).
+2. featured-work / horizontal-scroll rework (HorizontalScrollSection.tsx,
+   _featured-work-section.scss, _horizontal-scroll-section.scss) - left
+   uncommitted and untouched for the author to finish.
+
+### Known limitation
+
+The container-query thresholds (Phase F) are reasoned conversions from
+the original viewport breakpoints scaled to the content-well width. CSS
+output is verified, but the exact column-flip points may differ slightly
+from the previous viewport behaviour and should be eyeballed in a
+browser before launch.
+
 ---
 
 ## Phase A - Brand source of truth (do first, blocks copy fixes)
