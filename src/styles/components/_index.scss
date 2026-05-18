@@ -1,2 +1,46 @@
-// Register global (non-module) component SCSS partials here.
-// CSS Modules live next to their components and are imported from TSX only.
+// Global component styles (BEM). Import partials here — do not use CSS Modules.
+
+@use '_contact-page';
+@use '_not-found-page';
+@use '_brand-strip';
+@use '_button';
+@use '_case-study-body';
+@use '_experience-block';
+@use '_featured-work';
+@use '_hero-placeholder';
+@use '_hero-webgl-layer';
+@use '_scroll-badge';
+@use '_floating-accent-dot';
+@use '_section-numerals';
+@use '_mobile-nav-menu';
+@use '_legacy-work-gallery';
+@use '_project-card';
+@use '_site-footer';
+@use '_site-header';
+@use '_skills-block';
+@use '_case-study-template';
+@use '_contact-form';
+@use '_site-chrome';
+@use '_cursor';
+@use '_horizontal-scroll-section';
+@use '_loader';
+@use '_page-transition';
+@use '_reveal-image';
+@use '_sticky-scene';
+@use '_app-sticky-nav';
+@use '_brand-mark';
+@use '_about-page-content';
+@use '_capabilities-section';
+@use '_closing-cta-section';
+@use '_featured-work-section';
+@use '_hero-section';
+@use '_manifesto-teaser-section';
+@use '_lab-grid';
+@use '_work-index-client';
+@use '_intro-splash-sequence';
+@use '_display-text';
+@use '_eyebrow-label';
+@use '_magnetic-button';
+@use '_marquee';
+@use '_status-pill';
+@use '_vertical-text';
