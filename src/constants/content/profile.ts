@@ -1,5 +1,5 @@
 export const PROFILE = {
-  eyebrow: "01 - Senior front-end engineer · Founder",
+  eyebrow: "01 - 20 years · Sky, Estée Lauder, Liberty Global · Founder",
   headline: "Senior front-end engineer who ships whole products, end to end.",
   subhead:
     "London-based. Twenty years in high-traffic web work; now leading frontend at Liberty Blume and building Nannynow.co.uk.",
@@ -32,7 +32,7 @@ export const TRUSTED_BY_CLIENTS = [
 ] as const;
 
 export const POSITIONING = {
-  headline: "Regulated lending one day, WebGL experiments the next.",
+  headline: "I work at both ends: regulated enterprise platforms and experimental interfaces.",
   paragraphs: [
     "I can architect a 12-step financial lending platform and prototype an experimental WebGL interface in the same week when the brief demands it.",
     "The through-line is judgement: knowing when to optimise, when to ship, and when a calm interface is worth more than another feature.",
