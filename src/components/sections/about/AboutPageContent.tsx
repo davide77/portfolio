@@ -31,7 +31,7 @@ export function AboutPageContent() {
           <p className="text-lg leading-relaxed measure-62ch has-mt-4">{ABOUT_PAGE.intro}</p>
           <p className="has-mt-4">
             <a href={CV_PDF_PATH} className="has-font-semibold is-primary" download>
-              Download CV (PDF)
+              {ABOUT_PAGE.cvLabel}
             </a>
           </p>
         </div>
@@ -49,7 +49,7 @@ export function AboutPageContent() {
 
       <section aria-labelledby="timeline-title">
         <h2 id="timeline-title" className="text-3xl">
-          Career timeline
+          {ABOUT_PAGE.timelineTitle}
         </h2>
         <ol className={"about-page-content__timeline"}>
           {TIMELINE.map((entry) => (

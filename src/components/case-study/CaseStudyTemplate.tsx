@@ -5,6 +5,7 @@ import { ROUTES } from "@/constants/routes";
 import { RevealImage } from "@/components/motion/RevealImage";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
+import { CASE_STUDY } from "@/constants/content/case-study";
 import { cx } from "@/components/cx";
 
 type CaseStudyTemplateProps = {
@@ -19,7 +20,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
       <main id="main">
         <div className="container-atmosphere has-py-8">
           <Link href={ROUTES.workIndex} className={cx("case-study-template__back", "text-sm has-font-semibold is-primary")}>
-            Back to work
+            {CASE_STUDY.backToWorkLabel}
           </Link>
           <header className="is-flex is-flex-column has-gap-3 has-mt-5">
             <EyebrowLabel>{project.client}</EyebrowLabel>
@@ -29,7 +30,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             <p className="text-sm is-text-muted">
               {project.role} · {project.period}
             </p>
-            <ul className="is-flex is-flex-wrap has-gap-2" aria-label="Technologies">
+            <ul className="is-flex is-flex-wrap has-gap-2" aria-label={CASE_STUDY.technologiesAriaLabel}>
               {project.tags.map((tag) => (
                 <li key={tag} className={cx("case-study-template__tag", "text-xs has-font-medium has-py-1 has-px-2")}>
                   {tag}
@@ -50,11 +51,11 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
         </div>
         <div className="container-sm has-py-8 is-flex is-flex-column has-gap-8">
           <section>
-            <h2 className="text-2xl has-mb-3">The brief</h2>
+            <h2 className="text-2xl has-mb-3">{CASE_STUDY.sections.brief}</h2>
             <p className="text-lg leading-relaxed">{project.brief}</p>
           </section>
           <section>
-            <h2 className="text-2xl has-mb-4">The work</h2>
+            <h2 className="text-2xl has-mb-4">{CASE_STUDY.sections.work}</h2>
             <ol className={"case-study-template__work-list"}>
               {project.workPoints.map((point, i) => (
                 <li key={point.title} className={"case-study-template__work-item"}>
@@ -68,7 +69,7 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             </ol>
           </section>
           <section>
-            <h2 className="text-2xl has-mb-3">Outcome</h2>
+            <h2 className="text-2xl has-mb-3">{CASE_STUDY.sections.outcome}</h2>
             <p className="text-lg leading-relaxed">{project.outcome}</p>
           </section>
           {project.sections.map((block) => (
@@ -77,8 +78,8 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
               <p className="text-md leading-relaxed is-text-muted">{block.body}</p>
             </section>
           ))}
-          <section aria-label="Selected artefacts">
-            <h2 className="text-2xl has-mb-4">Selected screens</h2>
+          <section aria-label={CASE_STUDY.artefactsAriaLabel}>
+            <h2 className="text-2xl has-mb-4">{CASE_STUDY.sections.artefacts}</h2>
             <ul className={"case-study-template__artefacts"}>
               {project.artefacts.map((art) => (
                 <li key={art.src} className="case-study-template__artefact">
@@ -89,13 +90,13 @@ export function CaseStudyTemplate({ project }: CaseStudyTemplateProps) {
             </ul>
           </section>
           <div className="is-flex is-flex-wrap has-gap-3">
-            <MagneticButton href={project.liveUrl} cursorText="Live" external>
+            <MagneticButton href={project.liveUrl} cursorText={CASE_STUDY.liveCursorText} external>
               {project.liveLabel}
             </MagneticButton>
           </div>
           {next ? (
             <section className={"case-study-template__next"}>
-              <EyebrowLabel>Next project</EyebrowLabel>
+              <EyebrowLabel>{CASE_STUDY.nextProjectLabel}</EyebrowLabel>
               <Link href={ROUTES.work(next.slug)} className={"case-study-template__next-link"}>
                 <span className="text-2xl">{next.title}</span>
                 <span className="text-sm is-text-muted">{next.outcome}</span>

@@ -13,7 +13,7 @@ export function LegacyWorkGallery() {
           <div className={"legacy-work-gallery__header-row"}>
             <p className={cx("legacy-work-gallery__kicker", "is-inline-flex is-align-center has-gap-2 text-xs has-font-semibold uppercase has-mb-3")}>
               <span className={"legacy-work-gallery__kicker-rule"} aria-hidden />
-              Archive
+              {ARCHIVE_SECTION.kicker}
             </p>
             <h2 id="archive-heading" className="text-3xl is-cream has-mt-2">
               {ARCHIVE_SECTION.title}

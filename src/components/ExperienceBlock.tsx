@@ -6,7 +6,7 @@ import { ScrollReveal } from "./ScrollReveal";
 
 export function ExperienceBlock() {
   return (
-    <section className={"experience-block__section"} aria-label="About and experience">
+    <section className={"experience-block__section"} aria-label={EXPERIENCE_SECTION.ariaLabel}>
       <div className="container-atmosphere is-flex is-flex-column has-gap-9">
         <ScrollReveal>
           <div className="is-flex is-flex-column has-gap-4">

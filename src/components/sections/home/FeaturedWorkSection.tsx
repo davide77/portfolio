@@ -11,19 +11,24 @@ export function FeaturedWorkSection() {
 
   return (
     <section id="work" className={"featured-work-section"} aria-labelledby="featured-work-title">
-      <div className="container-atmosphere has-pb-5">
-        <EyebrowLabel>{FEATURED_WORK_SECTION.kicker}</EyebrowLabel>
-        <h2 id="featured-work-title" className="text-3xl has-mt-3">
-          {FEATURED_WORK_SECTION.title}
-        </h2>
-        <p className="text-lg leading-relaxed measure-62ch has-mt-3">{FEATURED_WORK_SECTION.intro}</p>
-        <p className="has-mt-4">
-          <Link href={ROUTES.workIndex} className="has-font-semibold is-primary">
-            View all work
-          </Link>
-        </p>
-      </div>
-      <HorizontalScrollSection>
+      <HorizontalScrollSection
+        header={
+          <div className="container-atmosphere">
+            <EyebrowLabel>{FEATURED_WORK_SECTION.kicker}</EyebrowLabel>
+            <h2 id="featured-work-title" className="text-3xl has-mt-3">
+              {FEATURED_WORK_SECTION.title}
+            </h2>
+            <p className="text-lg leading-relaxed measure-62ch has-mt-3">
+              {FEATURED_WORK_SECTION.intro}
+            </p>
+            <p className="has-mt-4">
+              <Link href={ROUTES.workIndex} className="has-font-semibold is-primary">
+                {FEATURED_WORK_SECTION.viewAllLabel}
+              </Link>
+            </p>
+          </div>
+        }
+      >
         {projects.map((project) => (
           <div key={project.slug} className={"featured-work-section__card-wrap"}>
             <ProjectCard project={project} tone="ink" />

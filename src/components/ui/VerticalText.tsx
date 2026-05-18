@@ -8,7 +8,7 @@ type VerticalTextProps = {
 /** Rotated edge accent copy. */
 export function VerticalText({ children, className }: VerticalTextProps) {
   return (
-    <p className={cx("vertical-text", "text-xs has-font-medium uppercase", className)} aria-hidden>
+    <p className={cx("vertical-text", "text-xs has-font-medium uppercase is-stone-gray", className)} aria-hidden>
       {children}
     </p>
   );

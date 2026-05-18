@@ -1,5 +1,6 @@
 import { BOOKING_URL } from "./config";
 import { ROUTES } from "./routes";
+import { SITE } from "./site";
 
 export const PRIMARY_NAV = [
   { label: "Work", href: ROUTES.workIndex },
@@ -18,6 +19,7 @@ export const NAV_WORDMARK = {
   prefix: "dd",
   separator: "·",
   suffix: "domenghini",
+  homeAriaLabel: `${SITE.name} home`,
 } as const;
 
 export const MOBILE_NAV = {

@@ -39,7 +39,7 @@ function LabTile({ experiment }: { experiment: (typeof EXPERIMENTS)[number] }) {
       />
       <h2 className="text-lg has-font-semibold has-mt-3">{experiment.title}</h2>
       <p className="text-sm is-text-muted">{experiment.caption}</p>
-      <p className={"lab-grid__attr"}>{experiment.attribution}</p>
+      <p className="has-mt-2 text-xs is-stone-gray">{experiment.attribution}</p>
     </article>
   );
 }

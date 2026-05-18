@@ -89,7 +89,7 @@ export function AppStickyNav({
             <Link
               href={ROUTES.home}
               className="app-sticky-nav__wordmark"
-              aria-label="Davide Domenghini home"
+              aria-label={NAV_WORDMARK.homeAriaLabel}
             >
               <span
                 className={cx(

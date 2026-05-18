@@ -10,6 +10,7 @@ const ALT_CYCLE = [
 
 export const ARCHIVE_SECTION = {
   id: "archive",
+  kicker: "Archive",
   title: "Archive of earlier shipped work",
   intro:
     "Frames pulled from my long-form archive: agency builds, brand campaigns, and product skins from the pre-React era through to today. Not every property is still live, but the craft is visible in the pixels.",

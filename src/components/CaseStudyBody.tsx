@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "@/constants/content/projects";
 import { ROUTES } from "@/constants/routes";
+import { CASE_STUDY } from "@/constants/content/case-study";
 import { ButtonLink } from "./ButtonLink";
 import { cx } from "./cx";
 import { ScrollReveal } from "./ScrollReveal";
@@ -30,7 +31,7 @@ export function CaseStudyBody({ project }: CaseStudyBodyProps) {
       <ScrollReveal y={20}>
         <div className="container-sm has-py-8 is-flex is-flex-column has-gap-6">
           <Link href={ROUTES.home} className={cx("case-study-body__back", "text-sm has-font-semibold is-primary")}>
-            Back to home
+            {CASE_STUDY.backToHomeLabel}
           </Link>
 
           <header className="is-flex is-flex-column has-gap-3">
@@ -39,7 +40,7 @@ export function CaseStudyBody({ project }: CaseStudyBodyProps) {
             </p>
             <h1 className="text-4xl leading-snug">{project.title}</h1>
             <p className="text-xl leading-relaxed is-text-muted">{project.tagline}</p>
-            <ul className="is-flex is-flex-wrap has-gap-2" aria-label="Technologies">
+            <ul className="is-flex is-flex-wrap has-gap-2" aria-label={CASE_STUDY.technologiesAriaLabel}>
               {project.tags.map((tag) => (
                 <li key={tag} className={cx("case-study-body__tag", "text-xs has-font-medium has-py-1 has-px-2 is-text-muted")}>
                   {tag}
@@ -72,7 +73,7 @@ export function CaseStudyBody({ project }: CaseStudyBodyProps) {
               {project.liveLabel}
             </ButtonLink>
             <ButtonLink href={ROUTES.hash.work} variant="secondary">
-              More work
+              {CASE_STUDY.moreWorkLabel}
             </ButtonLink>
           </div>
         </div>

@@ -29,12 +29,12 @@ export default function ContactPage() {
           <h2 className="text-xl has-font-semibold">{CONTACT_PAGE.cards.book.title}</h2>
           <p className="text-md is-text-muted">{CONTACT_PAGE.cards.book.body}</p>
           <div className="has-mt-4">
-            <MagneticButton href={BOOKING_URL} cursorText="Book" external>
-              Book a call
+            <MagneticButton href={BOOKING_URL} cursorText={CONTACT_PAGE.cards.book.cursorText} external>
+              {CONTACT_PAGE.cards.book.title}
             </MagneticButton>
           </div>
           <iframe
-            title="Book a call with Davide Domenghini"
+            title={CONTACT_PAGE.cards.book.embedTitle}
             src={BOOKING_URL}
             className={"contact-page__cal-embed"}
             loading="lazy"

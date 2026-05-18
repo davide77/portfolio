@@ -10,6 +10,8 @@ export const CONTACT_PAGE = {
     book: {
       title: "Book a call",
       body: "Pick a slot that suits your time zone. Best for hiring leads and founders.",
+      cursorText: "Book",
+      embedTitle: `Book a call with ${SITE.name}`,
     },
     brief: {
       title: "Send a brief",

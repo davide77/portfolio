@@ -1,5 +1,7 @@
 export const ABOUT_PAGE = {
   eyebrow: "About",
+  cvLabel: "Download CV (PDF)",
+  timelineTitle: "Career timeline",
   headline: "Twenty years of front-end work. Still sweating the details.",
   intro:
     "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript. I do my best work when design, engineering and commercial outcomes all have to land at once.",
