@@ -102,7 +102,7 @@
   align-items: center;
   gap: spacer(2);
   padding: spacer(1) 0;
-  font-family: $font-family-mono;
+  font-family: $font-family-body;
   font-size: font-size(xs);
   text-decoration: none;
   letter-spacing: 0.18em;
@@ -213,7 +213,14 @@ body.has-mobile-nav-open {
 main#main {
   padding-top: spacer(10);
 
+  // The home page is a single dark stack (brand.md: AppStickyNav
+  // surface="ink" on the dark home stack). Painting the stack ink here
+  // means sections that do not set their own background inherit ink
+  // instead of the cream body default, so the cream-text sticky nav
+  // never lands on a cream surface and stays legible end to end.
   &.home-main {
     padding-top: 0;
+    background-color: color(black);
+    color: color(cream);
   }
 }

@@ -40,7 +40,10 @@ export function HeroHeadline({ className, ready = true }: HeroHeadlineProps) {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          {word}{" "}
+          {word}
+          {i < HERO_DISPLAY.words.length - 1 && (
+            <span className="hero-section__word-space"> </span>
+          )}
         </motion.span>
       ))}
     </h1>

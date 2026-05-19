@@ -1,17 +1,38 @@
 @use '../abstracts' as *;
 
 .sticky-scene {
-  min-height: 160vh;
-  padding-block: spacer(8);
+  // Scroll track. Its height (minus one viewport for the pin) is the
+  // distance available to dwell on each paragraph. Scales with paragraph
+  // count via --sticky-scene-steps, set from the component.
+  min-height: calc(100vh + (var(--sticky-scene-steps, 2) * 60vh));
 }
 
 .sticky-scene--reduced {
   min-height: auto;
+  padding-block: spacer(8);
+}
+
+// The pin is a definite-height sticky child of the tall track. Giving the
+// sticky element its own height (100vh) is what makes position: sticky
+// behave: it stays fixed for the whole track instead of unsticking early
+// the way a content-height grid did.
+.sticky-scene__pin {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+
+  .sticky-scene--reduced & {
+    position: static;
+    min-height: auto;
+  }
 }
 
 .sticky-scene__inner {
   display: grid;
   gap: spacer(6);
+  width: 100%;
   max-width: $layout-page-max;
   margin-inline: auto;
   padding-inline: spacer(4);
@@ -19,18 +40,29 @@
   @include min(bp(lg)) {
     grid-template-columns: 1fr 1fr;
     gap: spacer(8);
+    align-items: center;
   }
 }
 
-.sticky-scene__headline {
-  position: sticky;
-  top: 20vh;
-  align-self: start;
+// Compound with .display-text so this wins on specificity: _display-text
+// loads after _sticky-scene in the component index, so a lone
+// .sticky-scene__title rule would be overridden by .display-text.
+.display-text.sticky-scene__title {
+  text-wrap: balance;
+
+  // display-text is sized for a full-bleed hero (clamps up to ~7.5rem).
+  // In this pinned two-column scene that overwhelms the body copy and
+  // overflows the column, so cap it to a section-heading scale.
+  font-size: clamp(#{font-size(2xl)}, 4vw, #{font-size(4xl)});
 }
 
 .sticky-scene__body {
   position: relative;
   min-height: 40vh;
+
+  @include min(bp(lg)) {
+    min-height: 30vh;
+  }
 }
 
 .sticky-scene__paragraph {

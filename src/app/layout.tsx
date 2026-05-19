@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { PLAUSIBLE_DOMAIN } from "@/constants/config";
 import { rootMetadata } from "@/lib/seo";
@@ -7,13 +7,6 @@ import { Providers } from "./providers";
 import Script from "next/script";
 import "../styles/main.scss";
 import "lenis/dist/lenis.css";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-headline",
-  display: "swap",
-  weight: ["400", "600"],
-});
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -31,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-GB" className={`${fraunces.variable} ${dmSans.variable}`} data-theme="paper">
+    <html lang="en-GB" className={dmSans.variable} data-theme="paper">
       <body>
         {process.env.NODE_ENV === "production" ? (
           <Script defer data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js" />

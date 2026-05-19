@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-// Monopo-style ink hero typography: DM Sans light headline, mono meta (see brand.md).
+// Ink hero typography: DM Sans throughout, weight contrast for hierarchy (see brand.md).
 
 .hero-section {
   position: relative;
@@ -34,7 +34,7 @@
 
 .hero-section__eyebrow {
   margin: 0;
-  font-family: $font-family-mono;
+  font-family: $font-family-body;
   font-size: font-size(xs);
   font-weight: font-weight(regular);
   letter-spacing: 0.32em;
@@ -46,11 +46,11 @@
   margin: 0;
   color: color(white);
   max-width: 18ch;
-  font-family: $font-family-body;
+  font-family: $font-family-headline;
   font-size: clamp(#{font-size(2xl)}, 5vw, 2.75rem);
-  font-weight: font-weight(light);
+  font-weight: font-weight(regular);
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
@@ -58,9 +58,17 @@
   display: inline-block;
 }
 
+// The word spans are inline-block (needed for the y transform), which
+// collapses whitespace between them. This explicit space span keeps the
+// gap between words while still allowing the line to wrap.
+.hero-section__word-space {
+  display: inline-block;
+  white-space: pre;
+}
+
 .hero-section__word--emphasis {
   font-style: italic;
-  font-weight: font-weight(light);
+  font-weight: font-weight(regular);
 }
 
 .hero-section__edge {
@@ -69,7 +77,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  font-family: $font-family-mono;
+  font-family: $font-family-body;
   font-size: font-size(xs);
   letter-spacing: 0.45em;
   color: color-mix(in srgb, color(cream) 40%, transparent);

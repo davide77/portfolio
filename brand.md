@@ -6,7 +6,7 @@
 
 > **Senior front-end engineer who ships whole products, end to end.**
 >
-> London-based. Twenty years in high-traffic web work, now leading own products (Nannynow) and flagship sites (Striver.Football, Cheam Sports FC) with the same rigour as enterprise lending and luxury retail.
+> London-based. Twenty years in high-traffic web work for Sky, Estée Lauder and Liberty Global, now leading frontend at Liberty Blume and building Nannynow with the same rigour as enterprise lending and luxury retail.
 
 Tagline (lock-up): **"Ship the hard path. Make it feel simple."**
 
@@ -93,19 +93,17 @@ The home hero's celestial "DD" forms are a shader surface, not a CSS surface. Th
 
 ## Typography
 
-- **Fraunces** - titles and headlines. Optical headline weight, slight personality, still readable at large sizes.
-- **DM Sans** - body, navigation, labels. Neutral, legible, pairs cleanly with Fraunces.
+- **DM Sans** - the single typeface. Titles, headlines, body, navigation, labels. Neutral, legible, modern.
 
-Pairing: Fraunces for impact, DM Sans for everything else. No third display face.
+One typeface only. Hierarchy comes from **size and weight contrast**, not from a second face: big titles run light-to-medium weight at large sizes, body stays regular. No serif, no display face, no third font.
 
-Fallbacks:
+Fallback:
 
-- Fraunces -> Georgia, serif
 - DM Sans -> system-ui, sans-serif
 
 ## Logo
 
-- Wordmark is the name set in Fraunces semibold. No separate mark required for v1.
+- Wordmark is the name set in DM Sans semibold. No separate mark required for v1.
 - Minimum size: 120px wide on desktop nav.
 - Clear space: cap height of the "D" on all sides.
 - Never distort, outline, or add drop shadow to the wordmark.
@@ -115,7 +113,7 @@ Fallbacks:
 - Subtle grid or single vertical rule in ink sections only. No busy pattern fills behind body copy.
 - **Ink hero backgrounds** may layer soft radial washes using only Forest, Signal, and Cream at **12% opacity or lower** per stop. No colours outside the palette, no neon or unrelated hues.
 - **Glass-forward depth** (same idea as frosted dark UI references such as [monopo Saigon on Refero](https://styles.refero.design/style/3e52dd36-6ab1-48c6-bc40-47ef6d33abc2), but always with **our** hexes only): translucent panels sit over the ink wash. Use `backdrop-filter` blur, a **1px** border around **30% cream-on-transparent** (not arbitrary RGB), and hierarchy from **gradient depth**, not stacked drop shadows. Optional **very slow** motion on background washes is allowed on marketing ink bands only when `prefers-reduced-motion: reduce` turns it off. Shared mixins `ink-atmosphere-wash-background` and `paper-atmosphere-wash-background` in SCSS keep footer, archive, and future bands aligned; override `:root { --brand-atmosphere-strength }` with a number from **0** to **1** (default **1** in global CSS) to dim or silence those layers globally.
-- **Monopo-style layout translation (SCSS only):** we do **not** import Roobert, Raleway, Midnight `#000`, or the Deep Ocean RGB string. Instead we use **`brand-atmospheric-band`** (horizontal Forest / Paper / Signal wash), **`$layout-page-max` (1078px)** via `.container-atmosphere`, **`$radius-card-glass` (10px)** on frosted cards, **`$radius-pill-cta`** on buttons and nav pills, **`spacer(11)` (46px)** for monopo-style section and grid gaps where noted in components, and **`AppStickyNav` `surface="ink"`** on the dark home stack. Typography stays **Fraunces + DM Sans**.
+- **Monopo-style layout translation (SCSS only):** we do **not** import Roobert, Raleway, Midnight `#000`, or the Deep Ocean RGB string. Instead we use **`brand-atmospheric-band`** (horizontal Forest / Paper / Signal wash), **`$layout-page-max` (1078px)** via `.container-atmosphere`, **`$radius-card-glass` (10px)** on frosted cards, **`$radius-pill-cta`** on buttons and nav pills, **`spacer(11)` (46px)** for monopo-style section and grid gaps where noted in components, and **`AppStickyNav` `surface="ink"`** on the dark home stack. Typography stays **DM Sans only** (size and weight contrast for hierarchy, no second face).
 - **Archive gallery** uses a bento-style grid: mixed tile sizes, thin borders, and real screen exports from the long-form archive.
 - Cards: soft radius, thin border, no heavy shadow stacks.
 
@@ -140,7 +138,7 @@ Fallbacks:
 
 ### Headlines
 
-- Fraunces, sentence case. One idea. Roughly six to ten words.
+- DM Sans, sentence case. One idea. Roughly six to ten words.
 
 ### Sub-headlines
 

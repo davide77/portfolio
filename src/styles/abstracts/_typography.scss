@@ -1,13 +1,14 @@
 // Font stacks. CSS variables are injected by next/font in src/app/layout.tsx.
 // Replace the var() names per project to match the fonts loaded in layout.tsx.
 
-// Fallbacks mirror brand.md Typography: DM Sans -> system-ui, sans-serif;
-// Fraunces -> Georgia, serif (a serif fallback so a Fraunces load
-// failure does not swap the headline to a sans-serif face).
+// brand.md Typography is a SINGLE typeface, no second/display face:
+//   DM Sans -> titles, headlines, body, navigation, labels.
+// Hierarchy comes from size and weight contrast, not a second font.
+// $font-family-headline is kept as a semantic alias (components ask
+// for "the headline font") but it resolves to the same DM Sans stack
+// as body, so there is exactly one face site-wide.
 $font-family-body: var(--font-body), system-ui, sans-serif;
-$font-family-headline: var(--font-headline), Georgia, serif;
-$font-family-accent: $font-family-body;
-$font-family-mono: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+$font-family-headline: $font-family-body;
 
 $font-sizes: (
   xs: 0.75rem,

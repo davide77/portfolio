@@ -22,9 +22,25 @@
   }
 }
 
+// Frosted tile on the ink home stack: same language as the project
+// cards on the featured-work band (translucent white fill, cream-on-
+// transparent hairline) so the section reads dark, not as light cards
+// punched into ink.
 .capabilities-section__tile {
   padding: spacer(5);
-  border: 1px solid color(border);
+  border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
   border-radius: $radius-card;
-  background-color: color(white);
+  background-color: color-mix(in srgb, color(white) 8%, transparent);
+}
+
+// Eyebrow ships as is-stone-gray (meta on light). On ink, brand.md
+// rule 90 mandates cream for meta instead.
+.capabilities-section .eyebrow-label {
+  color: color-mix(in srgb, color(cream) 58%, transparent);
+}
+
+// is-text-muted (#6f6a63) fails on ink; use cream-on-transparent body
+// meta, matching the featured-work intro treatment.
+.capabilities-section__tile p {
+  color: color-mix(in srgb, color(cream) 70%, transparent);
 }

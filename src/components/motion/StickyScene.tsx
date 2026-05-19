@@ -7,9 +7,8 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { type CSSProperties, useRef, useState } from "react";
 import { cx } from "@/components/cx";
-import { DisplayText } from "@/components/ui/DisplayText";
 import { EASE_EDITORIAL } from "@/lib/motion";
 
 type StickySceneProps = {
@@ -29,6 +28,17 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
     offset: ["start start", "end end"],
   });
 
+  // Headline reveal is driven by the section's *entry* progress, not
+  // whileInView. The headline sits in a position: sticky column, where
+  // framer-motion's viewport intersection is unreliable and can leave it
+  // stuck at opacity 0. Scroll progress is deterministic here.
+  const { scrollYProgress: entryProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start start"],
+  });
+  const headlineOpacity = useTransform(entryProgress, [0.05, 0.4], [0, 1]);
+  const headlineY = useTransform(entryProgress, [0.05, 0.4], [24, 0]);
+
   const indexProgress = useTransform(scrollYProgress, (v) =>
     Math.min(paragraphs.length - 1, Math.floor(v * paragraphs.length)),
   );
@@ -37,11 +47,13 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
     setActiveIndex(latest);
   });
 
+  const stepStyle = { "--sticky-scene-steps": paragraphs.length } as CSSProperties;
+
   if (reduceMotion) {
     return (
       <section ref={sectionRef} className={cx("sticky-scene", "sticky-scene--reduced", className)}>
         <div className={"sticky-scene__inner"}>
-          <DisplayText as="h2">{headline}</DisplayText>
+          <h2 className="display-text sticky-scene__title is-cream">{headline}</h2>
           <div className="is-flex is-flex-column has-gap-4 has-mt-4">
             {paragraphs.map((p) => (
               <p key={p} className="text-lg leading-relaxed">
@@ -55,27 +67,34 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
   }
 
   return (
-    <section ref={sectionRef} className={cx("sticky-scene", className)}>
-      <div className={"sticky-scene__inner"}>
-        <div className={"sticky-scene__headline"}>
-          <DisplayText as="h2">{headline}</DisplayText>
-        </div>
-        <div className={"sticky-scene__body"}>
-          {paragraphs.map((p, i) => (
-            <motion.p
-              key={p}
-              className={cx("sticky-scene__paragraph", "text-lg leading-relaxed")}
-              initial={false}
-              animate={{
-                opacity: i === activeIndex ? 1 : 0,
-                y: i === activeIndex ? 0 : 12,
-              }}
-              transition={{ duration: 0.45, ease: EASE_EDITORIAL }}
-              aria-hidden={i !== activeIndex}
+    <section ref={sectionRef} className={cx("sticky-scene", className)} style={stepStyle}>
+      <div className={"sticky-scene__pin"}>
+        <div className={"sticky-scene__inner"}>
+          <div className={"sticky-scene__headline"}>
+            <motion.h2
+              className="display-text sticky-scene__title is-cream"
+              style={{ opacity: headlineOpacity, y: headlineY }}
             >
-              {p}
-            </motion.p>
-          ))}
+              {headline}
+            </motion.h2>
+          </div>
+          <div className={"sticky-scene__body"}>
+            {paragraphs.map((p, i) => (
+              <motion.p
+                key={p}
+                className={cx("sticky-scene__paragraph", "text-lg leading-relaxed")}
+                initial={false}
+                animate={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  y: i === activeIndex ? 0 : 12,
+                }}
+                transition={{ duration: 0.45, ease: EASE_EDITORIAL }}
+                aria-hidden={i !== activeIndex}
+              >
+                {p}
+              </motion.p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

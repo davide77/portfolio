@@ -27,7 +27,7 @@ export const TIMELINE = [
     year: "2022",
     company: "Estée Lauder Companies",
     role: "Senior front-end engineer, EMEA",
-    outcome: "Frontend modernisation across seven luxury brands; French and German pilot markets.",
+    outcome: "Frontend modernisation across seven luxury brands; 40% dev-time cut on pilot markets.",
   },
   {
     year: "2021",

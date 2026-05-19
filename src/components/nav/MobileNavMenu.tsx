@@ -4,9 +4,7 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { EASE_EDITORIAL } from "@/lib/motion";
 import Link from "next/link";
 import { cx } from "@/components/cx";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import {
-  HEADER_CTA,
   MOBILE_NAV,
   PRIMARY_NAV,
 } from "@/constants/nav";
@@ -77,15 +75,6 @@ export function MobileNavMenu({ open, onClose }: MobileNavMenuProps) {
                 );
               })}
             </ul>
-            <MagneticButton
-              href={HEADER_CTA.href}
-              variant="primary"
-              cursorText={HEADER_CTA.cursorText}
-              external
-              className="mobile-nav-menu__cta"
-            >
-              {HEADER_CTA.label}
-            </MagneticButton>
           </nav>
         </motion.div>
       ) : null}

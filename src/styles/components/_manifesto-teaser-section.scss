@@ -2,7 +2,15 @@
 
 .manifesto-teaser-section {
   padding-block: spacer(8);
-  border-block: 1px solid color(border);
+  // On the ink home stack the decorative hairline is cream-on-
+  // transparent (brand.md rule 117), not the light-surface border.
+  border-block: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+}
+
+// Eyebrow ships as is-stone-gray (meta on light). On ink, brand.md
+// rule 90 mandates cream for meta instead.
+.manifesto-teaser-section .eyebrow-label {
+  color: color-mix(in srgb, color(cream) 58%, transparent);
 }
 
 .manifesto-teaser-section__quote {
@@ -11,4 +19,5 @@
   font-size: clamp(#{font-size(xl)}, 4vw, #{font-size(3xl)});
   line-height: line-height(snug);
   letter-spacing: -0.02em;
+  color: color(cream);
 }

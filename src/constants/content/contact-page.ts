@@ -1,7 +1,7 @@
 import { SITE } from "@/constants/site";
 
 export const CONTACT_PAGE = {
-  headline: "Let's build something.",
+  headline: "Bring the brief everyone else avoided.",
   responseTime: "I reply within 24 hours, weekdays.",
   backHomeLabel: "Back to home",
   pageIntro:

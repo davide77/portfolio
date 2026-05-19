@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-:global(html.has-custom-cursor) {
+html.has-custom-cursor {
   &,
   * {
     cursor: none !important;

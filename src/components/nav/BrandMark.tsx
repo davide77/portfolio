@@ -7,7 +7,7 @@ type BrandMarkProps = {
   className?: string;
 };
 
-/** Interlocking Fraunces monogram - no boxed "DD" badge. */
+/** Interlocking DM Sans monogram - no boxed "DD" badge. */
 export function BrandMark({ variant, className }: BrandMarkProps) {
   return (
     <span

@@ -7,17 +7,24 @@ h4,
 h5,
 h6 {
   font-family: $font-family-headline;
-  font-weight: font-weight(bold);
+  font-weight: font-weight(semibold);
   line-height: line-height(snug);
   color: color(text);
 }
 
+// Monopo-style big titles: large size, restrained weight. The size
+// carries the impact, so the weight stays light rather than bold
+// (single typeface, hierarchy from size + weight contrast - brand.md).
 h1 {
   font-size: clamp(font-size(2xl), 7vw, font-size(5xl));
+  font-weight: font-weight(medium);
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: clamp(font-size(2xl), 5vw, font-size(3xl));
+  font-weight: font-weight(medium);
+  letter-spacing: -0.02em;
 }
 
 h3 {

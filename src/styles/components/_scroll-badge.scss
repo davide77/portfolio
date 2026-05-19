@@ -23,7 +23,7 @@
 .scroll-badge__text {
   fill: color-mix(in srgb, color(cream) 70%, transparent);
   text-transform: uppercase;
-  font-family: $font-family-mono;
+  font-family: $font-family-body;
   font-size: font-size(xs);
   letter-spacing: 0.25em;
 }

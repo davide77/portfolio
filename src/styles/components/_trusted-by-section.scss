@@ -1,0 +1,16 @@
+@use '../abstracts' as *;
+
+// TrustedBy sits on the ink home stack. Marquee is a reusable component
+// (also used on the styleguide on a light surface), so its ink
+// treatment is scoped here instead of recolouring Marquee globally.
+.trusted-by-section {
+  .marquee {
+    border-block-color: color-mix(in srgb, color(cream) 18%, transparent);
+  }
+
+  // stone-gray (#6f6a63) fails on ink; cream-on-transparent meta per
+  // brand.md rule 90.
+  .marquee__content {
+    color: color-mix(in srgb, color(cream) 62%, transparent);
+  }
+}

@@ -4,13 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cx } from "@/components/cx";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SectionNumerals } from "@/components/ui/SectionNumerals";
 import { MobileNavMenu } from "@/components/nav/MobileNavMenu";
 import { isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
-import { BOOKING_URL } from "@/constants/config";
 import {
-  HEADER_CTA,
   MOBILE_NAV,
   NAV_WORDMARK,
   PRIMARY_NAV,
@@ -132,15 +129,6 @@ export function AppStickyNav({
                   );
                 })}
               </ul>
-              <MagneticButton
-                href={BOOKING_URL}
-                variant={ink ? "ghostOnInk" : "primary"}
-                cursorText={HEADER_CTA.cursorText}
-                external
-                className="app-sticky-nav__book-cta"
-              >
-                {HEADER_CTA.label}
-              </MagneticButton>
             </nav>
             <button
               type="button"

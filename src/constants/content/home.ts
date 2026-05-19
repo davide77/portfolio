@@ -8,8 +8,8 @@ export const HOME_SECTIONS = {
     cta: "View all work",
   },
   capabilities: {
-    eyebrow: "03 - What I ship",
-    title: "What I ship",
+    eyebrow: "03 - What you get",
+    title: "What you get when you hire me",
   },
   manifesto: {
     eyebrow: "04 - How I work",
@@ -37,7 +37,7 @@ export const EXPERIENCE_SECTION = {
   items: [] as readonly { period: string; title: string; org: string; summary: string }[],
 };
 export const SKILLS_SECTION = {
-  title: "The stack I work in",
+  title: "The tools behind the results",
   groups: [] as readonly { title: string; items: readonly string[] }[],
 };
 export const CONTACT_SECTION = {
