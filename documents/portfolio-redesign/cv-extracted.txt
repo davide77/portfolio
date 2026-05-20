@@ -1,0 +1,232 @@
+
+
+Davide Domenghini
+
+Senior Front-End Engineer  |  Founder, Nannynow.co.uk
+
+London, UK  •  07752 829119  •  davide@domenghini.com  •  linkedin.com/in/davidedomenghini  •  github.com/davide77  •  nannynow.co.uk
+
+ABOUT ME
+
+I'm a Senior Front-End Engineer and founder with 20+ years of experience building scalable, high-performance web applications for some of the world's most demanding brands — Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript, and I love the moment when a complex multi-step product finally feels effortless to use.
+
+What sets me apart is range: I can architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next. I lead frontend delivery on enterprise platforms generating multi-million euro revenue, but I'm equally at home mentoring juniors, mastering AI-assisted workflows, and turning a rough idea into a working MVP. I'm currently building Nannynow.co.uk, a consumer product connecting families with childcare — end-to-end from architecture to launch — because I believe the best engineers know how to ship product, not just code.
+
+I come alive when I'm solving the hard problems that sit between design, engineering and commercial: the ones where good UX, clean architecture and business outcomes all have to land at once.
+
+SKILLS
+
+Core stack: React, Next.js, TypeScript, JavaScript (ES6+), HTML5, SCSS/SASS (BEM), CSS3
+
+Architecture & state: Component-driven design systems, React Context API, scalable SCSS (7-1 pattern), API/JSON integration, performance optimisation
+
+DevOps & tooling: Git, GitHub, CI/CD, Docker, GCP, Vercel, Visual Studio
+
+Creative & interactive: GSAP, Framer Motion, Three.js, WebGL, SVG, rapid experimentation
+
+Standards & practice: WCAG 2.1 AA accessibility, responsive/mobile-first design, Agile (Scrum), code reviews, mentoring
+
+CMS & platforms: WordPress (headless), Drupal, Umbraco, Squiz Matrix DXP, AEM, Docusaurus
+
+AI-ASSISTED ENGINEERING
+
+I've spent the past two years embedding AI tools into my workflow — not as a shortcut, but as a force multiplier. With AI in the loop, I now ship full-stack features end-to-end that I'd previously have needed a cross-functional team to deliver. My view: AI doesn't replace senior engineering judgement, it amplifies it.
+
+Full-stack delivery. Built Nannynow.co.uk end-to-end — data model, API, frontend, deployment — work that pre-AI would have needed a backend engineer in the loop. Architecture and final calls stay with me.
+
+Debugging at machine speed. Solve in hours what used to take days, across unfamiliar stacks and legacy codebases — the diagnostic loop between “something's wrong” and “I know why” has collapsed.
+
+Code review as the discipline that scales AI. I treat AI output with the scepticism I'd apply to a mid-level pull request. Fast to generate, slower to verify — and verification is where senior engineers earn their keep.
+
+Tools: Cursor, Claude Code, GitHub Copilot, ChatGPT — chosen by task, not habit.
+
+EXPERIENCE
+
+Founder & Front-End Lead  |  Nannynow.co.uk
+
+2026 – Present
+
+I'm building Nannynow from concept to MVP — a consumer product that connects families with trusted childcare. I own everything: product strategy, architecture, UX, delivery. It's the project I always wanted to do, where I can prove that a senior engineer can move as fast as a startup founder when the layers between idea and ship are removed.
+
+Architected and built the entire product in Next.js, React and TypeScript with a mobile-first, performance-first approach.
+
+Designed a scalable component architecture reusable across multiple user journeys, so adding new flows is fast and consistent.
+
+Used AI-assisted prototyping to validate UX flows early, compressing what would have been weeks of iteration into days.
+
+Currently scoping a mobile app extension and continuous product evolution roadmap.
+
+Design & Front-End Lead  |  Striver.Football
+
+2026 – Present
+
+Striver.Football is a live consumer brand in the youth football space. I came in once the strategy and brand voice work was in place, and took it from guidelines to a shipped, production website — directing design and frontend execution end-to-end.
+
+Translated the brand strategy and voice guideline document into a working design system — tokens, typography, colour, pattern, motion — codified in SCSS and surfaced as a living design-system page the whole team works from.
+
+Architected the site in Next.js (App Router), React and TypeScript with a server-component-first approach, Suspense/skeleton loading patterns, and a token-driven SCSS layer (BEM components, generated utility classes, container-query responsive system).
+
+Directed visual execution across layout, motion, accessibility (WCAG AAA on small brand marks) and image art direction, keeping every shipped surface aligned with the brand guidelines.
+
+Integrated the editorial and growth pipeline: headless WordPress CMS, IMAGO image licensing, a custom Mailchimp upsert flow, and trunk-based continuous deployment to production.
+
+Established a “brand-as-code” workflow — brand definition as the single source of truth, automated voice and visual guardrails — so every artifact ships consistent with the identity.
+
+Tech: Next.js, React, TypeScript, SCSS (token maps, BEM, generated utilities), WordPress, IMAGO, Mailchimp.
+
+Founder, Front-End & Full-Stack Engineer  |  Cheam Sports FC (cheamsportsfc.com)
+
+2024 – Present
+
+I coach a youth team at Cheam Sports FC and over the last two years I've also built and shipped the club's entire digital platform end-to-end — a production application serving 100+ families across marketing site, member portal, payment flow, admin dashboard and automated content pipeline. Same proof point as Nannynow: with AI in the loop, one senior frontend engineer can deliver what would historically have needed a small cross-functional team.
+
+Architected the full stack in Next.js 14 (App Router, server components), TypeScript, MySQL on Drizzle ORM, and Better Auth, deployed across Vercel, SiteGround and a custom PHP proxy backend.
+
+Built a Stripe payment flow with webhook reconciliation into a Google Apps Script that mirrors transactions into the treasurer's spreadsheet, so the club's non-technical volunteers never had to change their workflow.
+
+Designed a member portal with role-based access (parent, coach, manager, player), iCal-synced event calendar, RSVP and fee collection.
+
+Wrote a defensive HTML scraper (cheerio) for FA Full-Time fixtures and league tables, proxied through a PHP backend to bypass Vercel network restrictions, and reconciled it against an internal fixture log for friendlies and pitch allocations.
+
+Built a procedural Instagram banner generator: deterministic PRNG-driven SVG art, OpenType.js glyph rendering and Sharp rasterisation, producing 1080x1350 templates keyed to each team's accent colour.
+
+Shipped a PWA with web-push notifications and Vercel cron jobs for weekly fixture posts, friendlies refresh and payment reminders.
+
+Designed a token-driven SCSS system (BEM components, generated utility classes, container-query responsive layer) so visual changes stay traceable and the codebase remains auditable.
+
+Maintained as a forkable template: a single club.config.ts (theme, badge, contact details) makes the codebase reusable by other grassroots clubs.
+
+Tech: Next.js, React, TypeScript, Drizzle ORM, MySQL, Better Auth, Stripe, Nodemailer, Sharp, OpenType.js, Three.js, Framer Motion, SCSS, Playwright, Vercel, SiteGround, Google Apps Script.
+
+Senior Front-End Developer  |  Liberty Blume – Liberty Global
+
+03/2025 – Present
+
+I lead frontend architecture and delivery on a large-scale financial lending platform, partnering closely with product, design and commercial teams across a multi-stage lending journey covering package building, credit assessment, customer data capture and digital agreement completion.
+
+Architected a scalable React application using context-based state management across 12+ interconnected steps, supporting complex loan workflows where every transition has to handle real money and real compliance.
+
+Implemented robust data validation and transformation for financial inputs, ensuring compliance with lending and security standards.
+
+Designed a scalable SCSS architecture using the 7-1 pattern and BEM, delivering responsive, accessible UI components that the wider team now uses as the standard.
+
+Built secure, production-ready components with API integrations, digital signature flows and compliance-driven data handling.
+
+Optimised performance through asset strategy, font loading and state management, measurably reducing load times and eliminating unnecessary re-renders across the multi-step flow.
+
+Established the team's development and DevOps standards including Git workflows, commit conventions, GCP deployment pipelines and Docker-based environments.
+
+Senior Front-End Developer  |  Estée Lauder Companies, London
+
+05/2022 – 02/2025
+
+I led frontend modernisation across the EMEA team for a premium beauty portfolio including Clinique, MAC Cosmetics, Bobbi Brown, Tom Ford Beauty, Jo Malone London, La Mer and Origins. My work directly supported ecommerce platforms generating multi-million euro revenue across European markets.
+
+Architected modern frontend solutions across brand websites, establishing the technical blueprint that became the standard for global rollout.
+
+Led the digital transformation of the French and German markets as the first regions modernised, serving as proof-of-concept for enterprise-wide adoption.
+
+Delivered measurable performance improvements on luxury ecommerce platforms that directly supported multi-million euro revenue streams.
+
+Collaborated with international design, marketing and product teams to balance brand consistency with regional market preferences and compliance requirements.
+
+Established modern development workflows and best practices subsequently adopted across all EMEA markets.
+
+Tech: JavaScript, React, Mustache, HTML5, SCSS, Drupal, PerlJam.
+
+Senior Front-End Developer  |  Bristol City Council, Remote
+
+12/2021 – 05/2022
+
+I led the comprehensive digital transformation of bristol.gov.uk, architecting a modern design system in React and Docusaurus under Agile delivery. The platform I built remains live today, serving Bristol's 500,000+ residents.
+
+Designed and implemented a scalable government design system fully aligned with GOV.UK Design System principles and GDS standards.
+
+Mentored and supervised 2 frontend associates, training them on government design system concepts, accessibility requirements and public sector development best practices.
+
+Delivered full WCAG 2.1 AA compliance across all components, ensuring inclusive digital services for a population of 500,000+.
+
+Established reusable component libraries and documentation standards that improved development efficiency across multiple council departments.
+
+Modernised legacy infrastructure while maintaining uninterrupted public services throughout the transition.
+
+Tech: React, Docusaurus, JavaScript, HTML5, SCSS. Led 2 frontend associates.
+
+Senior Front-End Developer  |  Squiz, Remote
+
+02/2021 – 10/2021
+
+Delivered client-facing consulting and technical solutions as part of Squiz's Professional Services team, architecting scalable frontend implementations in Squiz Matrix CMS/DXP for complex service-led organisations.
+
+Built and standardised reusable component libraries within Matrix CMS, reducing development time across client implementations by 40%.
+
+Delivered both traditional and headless Matrix implementations, integrating with client systems via RESTful APIs for multi-channel content publishing.
+
+Led knowledge transfer sessions for internal teams on Matrix best practices, modern JavaScript patterns and performance optimisation at enterprise scale.
+
+Championed component-based architecture and responsive design principles that became standard across multiple client projects.
+
+Tech: Squiz Matrix CMS, JavaScript (ES6+), HTML5, SCSS, RESTful APIs.
+
+Senior Front-End Developer  |  Boring Money, London
+
+03/2020 – 02/2021
+
+Built boringmoneyadvice.co.uk from the ground up using .NET Umbraco, vanilla ES6 and SCSS, collaborating closely with UX, design and marketing to deliver customer-facing fintech features.
+
+Tech: HTML5, SCSS, JavaScript ES6, C#, Umbraco CMS.
+
+Lead Creative Front-End Developer  |  MomentumABM, London
+
+11/2017 – 03/2020
+
+Led technical delivery on cutting-edge ABM (Account-Based Marketing) projects for top global tech clients, running technical meetings and mentoring junior talent.
+
+Introduced a new digital production methodology that was adopted as the team's standard way of working.
+
+Tech: JavaScript, Handlebars, JSON, ScrollMagic, GSAP, WebGL, SVG, HTML5, SCSS, Flexbox.
+
+Earlier Roles – Senior Front-End Developer  |  Various, London
+
+2006 – 2017
+
+A decade-plus of senior frontend roles across major brands and agencies, delivering everything from product launch campaigns to ground-up site rebuilds. Highlights:
+
+EE (2017): Delivered Apple product launch campaigns and contributed to the modernisation of the EE website. Tech: AEM, GSAP, ES6.
+
+Payment Sense (2017): Migrated the company website to Visual Studio MVC with a modern responsive structure.
+
+A+E Networks EMEA (2016–17): Redeveloped The HISTORY Channel and BLAZE websites.
+
+Spring Studios (2016): Built ecommerce product and listing pages for Le Bon Marché.
+
+Home Office GDS (2016): Redeveloped the Home Office website's Style Guide in Angular.js.
+
+Sky TV (2013–16): Collaborated with UX, product and design teams on SkyStore and SkyGo, building consumer-facing features for one of the UK's biggest media platforms.
+
+News UK (2013): Built the new Driving.co.uk brand site from scratch.
+
+Hogarth & Ogilvy (2012–13): Redeveloped the HSBC application using Mustache, Backbone, Python and Django.
+
+Brandwidth Global (2012): Led frontend on the my.toyota.co.uk advanced responsive design project.
+
+RAPP UK (2011–12): Built GSK and Philips sites and integrated Facebook apps with .NET and PHP.
+
+Comic Relief (2010–11): Contributed to Red Nose Day website features for one of the UK's most-loved charity campaigns.
+
+Inmarsat (2007–10): Redeveloped the company website, emails and microsites, and led the development team.
+
+TUISKI (2006–07): Led design and frontend delivery on TUISKI websites in a Java environment.
+
+BEYOND WORK
+
+Grassroots Football Coach — Cheam Sports FC, Surrey
+
+For the past 6 years I've been coaching and managing a youth team at Cheam Sports FC. What I love most is the psychology side: understanding how to motivate different personalities, build confidence in the quieter kids, channel the energy of the louder ones. It's taught me that great leadership isn't about authority — it's about creating an environment where people want to give their best. The same instincts shape how I mentor junior developers and lead frontend teams. (The club's digital platform listed above grew out of this; the domain knowledge also feeds directly into my work on Striver.Football.)
+
+Creative coding & experimentation
+
+Outside client work, I keep my hands dirty with Three.js, WebGL and GSAP — building experimental interfaces and interactive prototypes. It's where I test ideas that later show up, more disciplined, in production work.
+
+References available on request.
+

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Davide Domenghini . Figma frames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { background: #d9d4cb; font-family: 'DM Sans', system-ui, sans-serif; }
+    .fr { font-family: 'DM Sans', system-ui, sans-serif; }
+    .fr--paper { background: var(--paper); color: var(--ink); }
+    .fr--ink { background: var(--ink); color: var(--paper); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="figma-frame-sections.jsx"></script>
+
+  <script type="text/babel">
+    const { DesignCanvas, DCSection, DCArtboard } = window;
+
+    function App() {
+      return (
+        <DesignCanvas>
+          <DCSection id="tokens" title="Tokens" subtitle="Mirror these into Figma variables: colour/*, type/*, spacing/*, radius/*. Single source of truth.">
+            <DCArtboard id="tokens-colour" label="01 Colour . 900x900" width={900} height={920}>
+              <window.FrameTokensColour />
+            </DCArtboard>
+            <DCArtboard id="tokens-type" label="02 Type . 1100x1100" width={1100} height={1100}>
+              <window.FrameTokensType />
+            </DCArtboard>
+            <DCArtboard id="tokens-spacing" label="03 Spacing + Radii . 900x800" width={900} height={820}>
+              <window.FrameTokensSpacing />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="components" title="Components" subtitle="Build each tile as a Figma component with variants. Templates compose from these.">
+            <DCArtboard id="components-sheet" label="04 Component sheet . 1280x1200" width={1280} height={1240}>
+              <window.FrameComponents />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="templates" title="Templates" subtitle="Home / desktop and mobile. Use as Figma frame references for the final page composition.">
+            <DCArtboard id="home-desktop" label="05 Home / Desktop . 1440x4400" width={1440} height={4400}>
+              <window.FrameHomeDesktop />
+            </DCArtboard>
+            <DCArtboard id="home-mobile" label="06 Home / Mobile . 390x1900" width={390} height={1900}>
+              <window.FrameHomeMobile />
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
