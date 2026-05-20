@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.floating-lens {
+  position: absolute;
+  width: var(--floating-lens-size, 220px);
+  height: var(--floating-lens-size, 220px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floating-lens__canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
