@@ -46,7 +46,7 @@
   font-weight: font-weight(regular);
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: color-mix(in srgb, color(cream) 50%, transparent);
+  color: color-mix(in srgb, color(paper) 50%, transparent);
 }
 
 .hero-section__headline {
@@ -76,6 +76,10 @@
 .hero-section__word--emphasis {
   font-style: italic;
   font-weight: font-weight(regular);
+  // Sanctioned orb-ramp carve-out, per brand.md. Single italic emphasis word
+  // on the hero headline. Wired via custom property so consuming surfaces can
+  // override without inline styles.
+  color: var(--hero-emphasis-color, #{color(orb-flare)});
 }
 
 .hero-section__edge {
@@ -87,7 +91,7 @@
   font-family: $font-family-body;
   font-size: font-size(xs);
   letter-spacing: 0.45em;
-  color: color-mix(in srgb, color(cream) 40%, transparent);
+  color: color-mix(in srgb, color(paper) 40%, transparent);
 
   @include max(bp(md)) {
     display: none;

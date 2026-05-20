@@ -10,7 +10,7 @@ export function ExperienceBlock() {
       <div className="container-atmosphere is-flex is-flex-column has-gap-9">
         <ScrollReveal>
           <div className="is-flex is-flex-column has-gap-4">
-            <h2 className="text-3xl is-cream">{ABOUT_SECTION.title}</h2>
+            <h2 className="text-3xl is-paper">{ABOUT_SECTION.title}</h2>
             {ABOUT_SECTION.paragraphs.map((p) => (
               <p key={p} className={cx("text-lg leading-relaxed measure-72ch", "experience-block__body-muted")}>
                 {p}
@@ -22,7 +22,7 @@ export function ExperienceBlock() {
         <div className="is-flex is-flex-column has-gap-6">
           <ScrollReveal y={20}>
             <div className="is-flex is-flex-column has-gap-3">
-              <h2 className="text-3xl is-cream">{EXPERIENCE_SECTION.title}</h2>
+              <h2 className="text-3xl is-paper">{EXPERIENCE_SECTION.title}</h2>
               <p className={cx("text-lg leading-relaxed measure-72ch", "experience-block__body-muted")}>{EXPERIENCE_SECTION.intro}</p>
             </div>
           </ScrollReveal>

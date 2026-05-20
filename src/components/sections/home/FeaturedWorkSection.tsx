@@ -32,7 +32,7 @@ export function FeaturedWorkSection() {
               {FEATURED_WORK_SECTION.intro}
             </p>
             <p className="has-mt-4">
-              <Link href={ROUTES.workIndex} className="has-font-semibold is-primary">
+              <Link href={ROUTES.workIndex} className="has-font-semibold is-forest">
                 {FEATURED_WORK_SECTION.viewAllLabel}
               </Link>
             </p>

@@ -1,7 +1,5 @@
 /** Runtime config and third-party placeholders. Swap values per environment. */
 
-export const BOOKING_URL = "https://cal.com/davidedomenghini/intro";
-
 export const PLAUSIBLE_DOMAIN = "domenghini.com";
 
 export const CV_PDF_PATH = "/cv/davide-domenghini-cv.docx";

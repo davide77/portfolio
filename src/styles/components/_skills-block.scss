@@ -3,7 +3,7 @@
 .skills-block__section {
   padding-block: spacer(11);
   background-color: transparent;
-  color: color(cream);
+  color: color(paper);
   container-type: inline-size;
   container-name: skills;
 }
@@ -22,10 +22,10 @@
 
 .skills-block__group-title {
   letter-spacing: 0.06em;
-  color: color-mix(in srgb, color(cream) 70%, color(primary));
+  color: color-mix(in srgb, color(paper) 70%, color(forest));
 }
 
 .skills-block__item {
-  color: color-mix(in srgb, color(cream) 76%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, color(cream) 14%, transparent);
+  color: color-mix(in srgb, color(paper) 76%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
 }

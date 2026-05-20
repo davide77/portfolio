@@ -5,9 +5,9 @@
 }
 
 .case-study-template__tag {
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
   border-radius: $radius-sm;
-  background-color: color(cream);
+  background-color: color(paper);
 }
 
 .case-study-template__hero-image {
@@ -33,7 +33,7 @@
   font-variant-numeric: tabular-nums;
   font-size: font-size(sm);
   font-weight: font-weight(semibold);
-  color: color(stone-gray);
+  color: color(stone);
 }
 
 .case-study-template__artefacts {
@@ -47,7 +47,7 @@
 
 .case-study-template__next {
   padding-top: spacer(6);
-  border-top: 1px solid color(border);
+  border-top: 1px solid color(cream);
 }
 
 .case-study-template__next-link {
@@ -59,6 +59,6 @@
   color: inherit;
 
   &:hover {
-    color: color(primary);
+    color: color(forest);
   }
 }

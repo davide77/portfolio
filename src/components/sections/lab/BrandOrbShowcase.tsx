@@ -27,7 +27,7 @@ export function BrandOrbShowcase() {
           <BrandOrbCluster className="brand-orb-showcase__canvas" />
         </div>
         <div className="brand-orb-showcase__copy">
-          <p className="text-xs has-font-semibold uppercase is-stone-gray">
+          <p className="text-xs has-font-semibold uppercase is-stone">
             {BRAND_ORBS_SHOWCASE_COPY.eyebrow}
           </p>
           <h2
@@ -36,7 +36,7 @@ export function BrandOrbShowcase() {
           >
             {BRAND_ORBS_SHOWCASE_COPY.headline}
           </h2>
-          <p className="text-lg leading-relaxed is-cream">
+          <p className="text-lg leading-relaxed is-paper">
             {BRAND_ORBS_SHOWCASE_COPY.description}
           </p>
         </div>

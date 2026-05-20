@@ -69,7 +69,7 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
 
   return (
     <motion.div
-      className={cx("intro-splash-sequence__overlay", "is-flex is-align-center is-justify-center bg-black")}
+      className={cx("intro-splash-sequence__overlay", "is-flex is-align-center is-justify-center bg-ink")}
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "out" ? 0 : 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -87,7 +87,7 @@ export function IntroSplashSequence({ onComplete }: IntroSplashSequenceProps) {
           {SITE.role}
         </motion.p>
         <motion.h1
-          className={cx("intro-splash-sequence__name", "has-m-0 is-cream")}
+          className={cx("intro-splash-sequence__name", "has-m-0 is-paper")}
           initial={{ opacity: 0, y: 22 }}
           animate={{
             opacity: phase === "out" ? 0 : 1,

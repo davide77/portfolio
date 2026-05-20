@@ -17,12 +17,12 @@
     background:
       radial-gradient(
         circle at 28% 32%,
-        color-mix(in srgb, color(accent) 12%, transparent) 0%,
+        color-mix(in srgb, color(signal) 12%, transparent) 0%,
         transparent 45%
       ),
       radial-gradient(
         circle at 78% 72%,
-        color-mix(in srgb, color(accent) 10%, transparent) 0%,
+        color-mix(in srgb, color(signal) 10%, transparent) 0%,
         transparent 40%
       );
   }

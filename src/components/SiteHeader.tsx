@@ -20,7 +20,7 @@ export function SiteHeader() {
       >
         <Link
           href={ROUTES.home}
-          className={cx("site-header__brand", "is-text is-flex is-align-center has-gap-3 has-font-semibold text-lg")}
+          className={cx("site-header__brand", "is-ink is-flex is-align-center has-gap-3 has-font-semibold text-lg")}
         >
           {SITE.name}
         </Link>
@@ -33,8 +33,8 @@ export function SiteHeader() {
                 href={item.href}
                 className={cx(
                   "site-header__nav-link",
-                  "is-inline-flex is-align-center text-sm has-font-medium is-text-muted has-px-2",
-                  active && cx("site-header__nav-link-active", "is-primary has-font-semibold"),
+                  "is-inline-flex is-align-center text-sm has-font-medium is-stone has-px-2",
+                  active && cx("site-header__nav-link-active", "is-forest has-font-semibold"),
                 )}
                 aria-current={active ? "page" : undefined}
               >

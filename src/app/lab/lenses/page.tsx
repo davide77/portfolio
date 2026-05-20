@@ -13,17 +13,17 @@ export const metadata = pageMetadata({
 
 export default function LensesLabPage() {
   return (
-    <main id="main" className="lab-page bg-black">
+    <main id="main" className="lab-page bg-ink">
       <div className="container-atmosphere has-py-8">
         <EyebrowLabel>{LENSES_LAB_PAGE.eyebrow}</EyebrowLabel>
         <h1 className="text-hero has-font-medium leading-tight is-white has-mt-4">
           {LENSES_LAB_PAGE.headline}
         </h1>
-        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-cream">
+        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-paper">
           {LENSES_LAB_PAGE.description}{" "}
           <Link
             href={LENSES_LAB_PAGE.referenceUrl}
-            className="is-accent"
+            className="is-signal"
             target="_blank"
             rel="noopener noreferrer"
           >

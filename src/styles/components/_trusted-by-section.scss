@@ -5,12 +5,12 @@
 // treatment is scoped here instead of recolouring Marquee globally.
 .trusted-by-section {
   .marquee {
-    border-block-color: color-mix(in srgb, color(cream) 18%, transparent);
+    border-block-color: color-mix(in srgb, color(paper) 18%, transparent);
   }
 
   // stone-gray (#6f6a63) fails on ink; cream-on-transparent meta per
   // brand.md rule 90.
   .marquee__content {
-    color: color-mix(in srgb, color(cream) 62%, transparent);
+    color: color-mix(in srgb, color(paper) 62%, transparent);
   }
 }

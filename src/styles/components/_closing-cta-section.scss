@@ -2,11 +2,18 @@
 
 .closing-cta-section {
   padding-block: spacer(10);
-  background-color: color(black);
+  background-color: color(ink);
 }
 
 // Type, weight and colour now come from the shared .section-title +
 // is-cream classes. Only the component-specific measure cap stays.
 .closing-cta-section__headline {
   max-width: 18ch;
+
+  // Sanctioned orb-ramp carve-out, per brand.md. Single italic emphasis word
+  // on the closer headline. Same custom-property pattern as the hero.
+  em {
+    font-style: italic;
+    color: var(--hero-emphasis-color, #{color(orb-flare)});
+  }
 }

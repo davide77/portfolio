@@ -28,7 +28,7 @@
 // punched into ink.
 .capabilities-section__tile {
   padding: spacer(5);
-  border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 22%, transparent);
   border-radius: $radius-card;
   background-color: color-mix(in srgb, color(white) 8%, transparent);
 }
@@ -36,7 +36,7 @@
 // Eyebrow ships as is-stone-gray (meta on light). On ink, brand.md
 // rule 90 mandates cream for meta instead.
 .capabilities-section .eyebrow-label {
-  color: color-mix(in srgb, color(cream) 58%, transparent);
+  color: color-mix(in srgb, color(paper) 58%, transparent);
 }
 
 // Tile heading ships with no colour class, so it inherits the default
@@ -44,11 +44,11 @@
 // rule 91: text on ink is paper/white. Use full-strength cream to match
 // the section's cream-on-ink language.
 .capabilities-section__tile h3 {
-  color: color(cream);
+  color: color(paper);
 }
 
 // is-text-muted (#6f6a63) fails on ink; use cream-on-transparent body
 // meta, matching the featured-work intro treatment.
 .capabilities-section__tile p {
-  color: color-mix(in srgb, color(cream) 78%, transparent);
+  color: color-mix(in srgb, color(paper) 78%, transparent);
 }

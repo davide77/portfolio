@@ -18,35 +18,13 @@
 .about-page-content__portrait {
   border-radius: $radius-card;
   overflow: hidden;
-  background-color: color(cream);
+  background-color: color(paper);
 }
 
 .about-page-content__portrait-img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-.about-page-content__timeline {
-  list-style: none;
-  padding: 0;
-  margin: spacer(6) 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: spacer(5);
-  border-left: 2px solid color(border);
-  padding-left: spacer(5);
-}
-
-.about-page-content__timeline-item {
-  position: relative;
-}
-
-.about-page-content__timeline-year {
-  font-variant-numeric: tabular-nums;
-  font-size: font-size(sm);
-  font-weight: font-weight(semibold);
-  color: color(primary);
 }
 
 .about-page-content__tools {

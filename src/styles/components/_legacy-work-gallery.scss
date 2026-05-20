@@ -2,37 +2,16 @@
 
 .legacy-work-gallery__section {
   position: relative;
-  // The archive hero now opens the page; the grid is no longer the
-  // section opener, so the top inset is lighter than the bottom.
-  padding-block: spacer(8) spacer(11);
-  isolation: isolate;
+  // Shares the site-chrome ink backdrop with .work-archive-hero above it,
+  // so the hero copy and the tile grid read as one continuous archive band
+  // rather than two stacked sections.
+  padding-block: spacer(2) spacer(11);
   background-color: transparent;
-  color: color(cream);
-}
-
-.legacy-work-gallery__section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.38;
-  pointer-events: none;
-  z-index: 0;
-  @include brand-atmospheric-band;
-}
-
-.legacy-work-gallery__section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: calc(0.45 * var(--brand-atmosphere-strength, 1));
-  pointer-events: none;
-  z-index: 0;
-  @include ink-atmosphere-wash-background;
+  color: color(paper);
 }
 
 .legacy-work-gallery__inner {
   position: relative;
-  z-index: 1;
   container-type: inline-size;
   container-name: legacy-gallery;
 }
@@ -56,7 +35,7 @@
   position: relative;
   border-radius: $radius-card-glass;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 22%, transparent);
   background-color: color-mix(in srgb, color(white) 8%, transparent);
   backdrop-filter: blur(12px);
   min-height: 140px;
@@ -105,8 +84,8 @@
     inset: 0;
     background: linear-gradient(
       155deg,
-      color-mix(in srgb, color(accent) 38%, transparent),
-      color-mix(in srgb, color(black) 32%, transparent) 78%
+      color-mix(in srgb, color(signal) 38%, transparent),
+      color-mix(in srgb, color(ink) 32%, transparent) 78%
     );
     mix-blend-mode: multiply;
     pointer-events: none;
@@ -143,8 +122,8 @@
   padding: spacer(5) spacer(3) spacer(3);
   background: linear-gradient(
     to top,
-    color-mix(in srgb, color(black) 82%, transparent) 0%,
-    color-mix(in srgb, color(black) 55%, transparent) 55%,
+    color-mix(in srgb, color(ink) 82%, transparent) 0%,
+    color-mix(in srgb, color(ink) 55%, transparent) 55%,
     transparent 100%
   );
 }
@@ -153,20 +132,20 @@
   font-size: font-size(sm);
   font-weight: font-weight(semibold);
   line-height: line-height(tight);
-  color: color(cream);
+  color: color(paper);
 }
 
 .legacy-work-gallery__caption-client {
   font-size: font-size(xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: color-mix(in srgb, color(cream) 64%, transparent);
+  color: color-mix(in srgb, color(paper) 64%, transparent);
 }
 
 .legacy-work-gallery__caption-blurb {
   font-size: font-size(xs);
   line-height: line-height(snug);
-  color: color-mix(in srgb, color(cream) 78%, transparent);
+  color: color-mix(in srgb, color(paper) 78%, transparent);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

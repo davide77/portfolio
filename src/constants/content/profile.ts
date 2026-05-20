@@ -1,14 +1,15 @@
 export const PROFILE = {
-  eyebrow: "01 - 20 years · Sky, Estée Lauder, Liberty Global · Founder",
-  headline: "Senior front-end engineer who ships whole products, end to end.",
+  eyebrow: "01 · Senior front-end · Founder",
+  headline: "Twenty years shipping the front end of products people use.",
   subhead:
-    "London-based. Twenty years in high-traffic web work; now leading frontend at Liberty Blume and building Nannynow.co.uk.",
-  verticalStrip: "EST · 2006 · LONDON · ROME",
-  primaryCta: "Book a call",
+    "London-based. Twenty years in high-traffic web work for Sky, Estée Lauder and Liberty Global. Now leading frontend at Liberty Blume and building Nannynow with the same rigour as enterprise lending and luxury retail.",
+  verticalStrip: "EST · 2006 · BASED IN LONDON",
+  primaryCta: "Email Davide",
   secondaryCta: "See selected work",
-  closingHeadline: "Hiring a senior engineer? Building a product?",
-  statusLabel: "Open to senior roles & advisory · London / Remote",
-  availabilityLabel: "Available for senior roles & advisory",
+  closingHeadline: "Got a brief that needs a senior owner? Send it.",
+  closingEmphasisWord: "senior owner",
+  statusLabel: "Open to senior roles · London / Remote",
+  availabilityLabel: "Replies within 48h · London · GMT",
 } as const;
 
 export const TRUSTED_BY_CLIENTS = [
@@ -18,6 +19,7 @@ export const TRUSTED_BY_CLIENTS = [
   "Bristol City Council",
   "EE",
   "A+E Networks",
+  "SAP",
   "MAC Cosmetics",
   "Tom Ford Beauty",
   "Jo Malone London",
@@ -26,39 +28,53 @@ export const TRUSTED_BY_CLIENTS = [
   "Origins",
   "Boring Money",
   "Squiz",
+  "Toyota",
+  "Honda",
+  "Renault",
+  "Comic Relief",
+  "Sunday Times",
+  "History Channel",
+  "Inmarsat",
+  "Le Bon Marché",
 ] as const;
 
 export const POSITIONING = {
-  headline: "I work at both ends: regulated enterprise platforms and experimental interfaces.",
+  headline: "Twenty years shipping the front end of products people actually use.",
   paragraphs: [
-    "I can architect a 12-step financial lending platform and prototype an experimental WebGL interface in the same week when the brief demands it.",
+    "I can architect a 12-step regulated lending platform and prototype an experimental WebGL interface in the same week when the brief demands it.",
     "The through-line is judgement: knowing when to optimise, when to ship, and when a calm interface is worth more than another feature.",
   ],
 } as const;
 
 export const CAPABILITIES = [
   {
-    title: "Architecture & state",
-    body: "React, Next.js, TypeScript, Context API, 7-1 SCSS",
-  },
-  {
-    title: "Performance",
-    body: "Lighthouse-grade asset strategy, font loading, render discipline",
-  },
-  {
-    title: "Design systems",
-    body: "Token-driven, BEM, container queries, generated utilities",
-  },
-  {
-    title: "Creative & interactive",
-    body: "GSAP, Three.js, WebGL, SVG, Framer Motion",
+    title: "Front-end architecture",
+    body: "Type-safe component systems with tokens, container-query layouts and a generated utility layer. The structure that lets a team ship without re-litigating every spacing decision.",
+    stack: "NEXT.JS · REACT · TYPESCRIPT · SCSS",
   },
   {
     title: "Accessibility",
-    body: "WCAG 2.1 AA as a floor, AAA on brand-critical surfaces",
+    body: "WCAG 2.1 AA on every shipped flow. Keyboard pass, contrast checks and reduced motion in the definition of done. 500,000+ residents on bristol.gov.uk.",
+    stack: "AXE · NVDA · VOICEOVER · LIGHTHOUSE",
+  },
+  {
+    title: "Performance",
+    body: "Lighthouse 90+ on production hero pages, mobile, throttled. Set a perf budget; measure on every PR; refuse the regression. Boring, repeatable, evidence-led.",
+    stack: "LIGHTHOUSE · WEBPAGETEST · CWV",
+  },
+  {
+    title: "Design systems",
+    body: "Tokens mirrored across brand book, Figma library, and SCSS. The same name in three places. The library is a product, with versioning and a changelog.",
+    stack: "FIGMA · STYLE-DICTIONARY · SCSS",
+  },
+  {
+    title: "WebGL and motion",
+    body: "GLSL shaders for the celestial DD orbs on the home hero. Sharp, defined, high-contrast. Render loop paused on visibility change. No bloom, no blur.",
+    stack: "THREE.JS · GLSL · INTERSECTION-OBSERVER",
   },
   {
     title: "End-to-end delivery",
-    body: "Product direction, UX, API integration, and deployment in one stack",
+    body: "From technical discovery to live deploy. Comfortable owning the API contract, the build pipeline and the analytics that prove the thing worked.",
+    stack: "VERCEL · GH ACTIONS · STRIPE",
   },
 ] as const;

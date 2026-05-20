@@ -19,7 +19,7 @@ type CaseStudyViewProps = {
  */
 export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
   return (
-    <article className={"case-study-page"} aria-labelledby="case-study-title">
+    <main id="main" className="case-study-page" aria-labelledby="case-study-title">
       <div className="container-atmosphere has-py-4">
         <MagneticButton href={ROUTES.home} variant="ghostOnInk">
           {CASE_STUDY.backToHomeLabel}
@@ -32,9 +32,9 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
           <h1 id="case-study-title" className="text-4xl leading-snug">
             {project.title}
           </h1>
-          <p className="text-xl leading-relaxed is-text-muted">{project.tagline}</p>
-          <p className="text-lg has-font-semibold is-primary">{project.outcome}</p>
-          <p className="text-sm is-text-muted">
+          <p className="text-xl leading-relaxed is-stone">{project.tagline}</p>
+          <p className="text-lg has-font-semibold is-forest">{project.outcome}</p>
+          <p className="text-sm is-stone">
             {project.role} · {project.period}
           </p>
           <ul
@@ -82,7 +82,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
                 </span>
                 <div>
                   <h3 className="text-lg has-font-semibold">{point.title}</h3>
-                  <p className="text-md leading-relaxed is-text-muted has-m-0">
+                  <p className="text-md leading-relaxed is-stone has-m-0">
                     {point.body}
                   </p>
                 </div>
@@ -97,7 +97,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
         {project.sections.map((block) => (
           <section key={block.heading}>
             <h2 className="text-2xl has-mb-3">{block.heading}</h2>
-            <p className="text-md leading-relaxed is-text-muted">{block.body}</p>
+            <p className="text-md leading-relaxed is-stone">{block.body}</p>
           </section>
         ))}
         <section aria-label={CASE_STUDY.artefactsAriaLabel}>
@@ -106,7 +106,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
             {project.artefacts.map((art) => (
               <li key={art.src} className="case-study-template__artefact">
                 <RevealImage src={art.src} alt={art.alt} width={1200} height={800} />
-                <p className="text-sm is-text-muted has-mt-2">{art.caption}</p>
+                <p className="text-sm is-stone has-mt-2">{art.caption}</p>
               </li>
             ))}
           </ul>
@@ -129,7 +129,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
             href={ROUTES.work(nextProject.slug)}
             className={"case-study-template__next-link"}
           >
-            <span className="text-sm is-text-muted uppercase has-font-semibold">
+            <span className="text-sm is-stone uppercase has-font-semibold">
               {CASE_STUDY.nextProjectLabel}
             </span>
             <span className="text-2xl has-font-semibold">{nextProject.title}</span>
@@ -141,6 +141,6 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
           </MagneticButton>
         </div>
       </div>
-    </article>
+    </main>
   );
 }

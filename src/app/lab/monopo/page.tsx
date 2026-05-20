@@ -13,7 +13,7 @@ export const metadata = pageMetadata({
 
 export default function MonopoLabPage() {
   return (
-    <main id="main" className="lab-page bg-black">
+    <main id="main" className="lab-page bg-ink">
       <MonopoLabPreview />
 
       <div className="container-atmosphere has-py-8">
@@ -21,11 +21,11 @@ export default function MonopoLabPage() {
         <h1 className="text-hero has-font-medium leading-tight is-white has-mt-4">
           {MONOPO_LAB_PAGE.headline}
         </h1>
-        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-cream">
+        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-paper">
           {MONOPO_LAB_PAGE.description}{" "}
           <Link
             href={MONOPO_LAB_PAGE.referenceUrl}
-            className="is-accent"
+            className="is-signal"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -35,12 +35,12 @@ export default function MonopoLabPage() {
         </p>
 
         <div className="monopo-lab__checklist has-mt-8">
-          <p className="text-xs has-font-semibold uppercase is-stone-gray">
+          <p className="text-xs has-font-semibold uppercase is-stone">
             Acceptance checks
           </p>
           <ul role="list" className="is-flex is-flex-column has-gap-2 has-mt-2">
             {MONOPO_LAB_PAGE.checklist.map((line) => (
-              <li key={line} className="text-base leading-relaxed is-cream">
+              <li key={line} className="text-base leading-relaxed is-paper">
                 {line}
               </li>
             ))}

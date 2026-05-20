@@ -9,7 +9,7 @@ export function SkillsBlock() {
     <section className={"skills-block__section"} aria-labelledby="skills-heading">
       <div className="container-atmosphere is-flex is-flex-column has-gap-6">
         <ScrollReveal>
-          <h2 id="skills-heading" className="text-3xl is-cream">
+          <h2 id="skills-heading" className="text-3xl is-paper">
             {SKILLS_SECTION.title}
           </h2>
         </ScrollReveal>

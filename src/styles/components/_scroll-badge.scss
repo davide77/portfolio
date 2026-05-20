@@ -21,7 +21,7 @@
 }
 
 .scroll-badge__text {
-  fill: color-mix(in srgb, color(cream) 70%, transparent);
+  fill: color-mix(in srgb, color(paper) 70%, transparent);
   text-transform: uppercase;
   font-family: $font-family-body;
   font-size: font-size(xs);
@@ -35,8 +35,8 @@
   width: 8px;
   height: 8px;
   margin: -4px 0 0 -4px;
-  border-right: 1.5px solid color(cream);
-  border-bottom: 1.5px solid color(cream);
+  border-right: 1.5px solid color(paper);
+  border-bottom: 1.5px solid color(paper);
   transform: rotate(45deg);
   animation: scroll-badge-pulse 2s ease-in-out infinite;
 }

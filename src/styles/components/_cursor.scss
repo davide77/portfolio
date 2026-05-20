@@ -28,13 +28,13 @@ html.has-custom-cursor {
   width: 8px;
   height: 8px;
   border-radius: $radius-full;
-  background-color: color(primary);
+  background-color: color(forest);
 }
 
 .cursor__ring {
   width: 8px;
   height: 8px;
-  border: 1px solid color-mix(in srgb, color(primary) 60%, transparent);
+  border: 1px solid color-mix(in srgb, color(forest) 60%, transparent);
   border-radius: $radius-full;
   display: flex;
   align-items: center;
@@ -49,14 +49,14 @@ html.has-custom-cursor {
 .cursor__ring--magnetic {
   width: 60px;
   height: 60px;
-  border-color: color-mix(in srgb, color(cream) 40%, transparent);
-  background-color: color-mix(in srgb, color(black) 75%, transparent);
+  border-color: color-mix(in srgb, color(paper) 40%, transparent);
+  background-color: color-mix(in srgb, color(ink) 75%, transparent);
 }
 
 .cursor__ring-label {
   font-size: font-size(xs);
   font-weight: font-weight(medium);
-  color: color(cream);
+  color: color(paper);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-align: center;

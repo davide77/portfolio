@@ -94,13 +94,13 @@ export function AppStickyNav({
                   // accent on the ink nav is 4.42:1 (just under AA for
                   // 14px text); brand.md rule 89 says use cream for meta
                   // on ink. accent stays on the light/paper nav.
-                  ink ? "is-cream" : "is-accent",
+                  ink ? "is-paper" : "is-signal",
                 )}
               >
                 {NAV_WORDMARK.prefix}
               </span>
               <span className="app-sticky-nav__wordmark-sep"> {NAV_WORDMARK.separator} </span>
-              <span className={ink ? "is-white" : "is-text"}>{NAV_WORDMARK.suffix}</span>
+              <span className={ink ? "is-white" : "is-ink"}>{NAV_WORDMARK.suffix}</span>
             </Link>
           </div>
 

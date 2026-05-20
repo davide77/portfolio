@@ -6,13 +6,13 @@
 }
 
 html[data-theme='ink'] body {
-  color: color(cream);
-  background-color: color(black);
+  color: color(paper);
+  background-color: color(ink);
 }
 
 html[data-theme='paper'] body {
-  color: color(text);
-  background-color: color(cream);
+  color: color(ink);
+  background-color: color(paper);
 }
 
 html {
@@ -39,20 +39,20 @@ body {
   font-size: font-size(base);
   font-weight: font-weight(regular);
   line-height: line-height(normal);
-  color: color(text);
-  background-color: color(cream);
+  color: color(ink);
+  background-color: color(paper);
 }
 
 a {
   transition: color $transition-fast;
 
   &:hover {
-    color: color(primary);
+    color: color(forest);
   }
 }
 
 ::selection {
-  background-color: color(primary);
+  background-color: color(forest);
   color: color(white);
 }
 

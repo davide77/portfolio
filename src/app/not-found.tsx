@@ -23,7 +23,7 @@ export default function NotFound() {
             {NOT_FOUND_PAGE.eyebrow}
           </p>
           <h1 className="text-4xl">{NOT_FOUND_PAGE.title}</h1>
-          <p className="text-lg leading-relaxed is-text-muted">
+          <p className="text-lg leading-relaxed is-stone">
             {NOT_FOUND_PAGE.body}
           </p>
         </div>

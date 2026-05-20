@@ -30,7 +30,7 @@ export default function Error({
             {ERROR_PAGE.eyebrow}
           </p>
           <h1 className="text-4xl">{ERROR_PAGE.title}</h1>
-          <p className="text-lg leading-relaxed is-text-muted">
+          <p className="text-lg leading-relaxed is-stone">
             {ERROR_PAGE.body}
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function Error({
               {ERROR_PAGE.homeLabel}
             </Link>
           </div>
-          <p className="text-sm is-text-muted">
+          <p className="text-sm is-stone">
             {ERROR_PAGE.contactPrefix}{" "}
             <a
               href={`mailto:${ERROR_PAGE.contactEmail}`}

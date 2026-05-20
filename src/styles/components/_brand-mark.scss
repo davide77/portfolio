@@ -29,10 +29,10 @@
 }
 
 .brand-mark__mark--ink {
-  color: color(cream);
+  color: color(paper);
 
   .brand-mark__letter-alt {
-    color: color-mix(in srgb, color(cream) 62%, color(primary));
+    color: color-mix(in srgb, color(paper) 62%, color(forest));
   }
 
   &::after {
@@ -40,16 +40,16 @@
     position: absolute;
     inset: 2px;
     border-radius: 50%;
-    border: 1px solid color-mix(in srgb, color(cream) 22%, transparent);
+    border: 1px solid color-mix(in srgb, color(paper) 22%, transparent);
     pointer-events: none;
   }
 }
 
 .brand-mark__mark--paper {
-  color: color(text);
+  color: color(ink);
 
   .brand-mark__letter-alt {
-    color: color(primary);
+    color: color(forest);
     opacity: 0.92;
   }
 
@@ -58,7 +58,7 @@
     position: absolute;
     inset: 2px;
     border-radius: 50%;
-    border: 1px solid color-mix(in srgb, color(primary) 18%, color(border));
+    border: 1px solid color-mix(in srgb, color(forest) 18%, color(cream));
     pointer-events: none;
   }
 }

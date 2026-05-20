@@ -41,7 +41,7 @@ $control-min-size: 44px;
 $underline-offset: 3px;
 
 // Card styling
-$card-border: 1.5px solid color(border);
+$card-border: 1.5px solid color(cream);
 
 // Frosted-glass depth (brand.md "Glass-forward depth"). Canonical values
 // used by the `glass-border` and `frosted-glass` mixins in _mixins.scss.
@@ -63,5 +63,5 @@ $ease-snappy: cubic-bezier(0.33, 1, 0.68, 1);
 
 // Focus ring
 $focus-ring-width: 3px;
-$focus-ring-color: rgba(color(primary), 0.5);
+$focus-ring-color: rgba(color(forest), 0.5);
 $focus-ring-offset: 2px;

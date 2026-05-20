@@ -1,15 +1,18 @@
 @use '../abstracts' as *;
 
+// Centered punctuation dot pinned to the viewport center as the user
+// scrolls. inset: 0 + margin: auto handles centering so the transform
+// property stays free for the drift animation.
 .floating-accent-dot {
   position: fixed;
-  right: 8%;
-  top: 42%;
+  inset: 0;
+  margin: auto;
   z-index: z(fixed);
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: $radius-full;
   background-color: color(white);
-  box-shadow: 0 0 12px color-mix(in srgb, color(white) 40%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, color(white) 45%, transparent);
   animation: floating-dot-drift 3.6s ease-in-out infinite alternate;
   pointer-events: none;
 
@@ -20,11 +23,11 @@
 
 @keyframes floating-dot-drift {
   0% {
-    transform: translate(0, 0);
+    transform: translateY(-3px);
   }
 
   100% {
-    transform: translate(-20px, 20px);
+    transform: translateY(3px);
   }
 }
 

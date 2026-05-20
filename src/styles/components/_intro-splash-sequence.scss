@@ -12,9 +12,9 @@
   inset: -15%;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 18% 22%, color-mix(in srgb, color(primary) 12%, transparent), transparent 55%),
-    radial-gradient(ellipse 65% 50% at 82% 78%, color-mix(in srgb, color(accent) 10%, transparent), transparent 52%),
-    radial-gradient(ellipse 90% 45% at 50% 100%, color-mix(in srgb, color(cream) 10%, transparent), transparent 58%);
+    radial-gradient(ellipse 70% 55% at 18% 22%, color-mix(in srgb, color(forest) 12%, transparent), transparent 55%),
+    radial-gradient(ellipse 65% 50% at 82% 78%, color-mix(in srgb, color(signal) 10%, transparent), transparent 52%),
+    radial-gradient(ellipse 90% 45% at 50% 100%, color-mix(in srgb, color(paper) 10%, transparent), transparent 58%);
   filter: blur(36px);
   opacity: 0.72;
 }
@@ -26,7 +26,7 @@
 
 .intro-splash-sequence__kicker {
   letter-spacing: 0.12em;
-  color: color-mix(in srgb, color(cream) 58%, transparent);
+  color: color-mix(in srgb, color(paper) 58%, transparent);
 }
 
 .intro-splash-sequence__name {
@@ -39,7 +39,7 @@
 }
 
 .intro-splash-sequence__meta {
-  color: color-mix(in srgb, color(cream) 52%, transparent);
+  color: color-mix(in srgb, color(paper) 52%, transparent);
 }
 
 .intro-splash-sequence__skip-wrap {
@@ -50,7 +50,7 @@
 }
 
 .intro-splash-sequence__skip {
-  color: color-mix(in srgb, color(cream) 70%, transparent);
+  color: color-mix(in srgb, color(paper) 70%, transparent);
   text-decoration: underline;
   text-underline-offset: $underline-offset;
   cursor: pointer;
@@ -59,6 +59,6 @@
 
   &:focus-visible {
     @include focus-ring;
-    outline-color: color(cream);
+    outline-color: color(paper);
   }
 }

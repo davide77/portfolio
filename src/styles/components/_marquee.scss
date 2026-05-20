@@ -3,7 +3,7 @@
 .marquee {
   overflow: hidden;
   width: 100%;
-  border-block: 1px solid color-mix(in srgb, color(border) 80%, transparent);
+  border-block: 1px solid color-mix(in srgb, color(cream) 80%, transparent);
   padding-block: spacer(3);
 
   &:hover .marquee__track,
@@ -31,7 +31,7 @@
   font-weight: font-weight(medium);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: color(stone-gray);
+  color: color(stone);
   white-space: nowrap;
 }
 

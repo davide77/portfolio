@@ -29,7 +29,7 @@ export default function GlobalError({
             </p>
             <div className="is-flex is-flex-column has-gap-4">
               <h1 className="text-4xl">{GLOBAL_ERROR_PAGE.title}</h1>
-              <p className="text-lg leading-relaxed is-text-muted">
+              <p className="text-lg leading-relaxed is-stone">
                 {GLOBAL_ERROR_PAGE.body}
               </p>
             </div>

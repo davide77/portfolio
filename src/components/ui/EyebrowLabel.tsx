@@ -8,7 +8,7 @@ type EyebrowLabelProps = {
 /** Numbered section indicator, e.g. "01 - Selected work". */
 export function EyebrowLabel({ children, className }: EyebrowLabelProps) {
   return (
-    <p className={cx("eyebrow-label", "text-xs has-font-semibold uppercase is-stone-gray", className)}>
+    <p className={cx("eyebrow-label", "text-xs has-font-semibold uppercase is-stone", className)}>
       {children}
     </p>
   );

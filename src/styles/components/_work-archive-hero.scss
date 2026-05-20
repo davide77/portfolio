@@ -10,7 +10,7 @@
   min-height: 70svh;
   display: flex;
   align-items: center;
-  padding-block: spacer(10) spacer(8);
+  padding-block: spacer(10) spacer(4);
   overflow: hidden;
 }
 
@@ -29,7 +29,7 @@
   font-weight: font-weight(regular);
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: color-mix(in srgb, color(cream) 50%, transparent);
+  color: color-mix(in srgb, color(paper) 50%, transparent);
 }
 
 .work-archive-hero__headline {
@@ -49,7 +49,7 @@
   max-width: 56ch;
   font-size: font-size(lg);
   line-height: line-height(relaxed);
-  color: color-mix(in srgb, color(cream) 72%, transparent);
+  color: color-mix(in srgb, color(paper) 72%, transparent);
 }
 
 .work-archive-hero__edge {
@@ -61,7 +61,7 @@
   font-family: $font-family-body;
   font-size: font-size(xs);
   letter-spacing: 0.45em;
-  color: color-mix(in srgb, color(cream) 40%, transparent);
+  color: color-mix(in srgb, color(paper) 40%, transparent);
 
   @include max(bp(md)) {
     display: none;

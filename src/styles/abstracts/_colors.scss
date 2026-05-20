@@ -1,36 +1,30 @@
 // Mirror brand.md exactly.
+// Single source of truth: /brand.md. Update there first, mirror here.
+// Names match brand.md verbatim. No aliases.
 
 $theme-colors: (
-  // Primary (dominant)
-  black:        #101214,
-  white:        #ffffff,
-  primary:      #2a6b5e,
+  // Primary
+  ink:            #101214,  // Hero bands, footer, high-contrast panels.
+  forest:         #2a6b5e,  // Primary actions and selection on light backgrounds.
+  paper:          #f5f1ea,  // Default page background.
+  white:          #ffffff,  // Cards and raised surfaces.
 
-  // Secondary
-  cream:        #f5f1ea,
-  stone-gray:   #6f6a63,
+  // Support
+  stone:          #6f6a63,  // Secondary text and control borders on light surfaces.
+                            // 5.36:1 on white (WCAG AA normal text), 3:1 on white (AA UI).
+  cream:          #e0dbd4,  // Decorative hairlines and meta text on ink surfaces.
+                            // Decorative only - does not meet 3:1 for UI components.
+  signal:         #c45c3e,  // Hover, large text, and non-text accents on light surfaces.
+  signal-strong:  #b04f33,  // Accessible-text shade. Error text. 4.5:1 on white/paper.
 
-  // Accents
-  accent:       #c45c3e,
-  // Darker accent for normal-size text on white/cream (WCAG 1.4.3:
-  // 5.23:1 on white, 4.65:1 on cream). Use accent itself only for
-  // large text and non-text.
-  accent-strong: #b04f33,
-
-  // Hero orb (WebGL shader material only - never type/UI/washes)
-  orb-void:     #000000,
-  orb-shadow:   #2c1505,
-  orb-amber:    #d07a25,
-  orb-flare:    #ffc080,
-
-  // Semantic UI
-  text:         #101214,
-  text-muted:   #6f6a63,
-  border:       #e0dbd4,
-  // Decorative hairline border only. For interactive control bounds
-  // (inputs, chips, secondary buttons) use control-border, which
-  // reaches the 3:1 the border colour cannot (WCAG 1.4.11).
-  control-border: #6f6a63,
+  // Hero orb (WebGL shader only. Never type, UI, washes, or any CSS.
+  // Sanctioned carve-out: a single italic emphasis word on hero and closer
+  // headlines may use orb-flare via the --hero-emphasis-color custom property.)
+  orb-void:       #000000,
+  orb-shadow:     #2c1505,
+  orb-amber:      #d07a25,
+  orb-flare:      #ffc080,
+  orb-glow:       #a8d66a,
 );
 
 @function color($name) {
@@ -42,4 +36,4 @@ $theme-colors: (
 }
 
 // The .bg-* / .is-* / .has-border-* utility classes are generated from
-// $theme-colors in utilities/_colors.scss. This abstract emits no CSS.
+// $theme-colors in utilities/_colors.scss. This abstract emits zero CSS.

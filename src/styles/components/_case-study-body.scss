@@ -6,7 +6,7 @@
   aspect-ratio: 21 / 9;
   min-height: 200px;
   max-height: 520px;
-  background-color: color(cream);
+  background-color: color(paper);
 }
 
 .case-study-body__hero-image {
@@ -28,18 +28,18 @@
 
 .case-study-body__tag {
   border-radius: $radius-full;
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
 }
 
 .case-study-body__section {
   padding-top: spacer(6);
-  border-top: 1.5px solid color(border);
+  border-top: 1.5px solid color(cream);
 }
 
 .case-study-body__list {
   margin-top: spacer(4);
   padding-left: spacer(4);
-  border-left: 3px solid color(primary);
+  border-left: 3px solid color(forest);
 }
 
 .case-study-body__actions {

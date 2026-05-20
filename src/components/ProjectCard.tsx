@@ -41,27 +41,27 @@ export function ProjectCard({ project, tone = "paper" }: ProjectCardProps) {
       <div className="is-flex is-flex-column has-gap-3 has-p-5 is-flex-1">
         <div>
           <h3 className="text-xl">
-            <Link href={studyHref} className={cx("project-card__title-link", !ink && "is-text")}>
+            <Link href={studyHref} className={cx("project-card__title-link", !ink && "is-ink")}>
               {project.title}
             </Link>
           </h3>
-          <p className={cx("project-card__meta", "text-sm is-text-muted has-mt-2")}>{project.tagline}</p>
+          <p className={cx("project-card__meta", "text-sm is-stone has-mt-2")}>{project.tagline}</p>
         </div>
-        <p className={cx("project-card__summary", "text-sm leading-relaxed is-text-muted has-m-0")}>{project.summary}</p>
+        <p className={cx("project-card__summary", "text-sm leading-relaxed is-stone has-m-0")}>{project.summary}</p>
         <ul className="is-flex is-flex-wrap has-gap-2" aria-label={CASE_STUDY.technologiesAriaLabel}>
           {project.tags.slice(0, 5).map((tag) => (
-            <li key={tag} className={cx("project-card__tag", "text-xs has-font-medium has-py-1 has-px-2 is-text-muted")}>
+            <li key={tag} className={cx("project-card__tag", "text-xs has-font-medium has-py-1 has-px-2 is-stone")}>
               {tag}
             </li>
           ))}
         </ul>
         <div className={cx("project-card__links", "is-flex is-align-center is-flex-wrap has-gap-4 has-pt-3")}>
-          <Link href={studyHref} className={cx("project-card__link-primary", "has-font-semibold text-sm is-primary")}>
+          <Link href={studyHref} className={cx("project-card__link-primary", "has-font-semibold text-sm is-forest")}>
             {CASE_STUDY.viewCaseStudyLabel}
           </Link>
           <a
             href={project.liveUrl}
-            className={cx("project-card__link-secondary", "text-sm is-text-muted")}
+            className={cx("project-card__link-secondary", "text-sm is-stone")}
             rel="noopener noreferrer"
             target="_blank"
           >

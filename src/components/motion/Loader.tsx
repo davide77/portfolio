@@ -52,21 +52,21 @@ export function Loader({ onComplete }: LoaderProps) {
 
   return (
     <motion.div
-      className={cx("loader__overlay", "bg-black is-flex is-flex-column is-align-center is-justify-center")}
+      className={cx("loader__overlay", "bg-ink is-flex is-flex-column is-align-center is-justify-center")}
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "exit" ? 0 : 1 }}
       transition={{ duration: 0.4, ease: EASE_EDITORIAL }}
       role="presentation"
     >
       <motion.h1
-        className={cx("loader__name", "is-cream has-m-0")}
+        className={cx("loader__name", "is-paper has-m-0")}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE_EDITORIAL }}
       >
         {SITE.name}
       </motion.h1>
-      <p className={cx("loader__counter", "text-sm has-font-medium is-cream tabular-nums")} aria-live="polite">
+      <p className={cx("loader__counter", "text-sm has-font-medium is-paper tabular-nums")} aria-live="polite">
         {String(progress).padStart(2, "0")}
       </p>
       <motion.div

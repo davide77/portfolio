@@ -3,14 +3,14 @@
 .project-card__card {
   container-type: inline-size;
   height: 100%;
-  background-color: color-mix(in srgb, color(white) 72%, color(cream));
+  background-color: color-mix(in srgb, color(white) 72%, color(paper));
   border-radius: $radius-card;
   border: $card-border;
   overflow: hidden;
   transition: border-color $transition-base;
 
   &:hover {
-    border-color: color(primary);
+    border-color: color(forest);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -22,47 +22,47 @@
   background-color: color-mix(in srgb, color(white) 8%, transparent);
   backdrop-filter: blur(16px);
   border-radius: $radius-card-glass;
-  border: 1px solid color-mix(in srgb, color(cream) 28%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 28%, transparent);
   box-shadow: none;
 
   &:hover {
-    border-color: color-mix(in srgb, color(cream) 48%, transparent);
+    border-color: color-mix(in srgb, color(paper) 48%, transparent);
   }
 
   .project-card__title-link {
-    color: color(cream);
+    color: color(paper);
 
     &:hover {
-      color: color-mix(in srgb, color(cream) 88%, color(primary));
+      color: color-mix(in srgb, color(paper) 88%, color(forest));
     }
   }
 
   .project-card__meta {
-    color: color-mix(in srgb, color(cream) 58%, transparent);
+    color: color-mix(in srgb, color(paper) 58%, transparent);
   }
 
   .project-card__summary {
-    color: color-mix(in srgb, color(cream) 70%, transparent);
+    color: color-mix(in srgb, color(paper) 70%, transparent);
   }
 
   .project-card__tag {
-    border-color: color-mix(in srgb, color(cream) 22%, transparent);
-    color: color-mix(in srgb, color(cream) 72%, transparent);
+    border-color: color-mix(in srgb, color(paper) 22%, transparent);
+    color: color-mix(in srgb, color(paper) 72%, transparent);
   }
 
   .project-card__link-primary {
-    color: color-mix(in srgb, color(cream) 92%, color(primary));
+    color: color-mix(in srgb, color(paper) 92%, color(forest));
 
     &:hover {
-      color: color(cream);
+      color: color(paper);
     }
   }
 
   .project-card__link-secondary {
-    color: color-mix(in srgb, color(cream) 62%, transparent);
+    color: color-mix(in srgb, color(paper) 62%, transparent);
 
     &:hover {
-      color: color(cream);
+      color: color(paper);
     }
   }
 }
@@ -81,7 +81,7 @@
 .project-card__media {
   position: relative;
   aspect-ratio: 16 / 10;
-  background-color: color(cream);
+  background-color: color(paper);
 }
 
 .project-card__image {
@@ -90,7 +90,7 @@
 
 .project-card__tag {
   border-radius: $radius-full;
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
 }
 
 .project-card__links {
@@ -102,7 +102,7 @@
   cursor: pointer;
 
   &:hover {
-    color: color(primary);
+    color: color(forest);
   }
 
   &:focus-visible {
@@ -130,7 +130,7 @@
   cursor: pointer;
 
   &:hover {
-    color: color(primary);
+    color: color(forest);
   }
 
   &:focus-visible {

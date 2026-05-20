@@ -17,7 +17,7 @@
   inset: 0;
   z-index: calc(#{z(sticky)} - 50);
   pointer-events: none;
-  background-color: color(cream);
+  background-color: color(paper);
   opacity: var(--footer-wash, 0);
   will-change: opacity;
 }
@@ -27,18 +27,18 @@
 // they resolve to solid ink, so the arrival is crisp, not muddy.
 $wash-text: color-mix(
   in srgb,
-  color(cream),
-  color(text) calc(var(--footer-wash, 0) * 100%)
+  color(paper),
+  color(ink) calc(var(--footer-wash, 0) * 100%)
 );
 $wash-hairline: color-mix(
   in srgb,
-  color-mix(in srgb, color(cream) 22%, transparent),
-  color-mix(in srgb, color(text) 22%, transparent) calc(var(--footer-wash, 0) * 100%)
+  color-mix(in srgb, color(paper) 22%, transparent),
+  color-mix(in srgb, color(ink) 22%, transparent) calc(var(--footer-wash, 0) * 100%)
 );
 $wash-control-border: color-mix(
   in srgb,
-  color-mix(in srgb, color(cream) 28%, transparent),
-  color(control-border) calc(var(--footer-wash, 0) * 100%)
+  color-mix(in srgb, color(paper) 28%, transparent),
+  color(stone) calc(var(--footer-wash, 0) * 100%)
 );
 
 // The closing epilogue (#contact: manifesto + contact + closing CTA)
@@ -54,12 +54,12 @@ $wash-control-border: color-mix(
   .closing-cta-section {
     background-color: color-mix(
       in srgb,
-      color(black),
+      color(ink),
       transparent calc(var(--footer-wash, 0) * 100%)
     );
   }
 
-  .is-cream,
+  .is-paper,
   .is-white,
   .section-title,
   .eyebrow-label,

@@ -18,7 +18,7 @@
 
 .contact-page__card {
   padding: spacer(5);
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
   border-radius: $radius-card;
   background: color(white);
 }
@@ -41,52 +41,52 @@
   padding: spacer(8);
   border-radius: $radius-card-glass;
   background-color: color-mix(in srgb, color(white) 8%, transparent);
-  border: 1px solid color-mix(in srgb, color(cream) 28%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 28%, transparent);
   backdrop-filter: blur(18px);
-  color: color(cream);
+  color: color(paper);
 }
 
 .contact-page__lead {
-  color: color-mix(in srgb, color(cream) 78%, transparent);
+  color: color-mix(in srgb, color(paper) 78%, transparent);
 }
 
 .contact-page__body {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
+  color: color-mix(in srgb, color(paper) 72%, transparent);
 }
 
 .contact-page__mail-cta {
   min-height: $control-min-size;
-  color: color-mix(in srgb, color(cream) 94%, color(primary));
+  color: color-mix(in srgb, color(paper) 94%, color(forest));
   text-decoration: underline;
   text-underline-offset: 4px;
 
   &:hover {
-    color: color(cream);
+    color: color(paper);
   }
 
   &:focus-visible {
     @include focus-ring;
-    outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+    outline-color: color-mix(in srgb, color(paper) 45%, transparent);
   }
 }
 
 .contact-page__phone-link {
-  color: color-mix(in srgb, color(cream) 70%, transparent);
+  color: color-mix(in srgb, color(paper) 70%, transparent);
   text-decoration: underline;
   text-underline-offset: $underline-offset;
 
   &:hover {
-    color: color(cream);
+    color: color(paper);
   }
 
   &:focus-visible {
     @include focus-ring;
-    outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+    outline-color: color-mix(in srgb, color(paper) 45%, transparent);
   }
 }
 
 .contact-page__back-link {
-  color: color-mix(in srgb, color(cream) 58%, transparent);
+  color: color-mix(in srgb, color(paper) 58%, transparent);
 
   a {
     color: inherit;
@@ -94,12 +94,12 @@
     text-underline-offset: $underline-offset;
 
     &:hover {
-      color: color(cream);
+      color: color(paper);
     }
 
     &:focus-visible {
       @include focus-ring;
-      outline-color: color-mix(in srgb, color(cream) 45%, transparent);
+      outline-color: color-mix(in srgb, color(paper) 45%, transparent);
     }
   }
 }

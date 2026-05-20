@@ -86,6 +86,16 @@ The home hero's celestial "DD" forms and the /lab brand-orb cluster are a shader
 - **Orb flare** `#ffc080` - the hot rim peaks.
 - **Orb glow** `#a8d66a` - cool green refracted light. Approved deviation (2026-05-19): the /lab brand-orb cluster mirrors a glass-refraction reference whose letters shift through green as well as warm tones. WebGL orb material only, same as the rest of this ramp - never type/UI/CSS.
 
+#### Sanctioned italic-accent carve-out (2026-05-20)
+
+A single italic emphasis word on the hero headline and a single italic emphasis word on the closer headline may use **Orb flare** `#ffc080` as their text colour. This is the only CSS use of any orb-ramp colour anywhere on the site. The carve-out is bounded to:
+
+- exactly one emphasis word per surface (hero, closer)
+- the `<em>` inside the headline only - never body, eyebrow, meta, or button copy
+- ink-surface headlines only - never on paper
+
+Wired via the `--hero-emphasis-color` CSS custom property on the emphasis-word class so the rule lives in component SCSS, not inline. Any other CSS reference to an orb-ramp colour is a bug.
+
 ### Rules
 
 - Dominant: ink on large bands, paper for canvas, forest for actions. Support: white cards, stone for meta. Signal only for accents and hover states on light backgrounds, never as small caps text on ink (use cream for meta on ink for contrast).

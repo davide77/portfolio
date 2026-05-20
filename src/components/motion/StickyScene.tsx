@@ -53,7 +53,7 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
     return (
       <section ref={sectionRef} className={cx("sticky-scene", "sticky-scene--reduced", className)}>
         <div className={"sticky-scene__inner"}>
-          <h2 className="section-title is-cream">{headline}</h2>
+          <h2 className="section-title is-paper">{headline}</h2>
           <div className="is-flex is-flex-column has-gap-4 has-mt-4">
             {paragraphs.map((p) => (
               <p key={p} className="text-lg leading-relaxed">
@@ -72,7 +72,7 @@ export function StickyScene({ headline, paragraphs, className }: StickySceneProp
         <div className={"sticky-scene__inner"}>
           <div className={"sticky-scene__headline"}>
             <motion.h2
-              className="section-title is-cream"
+              className="section-title is-paper"
               style={{ opacity: headlineOpacity, y: headlineY }}
             >
               {headline}

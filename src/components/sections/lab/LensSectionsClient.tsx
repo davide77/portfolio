@@ -20,10 +20,10 @@ export function LensSections() {
             }
           >
             <div className="lens-sections__stage">
-              <p className="text-xs has-font-semibold uppercase is-stone-gray lens-sections__label">
+              <p className="text-xs has-font-semibold uppercase is-stone lens-sections__label">
                 Section {i + 1}
               </p>
-              <p className="text-base leading-relaxed is-cream lens-sections__caption has-mt-4">
+              <p className="text-base leading-relaxed is-paper lens-sections__caption has-mt-4">
                 {section.caption}
               </p>
               <FloatingLens

@@ -15,7 +15,7 @@
     font-weight: font-weight(extrabold);
     line-height: line-height(tight);
     letter-spacing: -0.04em;
-    color: color(border);
+    color: color(cream);
     font-variant-numeric: tabular-nums;
 
     @include min(bp(md)) {
@@ -24,7 +24,7 @@
   }
 
   &__eyebrow {
-    color: color(accent-strong);
+    color: color(signal-strong);
     letter-spacing: 0.08em;
   }
 
@@ -33,13 +33,13 @@
     padding: spacer(3) spacer(5);
     border: 0;
     border-radius: $radius-pill-cta;
-    background: color(primary);
+    background: color(forest);
     color: color(white);
     cursor: pointer;
     transition: background-color $transition-base;
 
     &:hover {
-      background: color(black);
+      background: color(ink);
     }
 
     &:focus-visible {
@@ -48,14 +48,14 @@
   }
 
   &__link {
-    color: color(primary);
+    color: color(forest);
     text-decoration: underline;
     text-underline-offset: $underline-offset;
     cursor: pointer;
     transition: color $transition-fast;
 
     &:hover {
-      color: color(black);
+      color: color(ink);
     }
 
     &:focus-visible {

@@ -4,14 +4,8 @@ export const CONTACT_PAGE = {
   headline: "Bring the brief everyone else avoided.",
   responseTime: "I reply within 24 hours, weekdays.",
   backHomeLabel: "Back to home",
-  pageIntro: "Book a call or send a brief. No gate, no pop-up.",
+  pageIntro: "Send a brief. No gate, no pop-up. Replies within 48h.",
   cards: {
-    book: {
-      title: "Book a call",
-      body: "Pick a slot that suits your time zone. Best for hiring leads and founders.",
-      cursorText: "Book",
-      embedTitle: `Book a call with ${SITE.name}`,
-    },
     brief: {
       title: "Send a brief",
       body: "Name, email, and message are enough. Budget and project type help me respond faster.",

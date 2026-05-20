@@ -11,13 +11,13 @@
   // with --footer-wash. At 0 this is the original dark footer.
   background-color: color-mix(
     in srgb,
-    color(black),
-    color(cream) calc(var(--footer-wash, 0) * 100%)
+    color(ink),
+    color(paper) calc(var(--footer-wash, 0) * 100%)
   );
   color: color-mix(
     in srgb,
-    color(cream),
-    color(text) calc(var(--footer-wash, 0) * 100%)
+    color(paper),
+    color(ink) calc(var(--footer-wash, 0) * 100%)
   );
   isolation: isolate;
 
@@ -46,11 +46,11 @@
   cursor: pointer;
 
   &:hover {
-    color: color(accent);
+    color: color(signal);
   }
 
   &:focus-visible {
-    outline: 2px solid color(accent);
+    outline: 2px solid color(signal);
     outline-offset: $underline-offset;
   }
 }
@@ -61,11 +61,11 @@
   cursor: pointer;
 
   &:hover {
-    color: color-mix(in srgb, color(cream) 92%, color(primary));
+    color: color-mix(in srgb, color(paper) 92%, color(forest));
   }
 
   &:focus-visible {
-    outline: 2px solid color(cream);
+    outline: 2px solid color(paper);
     outline-offset: $underline-offset;
   }
 }

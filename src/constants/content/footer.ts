@@ -1,7 +1,7 @@
 export const FOOTER_SECTION = {
   id: "site-footer",
-  farewell: "Got a hard brief? That's the fun part",
-  locationLine: "London, UK · GMT",
+  farewell: "est · 2006 · based in london",
+  locationLine: "London, UK · GMT · Replies within 48h",
   cvLabel: "Download CV",
-  contactLinkLabel: "Get in touch",
+  briefLabel: "Email Davide",
 } as const;

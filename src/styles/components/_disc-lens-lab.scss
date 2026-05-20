@@ -13,8 +13,8 @@
   max-height: 72vh;
   border-radius: 10px;
   overflow: hidden;
-  background-color: color(black);
-  border: 1px solid color-mix(in srgb, color(cream) 18%, transparent);
+  background-color: color(ink);
+  border: 1px solid color-mix(in srgb, color(paper) 18%, transparent);
 
   .blob-accent {
     position: absolute;
@@ -48,8 +48,8 @@
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-  background-color: color(black);
-  border: 1px solid color-mix(in srgb, color(cream) 18%, transparent);
+  background-color: color(ink);
+  border: 1px solid color-mix(in srgb, color(paper) 18%, transparent);
 
   .blob-accent {
     position: absolute;
@@ -63,6 +63,6 @@
   gap: spacer(2);
   padding: spacer(5);
   border-radius: 10px;
-  background-color: color-mix(in srgb, color(cream) 4%, transparent);
-  border: 1px solid color-mix(in srgb, color(cream) 14%, transparent);
+  background-color: color-mix(in srgb, color(paper) 4%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
 }

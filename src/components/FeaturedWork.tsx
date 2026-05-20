@@ -18,7 +18,7 @@ export function FeaturedWork() {
               <span className={"featured-work__kicker-rule"} aria-hidden />
               {FEATURED_WORK_SECTION.kicker}
             </p>
-            <h2 id="work-heading" className="text-3xl is-cream">
+            <h2 id="work-heading" className="text-3xl is-paper">
               {FEATURED_WORK_SECTION.title}
             </h2>
             <p className={cx("featured-work__intro", "text-lg leading-relaxed measure-62ch")}>{FEATURED_WORK_SECTION.intro}</p>

@@ -23,7 +23,7 @@
   input,
   textarea {
     padding: spacer(3);
-    border: 1px solid color(control-border);
+    border: 1px solid color(stone);
     border-radius: $radius-sm;
     font-family: $font-family-body;
     font-size: font-size(base);
@@ -46,7 +46,7 @@
   align-items: center;
   gap: spacer(1);
   padding: spacer(1) spacer(3);
-  border: 1px solid color(control-border);
+  border: 1px solid color(stone);
   border-radius: $radius-full;
   font-size: font-size(sm);
   cursor: pointer;
@@ -57,7 +57,7 @@
   padding: spacer(3) spacer(5);
   border: 0;
   border-radius: $radius-pill-cta;
-  background: color(primary);
+  background: color(forest);
   color: color(white);
   font-weight: font-weight(semibold);
   cursor: pointer;
@@ -72,18 +72,18 @@
 }
 
 .contact-form__required {
-  color: color(text-muted);
+  color: color(stone);
   font-size: font-size(sm);
 }
 
 .contact-form__error {
-  color: color(accent-strong);
+  color: color(signal-strong);
   font-size: font-size(sm);
 }
 
 .contact-form__success {
   padding: spacer(6);
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
   border-radius: $radius-card;
 }
 
@@ -91,9 +91,9 @@
 // Layout/spacing utilities live on the element in JSX; only the surface
 // treatment and focus ring are component-specific.
 .contact-form__summary {
-  border: 1px solid color(accent-strong);
+  border: 1px solid color(signal-strong);
   border-radius: $radius-sm;
-  background: rgba(color(accent), 0.08);
+  background: rgba(color(signal), 0.08);
 
   &:focus-visible {
     @include focus-ring;
@@ -101,7 +101,7 @@
 }
 
 .contact-form__summary-link {
-  color: color(accent-strong);
+  color: color(signal-strong);
   text-decoration: underline;
   text-underline-offset: $underline-offset;
 
@@ -112,7 +112,7 @@
 
 // Form-level send failure / rate-limit notice.
 .contact-form__notice {
-  border: 1px solid color(border);
+  border: 1px solid color(cream);
   border-radius: $radius-sm;
-  color: color(accent-strong);
+  color: color(signal-strong);
 }

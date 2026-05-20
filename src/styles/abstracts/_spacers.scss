@@ -13,7 +13,10 @@ $spacers: (
   8: 48px,
   9: 64px,
   10: 80px,
-  11: 46px,
+  11: 96px,
+  12: 128px,
+  13: 160px,
+  14: 200px,
 );
 
 @function spacer($n) {

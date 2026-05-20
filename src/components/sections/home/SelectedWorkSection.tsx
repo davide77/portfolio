@@ -11,7 +11,7 @@ export function SelectedWorkSection() {
       <div className="container-atmosphere">
         <header className="selected-work__header">
           <EyebrowLabel>{SELECTED_WORK_SECTION.kicker}</EyebrowLabel>
-          <h2 id="selected-work-title" className="section-title is-cream has-mt-3">
+          <h2 id="selected-work-title" className="section-title is-paper has-mt-3">
             {SELECTED_WORK_SECTION.title}
           </h2>
           <p className="text-lg leading-relaxed measure-62ch has-mt-3">

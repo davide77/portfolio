@@ -15,7 +15,7 @@
 // in _index.scss so it is the final word for internal pages.
 
 main#main:not(.home-main) {
-  // base/_headings.scss pins every h1-h6 to color(text) (#101214) as an
+  // base/_headings.scss pins every h1-h6 to color(ink) (#101214) as an
   // element rule, which beats the inherited cream and makes headings
   // vanish on ink. Same failure the home ink sections fix one-off
   // (capabilities-section__tile h3, selected-work__name). brand.md:
@@ -26,36 +26,30 @@ main#main:not(.home-main) {
   h4,
   h5,
   h6 {
-    color: color(cream);
+    color: color(paper);
   }
 
   // Meta / eyebrow: brand.md keeps section meta quiet. Cream at 58%
   // matches the home ink stack (capabilities-section).
   .eyebrow-label {
-    color: color-mix(in srgb, color(cream) 58%, transparent);
+    color: color-mix(in srgb, color(paper) 58%, transparent);
   }
 
   // Muted body copy (#6f6a63) is unreadable on ink. Lift to the same
   // cream-on-transparent the home ink sections use for body meta.
-  .is-text-muted,
+  .is-stone,
   .contact-form__required,
   .marquee__content,
   .case-study-template__work-index,
-  .case-study-template__next-link .is-text-muted {
-    color: color-mix(in srgb, color(cream) 72%, transparent);
+  .case-study-template__next-link .is-stone {
+    color: color-mix(in srgb, color(paper) 72%, transparent);
   }
 
   // Primary forest (#2a6b5e) on near-black fails contrast. brand.md:
   // on ink, accent links read as a cream tint warmed by the brand
   // (same treatment as contact-page__mail-cta).
-  .is-primary {
-    color: color-mix(in srgb, color(cream) 92%, color(accent));
-  }
-
-  // Year markers / numerals that used primary or stone now use the
-  // brand accent, which clears contrast on ink.
-  .about-page-content__timeline-year {
-    color: color(accent);
+  .is-forest {
+    color: color-mix(in srgb, color(paper) 92%, color(signal));
   }
 
   // Frosted card recipe (translucent white fill, cream hairline,
@@ -64,7 +58,7 @@ main#main:not(.home-main) {
   .contact-page__card,
   .contact-form__success {
     background: color-mix(in srgb, color(white) 8%, transparent);
-    border-color: color-mix(in srgb, color(cream) 22%, transparent);
+    border-color: color-mix(in srgb, color(paper) 22%, transparent);
     backdrop-filter: blur(12px);
   }
 
@@ -72,28 +66,24 @@ main#main:not(.home-main) {
   .case-study-template__tag,
   .case-study-body__tag {
     background-color: color-mix(in srgb, color(white) 6%, transparent);
-    border-color: color-mix(in srgb, color(cream) 22%, transparent);
+    border-color: color-mix(in srgb, color(paper) 22%, transparent);
   }
 
   // Light decorative hairlines (#e0dbd4) become harsh on black. Soften
   // to the cream-on-transparent rule used across the ink stack.
-  .about-page-content__timeline {
-    border-left-color: color-mix(in srgb, color(cream) 22%, transparent);
-  }
-
   .case-study-template__next,
   .case-study-body__section {
-    border-top-color: color-mix(in srgb, color(cream) 18%, transparent);
+    border-top-color: color-mix(in srgb, color(paper) 18%, transparent);
   }
 
   .marquee {
-    border-block-color: color-mix(in srgb, color(cream) 20%, transparent);
+    border-block-color: color-mix(in srgb, color(paper) 20%, transparent);
   }
 
   // Quote/list rule used brand forest; accent clears the non-text 3:1
   // on ink while staying on-brand.
   .case-study-body__list {
-    border-left-color: color(accent);
+    border-left-color: color(signal);
   }
 
   // Form controls: white fields with dark text are illegible on ink.
@@ -102,35 +92,35 @@ main#main:not(.home-main) {
     input,
     textarea {
       background: color-mix(in srgb, color(white) 8%, transparent);
-      border-color: color-mix(in srgb, color(cream) 35%, transparent);
-      color: color(cream);
+      border-color: color-mix(in srgb, color(paper) 35%, transparent);
+      color: color(paper);
 
       &::placeholder {
-        color: color-mix(in srgb, color(cream) 50%, transparent);
+        color: color-mix(in srgb, color(paper) 50%, transparent);
       }
     }
   }
 
   .contact-form__chip {
-    border-color: color-mix(in srgb, color(cream) 35%, transparent);
-    color: color(cream);
+    border-color: color-mix(in srgb, color(paper) 35%, transparent);
+    color: color(paper);
   }
 
   // Error text: accent-strong is too dark on ink. A cream-warmed
   // accent stays clearly readable for a small error string.
   .contact-form__error {
-    color: color-mix(in srgb, color(accent) 55%, color(cream));
+    color: color-mix(in srgb, color(signal) 55%, color(paper));
   }
 
   // Image holders defaulted to a cream block behind the photo. The
   // image covers it, but keep the load/empty state on-surface.
   .about-page-content__portrait,
   .case-study-body__hero-media {
-    background-color: color-mix(in srgb, color(cream) 6%, transparent);
+    background-color: color-mix(in srgb, color(paper) 6%, transparent);
   }
 
   // Next-project hover used forest; cream reads on ink.
   .case-study-template__next-link:hover {
-    color: color(cream);
+    color: color(paper);
   }
 }

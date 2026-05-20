@@ -13,25 +13,25 @@ export const metadata = pageMetadata({
 
 export default function DiscLensLabPage() {
   return (
-    <main id="main" className="lab-page bg-black">
+    <main id="main" className="lab-page bg-ink">
       <div className="container-atmosphere has-py-8">
         <EyebrowLabel>{DISC_LENS_LAB_PAGE.eyebrow}</EyebrowLabel>
         <h1 className="text-hero has-font-medium leading-tight is-white has-mt-4">
           {DISC_LENS_LAB_PAGE.headline}
         </h1>
-        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-cream">
+        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-paper">
           {DISC_LENS_LAB_PAGE.description}
         </p>
 
         <DiscLensPreview />
 
         <div className="disc-lens-lab__checklist has-mt-8">
-          <p className="text-xs has-font-semibold uppercase is-stone-gray">
+          <p className="text-xs has-font-semibold uppercase is-stone">
             Acceptance checks
           </p>
           <ul role="list" className="is-flex is-flex-column has-gap-2 has-mt-2">
             {DISC_LENS_LAB_PAGE.checklist.map((line) => (
-              <li key={line} className="text-base leading-relaxed is-cream">
+              <li key={line} className="text-base leading-relaxed is-paper">
                 {line}
               </li>
             ))}

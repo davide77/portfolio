@@ -63,7 +63,7 @@
 }
 
 .app-sticky-nav--ink .app-sticky-nav__wordmark-sep {
-  color: color-mix(in srgb, color(cream) 55%, transparent);
+  color: color-mix(in srgb, color(paper) 55%, transparent);
 }
 
 .app-sticky-nav__right {
@@ -144,38 +144,38 @@
 }
 
 .app-sticky-nav__nav-link--ink {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
+  color: color-mix(in srgb, color(paper) 72%, transparent);
 
   &::after {
-    background-color: color(cream);
+    background-color: color(paper);
   }
 
   &:hover {
-    color: color(cream);
+    color: color(paper);
   }
 }
 
 .app-sticky-nav__nav-link--paper {
-  color: color(text-muted);
+  color: color(stone);
 
   &::after {
-    background-color: color(primary);
+    background-color: color(forest);
   }
 
   &:hover {
-    color: color(primary);
+    color: color(forest);
   }
 }
 
 .app-sticky-nav__nav-link--active {
-  color: color(cream);
+  color: color(paper);
 }
 
 .app-sticky-nav__active-dot {
   width: 4px;
   height: 4px;
   border-radius: $radius-full;
-  background-color: color(accent);
+  background-color: color(signal);
   flex-shrink: 0;
 }
 
@@ -208,7 +208,7 @@
     width: 22px;
     height: 1.5px;
     margin: 0 auto;
-    background-color: color(cream);
+    background-color: color(paper);
     transition: transform $transition-fast;
   }
 
@@ -219,7 +219,7 @@
 
 .app-sticky-nav--ink .app-sticky-nav__burger::before,
 .app-sticky-nav--ink .app-sticky-nav__burger::after {
-  background-color: color(cream);
+  background-color: color(paper);
 }
 
 body.has-mobile-nav-open {
@@ -238,8 +238,8 @@ main#main {
   // never lands on a cream surface and stays legible end to end.
   &.home-main {
     padding-top: 0;
-    background-color: color(black);
-    color: color(cream);
+    background-color: color(ink);
+    color: color(paper);
   }
 
   // Every internal route renders on the same ink stack as home, so the
@@ -250,8 +250,8 @@ main#main {
   &:not(.home-main) {
     position: relative;
     isolation: isolate;
-    background-color: color(black);
-    color: color(cream);
+    background-color: color(ink);
+    color: color(paper);
 
     &::before {
       content: "";

@@ -22,10 +22,10 @@ export function DiscLensPreview() {
           <BlobAccent composition={hero.composition} />
         </div>
         <div className="is-flex is-flex-column has-gap-1">
-          <p className="text-xs has-font-semibold uppercase is-stone-gray">
+          <p className="text-xs has-font-semibold uppercase is-stone">
             {hero.label}
           </p>
-          <p className="text-base leading-relaxed is-cream">{hero.caption}</p>
+          <p className="text-base leading-relaxed is-paper">{hero.caption}</p>
         </div>
       </div>
 
@@ -36,10 +36,10 @@ export function DiscLensPreview() {
               <BlobAccent composition={panel.key} />
             </div>
             <div className="is-flex is-flex-column has-gap-1">
-              <p className="text-xs has-font-semibold uppercase is-stone-gray">
+              <p className="text-xs has-font-semibold uppercase is-stone">
                 {panel.label} - {panel.loopSec}s loop
               </p>
-              <p className="text-base leading-relaxed is-cream">{panel.caption}</p>
+              <p className="text-base leading-relaxed is-paper">{panel.caption}</p>
             </div>
           </li>
         ))}

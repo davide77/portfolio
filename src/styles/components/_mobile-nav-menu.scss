@@ -9,7 +9,7 @@
 .mobile-nav-menu__backdrop {
   position: absolute;
   inset: 0;
-  background-color: color-mix(in srgb, color(black) 65%, transparent);
+  background-color: color-mix(in srgb, color(ink) 65%, transparent);
 }
 
 .mobile-nav-menu__panel {
@@ -22,7 +22,7 @@
   justify-content: center;
   gap: spacer(6);
   padding: spacer(8) spacer(4);
-  background-color: color(black);
+  background-color: color(ink);
 }
 
 .mobile-nav-menu__close {
@@ -31,7 +31,7 @@
   right: spacer(4);
   border: 0;
   background: transparent;
-  color: color(cream);
+  color: color(paper);
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -48,13 +48,13 @@
 .mobile-nav-menu__link {
   font-family: $font-family-headline;
   font-size: font-size(4xl);
-  color: color(cream);
+  color: color(paper);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 
   &--active {
-    color: color(accent);
+    color: color(signal);
   }
 }
 

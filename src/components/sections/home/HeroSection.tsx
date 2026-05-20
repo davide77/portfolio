@@ -27,7 +27,7 @@ export function HeroSection() {
   }, [reduceMotion]);
 
   return (
-    <section id="hero" className={cx("hero-section", "bg-black")} aria-labelledby="hero-heading">
+    <section id="hero" className={cx("hero-section", "bg-ink")} aria-labelledby="hero-heading">
       <HeroGrainient className="hero-section__backdrop" />
       <HeroWebGLLayer className="hero-section__canvas" onCanvasReady={handleCanvasReady} />
       <div className={cx("hero-section__inner", "container-atmosphere")}>

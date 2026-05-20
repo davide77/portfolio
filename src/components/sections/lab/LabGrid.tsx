@@ -40,8 +40,8 @@ function LabTile({ experiment }: { experiment: (typeof EXPERIMENTS)[number] }) {
         aria-hidden
       />
       <h2 className="text-lg has-font-semibold has-mt-3">{experiment.title}</h2>
-      <p className="text-sm is-text-muted">{experiment.caption}</p>
-      <p className="has-mt-2 text-xs is-stone-gray">{experiment.attribution}</p>
+      <p className="text-sm is-stone">{experiment.caption}</p>
+      <p className="has-mt-2 text-xs is-stone">{experiment.attribution}</p>
     </article>
   );
 }

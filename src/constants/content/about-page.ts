@@ -1,7 +1,6 @@
 export const ABOUT_PAGE = {
   eyebrow: "05 - Who you'd be hiring",
   cvLabel: "Download CV (PDF)",
-  timelineTitle: "Career timeline",
   principlesLabel: "Why you'd hire me",
   headline: "Twenty years shipping front-end for Sky, Estée Lauder and Liberty Global.",
   intro:

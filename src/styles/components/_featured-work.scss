@@ -5,8 +5,8 @@
   position: relative;
   isolation: isolate;
   padding-block: spacer(11);
-  background-color: color(black);
-  color: color(cream);
+  background-color: color(ink);
+  color: color(paper);
 }
 
 .featured-work__section::before {
@@ -31,17 +31,17 @@
 
 .featured-work__kicker {
   letter-spacing: 0.14em;
-  color: color-mix(in srgb, color(cream) 58%, transparent);
+  color: color-mix(in srgb, color(paper) 58%, transparent);
 }
 
 .featured-work__kicker-rule {
   width: spacer(6);
   height: 2px;
-  background-color: color-mix(in srgb, color(accent) 85%, color(cream));
+  background-color: color-mix(in srgb, color(signal) 85%, color(paper));
 }
 
 .featured-work__intro {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
+  color: color-mix(in srgb, color(paper) 72%, transparent);
 }
 
 .featured-work__stack {

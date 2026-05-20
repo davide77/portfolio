@@ -9,8 +9,8 @@
 
 .selected-work {
   padding-block: spacer(9);
-  background-color: color(black);
-  color: color(cream);
+  background-color: color(ink);
+  color: color(paper);
 }
 
 .selected-work__header {
@@ -18,13 +18,13 @@
 }
 
 .selected-work__view-all {
-  color: color(cream);
+  color: color(paper);
   text-decoration: underline;
   text-underline-offset: $underline-offset;
   transition: color $transition-base;
 
   &:hover {
-    color: color(accent);
+    color: color(signal);
   }
 
   &:focus-visible {
@@ -38,7 +38,7 @@
 }
 
 .selected-work__role {
-  color: color-mix(in srgb, color(cream) 64%, transparent);
+  color: color-mix(in srgb, color(paper) 64%, transparent);
   letter-spacing: 0.08em;
 
   @include container-min(workrow, 720px) {
@@ -110,7 +110,7 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: $radius-card;
-  background-color: color-mix(in srgb, color(cream) 6%, transparent);
+  background-color: color-mix(in srgb, color(paper) 6%, transparent);
 
   // Brand grade. monopo warms its portraits with a golden tint; the
   // {{PROJECT_NAME}} palette has no gold, so Signal (the brand warm
@@ -122,8 +122,8 @@
     inset: 0;
     background: linear-gradient(
       155deg,
-      color-mix(in srgb, color(accent) 38%, transparent),
-      color-mix(in srgb, color(black) 32%, transparent) 78%
+      color-mix(in srgb, color(signal) 38%, transparent),
+      color-mix(in srgb, color(ink) 32%, transparent) 78%
     );
     mix-blend-mode: multiply;
     pointer-events: none;
@@ -151,18 +151,18 @@
   place-items: center;
   width: $control-min-size;
   height: $control-min-size;
-  border: 1px solid color-mix(in srgb, color(cream) 45%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 45%, transparent);
   border-radius: $radius-full;
-  background-color: color-mix(in srgb, color(black) 55%, transparent);
+  background-color: color-mix(in srgb, color(ink) 55%, transparent);
   backdrop-filter: blur(6px);
-  color: color(cream);
+  color: color(paper);
   cursor: pointer;
   transition:
     border-color $transition-base,
     background-color $transition-base;
 
   &:hover {
-    border-color: color(cream);
+    border-color: color(paper);
   }
 
   &:focus-visible {
@@ -172,8 +172,8 @@
   // Active ring. monopo uses blue here; the brand palette has no blue,
   // so the brand accent (terracotta) carries the "open" state on ink.
   &--open {
-    border-color: color(accent);
-    box-shadow: 0 0 0 1px color(accent);
+    border-color: color(signal);
+    box-shadow: 0 0 0 1px color(signal);
   }
 }
 
@@ -203,7 +203,7 @@
 }
 
 .selected-work__index {
-  color: color-mix(in srgb, color(cream) 56%, transparent);
+  color: color-mix(in srgb, color(paper) 56%, transparent);
   letter-spacing: 0.04em;
 }
 
@@ -232,7 +232,7 @@
   font-size: clamp(#{font-size(2xl)}, 6cqi, #{font-size(4xl)});
   font-weight: font-weight(regular);
   line-height: line-height(snug);
-  color: color(cream);
+  color: color(paper);
   overflow-wrap: break-word;
 }
 
@@ -247,7 +247,7 @@
 
 .selected-work__summary {
   margin: 0;
-  color: color-mix(in srgb, color(cream) 78%, transparent);
+  color: color-mix(in srgb, color(paper) 78%, transparent);
 }
 
 .selected-work__row--mirror .selected-work__links {
@@ -266,19 +266,19 @@
   }
 
   &--primary {
-    color: color(cream);
+    color: color(paper);
     text-decoration: underline;
 
     &:hover {
-      color: color(accent);
+      color: color(signal);
     }
   }
 
   &--secondary {
-    color: color-mix(in srgb, color(cream) 64%, transparent);
+    color: color-mix(in srgb, color(paper) 64%, transparent);
 
     &:hover {
-      color: color(cream);
+      color: color(paper);
     }
   }
 }

@@ -5,8 +5,8 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Marquee } from "@/components/ui/Marquee";
 import { StatusPill } from "@/components/ui/StatusPill";
 import { VerticalText } from "@/components/ui/VerticalText";
-import { BOOKING_URL } from "@/constants/config";
 import { PROFILE } from "@/constants/content/profile";
+import { SITE } from "@/constants/site";
 
 export default function StyleguidePage() {
   if (process.env.NODE_ENV !== "development") {
@@ -21,8 +21,8 @@ export default function StyleguidePage() {
           <EyebrowLabel>01 - Component preview</EyebrowLabel>
           <DisplayText as="h2">{PROFILE.headline}</DisplayText>
           <StatusPill label={PROFILE.availabilityLabel} tone="ink" />
-          <MagneticButton href={BOOKING_URL} cursorText="Book" external>
-            Book a call
+          <MagneticButton href={`mailto:${SITE.email}`} cursorText="Email">
+            Email Davide
           </MagneticButton>
           <VerticalText>{PROFILE.verticalStrip}</VerticalText>
           <Marquee items={["Sky", "Liberty Global", "Estée Lauder"]} />

@@ -3,24 +3,24 @@
 .experience-block__section {
   padding-block: spacer(11);
   background-color: transparent;
-  color: color(cream);
-  border-bottom: 1px solid color-mix(in srgb, color(cream) 12%, transparent);
+  color: color(paper);
+  border-bottom: 1px solid color-mix(in srgb, color(paper) 12%, transparent);
 }
 
 .experience-block__body-muted {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
+  color: color-mix(in srgb, color(paper) 72%, transparent);
 }
 
 .experience-block__item {
   padding-left: spacer(4);
-  border-left: 3px solid color(primary);
+  border-left: 3px solid color(forest);
 }
 
 .experience-block__period {
-  color: color-mix(in srgb, color(cream) 55%, transparent);
+  color: color-mix(in srgb, color(paper) 55%, transparent);
   letter-spacing: 0.02em;
 }
 
 .experience-block__org {
-  color: color-mix(in srgb, color(cream) 92%, color(primary));
+  color: color-mix(in srgb, color(paper) 92%, color(forest));
 }

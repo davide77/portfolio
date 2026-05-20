@@ -17,10 +17,10 @@
   }
 
   .lab-grid__tile p {
-    color: color(cream);
+    color: color(paper);
   }
 
-  .lab-grid__tile p.is-stone-gray {
-    color: color(stone-gray);
+  .lab-grid__tile p.is-stone {
+    color: color(stone);
   }
 }
