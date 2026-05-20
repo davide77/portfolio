@@ -22,15 +22,12 @@ export function useNavHash() {
   return { pathname, hash };
 }
 
+// All nav items are home-page anchors now (e.g. "/#work"). An item is
+// active when we are on the home page and the current hash matches it.
 export function isNavItemActive(href: string, pathname: string, hash: string) {
-  if (href === ROUTES.hash.work) {
-    return pathname.startsWith("/work") || (pathname === "/" && hash === "#work");
+  if (pathname !== ROUTES.home) {
+    return false;
   }
-  if (href === ROUTES.about) {
-    return pathname === "/about";
-  }
-  if (href === ROUTES.contact) {
-    return pathname === "/contact";
-  }
-  return false;
+  const target = href.includes("#") ? `#${href.split("#")[1]}` : "";
+  return target !== "" && hash === target;
 }

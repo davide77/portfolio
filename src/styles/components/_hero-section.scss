@@ -12,8 +12,15 @@
   overflow: hidden;
 }
 
-.hero-section__canvas {
+// Layer order inside the hero: grainient backdrop (0) < metal Ds canvas (1)
+// < headline/text (2). The Ds canvas is transparent, so the grainient
+// shows through behind the forms.
+.hero-section__backdrop {
   z-index: 0;
+}
+
+.hero-section__canvas {
+  z-index: 1;
 }
 
 .hero-section__inner {

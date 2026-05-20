@@ -14,18 +14,20 @@ export default function StyleguidePage() {
   }
 
   return (
-    <main id="main" className="container-atmosphere has-py-8 is-flex is-flex-column has-gap-8">
-      <h1 className="text-3xl">Styleguide</h1>
-      <section className="is-flex is-flex-column has-gap-3">
-        <EyebrowLabel>01 - Component preview</EyebrowLabel>
-        <DisplayText as="h2">{PROFILE.headline}</DisplayText>
-        <StatusPill label={PROFILE.availabilityLabel} tone="paper" />
-        <MagneticButton href={BOOKING_URL} cursorText="Book" external>
-          Book a call
-        </MagneticButton>
-        <VerticalText>{PROFILE.verticalStrip}</VerticalText>
-        <Marquee items={["Sky", "Liberty Global", "Estée Lauder"]} />
-      </section>
+    <main id="main">
+      <div className="container-atmosphere has-py-8 is-flex is-flex-column has-gap-8">
+        <h1 className="text-3xl">Styleguide</h1>
+        <section className="is-flex is-flex-column has-gap-3">
+          <EyebrowLabel>01 - Component preview</EyebrowLabel>
+          <DisplayText as="h2">{PROFILE.headline}</DisplayText>
+          <StatusPill label={PROFILE.availabilityLabel} tone="ink" />
+          <MagneticButton href={BOOKING_URL} cursorText="Book" external>
+            Book a call
+          </MagneticButton>
+          <VerticalText>{PROFILE.verticalStrip}</VerticalText>
+          <Marquee items={["Sky", "Liberty Global", "Estée Lauder"]} />
+        </section>
+      </div>
     </main>
   );
 }

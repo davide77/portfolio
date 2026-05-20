@@ -1,36 +1,37 @@
 export const ABOUT_PAGE = {
-  eyebrow: "Who you'd be hiring",
+  eyebrow: "05 - Who you'd be hiring",
   cvLabel: "Download CV (PDF)",
   timelineTitle: "Career timeline",
+  principlesLabel: "Why you'd hire me",
   headline: "Twenty years shipping front-end for Sky, Estée Lauder and Liberty Global.",
   intro:
-    "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE, and A+E Networks. I specialise in React, Next.js and TypeScript. I do my best work when design, engineering and commercial outcomes all have to land at once.",
+    "I'm a senior front-end engineer and founder with 20+ years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE and A+E Networks. React, Next.js and TypeScript are home ground. I do my best work when design, engineering and commercial outcomes all have to land at once, which is exactly the moment most teams want a senior pair of hands they can hand the call to.",
   portraitAlt: "Portrait of Davide Domenghini",
   portraitSrc: "/images/about/portrait.jpg",
   principles: [
     {
       id: "judgement",
-      title: "Judgement over volume",
+      title: "I've already shipped the hard version of your problem",
       body:
-        "Twenty years in high-traffic web work taught me where speed helps and where it costs. I optimise for the outcome: fewer regressions, clearer interfaces, and code the next engineer can pick up without a tour.",
+        "Sky, Estée Lauder, Liberty Global, Bristol City Council, EE and A+E Networks have all run front-end I led. Twenty years in high-traffic web work means I know where speed pays off and where it costs you later: fewer regressions, clearer interfaces and code the next engineer picks up without a tour.",
     },
     {
       id: "range",
-      title: "Range is the differentiator",
+      title: "One senior hire covering what usually takes a team",
       body:
-        "I can architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next. I lead front-end on enterprise platforms generating multi-million-euro revenue, and I'm equally at home mentoring juniors and turning a rough idea into a working MVP.",
+        "I architect a 12-step financial lending platform one week and prototype an experimental WebGL interface the next. I lead front-end on enterprise platforms generating multi-million-pound revenue, and I'm just as effective mentoring juniors or turning a rough idea into a working MVP. That range is less coordination overhead for you.",
     },
     {
       id: "ship",
-      title: "Ship product end to end",
+      title: "I ship product end to end, not tickets",
       body:
-        "Nannynow.co.uk is the live proof: product direction, UX, API integration, and deployment in one stack. Cheam Sports FC and Striver.Football show the same pattern - one senior engineer with clear ownership delivering what used to need a small cross-functional team.",
+        "Nannynow.co.uk is the proof: product direction, UX, API integration and deployment in one stack. Cheam Sports FC and Striver.Football show the same pattern. One senior engineer with clear ownership, delivering what used to need a small cross-functional team.",
     },
   ],
   beyond: {
     title: "Beyond work",
     body:
-      "For six years I've coached a youth team at Cheam Sports FC. Understanding how to motivate different personalities shapes how I mentor developers and lead teams. Outside client work I keep building with Three.js, WebGL and Framer Motion, testing ideas that later show up, more disciplined, in production.",
+      "For six years I've coached a youth team at Cheam Sports FC. Reading how to motivate different personalities is the same skill I bring to mentoring developers and leading teams. Outside client work I keep building with Three.js, WebGL and Framer Motion, testing ideas that later show up, more disciplined, in production.",
   },
   tools: {
     title: "Tools and stack",

@@ -1,0 +1,69 @@
+@use '../abstracts' as *;
+
+// Archive hero band. Background is intentionally transparent: the
+// site-chrome ink backdrop (brand-atmospheric-band + ink-atmosphere-wash)
+// shows through, so this reads as the home hero band without the DD orb.
+// Type is hero-grade DM Sans, weight/size contrast only (see brand.md).
+
+.work-archive-hero {
+  position: relative;
+  min-height: 70svh;
+  display: flex;
+  align-items: center;
+  padding-block: spacer(10) spacer(8);
+  overflow: hidden;
+}
+
+.work-archive-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(4);
+}
+
+.work-archive-hero__eyebrow {
+  margin: 0;
+  font-family: $font-family-body;
+  font-size: font-size(xs);
+  font-weight: font-weight(regular);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 50%, transparent);
+}
+
+.work-archive-hero__headline {
+  margin: 0;
+  color: color(white);
+  max-width: 20ch;
+  font-family: $font-family-headline;
+  font-size: clamp(#{font-size(2xl)}, 5vw, 2.75rem);
+  font-weight: font-weight(regular);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.work-archive-hero__intro {
+  margin: 0;
+  max-width: 56ch;
+  font-size: font-size(lg);
+  line-height: line-height(relaxed);
+  color: color-mix(in srgb, color(cream) 72%, transparent);
+}
+
+.work-archive-hero__edge {
+  position: absolute;
+  right: spacer(2);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  font-family: $font-family-body;
+  font-size: font-size(xs);
+  letter-spacing: 0.45em;
+  color: color-mix(in srgb, color(cream) 40%, transparent);
+
+  @include max(bp(md)) {
+    display: none;
+  }
+}

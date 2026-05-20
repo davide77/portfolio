@@ -1,0 +1,284 @@
+@use '../abstracts' as *;
+
+// monopo.vn-style expandable work list. Ink band, cream type.
+// Layout/spacing/typography that a utility covers lives in the JSX
+// (see SelectedWorkSection / SelectedWorkList). This file only holds
+// genuinely component-specific concerns: the cropped frame, the
+// circular toggle, dividers, fluid display type, and the height-
+// animated panel.
+
+.selected-work {
+  padding-block: spacer(9);
+  background-color: color(black);
+  color: color(cream);
+}
+
+.selected-work__header {
+  margin-block-end: spacer(8);
+}
+
+.selected-work__view-all {
+  color: color(cream);
+  text-decoration: underline;
+  text-underline-offset: $underline-offset;
+  transition: color $transition-base;
+
+  &:hover {
+    color: color(accent);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.selected-work__row {
+  container-type: inline-size;
+  container-name: workrow;
+}
+
+.selected-work__role {
+  color: color-mix(in srgb, color(cream) 64%, transparent);
+  letter-spacing: 0.08em;
+
+  @include container-min(workrow, 720px) {
+    margin-block-end: spacer(4);
+  }
+
+  .selected-work__row--mirror & {
+    @include container-min(workrow, 720px) {
+      text-align: right;
+    }
+  }
+}
+
+.selected-work__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: spacer(5);
+
+  // monopo-style editorial split: portrait on one side, oversized
+  // name on the other. Alternating rows mirror the columns so the
+  // page reads as a zig-zag rather than a single vertical stack.
+  @include container-min(workrow, 720px) {
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    column-gap: spacer(9);
+    align-items: stretch;
+  }
+}
+
+.selected-work__row--mirror .selected-work__body {
+  @include container-min(workrow, 720px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  }
+}
+
+.selected-work__media {
+  // Pin to row 1 explicitly. On mirror rows the columns are swapped
+  // via grid-column, and sparse auto-placement would otherwise push
+  // the second-in-source item onto a new row instead of beside it.
+  @include container-min(workrow, 720px) {
+    grid-row: 1;
+    grid-column: 1;
+  }
+}
+
+.selected-work__row--mirror .selected-work__media {
+  @include container-min(workrow, 720px) {
+    grid-column: 2;
+  }
+}
+
+.selected-work__detail {
+  @include container-min(workrow, 720px) {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+.selected-work__row--mirror .selected-work__detail {
+  @include container-min(workrow, 720px) {
+    grid-column: 1;
+    text-align: right;
+    align-items: flex-end;
+  }
+}
+
+.selected-work__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: $radius-card;
+  background-color: color-mix(in srgb, color(cream) 6%, transparent);
+
+  // Brand grade. monopo warms its portraits with a golden tint; the
+  // {{PROJECT_NAME}} palette has no gold, so Signal (the brand warm
+  // accent) over an ink floor does the same job: knocks back the
+  // bright screenshots and ties every tile to the brand.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      155deg,
+      color-mix(in srgb, color(accent) 38%, transparent),
+      color-mix(in srgb, color(black) 32%, transparent) 78%
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+}
+
+.selected-work__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform $duration-hero $ease-editorial;
+}
+
+.selected-work__row:hover .selected-work__image {
+  transform: scale(1.03);
+}
+
+.selected-work__toggle {
+  // monopo sits the toggle just under the title, in normal flow, not
+  // pinned over the portrait. The gentle float is owned by
+  // framer-motion (y transform) so the two never fight over
+  // `transform`.
+  margin-block-start: spacer(5);
+  display: grid;
+  place-items: center;
+  width: $control-min-size;
+  height: $control-min-size;
+  border: 1px solid color-mix(in srgb, color(cream) 45%, transparent);
+  border-radius: $radius-full;
+  background-color: color-mix(in srgb, color(black) 55%, transparent);
+  backdrop-filter: blur(6px);
+  color: color(cream);
+  cursor: pointer;
+  transition:
+    border-color $transition-base,
+    background-color $transition-base;
+
+  &:hover {
+    border-color: color(cream);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  // Active ring. monopo uses blue here; the brand palette has no blue,
+  // so the brand accent (terracotta) carries the "open" state on ink.
+  &--open {
+    border-color: color(accent);
+    box-shadow: 0 0 0 1px color(accent);
+  }
+}
+
+.selected-work__toggle-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+.selected-work__toggle-bar {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background-color: currentColor;
+  border-radius: $radius-sharp;
+
+  &--h {
+    width: 14px;
+    height: 2px;
+  }
+
+  &--v {
+    width: 2px;
+    height: 14px;
+    transform-origin: center;
+  }
+}
+
+.selected-work__index {
+  color: color-mix(in srgb, color(cream) 56%, transparent);
+  letter-spacing: 0.04em;
+}
+
+.selected-work__detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  // Keep the name vertically centred against the portrait. The grid
+  // cell is stretched to the media height, so centring the content
+  // here lands the title in the middle of the image.
+  @include container-min(workrow, 720px) {
+    justify-content: center;
+  }
+}
+
+.selected-work__name {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: $font-family-headline;
+  max-width: 100%;
+  // monopo keeps these titles modest and elegant, not a billboard.
+  // Hierarchy comes from the ink band and generous whitespace, so the
+  // name reads as a refined label beside the portrait, not over it.
+  font-size: clamp(#{font-size(2xl)}, 6cqi, #{font-size(4xl)});
+  font-weight: font-weight(regular);
+  line-height: line-height(snug);
+  color: color(cream);
+  overflow-wrap: break-word;
+}
+
+.selected-work__panel {
+  overflow: hidden;
+}
+
+.selected-work__panel-inner {
+  max-width: 52ch;
+  padding-block-start: spacer(4);
+}
+
+.selected-work__summary {
+  margin: 0;
+  color: color-mix(in srgb, color(cream) 78%, transparent);
+}
+
+.selected-work__row--mirror .selected-work__links {
+  @include container-min(workrow, 720px) {
+    justify-content: flex-end;
+  }
+}
+
+.selected-work__link {
+  text-decoration: none;
+  text-underline-offset: $underline-offset;
+  transition: color $transition-base;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &--primary {
+    color: color(cream);
+    text-decoration: underline;
+
+    &:hover {
+      color: color(accent);
+    }
+  }
+
+  &--secondary {
+    color: color-mix(in srgb, color(cream) 64%, transparent);
+
+    &:hover {
+      color: color(cream);
+    }
+  }
+}

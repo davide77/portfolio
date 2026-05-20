@@ -1,0 +1,12 @@
+@use '../abstracts' as *;
+
+// Hairline between home sections on the ink stack. Same cream-on-
+// transparent recipe as the other ink dividers (_ink-page.scss). The
+// component animates scaleX from the centre, so transform-origin is
+// pinned to the middle and the rule renders at full width.
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background-color: color-mix(in srgb, color(cream) 22%, transparent);
+  transform-origin: center;
+}

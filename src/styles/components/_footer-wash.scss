@@ -1,0 +1,83 @@
+@use '../abstracts' as *;
+
+// Scroll-linked cream wash. FooterWash.tsx writes 0 -> 1 to
+// --footer-wash on <html> as the viewport nears the bottom of the
+// document. Default 0 so SSR / reduced-motion render the normal dark
+// theme with no flash.
+:root {
+  --footer-wash: 0;
+}
+
+// Full-viewport cream sheet. The dark page (main#main is the ink
+// surface) scrolls off onto this as you approach the footer. Sits above
+// the page content backgrounds but below the footer and sticky nav,
+// which lift themselves over it and flip their own contrast.
+.footer-wash__veil {
+  position: fixed;
+  inset: 0;
+  z-index: calc(#{z(sticky)} - 50);
+  pointer-events: none;
+  background-color: color(cream);
+  opacity: var(--footer-wash, 0);
+  will-change: opacity;
+}
+
+// Interpolations. At wash 0 each resolves to its original dark-stack
+// value, so the page is untouched until it actually flips. At wash 1
+// they resolve to solid ink, so the arrival is crisp, not muddy.
+$wash-text: color-mix(
+  in srgb,
+  color(cream),
+  color(text) calc(var(--footer-wash, 0) * 100%)
+);
+$wash-hairline: color-mix(
+  in srgb,
+  color-mix(in srgb, color(cream) 22%, transparent),
+  color-mix(in srgb, color(text) 22%, transparent) calc(var(--footer-wash, 0) * 100%)
+);
+$wash-control-border: color-mix(
+  in srgb,
+  color-mix(in srgb, color(cream) 28%, transparent),
+  color(control-border) calc(var(--footer-wash, 0) * 100%)
+);
+
+// The closing epilogue (#contact: manifesto + contact + closing CTA)
+// lifts above the cream sheet and resolves its own contrast to solid
+// ink, so the arrival reads as a clean light section instead of dark
+// content fading behind a translucent overlay. The nav sits above this
+// (z(sticky)) and is intentionally left untouched.
+.footer-wash-zone {
+  position: relative;
+  z-index: calc(#{z(sticky)} - 40);
+
+  // Drop the section's dark fill so the cream sheet shows clean.
+  .closing-cta-section {
+    background-color: color-mix(
+      in srgb,
+      color(black),
+      transparent calc(var(--footer-wash, 0) * 100%)
+    );
+  }
+
+  .is-cream,
+  .is-white,
+  .section-title,
+  .eyebrow-label,
+  .manifesto-teaser-section__quote {
+    color: $wash-text;
+  }
+
+  .manifesto-teaser-section {
+    border-block-color: $wash-hairline;
+  }
+
+  .status-pill--ink {
+    color: $wash-text;
+    border-color: $wash-control-border;
+  }
+
+  .button--ghostOnInk {
+    color: $wash-text;
+    border-color: $wash-control-border;
+  }
+}

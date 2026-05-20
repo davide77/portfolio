@@ -43,6 +43,12 @@ $underline-offset: 3px;
 // Card styling
 $card-border: 1.5px solid color(border);
 
+// Frosted-glass depth (brand.md "Glass-forward depth"). Canonical values
+// used by the `glass-border` and `frosted-glass` mixins in _mixins.scss.
+$glass-border-width: 1px;
+$glass-blur: 16px;
+$glass-border-alpha: 30%; // 30% cream-on-transparent, per brand.md
+
 // Transitions
 $transition-fast: 150ms ease;
 $transition-base: 250ms ease;

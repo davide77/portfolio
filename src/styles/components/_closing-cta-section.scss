@@ -5,11 +5,8 @@
   background-color: color(black);
 }
 
+// Type, weight and colour now come from the shared .section-title +
+// is-cream classes. Only the component-specific measure cap stays.
 .closing-cta-section__headline {
-  margin: 0;
-  font-family: $font-family-headline;
-  font-size: clamp(#{font-size(2xl)}, 5vw, #{font-size(5xl)});
-  line-height: line-height(tight);
-  color: color(cream);
   max-width: 18ch;
 }

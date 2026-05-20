@@ -80,21 +80,13 @@
   }
 }
 
-.app-sticky-nav__nav-list {
-  list-style: none;
-
-  @include min(bp(lg)) {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  @include max(bp(lg)) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: spacer(2);
-  }
-}
+// The nav list is a right-aligned vertical stack whenever the bar is
+// shown. The bar is hidden below bp(md) (the burger takes over), so
+// there is no narrow-width horizontal variant: the hover arrow
+// (::before at right:100%) and the flex-end alignment only read
+// correctly as a column. Display/direction/gap come from the JSX
+// utilities (is-flex is-flex-column has-gap-1 is-align-end); the reset
+// already strips ul list-style, so this rule has nothing left to hold.
 
 .app-sticky-nav__nav-link {
   position: relative;
@@ -107,6 +99,32 @@
   text-decoration: none;
   letter-spacing: 0.18em;
   transition: color $transition-fast;
+
+  // Monopo-style cue: a small arrow sits just off the left edge of the
+  // link and slides in on hover/focus. Absolutely positioned so it never
+  // shifts the right-aligned list. Glyph inherits the link's hover colour
+  // via currentColor.
+  &::before {
+    content: "\2192";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-right: spacer(2);
+    font-size: font-size(xs);
+    line-height: 1;
+    opacity: 0;
+    transform: translate(-0.5em, -50%);
+    transition:
+      opacity $transition-fast,
+      transform 240ms cubic-bezier(0.33, 1, 0.68, 1);
+    pointer-events: none;
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
 
   &::after {
     content: "";
@@ -222,5 +240,45 @@ main#main {
     padding-top: 0;
     background-color: color(black);
     color: color(cream);
+  }
+
+  // Every internal route renders on the same ink stack as home, so the
+  // site reads as one dark surface instead of paper pages bolted onto a
+  // dark home. Washes match site-chrome / featured-work (brand.md
+  // atmosphere band + ink wash). Component-level contrast fixes for the
+  // paper-built widgets live in _ink-page.scss.
+  &:not(.home-main) {
+    position: relative;
+    isolation: isolate;
+    background-color: color(black);
+    color: color(cream);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.4;
+      @include brand-atmospheric-band;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: calc(0.55 * var(--brand-atmosphere-strength, 1));
+      @include ink-atmosphere-wash-background;
+    }
+
+    // Page content sits above the full-bleed washes. Every internal
+    // page's <main> children are content wrappers, so this is enough
+    // without per-page markup changes.
+    > * {
+      position: relative;
+      z-index: 1;
+    }
   }
 }

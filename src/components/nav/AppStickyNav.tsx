@@ -106,7 +106,7 @@ export function AppStickyNav({
 
           <div className="app-sticky-nav__right">
             <nav className="app-sticky-nav__nav is-flex is-align-center" aria-label="Primary">
-              <ul className="app-sticky-nav__nav-list is-flex is-flex-column has-gap-1">
+              <ul className="app-sticky-nav__nav-list is-flex is-flex-column is-align-end has-gap-1">
                 {PRIMARY_NAV.map((item) => {
                   const active = isNavItemActive(item.href, pathname, hash);
                   return (

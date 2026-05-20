@@ -30,6 +30,8 @@ export type CaseStudy = {
   featured: boolean;
 };
 
+// `featured` = appears on the home page. Keep it to 3-4 (the latest by recency).
+// `/work` shows all case studies via getSortedCaseStudies() regardless of this flag.
 export const CASE_STUDIES = [
   {
     slug: "liberty-blume",
@@ -43,8 +45,8 @@ export const CASE_STUDIES = [
     order: 1,
     liveUrl: "https://www.libertyglobal.com",
     liveLabel: "Open live site",
-    imageSrc: "/images/projects/liberty-blume/review-offer.png",
-    imageAlt: "Liberty Blume lending journey review offer step",
+    imageSrc: "/images/projects/liberty-blume/confirm-your-package.png",
+    imageAlt: "Liberty Blume lending journey confirm your package step",
     tags: ["React", "Context API", "SCSS", "GCP", "Docker"],
     summary:
       "A 12+ step financial lending journey with digital signatures, scalable SCSS architecture, and a GCP/Docker delivery pipeline.",
@@ -276,7 +278,7 @@ export const CASE_STUDIES = [
         caption: "Bobbi Brown UK storefront.",
       },
     ],
-    featured: true,
+    featured: false,
   },
   {
     slug: "cheam-sports-fc",
@@ -372,7 +374,7 @@ export const CASE_STUDIES = [
         caption: "bristol.gov.uk homepage (interim hero until design-system capture is added).",
       },
     ],
-    featured: true,
+    featured: false,
   },
 ] as const satisfies readonly CaseStudy[];
 

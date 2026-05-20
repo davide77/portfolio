@@ -12,3 +12,11 @@ export const CONTACT_RATE_LIMIT = {
 } as const;
 
 export const LOADER_STORAGE_KEY = "dd-portfolio-loader-v1";
+
+/**
+ * Footer wash: how far before the bottom of the page the cream
+ * transition starts, measured in viewport heights. 1.1 means the page
+ * has fully washed to cream by the time you reach the bottom, with the
+ * ramp spanning roughly the last viewport-and-a-bit of scroll.
+ */
+export const FOOTER_WASH_RAMP_VH = 1.1;

@@ -68,6 +68,22 @@
     radial-gradient(ellipse 75% 50% at 88% 92%, color-mix(in srgb, color(cream) 12%, transparent), transparent 50%);
 }
 
+/// Hairline border for frosted-glass panels on ink, per brand.md
+/// "Glass-forward depth": 1px around 30% cream-on-transparent. Pass a
+/// different alpha for hover/focus states (e.g. 45%).
+@mixin glass-border($alpha: $glass-border-alpha) {
+  border: $glass-border-width solid color-mix(in srgb, color(cream) #{$alpha}, transparent);
+}
+
+/// Full frosted-glass surface: backdrop blur + hairline border.
+/// Use on translucent ink panels. Set the panel background separately
+/// (typically `color-mix(in srgb, color(cream) 6-8%, transparent)`).
+@mixin frosted-glass($border-alpha: $glass-border-alpha) {
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  @include glass-border($border-alpha);
+}
+
 /// Horizontal atmospheric band: maps monopo "Deep Ocean" *role* to Forest, Paper, Signal only (no foreign RGB).
 /// Use on ink behind frosted UI; pair with low `opacity` in the caller when layering.
 @mixin brand-atmospheric-band {

@@ -1,6 +1,4 @@
-import Link from "next/link";
 import Image from "next/image";
-import { StickyScene } from "@/components/motion/StickyScene";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { DisplayText } from "@/components/ui/DisplayText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -25,7 +23,7 @@ export function AboutPageContent() {
         </div>
         <div>
           <EyebrowLabel>{ABOUT_PAGE.eyebrow}</EyebrowLabel>
-          <DisplayText as="h1" className="has-mt-4">
+          <DisplayText as="h2" className="has-mt-4">
             {ABOUT_PAGE.headline}
           </DisplayText>
           <p className="text-lg leading-relaxed measure-62ch has-mt-4">{ABOUT_PAGE.intro}</p>
@@ -37,15 +35,17 @@ export function AboutPageContent() {
         </div>
       </section>
 
-      {ABOUT_PAGE.principles.map((principle) => (
-        <section key={principle.id} id={principle.id} className={"about-page-content__principle"}>
-          <StickyScene
-            headline={principle.title}
-            paragraphs={[principle.body]}
-            className={"about-page-content__sticky-scene"}
-          />
-        </section>
-      ))}
+      <section
+        aria-label={ABOUT_PAGE.principlesLabel}
+        className="is-flex is-flex-column has-gap-7"
+      >
+        {ABOUT_PAGE.principles.map((principle) => (
+          <article key={principle.id} id={principle.id}>
+            <h2 className="section-title">{principle.title}</h2>
+            <p className="text-lg leading-relaxed measure-62ch has-mt-3">{principle.body}</p>
+          </article>
+        ))}
+      </section>
 
       <section aria-labelledby="timeline-title">
         <h2 id="timeline-title" className="text-3xl">

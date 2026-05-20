@@ -1,0 +1,70 @@
+@use '../abstracts' as *;
+
+// Shared chrome for the 404 (not-found.tsx), the segment 500 (error.tsx)
+// and the root 500 (global-error.tsx). Layout, spacing and type come from
+// utility classes in the JSX. Only the genuinely component-specific bits
+// live here: the oversized status numeral, the accent eyebrow, the pill
+// CTA, and the link treatment.
+.error-page {
+  display: flex;
+  align-items: center;
+  min-height: 70vh;
+
+  &__code {
+    font-size: font-size(5xl);
+    font-weight: font-weight(extrabold);
+    line-height: line-height(tight);
+    letter-spacing: -0.04em;
+    color: color(border);
+    font-variant-numeric: tabular-nums;
+
+    @include min(bp(md)) {
+      font-size: font-size(hero);
+    }
+  }
+
+  &__eyebrow {
+    color: color(accent-strong);
+    letter-spacing: 0.08em;
+  }
+
+  &__cta {
+    align-self: flex-start;
+    padding: spacer(3) spacer(5);
+    border: 0;
+    border-radius: $radius-pill-cta;
+    background: color(primary);
+    color: color(white);
+    cursor: pointer;
+    transition: background-color $transition-base;
+
+    &:hover {
+      background: color(black);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  &__link {
+    color: color(primary);
+    text-decoration: underline;
+    text-underline-offset: $underline-offset;
+    cursor: pointer;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: color(black);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  &__digest {
+    font-variant-numeric: tabular-nums;
+    opacity: 0.7;
+  }
+}

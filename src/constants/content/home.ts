@@ -3,20 +3,22 @@ import { CONTACT_PAGE } from "./contact-page";
 
 export const HOME_SECTIONS = {
   work: {
-    eyebrow: "02 - Selected work",
+    eyebrow: "01 - Selected work",
     title: "Selected work",
-    cta: "View all work",
+    cta: "Read the case studies",
+  },
+  caseStudies: {
+    eyebrow: "02 - Case studies",
+    title: "Case studies in depth",
+    intro:
+      "The full story behind the work above: the brief, what I did, and what it delivered.",
   },
   capabilities: {
-    eyebrow: "03 - What you get",
+    eyebrow: "04 - What you get",
     title: "What you get when you hire me",
   },
-  manifesto: {
-    eyebrow: "04 - How I work",
-    cta: PROFILE.manifestoCta,
-  },
   closing: {
-    eyebrow: "05 - Work with me",
+    eyebrow: "07 - Work with me",
   },
 } as const;
 
@@ -25,6 +27,17 @@ export const FEATURED_WORK_SECTION = {
   title: HOME_SECTIONS.work.title,
   intro: "Recent delivery across enterprise, founder-led products, and public sector.",
   viewAllLabel: "View all work",
+} as const;
+
+export const SELECTED_WORK_SECTION = {
+  kicker: HOME_SECTIONS.work.eyebrow,
+  title: HOME_SECTIONS.work.title,
+  intro: FEATURED_WORK_SECTION.intro,
+  viewAllLabel: HOME_SECTIONS.work.cta,
+  expandAriaPrefix: "Show details for",
+  collapseAriaPrefix: "Hide details for",
+  panelAriaPrefix: "Details for",
+  formatIndex: (order: number) => `( ${order} )`,
 } as const;
 
 /** Legacy exports for unused components kept for reference. */

@@ -4,7 +4,6 @@ import { SITE } from "./site";
 export const PRIMARY_NAV = [
   { label: "Work", href: ROUTES.workIndex },
   { label: "About", href: ROUTES.about },
-  { label: "Lab", href: ROUTES.lab },
   { label: "Contact", href: ROUTES.contact },
 ] as const;
 

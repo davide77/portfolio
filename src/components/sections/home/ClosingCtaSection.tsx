@@ -11,7 +11,7 @@ export function ClosingCtaSection() {
     <section className={"closing-cta-section"} aria-labelledby="closing-cta">
       <div className="container-atmosphere is-flex is-flex-column has-gap-5">
         <EyebrowLabel className="is-cream">{HOME_SECTIONS.closing.eyebrow}</EyebrowLabel>
-        <h2 id="closing-cta" className={"closing-cta-section__headline"}>
+        <h2 id="closing-cta" className="closing-cta-section__headline section-title is-cream">
           {PROFILE.closingHeadline}
         </h2>
         <StatusPill label={PROFILE.statusLabel} />

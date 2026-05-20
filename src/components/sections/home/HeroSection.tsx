@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HeroGrainient } from "@/components/hero/HeroGrainient";
 import { HeroWebGLLayer } from "@/components/hero/HeroWebGLLayer";
 import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
 import { HeroHeadline } from "@/components/sections/home/HeroHeadline";
@@ -27,6 +28,7 @@ export function HeroSection() {
 
   return (
     <section id="hero" className={cx("hero-section", "bg-black")} aria-labelledby="hero-heading">
+      <HeroGrainient className="hero-section__backdrop" />
       <HeroWebGLLayer className="hero-section__canvas" onCanvasReady={handleCanvasReady} />
       <div className={cx("hero-section__inner", "container-atmosphere")}>
         <p className="hero-section__eyebrow">{HERO_DISPLAY.eyebrow}</p>

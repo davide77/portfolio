@@ -1,17 +1,7 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 import { CONTACT_RATE_LIMIT } from "@/constants/config";
 import { sendContactEmail } from "@/lib/resend";
-
-const schema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  company: z.string().optional(),
-  message: z.string().min(10),
-  budget: z.string().optional(),
-  projectType: z.string().optional(),
-  website: z.string().optional(),
-});
+import { contactSchema, fieldErrors } from "@/lib/validation/contact";
 
 const hits = new Map<string, { count: number; reset: number }>();
 
@@ -34,9 +24,14 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const parsed = schema.safeParse(body);
+  const parsed = contactSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    // Return per-field messages from the shared schema so the client and
+    // server never disagree about what is wrong.
+    return NextResponse.json(
+      { errors: fieldErrors(parsed.error) },
+      { status: 400 },
+    );
   }
 
   if (parsed.data.website) {

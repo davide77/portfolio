@@ -1,0 +1,36 @@
+@use '../abstracts' as *;
+
+// Grainient backdrop: the animated grainy gradient behind the hero "DD"
+// forms. Deliberate departure from the pure-black hero rule (see
+// HERO_GRAINIENT_PALETTE) - requested, WebGL-surface only.
+
+.hero-grainient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    // NO filter:blur() - the shader carries the entire look. Do not add.
+  }
+
+  // Reduced-motion stand-in: a static read of the same palette. The custom
+  // properties are set per-instance on the element (see HeroGrainient.tsx).
+  &--static {
+    background:
+      radial-gradient(
+        circle at 30% 28%,
+        var(--grainient-mid) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 72% 70%,
+        var(--grainient-highlight) 0%,
+        transparent 50%
+      ),
+      var(--grainient-base);
+  }
+}

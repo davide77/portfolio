@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+
+// A single case study as its own standalone page. Inherits the shared ink
+// stack from `main#main:not(.home-main)` (see _app-sticky-nav.scss) so the
+// site reads as one dark surface end to end. Component-level fixes for the
+// paper-built widgets reused inside live in _ink-page.scss. Layout/spacing
+// that a utility covers lives in the JSX (see CaseStudyView); this file
+// only holds page padding and the closing "next / back" separator.
+
+.case-study-page {
+  padding-block: spacer(9);
+}
+
+.case-study-page__footer {
+  padding-top: spacer(8);
+  border-top: 1px solid color-mix(in srgb, color(cream) 18%, transparent);
+}

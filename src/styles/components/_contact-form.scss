@@ -86,3 +86,33 @@
   border: 1px solid color(border);
   border-radius: $radius-card;
 }
+
+// Accessible error summary shown above the form on an invalid submit.
+// Layout/spacing utilities live on the element in JSX; only the surface
+// treatment and focus ring are component-specific.
+.contact-form__summary {
+  border: 1px solid color(accent-strong);
+  border-radius: $radius-sm;
+  background: rgba(color(accent), 0.08);
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.contact-form__summary-link {
+  color: color(accent-strong);
+  text-decoration: underline;
+  text-underline-offset: $underline-offset;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Form-level send failure / rate-limit notice.
+.contact-form__notice {
+  border: 1px solid color(border);
+  border-radius: $radius-sm;
+  color: color(accent-strong);
+}

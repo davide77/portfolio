@@ -67,7 +67,7 @@
 .button--ghostOnInk {
   background-color: transparent;
   color: color(cream);
-  border: 1px solid color-mix(in srgb, color(cream) 30%, transparent);
+  @include glass-border;
   border-radius: $radius-pill-cta;
 
   &:hover:not(:disabled) {

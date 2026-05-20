@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+
+// One heading treatment for every eyebrow-led home section title
+// (Positioning, Selected work, What you get, Work with me). A single
+// fluid clamp keeps them identical across the ink stack instead of the
+// previous mix of text-3xl, a bespoke closing clamp, and display-text.
+// Colour is applied per context (is-cream on the ink home stack), so
+// the class stays reusable on light surfaces too.
+.section-title {
+  margin: 0;
+  font-family: $font-family-headline;
+  // Capped at 4xl (48px) to sit near monopo's heading (39px) /
+  // heading-lg (54px) range rather than display sizes.
+  font-size: clamp(#{font-size(xl)}, 4vw, #{font-size(4xl)});
+  line-height: line-height(tight);
+  text-wrap: balance;
+}

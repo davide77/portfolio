@@ -2,10 +2,23 @@
 
 .site-footer__footer {
   position: relative;
+  // Lift above the cream wash veil (z(sticky) - 50) so the footer drives
+  // its own contrast flip instead of being covered by the sheet.
+  z-index: calc(#{z(sticky)} - 40);
   overflow: hidden;
   padding-block: spacer(9);
-  background-color: color(black);
-  color: color(cream);
+  // Scroll-linked: ink surface -> cream, cream text -> ink, in lockstep
+  // with --footer-wash. At 0 this is the original dark footer.
+  background-color: color-mix(
+    in srgb,
+    color(black),
+    color(cream) calc(var(--footer-wash, 0) * 100%)
+  );
+  color: color-mix(
+    in srgb,
+    color(cream),
+    color(text) calc(var(--footer-wash, 0) * 100%)
+  );
   isolation: isolate;
 
   &::before {
@@ -14,7 +27,8 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: var(--brand-atmosphere-strength, 1);
+    // The dark ink glow fades out as the surface washes to cream.
+    opacity: calc(var(--brand-atmosphere-strength, 1) * (1 - var(--footer-wash, 0)));
     @include ink-atmosphere-wash-background;
   }
 }
@@ -25,7 +39,8 @@
 }
 
 .site-footer__link {
-  color: color(cream);
+  // Inherit the footer's scroll-interpolated colour (cream -> ink).
+  color: inherit;
   text-decoration: underline;
   text-underline-offset: $underline-offset;
   cursor: pointer;
@@ -59,12 +74,15 @@
   font-family: $font-family-headline;
   font-size: clamp(#{font-size(2xl)}, 5vw, #{font-size(5xl)});
   line-height: line-height(tight);
-  color: color(cream);
+  // Inherit the footer's scroll-interpolated colour (cream -> ink).
+  color: inherit;
 }
 
 .site-footer__rule {
   height: 1px;
   width: 100%;
-  background-color: color-mix(in srgb, color(cream) 18%, transparent);
+  // Tracks the footer's interpolated colour so the hairline stays
+  // visible on both the dark and cream surfaces.
+  background-color: color-mix(in srgb, currentColor 18%, transparent);
   margin-block: spacer(6);
 }

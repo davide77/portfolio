@@ -4,8 +4,7 @@ export const CONTACT_PAGE = {
   headline: "Bring the brief everyone else avoided.",
   responseTime: "I reply within 24 hours, weekdays.",
   backHomeLabel: "Back to home",
-  pageIntro:
-    "Book a call, send a brief, or reach out directly. No gate, no pop-up.",
+  pageIntro: "Book a call or send a brief. No gate, no pop-up.",
   cards: {
     book: {
       title: "Book a call",
@@ -17,10 +16,6 @@ export const CONTACT_PAGE = {
       title: "Send a brief",
       body: "Name, email, and message are enough. Budget and project type help me respond faster.",
     },
-    dm: {
-      title: "Direct message",
-      body: "LinkedIn, X, Facebook, email, or GitHub if you prefer async.",
-    },
   },
   form: {
     nameLabel: "Name",
@@ -31,9 +26,25 @@ export const CONTACT_PAGE = {
     submitLabel: "Send brief",
     projectTypeLabel: "Project type",
     requiredHint: "(required)",
-    errorBody: `Something went wrong. Email ${SITE.email} directly.`,
+    optionalHint: "(optional)",
+    errorTitle: "That did not send.",
+    errorBody: `Something went wrong on send. Email ${SITE.email} directly and it will reach me.`,
+    rateLimitedTitle: "Slow down a moment.",
+    rateLimitedBody:
+      "Too many attempts from here in a short window. Wait a minute, then send again.",
     successTitle: "Message received.",
     successBody: "I will reply within one working day.",
+    // Accessible error summary shown above the form on an invalid submit.
+    summaryTitle: "Check the highlighted fields:",
+    // Field-level validation messages. Single source of truth for both the
+    // client form and the API route via src/lib/validation/contact.ts.
+    validation: {
+      nameRequired: "Add your name so I know who I am replying to.",
+      emailRequired: "Add an email so I can reply.",
+      emailInvalid: "That email does not look right. Check for a typo.",
+      messageRequired: "Add a short brief.",
+      messageTooShort: "A line or two more so I can gauge fit (10 characters minimum).",
+    },
     projectTypes: [
       "Senior hire",
       "Advisory",

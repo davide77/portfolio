@@ -6,9 +6,6 @@ export const PROFILE = {
   verticalStrip: "EST · 2006 · LONDON · ROME",
   primaryCta: "Book a call",
   secondaryCta: "See selected work",
-  manifestoQuote:
-    "Ship the hard path. Make it feel simple.",
-  manifestoCta: "Read how I work",
   closingHeadline: "Hiring a senior engineer? Building a product?",
   statusLabel: "Open to senior roles & advisory · London / Remote",
   availabilityLabel: "Available for senior roles & advisory",

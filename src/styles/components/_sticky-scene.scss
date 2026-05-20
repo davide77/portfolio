@@ -44,17 +44,9 @@
   }
 }
 
-// Compound with .display-text so this wins on specificity: _display-text
-// loads after _sticky-scene in the component index, so a lone
-// .sticky-scene__title rule would be overridden by .display-text.
-.display-text.sticky-scene__title {
-  text-wrap: balance;
-
-  // display-text is sized for a full-bleed hero (clamps up to ~7.5rem).
-  // In this pinned two-column scene that overwhelms the body copy and
-  // overflows the column, so cap it to a section-heading scale.
-  font-size: clamp(#{font-size(2xl)}, 4vw, #{font-size(4xl)});
-}
+// The headline now uses the shared .section-title class (one fluid
+// clamp across every eyebrow section). No sticky-scene-specific type
+// override is needed; the pinned column copes with the shared scale.
 
 .sticky-scene__body {
   position: relative;

@@ -2,7 +2,9 @@
 
 .legacy-work-gallery__section {
   position: relative;
-  padding-block: spacer(11);
+  // The archive hero now opens the page; the grid is no longer the
+  // section opener, so the top inset is lighter than the bottom.
+  padding-block: spacer(8) spacer(11);
   isolation: isolate;
   background-color: transparent;
   color: color(cream);
@@ -33,29 +35,6 @@
   z-index: 1;
   container-type: inline-size;
   container-name: legacy-gallery;
-}
-
-.legacy-work-gallery__kicker {
-  letter-spacing: 0.14em;
-  color: color-mix(in srgb, color(cream) 58%, transparent);
-}
-
-.legacy-work-gallery__kicker-rule {
-  width: spacer(6);
-  height: 2px;
-  background-color: color-mix(in srgb, color(accent) 85%, color(cream));
-}
-
-.legacy-work-gallery__intro {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
-}
-
-.legacy-work-gallery__header-row {
-  margin-bottom: spacer(7);
-}
-
-.legacy-work-gallery__intro {
-  color: color-mix(in srgb, color(cream) 72%, transparent);
 }
 
 .legacy-work-gallery__bento {
@@ -105,9 +84,33 @@
   }
 }
 
+.legacy-work-gallery__figure {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
 .legacy-work-gallery__frame {
   position: absolute;
   inset: 0;
+
+  // Settled brand grade: the same accent-over-ink multiply wash the
+  // home Selected work tiles use (selected-work__frame::after). Knocks
+  // back the bright archive screenshots so they sit calmly on the ink
+  // stack and tie every tile to the brand. Sits under the caption
+  // (z-index 1) and the image scales beneath it on hover.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      155deg,
+      color-mix(in srgb, color(accent) 38%, transparent),
+      color-mix(in srgb, color(black) 32%, transparent) 78%
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
 }
 
 .legacy-work-gallery__image {
@@ -125,4 +128,47 @@
       transform: none;
     }
   }
+}
+
+// Caption is always visible (not hover-gated) so the archive is
+// readable by keyboard and screen-reader users, and on touch.
+.legacy-work-gallery__caption {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(1);
+  padding: spacer(5) spacer(3) spacer(3);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, color(black) 82%, transparent) 0%,
+    color-mix(in srgb, color(black) 55%, transparent) 55%,
+    transparent 100%
+  );
+}
+
+.legacy-work-gallery__caption-label {
+  font-size: font-size(sm);
+  font-weight: font-weight(semibold);
+  line-height: line-height(tight);
+  color: color(cream);
+}
+
+.legacy-work-gallery__caption-client {
+  font-size: font-size(xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 64%, transparent);
+}
+
+.legacy-work-gallery__caption-blurb {
+  font-size: font-size(xs);
+  line-height: line-height(snug);
+  color: color-mix(in srgb, color(cream) 78%, transparent);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }

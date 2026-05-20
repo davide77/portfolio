@@ -39,8 +39,16 @@
   color: color-mix(in srgb, color(cream) 58%, transparent);
 }
 
+// Tile heading ships with no colour class, so it inherits the default
+// ink text colour (#101214) and disappears on the ink stack. brand.md
+// rule 91: text on ink is paper/white. Use full-strength cream to match
+// the section's cream-on-ink language.
+.capabilities-section__tile h3 {
+  color: color(cream);
+}
+
 // is-text-muted (#6f6a63) fails on ink; use cream-on-transparent body
 // meta, matching the featured-work intro treatment.
 .capabilities-section__tile p {
-  color: color-mix(in srgb, color(cream) 70%, transparent);
+  color: color-mix(in srgb, color(cream) 78%, transparent);
 }
