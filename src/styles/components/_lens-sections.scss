@@ -1,0 +1,31 @@
+@use '../abstracts' as *;
+
+.lens-sections {
+  display: grid;
+  gap: spacer(6);
+}
+
+.lens-sections__item {
+  display: block;
+}
+
+.lens-sections__stage {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--lens-bg, #f3efe7);
+  padding: spacer(6);
+}
+
+.lens-sections__label {
+  position: relative;
+  z-index: 1;
+}
+
+.lens-sections__caption {
+  position: relative;
+  z-index: 1;
+  max-width: 48ch;
+}

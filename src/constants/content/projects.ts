@@ -83,9 +83,9 @@ export const CASE_STUDIES = [
     ],
     artefacts: [
       {
-        src: "/images/projects/liberty-blume/personal-details.png",
-        alt: "Personal details step in the lending journey",
-        caption: "Personal details capture in the multi-step flow.",
+        src: "/images/projects/liberty-blume/address-details.png",
+        alt: "Address details step in the lending journey",
+        caption: "Address details capture in the multi-step flow.",
       },
       {
         src: "/images/projects/liberty-blume/affordability.png",

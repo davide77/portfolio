@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FloatingLens } from "@/components/lab/monopo/FloatingLens";
 import { HorizontalScrollSection } from "@/components/motion/HorizontalScrollSection";
 import { ProjectCard } from "@/components/ProjectCard";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
@@ -11,6 +12,15 @@ export function FeaturedWorkSection() {
 
   return (
     <section id="work" className={"featured-work-section"} aria-labelledby="featured-work-title">
+      <FloatingLens
+        word="WORK"
+        wordColor="#f5f1ea"
+        wordBackground="#101214"
+        wordSize={0.28}
+        size={220}
+        top="14%"
+        right="8%"
+      />
       <HorizontalScrollSection
         header={
           <div className="container-atmosphere">

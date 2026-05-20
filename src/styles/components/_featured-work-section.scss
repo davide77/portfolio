@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 
 .featured-work-section {
+  position: relative;
   padding-block: spacer(8);
   background-color: color(black);
   color: color(cream);

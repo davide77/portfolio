@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+.lab-featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: spacer(4);
+
+  @include min(bp(md)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.lab-featured__card {
+  display: block;
+  padding: spacer(5);
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: color-mix(in srgb, color(cream) 4%, transparent);
+  border: 1px solid color-mix(in srgb, color(cream) 14%, transparent);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: color-mix(in srgb, color(cream) 32%, transparent);
+    background-color: color-mix(in srgb, color(cream) 8%, transparent);
+  }
+}

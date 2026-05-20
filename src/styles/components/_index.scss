@@ -1,56 +1,68 @@
-// Global component styles (BEM). Import partials here — do not use CSS Modules.
+// Global component styles (BEM). Import partials here - do not use CSS Modules.
 
-@use '_contact-page';
-@use '_error-page';
+@use '_about-page-content';
+@use '_app-sticky-nav';
+@use '_blob-accent';
+@use '_brand-mark';
+@use '_brand-orb-showcase';
 @use '_brand-strip';
 @use '_button';
+@use '_capabilities-section';
 @use '_case-study-body';
+@use '_case-study-page';
+@use '_case-study-template';
+@use '_closing-cta-section';
+@use '_contact-form';
+@use '_contact-page';
+@use '_cursor';
+@use '_disc-lens-lab';
+@use '_display-text';
+@use '_error-page';
 @use '_experience-block';
+@use '_eyebrow-label';
 @use '_featured-work';
+@use '_featured-work-section';
+@use '_floating-accent-dot';
+@use '_floating-lens';
 @use '_hero-grainient';
 @use '_hero-placeholder';
+@use '_hero-section';
 @use '_hero-webgl-layer';
-@use '_scroll-badge';
-@use '_floating-accent-dot';
-@use '_section-numerals';
-@use '_mobile-nav-menu';
+@use '_horizontal-scroll-section';
+@use '_intro-splash-sequence';
+@use '_lab-featured';
+@use '_lab-grid';
+@use '_lab-page';
 @use '_legacy-work-gallery';
+@use '_lens-sections';
+@use '_loader';
+@use '_magnetic-button';
+@use '_marquee';
+@use '_mobile-nav-menu';
+@use '_monopo-lab';
+@use '_page-transition';
+@use '_positioning-section';
 @use '_project-card';
+@use '_reveal-image';
+@use '_scroll-badge';
+@use '_section-divider';
+@use '_section-numerals';
+@use '_section-title';
+@use '_selected-work';
+@use '_site-chrome';
 @use '_site-footer';
 @use '_site-header';
 @use '_skills-block';
-@use '_case-study-template';
-@use '_contact-form';
-@use '_site-chrome';
-@use '_cursor';
-@use '_horizontal-scroll-section';
-@use '_loader';
-@use '_page-transition';
-@use '_reveal-image';
-@use '_sticky-scene';
-@use '_app-sticky-nav';
-@use '_brand-mark';
-@use '_about-page-content';
-@use '_capabilities-section';
-@use '_closing-cta-section';
-@use '_featured-work-section';
-@use '_selected-work';
-@use '_case-study-page';
-@use '_section-divider';
-@use '_section-title';
-@use '_hero-section';
-@use '_work-archive-hero';
-@use '_intro-splash-sequence';
-@use '_display-text';
-@use '_eyebrow-label';
-@use '_magnetic-button';
-@use '_marquee';
 @use '_status-pill';
+@use '_sticky-scene';
 @use '_trusted-by-section';
 @use '_vertical-text';
+@use '_work-archive-hero';
+
 // Loaded last: ink-surface contrast fixes for internal pages must be
 // the final word over the paper-built component partials above.
 @use '_ink-page';
+
 // Scroll-linked cream wash veil. Declared after every component it
 // sits in front of.
 @use '_footer-wash';

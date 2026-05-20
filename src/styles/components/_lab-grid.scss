@@ -1,0 +1,54 @@
+@use '../abstracts' as *;
+
+.lab-grid {
+  container-type: inline-size;
+  container-name: lab-grid;
+}
+
+.lab-grid__grid {
+  list-style: none;
+  padding: 0;
+  margin: spacer(8) 0 0;
+  display: grid;
+  gap: spacer(6);
+
+  @include container-min(lab-grid, 700px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lab-grid__tile {
+  // Frosted-dark tile on ink pages (matches the brand "glass-forward depth"
+  // direction in brand.md: 30% cream-on-transparent hairline, no heavy shadow).
+  border: 1px solid color-mix(in srgb, color(cream) 30%, transparent);
+  border-radius: $radius-card;
+  padding: spacer(4);
+  background: color-mix(in srgb, color(cream) 4%, transparent);
+}
+
+.lab-grid__canvas {
+  aspect-ratio: 4 / 3;
+  border-radius: $radius-sm;
+  background: color(black);
+  transition: filter $transition-slow;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.lab-grid__canvas--active {
+  filter: brightness(1.15);
+}
+
+.canvas--noise-field {
+  background: radial-gradient(circle at 30% 30%, color(primary), color(black));
+}
+
+.canvas--scroll-mask {
+  background: linear-gradient(135deg, color(cream), color(primary));
+}
+
+.canvas--type-decode {
+  background: linear-gradient(180deg, color(black), color(stone-gray));
+}
