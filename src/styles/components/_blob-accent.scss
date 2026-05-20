@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+// Glass-disc lens canvas. Sized to fill its parent; pure black surface
+// because the scene clears to black and lensing depends on no light
+// bleeding in from the page underneath.
+.blob-accent {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: color(black);
+}
+
+// Reduced-motion fallback: a single warm radial wash so the panel still
+// reads as luminous when the canvas is suppressed.
+.blob-accent--static {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, color(primary) 30%, transparent),
+      transparent 35%
+    ),
+    color(black);
+}

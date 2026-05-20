@@ -1,0 +1,26 @@
+@use '../abstracts' as *;
+
+// Ink theme for /lab. Mirrors the home hero: full-width black under the
+// constrained content well, cream / white type, frosted-dark experiment
+// tiles. Body still uses the paper theme globally; this only flips the lab
+// route.
+
+.lab-page {
+  min-height: 100svh;
+}
+
+// Tile typography on the ink lab page reads against the frosted dark surface
+// rather than the white card it assumes by default.
+.lab-page {
+  .lab-grid__tile h2 {
+    color: color(white);
+  }
+
+  .lab-grid__tile p {
+    color: color(cream);
+  }
+
+  .lab-grid__tile p.is-stone-gray {
+    color: color(stone-gray);
+  }
+}

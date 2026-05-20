@@ -78,12 +78,13 @@ All HEX values are canonical. Mirror them exactly in [src/styles/abstracts/_colo
 
 ### Hero orb (WebGL only)
 
-The home hero's celestial "DD" forms are a shader surface, not a CSS surface. They use a self-contained warm-amber ramp that exists **only** for the WebGL orb material - never for type, UI, washes, or any CSS. It does not relax the "no colours outside this palette" rule for the rest of the site.
+The home hero's celestial "DD" forms and the /lab brand-orb cluster are a shader surface, not a CSS surface. They use a self-contained ramp that exists **only** for the WebGL orb material - never for type, UI, washes, or any CSS. It does not relax the "no colours outside this palette" rule for the rest of the site.
 
 - **Orb void** `#000000` - pure black core of the forms. Design-mandated; not Ink.
 - **Orb shadow** `#2c1505` - the dark warm bands between ridges.
 - **Orb amber** `#d07a25` - the bright ridges.
 - **Orb flare** `#ffc080` - the hot rim peaks.
+- **Orb glow** `#a8d66a` - cool green refracted light. Approved deviation (2026-05-19): the /lab brand-orb cluster mirrors a glass-refraction reference whose letters shift through green as well as warm tones. WebGL orb material only, same as the rest of this ramp - never type/UI/CSS.
 
 ### Rules
 

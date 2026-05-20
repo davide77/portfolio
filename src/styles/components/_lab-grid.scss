@@ -18,10 +18,12 @@
 }
 
 .lab-grid__tile {
-  border: 1px solid color(border);
+  // Frosted-dark tile on ink pages (matches the brand "glass-forward depth"
+  // direction in brand.md: 30% cream-on-transparent hairline, no heavy shadow).
+  border: 1px solid color-mix(in srgb, color(cream) 30%, transparent);
   border-radius: $radius-card;
   padding: spacer(4);
-  background: color(white);
+  background: color-mix(in srgb, color(cream) 4%, transparent);
 }
 
 .lab-grid__canvas {

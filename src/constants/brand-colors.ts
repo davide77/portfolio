@@ -13,6 +13,8 @@ export const BRAND_COLORS = {
   orbShadow: "#2c1505",
   orbAmber: "#d07a25",
   orbFlare: "#ffc080",
+  // Approved WebGL-only deviation (2026-05-19), /lab brand-orb cluster. See brand.md.
+  orbGlow: "#a8d66a",
   text: "#101214",
   textMuted: "#6f6a63",
   border: "#e0dbd4",

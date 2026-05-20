@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+// Two-column band: a tight ~320px glass-orb cluster on the left, body copy on
+// the right. The background is intentionally transparent so the orbs feel
+// integrated into whatever section drops them in - they only need a parent
+// with enough contrast for the warm rim halo to read.
+//
+// All spacing values come from token maps. No literals.
+
+.brand-orb-showcase {
+  position: relative;
+  container-type: inline-size;
+  container-name: brand-orb-showcase;
+  padding-block: spacer(8);
+
+  @include container-min(brand-orb-showcase, 720px) {
+    padding-block: spacer(11);
+  }
+}
+
+.brand-orb-showcase__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: spacer(6);
+  align-items: center;
+
+  @include container-min(brand-orb-showcase, 720px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: spacer(11);
+  }
+}
+
+// The lens magnifies a glyph that bleeds past the sphere, so the canvas
+// needs a generous square the letter can extend into - matching the Monopo
+// reference where the big type runs off the edges of the orb.
+.brand-orb-showcase__canvas-frame {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+
+  @include container-min(brand-orb-showcase, 720px) {
+    margin-inline: 0;
+    max-width: 400px;
+  }
+}
+
+.brand-orb-showcase__canvas {
+  position: absolute;
+  inset: 0;
+
+  > canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.brand-orb-showcase__copy {
+  display: grid;
+  gap: spacer(4);
+  max-width: 52ch;
+}
