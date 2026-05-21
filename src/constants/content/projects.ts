@@ -73,12 +73,16 @@ export const CASE_STUDIES = [
     ],
     sections: [
       {
-        heading: "The brief",
-        body: "Build a lending platform that scales across markets while keeping every step auditable and accessible.",
+        heading: "Constraints",
+        body: "FCA-regulated journey, twelve steps, every transition logged for audit. Lending decisions and digital agreement on screen, behind a public marketing site. Team is distributed across three time zones; the front end has to be self-explanatory enough that the back-end and content teams can extend it without re-litigating component design.",
       },
       {
-        heading: "Outcome",
-        body: "The platform supports multi-million-euro revenue with a journey operators can extend without re-architecting the front end.",
+        heading: "Stack and architecture",
+        body: "React + Context API for shared state across steps so the journey can pause, branch and resume without prop drilling. SCSS 7-1 with BEM, generated utility classes from a token map, container queries on the form components so the steps work at every viewport. Build deploys via GCP and Docker on a trunk-based workflow with required reviews and type checks. No CSS-in-JS, no global state library; the journey is intentionally legible.",
+      },
+      {
+        heading: "Outcome and next steps",
+        body: "The platform is live in production, supporting multi-million-euro revenue with full WCAG 2.1 AA conformance. The team now extends the journey by composing existing tokens and components rather than authoring new SCSS. Next: lift the same architecture into Liberty Global's adjacent regulated products.",
       },
     ],
     artefacts: [
