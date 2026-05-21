@@ -133,3 +133,25 @@ export const ARCHIVE_TILES: readonly ArchiveTile[] = [
   tile(28, "Driving.co.uk", "Sell your car", "Sunday Times Driving classifieds landing.", "agency-loyalty", "wide"),
   tile(29, "ICLP", "Customer devotion, navigation open", "ICLP site with the expanded side navigation.", "agency-loyalty", "default"),
 ];
+
+/**
+ * Projects shipped but with no surviving screen capture. Listed honestly
+ * so the archive does not over-claim what is still in the bento, and so
+ * the breadth of past clients is visible even where the visual record
+ * is gone.
+ */
+export const MENTIONED_NO_SCREEN = {
+  eyebrow: "Mentioned · no screen kept",
+  intro:
+    "Projects I shipped but never captured a frame of, or whose captures have not survived a hard drive migration. Listed for completeness.",
+  items: [
+    "HSBC · digital banking workstreams",
+    "EE · consumer mobile marketing",
+    "GSK / Philips · pharma and consumer health surfaces",
+    "Inmarsat · enterprise satellite communications",
+    "Le Bon Marché · luxury retail in Paris",
+    "Home Office · digital service work",
+    "Driving.co.uk · Sunday Times Driving classifieds operations",
+    "TUI Ski · holiday booking flow",
+  ],
+} as const;
