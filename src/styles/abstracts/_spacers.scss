@@ -1,12 +1,14 @@
 // Spacing scale. Used for margin, padding, gap. Generates utility classes
 // `has-m*-N`, `has-p*-N`, `has-gap-N` via base/_measures.scss and base/_base.scss.
 
+// 4-base micro scale (1..4) + 8-base macro scale (5..14). Mirrors the
+// Figma `spacing` variable collection in bCjl4LmfZrxceEzNOfWH6J.
 $spacers: (
   0: 0,
-  1: 5px,
-  2: 10px,
-  3: 16px,
-  4: 20px,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
   5: 24px,
   6: 32px,
   7: 40px,

@@ -1,0 +1,16 @@
+// Layout primitives. Mirrors the Figma `layout` variable collection.
+// Used by content wells, max-widths and minimum-control sizing.
+
+$layout: (
+  well:        1180px,  // Default content well (atmosphere container).
+  well-narrow: 720px,   // Body copy / measure-capped sections.
+  control-min: 44px,    // Min interactive control size (WCAG 2.5.5).
+);
+
+@function layout($name) {
+  @if not map-has-key($layout, $name) {
+    @error 'Layout `#{$name}` not found in $layout map.';
+  }
+
+  @return map-get($layout, $name);
+}

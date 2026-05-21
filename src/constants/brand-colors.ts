@@ -3,6 +3,7 @@
  */
 export const BRAND_COLORS = {
   black: "#101214",
+  ink2: "#1a1d20",
   white: "#ffffff",
   primary: "#2a6b5e",
   cream: "#f5f1ea",

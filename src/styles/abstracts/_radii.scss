@@ -1,0 +1,16 @@
+// Border radius scale. Mirrors the Figma `radius` variable collection.
+// Accessor + map only - no CSS emitted from this file.
+
+$radii: (
+  square: 0,
+  card:   10px,
+  pill:   999px,
+);
+
+@function radius($name) {
+  @if not map-has-key($radii, $name) {
+    @error 'Radius `#{$name}` not found in $radii map.';
+  }
+
+  @return map-get($radii, $name);
+}
