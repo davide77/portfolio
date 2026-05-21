@@ -1,0 +1,63 @@
+@use '../abstracts' as *;
+
+.creative-coding-cards {
+  background: color(ink);
+  padding-block: spacer(10);
+  container-type: inline-size;
+  container-name: creative;
+}
+
+.creative-coding-cards__intro {
+  max-width: 62ch;
+}
+
+.creative-coding-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: spacer(5);
+
+  @container creative (max-width: 880px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.creative-coding-cards__cell {
+  list-style: none;
+}
+
+.creative-coding-cards__link {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+  padding: spacer(5);
+  background: color-mix(in srgb, color(paper) 4%, color(ink));
+  border: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
+  text-decoration: none;
+  height: 100%;
+  transition: border-color 200ms ease, transform 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: color(orb-glow);
+    transform: translateY(-2px);
+  }
+}
+
+.creative-coding-cards__tag {
+  font-size: font-size(xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.creative-coding-cards__head {
+  font-size: font-size(lg);
+  font-weight: font-weight(light);
+  margin: 0;
+}
+
+.creative-coding-cards__body {
+  font-size: font-size(sm);
+  line-height: 1.55;
+  margin: 0;
+}

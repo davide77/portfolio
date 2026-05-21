@@ -1,0 +1,75 @@
+@use '../abstracts' as *;
+
+// /lab hero - same architecture as the home hero, but a constellation
+// of five orbs instead of two and a green-refraction accent line on
+// the eyebrow + right-edge text.
+
+.lab-hero {
+  position: relative;
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: spacer(10) spacer(8);
+  overflow: hidden;
+}
+
+.lab-hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lab-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: spacer(5);
+}
+
+.lab-hero__eyebrow {
+  font-size: font-size(xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.lab-hero__headline {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+  font-family: $font-family-headline;
+  font-size: clamp(2.5rem, 6cqi, 5rem);
+  font-weight: font-weight(light);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 24ch;
+}
+
+.lab-hero__line {
+  display: block;
+}
+
+// Brand.md-sanctioned: single italic emphasis on the lab hero in
+// --orb-glow. The home hero italic uses --orb-flare; this is the
+// /lab counterpart.
+.lab-hero__emphasis {
+  font-style: italic;
+  color: color(orb-glow);
+}
+
+.lab-hero__subhead {
+  margin: 0;
+  font-size: font-size(xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 70%, transparent);
+}
+
+.lab-hero__edge {
+  color: color(orb-glow);
+  opacity: 0.5;
+}

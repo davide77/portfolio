@@ -1,52 +1,38 @@
-import Link from "next/link";
-import { BrandOrbShowcase } from "@/components/sections/lab/BrandOrbShowcase";
-import { LabGrid } from "@/components/sections/lab/LabGrid";
-import { LAB_PAGE } from "@/constants/content/experiments";
-import { LAB_FEATURED } from "@/constants/content/lab-featured";
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
-import { DisplayText } from "@/components/ui/DisplayText";
+import { ClosingCtaSection } from "@/components/sections/home/ClosingCtaSection";
+import { CreativeCodingCards } from "@/components/sections/lab/CreativeCodingCards";
+import { LabHero } from "@/components/sections/lab/LabHero";
+import { LegacyWorkGallery } from "@/components/LegacyWorkGallery";
+import { SectionDivider } from "@/components/motion/SectionDivider";
 import { ROUTES } from "@/constants/routes";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Lab",
   description:
-    "WebGL, canvas, and motion experiments from Davide Domenghini. Prototypes for scroll masks, shader gradients, and interaction patterns before they ship to production.",
+    "Twenty years of receipts plus the experiments behind the production work. Long-form archive grouped by era, mentioned-no-screen list, and WebGL prototypes.",
   path: ROUTES.lab,
 });
 
+/**
+ * /lab - long-form archive + creative coding hub. Different audience to the
+ * home: the reader who scrolled long enough to want range. Same brand voice;
+ * brand.md sanctions the green --orb-glow accent on this surface only.
+ */
 export default function LabPage() {
   return (
     <main id="main" className="lab-page bg-ink">
-      <div className="container-atmosphere has-py-8">
-        <EyebrowLabel>{LAB_PAGE.eyebrow}</EyebrowLabel>
-        <DisplayText as="h1" className="has-mt-4 is-white">
-          {LAB_PAGE.headline}
-        </DisplayText>
-        <p className="text-lg leading-relaxed measure-62ch has-mt-4 is-paper">
-          {LAB_PAGE.description}
-        </p>
-
-        <ul className="lab-featured has-mt-8" role="list">
-          {LAB_FEATURED.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="lab-featured__card">
-                <p className="text-xs has-font-semibold uppercase is-stone">
-                  {item.eyebrow}
-                </p>
-                <p className="text-lg has-font-semibold is-white has-mt-2">
-                  {item.title}
-                </p>
-                <p className="text-sm leading-relaxed is-paper has-mt-2">
-                  {item.description}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <BrandOrbShowcase />
-        <LabGrid />
+      <LabHero />
+      <SectionDivider />
+      <div id="lab-archive" className="has-pt-12">
+        <LegacyWorkGallery />
+      </div>
+      <SectionDivider />
+      <div id="lab-experiments" className="has-pt-12">
+        <CreativeCodingCards />
+      </div>
+      <SectionDivider />
+      <div id="lab-contact" className="footer-wash-zone has-pt-12">
+        <ClosingCtaSection />
       </div>
     </main>
   );

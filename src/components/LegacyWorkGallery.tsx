@@ -1,19 +1,28 @@
 "use client";
 
 import Image from "next/image";
+import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import {
   ARCHIVE_GROUPS,
   ARCHIVE_SECTION,
   ARCHIVE_TILES,
   MENTIONED_NO_SCREEN,
 } from "@/constants/content/archive-work";
+import { LAB_ARCHIVE_SECTION } from "@/constants/content/lab-page";
 import { cx } from "./cx";
 import { ScrollReveal } from "./ScrollReveal";
 
 export function LegacyWorkGallery() {
   return (
-    <section id={ARCHIVE_SECTION.id} className={"legacy-work-gallery__section"}>
+    <section id={ARCHIVE_SECTION.id} className={"legacy-work-gallery__section"} aria-labelledby="lab-archive-title">
       <div className={cx("legacy-work-gallery__inner", "container-atmosphere")}>
+        <header className="legacy-work-gallery__header">
+          <EyebrowLabel className="is-orb-glow">{LAB_ARCHIVE_SECTION.eyebrow}</EyebrowLabel>
+          <h2 id="lab-archive-title" className="section-title is-paper has-mt-3">
+            {LAB_ARCHIVE_SECTION.headline}
+          </h2>
+          <p className="legacy-work-gallery__lead is-cream has-mt-3">{LAB_ARCHIVE_SECTION.intro}</p>
+        </header>
         {ARCHIVE_GROUPS.map((group) => {
           const tiles = ARCHIVE_TILES.filter((t) => t.group === group.id);
           if (tiles.length === 0) return null;
