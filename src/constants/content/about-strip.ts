@@ -5,7 +5,7 @@
  */
 
 export const ABOUT_STRIP = {
-  eyebrow: "08 · About · the one-paragraph version",
+  eyebrow: "06 · About · the one-paragraph version",
   headline: "Senior front-end. Twenty years deep. Founder on the side.",
   paragraphs: [
     "I'm a senior front-end engineer and founder with twenty-plus years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE and A+E Networks. I specialise in React, Next.js and TypeScript, and I love the moment a complex multi-step product finally feels effortless to use.",

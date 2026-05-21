@@ -18,7 +18,7 @@ export const HOME_SECTIONS = {
     title: "Capabilities with receipts",
   },
   closing: {
-    eyebrow: "Closing",
+    eyebrow: "07 · Closing",
   },
 } as const;
 
