@@ -1,7 +1,7 @@
 /**
- * About strip - 4:5 portrait left, two-paragraph bio right, three CTA chips.
- * Compact form of the previous full /about page; lives inline on home in
- * Option B (single-page architecture).
+ * About strip - 4:5 portrait left, two-paragraph bio right, three CTA chips,
+ * four-column meta strip beneath. Mirrors the Figma source of truth
+ * (③ Home / Desktop · About frame).
  */
 
 export const ABOUT_STRIP = {
@@ -16,5 +16,23 @@ export const ABOUT_STRIP = {
     { label: "Download CV", href: "/davide-domenghini-cv.pdf" },
     { label: "Twenty-year timeline", href: "#timeline" },
     { label: "github.com/davide77", href: "https://github.com/davide77" },
+  ],
+  metaStrip: [
+    {
+      label: "Currently",
+      body: "Senior FE lead, Liberty Blume (Liberty Global). Founding Nannynow.",
+    },
+    {
+      label: "Specialism",
+      body: "React, Next.js, TypeScript, SCSS, accessibility, design systems, WebGL.",
+    },
+    {
+      label: "Coaching",
+      body: "Six years coaching youth football at Cheam Sports FC. Mentor on the same instincts.",
+    },
+    {
+      label: "Based",
+      body: "London. Italian. Twenty years in UK product teams.",
+    },
   ],
 } as const;

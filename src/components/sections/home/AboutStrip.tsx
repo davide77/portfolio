@@ -42,6 +42,18 @@ export function AboutStrip() {
               </li>
             ))}
           </ul>
+          <dl className="about-strip__meta has-mt-9">
+            {ABOUT_STRIP.metaStrip.map((item) => (
+              <div key={item.label} className="about-strip__meta-item">
+                <dt className="about-strip__meta-label mono text-xs is-cream">
+                  {item.label}
+                </dt>
+                <dd className="about-strip__meta-body is-paper has-m-0 has-mt-2">
+                  {item.body}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

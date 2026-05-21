@@ -79,3 +79,42 @@
     color: color(ink);
   }
 }
+
+// 4-column meta strip beneath the chips. Mirrors Figma's CURRENTLY /
+// SPECIALISM / COACHING / BASED row. Collapses 4->2->1 via container
+// queries on the about strip.
+.about-strip__meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: spacer(5);
+  margin: 0;
+  padding-top: spacer(6);
+  border-top: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
+
+  @include container-min(about, 560px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include container-min(about, 960px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.about-strip__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+}
+
+.about-strip__meta-label {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.about-strip__meta-body {
+  font-size: font-size(sm);
+  line-height: line-height(normal);
+  opacity: 0.85;
+}

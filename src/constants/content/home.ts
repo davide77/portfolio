@@ -15,7 +15,7 @@ export const HOME_SECTIONS = {
   },
   capabilities: {
     eyebrow: "05 · Capabilities with receipts",
-    title: "Capabilities with receipts",
+    title: "Six things I do. Each one earns its line.",
   },
   closing: {
     eyebrow: "07 · Closing",
