@@ -15,38 +15,45 @@ import { SectionDivider } from "@/components/motion/SectionDivider";
 // not here - the home page is the first 90 seconds for a hiring lead,
 // the archive is for the reader who wants range.
 export function MarketingHome() {
+  // Vertical rhythm: compact (spacer 8 = 48px) vs statement (spacer 12 =
+  // 128px) top-padding on each wrapper, layered on top of the section's
+  // own internal block padding. Audit calls for a swing between the
+  // brands/stats trio (compact, they read as a setup), work and
+  // capabilities (statement, the meat), the AI/receipts trio (compact,
+  // a single argument in three voices), and about + closer (statement,
+  // the resolution).
   return (
     <main id="main" className="home-main">
       <HeroSection />
-      <div id="brands">
+      <div id="brands" className="has-pt-8">
         <BrandsMarquee />
       </div>
       <SectionDivider />
-      <div id="stats">
+      <div id="stats" className="has-pt-8">
         <StatsBand />
       </div>
       <SectionDivider />
-      <div id="work">
+      <div id="work" className="has-pt-12">
         <WorkBento />
       </div>
       <SectionDivider />
-      <div id="capabilities">
+      <div id="capabilities" className="has-pt-12">
         <CapabilitiesSection />
       </div>
       <SectionDivider />
-      <div id="ai">
+      <div id="ai" className="has-pt-8">
         <AISection />
       </div>
       <SectionDivider />
-      <div id="receipts">
+      <div id="receipts" className="has-pt-8">
         <ReceiptsSection />
       </div>
       <SectionDivider />
-      <div id="about">
+      <div id="about" className="has-pt-12">
         <AboutStrip />
       </div>
       <SectionDivider />
-      <div id="contact" className="footer-wash-zone">
+      <div id="contact" className="footer-wash-zone has-pt-12">
         <ClosingCtaSection />
       </div>
     </main>
