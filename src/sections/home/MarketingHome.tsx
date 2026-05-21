@@ -1,32 +1,50 @@
 import { ClosingCtaSection } from "@/components/sections/home/ClosingCtaSection";
 import { CapabilitiesSection } from "@/components/sections/home/CapabilitiesSection";
-import { SelectedWorkSection } from "@/components/sections/home/SelectedWorkSection";
-import { ContactSection } from "@/components/sections/home/ContactSection";
 import { HeroSection } from "@/components/sections/home/HeroSection";
-import { PositioningSection } from "@/components/sections/home/PositioningSection";
-import { TrustedBySection } from "@/components/sections/home/TrustedBySection";
+import { BrandsMarquee } from "@/components/sections/home/BrandsMarquee";
+import { StatsBand } from "@/components/sections/home/StatsBand";
+import { WorkBento } from "@/components/sections/home/WorkBento";
+import { AISection } from "@/components/sections/home/AISection";
+import { ReceiptsSection } from "@/components/sections/home/ReceiptsSection";
+import { AboutStrip } from "@/components/sections/home/AboutStrip";
 import { WorkArchiveHero } from "@/components/sections/work/WorkArchiveHero";
 import { LegacyWorkGallery } from "@/components/LegacyWorkGallery";
-import { AboutPageContent } from "@/components/sections/about/AboutPageContent";
 import { SectionDivider } from "@/components/motion/SectionDivider";
 
-// Single-page portfolio: every former external page (/about, /work,
-// /work/[slug], /contact) is now a section here. Old URLs 301 to these
-// anchors (see next.config.ts). /lab is gone entirely.
+// Single-page portfolio (Option B). Every former external page (/about,
+// /contact) is a section here. Old URLs 301 to anchors (see
+// next.config.ts). /work/[slug] stays as real routes. Archive lives as
+// #archive between AboutStrip and Closer.
 export function MarketingHome() {
   return (
     <main id="main" className="home-main">
       <HeroSection />
-      <div id="trusted">
-        <TrustedBySection />
+      <div id="brands">
+        <BrandsMarquee />
       </div>
       <SectionDivider />
-      <div id="positioning">
-        <PositioningSection />
+      <div id="stats">
+        <StatsBand />
       </div>
       <SectionDivider />
       <div id="work">
-        <SelectedWorkSection />
+        <WorkBento />
+      </div>
+      <SectionDivider />
+      <div id="capabilities">
+        <CapabilitiesSection />
+      </div>
+      <SectionDivider />
+      <div id="ai">
+        <AISection />
+      </div>
+      <SectionDivider />
+      <div id="receipts">
+        <ReceiptsSection />
+      </div>
+      <SectionDivider />
+      <div id="about">
+        <AboutStrip />
       </div>
       <SectionDivider />
       <div id="archive">
@@ -34,16 +52,7 @@ export function MarketingHome() {
         <LegacyWorkGallery />
       </div>
       <SectionDivider />
-      <div id="capabilities">
-        <CapabilitiesSection />
-      </div>
-      <SectionDivider />
-      <div id="about">
-        <AboutPageContent />
-      </div>
-      <SectionDivider />
       <div id="contact" className="footer-wash-zone">
-        <ContactSection />
         <ClosingCtaSection />
       </div>
     </main>

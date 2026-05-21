@@ -1,0 +1,90 @@
+@use '../abstracts' as *;
+
+.ai-section {
+  padding-block: spacer(11);
+  background-color: color(paper);
+  color: color(ink);
+  container-type: inline-size;
+  container-name: ai;
+}
+
+.ai-section__intro {
+  max-width: 60ch;
+  font-size: font-size(md);
+  margin: 0;
+  line-height: line-height(normal);
+}
+
+.ai-section__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: spacer(5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include container-min(ai, 720px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include container-min(ai, 1080px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ai-section__card {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(3);
+  padding: spacer(6);
+  background-color: color(white);
+  border: 1px solid color-mix(in srgb, color(ink) 12%, transparent);
+  border-radius: $radius-card;
+}
+
+.ai-section__top {
+  display: flex;
+  align-items: center;
+  gap: spacer(3);
+  margin-bottom: spacer(2);
+}
+
+.ai-section__num {
+  font-size: 36px;
+  font-weight: font-weight(light);
+  color: color(signal-strong);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ai-section__tag {
+  margin: 0;
+  font-size: font-size(xs);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: font-weight(medium);
+  color: color(stone);
+}
+
+.ai-section__head {
+  margin: 0;
+  font-size: font-size(lg);
+  font-weight: font-weight(regular);
+  color: color(ink);
+  line-height: line-height(snug);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.ai-section__body {
+  margin: 0;
+  font-size: font-size(sm);
+  line-height: line-height(normal);
+}
+
+.ai-section__stack {
+  margin: auto 0 0;
+  font-size: font-size(xs);
+  color: color(signal-strong);
+  letter-spacing: 0.05em;
+}

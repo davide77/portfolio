@@ -14,7 +14,8 @@ export function CapabilitiesSection() {
           {CAPABILITIES.map((item) => (
             <li key={item.title} className={"capabilities-section__tile"}>
               <h3 className="text-lg has-font-semibold">{item.title}</h3>
-              <p className="text-base leading-relaxed is-stone has-m-0">{item.body}</p>
+              <p className="text-base leading-relaxed has-m-0">{item.body}</p>
+              <p className="capabilities-section__stack mono">{item.stack}</p>
             </li>
           ))}
         </ul>

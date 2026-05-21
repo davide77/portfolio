@@ -1,8 +1,11 @@
 // Global component styles (BEM). Import partials here - do not use CSS Modules.
 
 @use '_about-page-content';
+@use '_about-strip';
+@use '_ai-section';
 @use '_app-sticky-nav';
 @use '_blob-accent';
+@use '_brands-marquee';
 @use '_brand-mark';
 @use '_brand-orb-showcase';
 @use '_brand-strip';
@@ -43,6 +46,9 @@
 @use '_page-transition';
 @use '_positioning-section';
 @use '_project-card';
+@use '_receipts-section';
+@use '_stats-band';
+@use '_work-bento';
 @use '_reveal-image';
 @use '_scroll-badge';
 @use '_section-divider';

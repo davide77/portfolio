@@ -1,0 +1,35 @@
+@use '../abstracts' as *;
+
+.brands-marquee {
+  padding-block: spacer(7);
+  border-block: 1px solid color-mix(in srgb, color(paper) 16%, transparent);
+  container-type: inline-size;
+  container-name: brands;
+}
+
+.brands-marquee__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: spacer(4);
+  margin-bottom: spacer(5);
+  flex-wrap: wrap;
+}
+
+.brands-marquee__eyebrow {
+  color: color(cream);
+}
+
+.brands-marquee__meta {
+  opacity: 0.6;
+  margin: 0;
+}
+
+// Override the default marquee size for the brand wall - the brief
+// calls for ~34px DM Sans light. Container-query down on narrow widths.
+.brands-marquee .marquee__content {
+  font-size: clamp(#{font-size(lg)}, 3.5cqi, 34px);
+  font-weight: font-weight(light);
+  letter-spacing: -0.02em;
+  color: color(paper);
+}

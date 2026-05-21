@@ -1,0 +1,95 @@
+@use '../abstracts' as *;
+
+.receipts-section {
+  padding-block: spacer(11);
+  container-type: inline-size;
+  container-name: receipts;
+}
+
+.receipts-section__intro {
+  max-width: 60ch;
+  font-size: font-size(md);
+  margin: 0;
+  opacity: 0.78;
+}
+
+.receipts-section__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: spacer(5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include container-min(receipts, 720px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include container-min(receipts, 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.receipts-section__card {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(4);
+  padding: spacer(6);
+  border-radius: $radius-card;
+  background-color: color-mix(in srgb, color(white) 6%, transparent);
+  border: 1px solid color-mix(in srgb, color(paper) 16%, transparent);
+}
+
+.receipts-section__tag {
+  margin: 0;
+  font-size: font-size(xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.receipts-section__body {
+  margin: 0;
+  font-size: font-size(md);
+  font-weight: font-weight(light);
+  line-height: line-height(snug);
+  text-wrap: pretty;
+
+  &::before {
+    content: "\201C";
+    color: color(signal);
+    margin-right: 4px;
+  }
+}
+
+.receipts-section__who {
+  display: flex;
+  align-items: center;
+  gap: spacer(3);
+  margin-top: auto;
+}
+
+.receipts-section__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: color(forest);
+  color: color(paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: font-weight(semibold);
+  font-size: font-size(sm);
+  flex-shrink: 0;
+}
+
+.receipts-section__name {
+  margin: 0;
+  font-size: font-size(sm);
+}
+
+.receipts-section__role {
+  margin: 0;
+  font-size: font-size(xs);
+  opacity: 0.65;
+}
