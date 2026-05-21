@@ -15,7 +15,7 @@ export const SCROLL_BADGE = {
 } as const;
 
 export const HOME_SECTION_INDEX = {
-  total: 9,
+  total: 8,
   sections: [
     { id: "hero", label: "01" },
     { id: "brands", label: "02" },
@@ -25,6 +25,5 @@ export const HOME_SECTION_INDEX = {
     { id: "ai", label: "06" },
     { id: "receipts", label: "07" },
     { id: "about", label: "08" },
-    { id: "contact", label: "09" },
   ],
 } as const;

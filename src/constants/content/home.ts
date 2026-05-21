@@ -14,11 +14,11 @@ export const HOME_SECTIONS = {
       "The full story behind the work above: the brief, what I did, and what it delivered.",
   },
   capabilities: {
-    eyebrow: "04 - What you get",
-    title: "What you get when you hire me",
+    eyebrow: "05 · Capabilities with receipts",
+    title: "Capabilities with receipts",
   },
   closing: {
-    eyebrow: "07 - Work with me",
+    eyebrow: "Closing",
   },
 } as const;
 

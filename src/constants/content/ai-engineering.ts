@@ -4,7 +4,7 @@
  */
 
 export const AI_SECTION = {
-  eyebrow: "04 · AI-assisted engineering · a senior view",
+  eyebrow: "06 · AI-assisted engineering · a senior view",
   headline:
     "Two years embedding AI into the workflow. Not as a shortcut, as a force multiplier.",
   intro:

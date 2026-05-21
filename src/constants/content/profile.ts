@@ -12,6 +12,12 @@ export const PROFILE = {
   availabilityLabel: "Replies within 48h · London · GMT",
 } as const;
 
+export const BRANDS_MARQUEE = {
+  eyebrow: "02 · Brands shipped for",
+  meta: "23 of 60+ · 2006-2026",
+  ariaLabel: "Brands shipped for",
+} as const;
+
 export const TRUSTED_BY_CLIENTS = [
   "Sky",
   "Estée Lauder Companies",

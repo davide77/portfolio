@@ -5,7 +5,7 @@
  */
 
 export const WORK_BENTO = {
-  eyebrow: "03 · Selected work",
+  eyebrow: "04 · Selected work",
   headline: "Six pieces. Each one answers role, stack, scale, status.",
   intro:
     "Same template, every time. The bento is sized so one project always anchors the eye.",

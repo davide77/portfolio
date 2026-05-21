@@ -4,7 +4,7 @@
  */
 
 export const RECEIPTS_BAND = {
-  eyebrow: "05 · Three proofs · from the CV",
+  eyebrow: "07 · Three proofs · from the CV",
   headline: "Three projects. Three specific receipts. Pick any one to verify.",
   intro:
     "Final site will replace these with named LinkedIn quotes. Until then, the evidence is the work.",

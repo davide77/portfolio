@@ -5,7 +5,7 @@
  */
 
 export const STATS_BAND = {
-  eyebrow: "02 · By the numbers · 2006-2026",
+  eyebrow: "03 · By the numbers · 2006-2026",
   headline: "The shape of twenty years, on one line.",
 } as const;
 
