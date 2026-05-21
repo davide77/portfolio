@@ -5,6 +5,15 @@
   width: 100%;
   border-block: 1px solid color-mix(in srgb, color(cream) 80%, transparent);
   padding-block: spacer(3);
+  // 8% transparent edge fade so brand names never clip mid-glyph
+  $marquee-edge: 8%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 $marquee-edge,
+    #000 calc(100% - #{$marquee-edge}),
+    transparent 100%
+  );
 
   &:hover .marquee__track,
   &:focus-within .marquee__track {
@@ -15,7 +24,7 @@
 .marquee__track {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 50s linear infinite;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;

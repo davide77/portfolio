@@ -14,33 +14,30 @@ export const PROFILE = {
 
 export const BRANDS_MARQUEE = {
   eyebrow: "02 · Brands shipped for",
-  meta: "23 of 60+ · 2006-2026",
+  meta: "20 of 60+ · 2006-2026",
   ariaLabel: "Brands shipped for",
 } as const;
 
 export const TRUSTED_BY_CLIENTS = [
   "Sky",
-  "Estée Lauder Companies",
+  "Estée Lauder",
   "Liberty Global",
   "Bristol City Council",
   "EE",
   "A+E Networks",
   "SAP",
-  "MAC Cosmetics",
-  "Tom Ford Beauty",
-  "Jo Malone London",
-  "La Mer",
-  "Clinique",
-  "Origins",
   "Boring Money",
-  "Squiz",
   "Toyota",
+  "HSBC",
+  "GSK",
+  "Philips",
   "Honda",
   "Renault",
   "Comic Relief",
   "Sunday Times",
   "History Channel",
   "Inmarsat",
+  "Squiz",
   "Le Bon Marché",
 ] as const;
 
