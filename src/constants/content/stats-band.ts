@@ -38,7 +38,7 @@ export const STATS = [
   {
     value: "100",
     suffix: "+",
-    label: "Families using the platform I built and ship solo for Cheam Sports FC.",
+    label: "Families using the platform I built solo at Cheam Sports FC.",
   },
   {
     value: "2.1",
