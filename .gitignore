@@ -25,6 +25,14 @@
 # Local IDE config (do not commit)
 CLAUDE.md
 .claude/
+.claude-flow/
+.ruflo/
+.mcp.json
+.swarm/
+ruvector.db
+*.db
+*.db-shm
+*.db-wal
 
 # debug
 npm-debug.log*
