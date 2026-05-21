@@ -20,6 +20,8 @@ export function WorkBento() {
         <ul className="work-bento__grid has-mt-6">
           {WORK_BENTO_TILES.map((tile) => {
             const isText = tile.span === "text";
+            const isPending = "pending" in tile && tile.pending === true;
+            const hasImage = !isText && !isPending && "image" in tile && tile.image;
             const isExternal = tile.href.startsWith("http");
             const Wrapper = isExternal ? "a" : Link;
             const wrapperProps = isExternal
@@ -30,20 +32,26 @@ export function WorkBento() {
                 key={tile.slug}
                 className={cx("work-bento__cell", `work-bento__cell--${tile.span}`)}
                 data-span={tile.span}
+                data-pending={isPending ? "true" : undefined}
               >
                 <Wrapper
                   {...(wrapperProps as { href: string })}
                   className="work-bento__link"
                   aria-label={`${tile.title} - ${tile.role}`}
                 >
-                  {!isText && "image" in tile && tile.image && (
+                  {hasImage && (
                     <Image
-                      src={tile.image}
+                      src={tile.image as string}
                       alt=""
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 33vw"
                       className="work-bento__media"
                     />
+                  )}
+                  {isPending && (
+                    <p className="work-bento__pending mono" aria-hidden>
+                      {WORK_BENTO.pendingLabel}
+                    </p>
                   )}
                   <div className="work-bento__label">
                     <div>
@@ -60,7 +68,7 @@ export function WorkBento() {
         </ul>
         <div className="work-bento__footer has-mt-6">
           <p className="is-cream text-sm has-m-0">{WORK_BENTO.archiveLabel}</p>
-          <Link href="#archive" className="work-bento__archive-cta">
+          <Link href={WORK_BENTO.archiveHref} className="work-bento__archive-cta">
             {WORK_BENTO.archiveCta}
           </Link>
         </div>

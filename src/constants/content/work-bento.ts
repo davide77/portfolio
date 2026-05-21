@@ -9,8 +9,10 @@ export const WORK_BENTO = {
   headline: "Six pieces. Each one answers role, stack, scale, status.",
   intro:
     "Same template, every time. The bento is sized so one project always anchors the eye.",
-  archiveLabel: "Everything else lives at /#archive · twenty years of receipts, no longer crowding the hero.",
+  archiveLabel: "Everything else lives at /lab · twenty years of receipts, no longer crowding the hero.",
   archiveCta: "Open the archive",
+  archiveHref: "/lab",
+  pendingLabel: "Screen pending",
 } as const;
 
 export const WORK_BENTO_TILES = [
@@ -31,7 +33,7 @@ export const WORK_BENTO_TILES = [
     title: "Striver.Football",
     body: "Brand guidelines to shipped site. Token-driven SCSS, headless WP, IMAGO.",
     stack: "NEXT · TS · WP",
-    image: "/images/projects/striver-football.jpg",
+    pending: true, // real Striver screen not yet captured; see PR 11
     span: "tall", // 2x2
     href: "/work/striver-football",
   },
@@ -51,7 +53,7 @@ export const WORK_BENTO_TILES = [
     title: "bristol.gov.uk",
     body: "GOV.UK-aligned design system. 500k+ residents. Mentored 2 associates. Live.",
     stack: "REACT · DOCUSAURUS",
-    image: "/images/projects/bristol-gov-uk.jpg",
+    image: "/images/projects/bristol.jpg",
     span: "reg", // 2x1
     href: "/work/bristol-gov-uk",
   },
@@ -62,7 +64,7 @@ export const WORK_BENTO_TILES = [
     body:
       "Member portal, Stripe + webhook reconciliation, FA scraper, PWA cron. 100+ families.",
     stack: "NEXT · DRIZZLE · STRIPE · BETTER-AUTH",
-    image: "/images/projects/cheam-sports-fc.jpg",
+    pending: true, // current asset is a placeholder, not a real Cheam screen
     span: "wide", // 3x1
     href: "/work/cheam-sports-fc",
   },

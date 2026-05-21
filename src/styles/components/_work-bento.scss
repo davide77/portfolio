@@ -84,6 +84,28 @@
   transform: scale(1.04);
 }
 
+// Honest placeholder when the real screen has not been captured yet.
+// Bigger label, no image, no scrim. Reads as 'we own the gap' instead
+// of dressing the tile up with unrelated imagery.
+.work-bento__cell[data-pending="true"] {
+  background: color-mix(in srgb, color(ink) 88%, color(paper) 12%);
+  border: 1px dashed color-mix(in srgb, color(paper) 24%, transparent);
+}
+
+.work-bento__pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: font-size(xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(paper) 60%, transparent);
+  pointer-events: none;
+}
+
 .work-bento__label {
   position: relative;
   z-index: 1;
