@@ -24,7 +24,7 @@ export function SiteShell({ children }: SiteShellProps) {
         showSectionNumerals={isHome}
       />
       {children}
-      <SiteFooter />
+      {!isHome && <SiteFooter />}
       <FooterWash />
     </>
   );

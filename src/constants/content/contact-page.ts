@@ -1,5 +1,19 @@
 import { SITE } from "@/constants/site";
 
+export const HOME_CLOSER = {
+  body: "I read every brief, even the ones I cannot take. Hiring a senior IC or lead front-end, or you want a technical partner from discovery to deploy? The address below lands in my inbox.",
+  meta: "REPLY WITHIN 48H · LONDON · GMT",
+  emailLabel: "Email",
+  linkedinLabel: "LinkedIn",
+  githubLabel: "GitHub",
+  linkedinHref: "https://www.linkedin.com/in/davidedomenghini",
+  linkedinDisplay: "linkedin.com/in/davidedomenghini",
+  githubHref: "https://github.com/davide77",
+  githubDisplay: "github.com/davide77",
+  footerLeft: "dd domenghini · 2026",
+  footerRight: "est · 2006 · based in london",
+} as const;
+
 export const CONTACT_PAGE = {
   headline: "Bring the brief everyone else avoided.",
   responseTime: "I reply within 24 hours, weekdays.",

@@ -3,6 +3,8 @@
 .closing-cta-section {
   padding-block: spacer(10);
   background-color: color(ink);
+  container-type: inline-size;
+  container-name: closer;
 }
 
 // Type, weight and colour now come from the shared .section-title +
@@ -16,4 +18,66 @@
     font-style: italic;
     color: var(--hero-emphasis-color, #{color(orb-flare)});
   }
+}
+
+.closing-cta-section__body {
+  max-width: 62ch;
+}
+
+.closing-cta-section__meta {
+  opacity: 0.7;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.closing-cta-section__contact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: spacer(6);
+
+  @container closer (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: spacer(4);
+  }
+}
+
+.closing-cta-section__contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(2);
+}
+
+.closing-cta-section__contact dt {
+  opacity: 0.6;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.closing-cta-section__link {
+  color: color(paper);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, color(paper) 30%, transparent);
+  transition: border-color 200ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-bottom-color: color(paper);
+  }
+}
+
+.closing-cta-section__rule {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, color(paper) 20%, transparent);
+  margin: spacer(4) 0 0;
+  width: 100%;
+}
+
+.closing-cta-section__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: spacer(4);
+  flex-wrap: wrap;
+  color: color(cream);
+  opacity: 0.7;
+  letter-spacing: 0.08em;
 }

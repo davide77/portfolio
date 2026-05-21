@@ -7,14 +7,13 @@ import { WorkBento } from "@/components/sections/home/WorkBento";
 import { AISection } from "@/components/sections/home/AISection";
 import { ReceiptsSection } from "@/components/sections/home/ReceiptsSection";
 import { AboutStrip } from "@/components/sections/home/AboutStrip";
-import { WorkArchiveHero } from "@/components/sections/work/WorkArchiveHero";
-import { LegacyWorkGallery } from "@/components/LegacyWorkGallery";
 import { SectionDivider } from "@/components/motion/SectionDivider";
 
-// Single-page portfolio (Option B). Every former external page (/about,
-// /contact) is a section here. Old URLs 301 to anchors (see
-// next.config.ts). /work/[slug] stays as real routes. Archive lives as
-// #archive between AboutStrip and Closer.
+// Single-page portfolio. Each former external route (/about, /contact)
+// is a section here; old URLs 301 to anchors (see next.config.ts).
+// /work/[slug] stays as real routes. Long-form archive lives at /lab,
+// not here - the home page is the first 90 seconds for a hiring lead,
+// the archive is for the reader who wants range.
 export function MarketingHome() {
   return (
     <main id="main" className="home-main">
@@ -45,11 +44,6 @@ export function MarketingHome() {
       <SectionDivider />
       <div id="about">
         <AboutStrip />
-      </div>
-      <SectionDivider />
-      <div id="archive">
-        <WorkArchiveHero />
-        <LegacyWorkGallery />
       </div>
       <SectionDivider />
       <div id="contact" className="footer-wash-zone">
