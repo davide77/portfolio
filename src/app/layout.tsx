@@ -25,7 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-GB" className={dmSans.variable} data-theme="paper">
-      <body>
+      {/* suppressHydrationWarning: Grammarly + other extensions inject
+          data-* attributes on <body> after SSR. Per Next.js docs, the
+          recommended fix is to suppress hydration warnings on the
+          single element they touch (body), not site-wide. */}
+      <body suppressHydrationWarning>
         {process.env.NODE_ENV === "production" ? (
           <Script defer data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js" />
         ) : null}
