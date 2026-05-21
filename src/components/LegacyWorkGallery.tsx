@@ -6,7 +6,6 @@ import {
   ARCHIVE_GROUPS,
   ARCHIVE_SECTION,
   ARCHIVE_TILES,
-  MENTIONED_NO_SCREEN,
 } from "@/constants/content/archive-work";
 import { LAB_ARCHIVE_SECTION } from "@/constants/content/lab-page";
 import { cx } from "./cx";
@@ -66,20 +65,6 @@ export function LegacyWorkGallery() {
             </div>
           );
         })}
-
-        <div className="legacy-work-gallery__mentioned">
-          <p className="legacy-work-gallery__mentioned-eyebrow mono">
-            {MENTIONED_NO_SCREEN.eyebrow}
-          </p>
-          <p className="legacy-work-gallery__mentioned-intro">
-            {MENTIONED_NO_SCREEN.intro}
-          </p>
-          <ul className="legacy-work-gallery__mentioned-list">
-            {MENTIONED_NO_SCREEN.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

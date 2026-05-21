@@ -15,7 +15,6 @@ export type ArchiveGroup =
   | "sky-media"
   | "automotive"
   | "public-charity"
-  | "luxury-retail"
   | "agency-other";
 
 export type ArchiveTile = {
@@ -73,14 +72,9 @@ export const ARCHIVE_GROUPS = [
     intro: "Public-facing surfaces with a real reader behind them: Sunday Times Driving classifieds and friends.",
   },
   {
-    id: "luxury-retail",
-    title: "Luxury + retail · Estée Lauder, Boux Avenue",
-    intro: "Beauty proofing flows and retail campaign frames where the type and the photography have to land in lockstep.",
-  },
-  {
     id: "agency-other",
-    title: "Agency + other · iCLP, Momentum, Paymentsense, Parrot",
-    intro: "Loyalty and account-based marketing agency sites, fintech product pages, and consumer hardware product sites.",
+    title: "Agency + other · MomentumABM, iCLP, Paymentsense, Boux Avenue",
+    intro: "Loyalty + ABM consultancy sites, fintech product pages, and retail campaign frames.",
   },
 ] as const satisfies readonly { id: ArchiveGroup; title: string; intro: string }[];
 
@@ -110,30 +104,27 @@ export const ARCHIVE_TILES: readonly ArchiveTile[] = [
   tile(6, "SAP", "Time to transform", "Particle-field hero for a digital transformation campaign.", "enterprise-sap", "default"),
   tile(7, "SAP", "Identify the big opportunities", "Cinematic scroll-through campaign page.", "enterprise-sap", "default"),
   tile(8, "SAP", "Cloud expedition kit", "SAP and AWS scroll-through microsite.", "enterprise-sap", "wide"),
-  tile(9, "Estée Lauder", "CK Beauty creative proofing", "Mobile UI proofing flow for the Calvin Klein Beauty launch under the ELC EMEA programme.", "luxury-retail", "tall"),
+  // tile 9 (ELC CK Beauty) removed - not in Figma archive.
   tile(10, "iCLP", "Customer devotion", "Loyalty and engagement agency site, 'we drive customer devotion'.", "agency-other", "default"),
-  tile(11, "Sky", "Sky Store home hero", "Film detail and new-releases rail for the Sky Store video-on-demand front end.", "sky-media", "wide"),
-  tile(12, "Sky", "Sky Store a-z grid", "Full A to Z film grid for the Sky Store browsing UI.", "sky-media", "wide"),
-  tile(13, "Sky Sports", "Sky Sports promo module", "Responsive red news tile for Sky Sports.", "sky-media", "default"),
-  tile(14, "Renault", "Guest host panel", "Editorial 'today's guest host' site module.", "automotive", "default"),
-  // TODO: confirm client/title for the dark cinematic tile.
-  tile(15, "Media (TODO)", "Cinematic promo tile", "Dark editorial content tile.", "sky-media", "default"),
-  tile(16, "Toyota", "Goodwood Festival of Speed", "GT86 campaign tile.", "automotive", "default"),
-  tile(17, "Paymentsense", "Simple card payments", "Phone-led marketing page for the Paymentsense card-payments product.", "agency-other", "default"),
-  // TODO: confirm directory client.
-  tile(18, "Directory (TODO)", "Local listings directory", "'Set foot in our' directory page with an embedded map.", "agency-other", "default"),
-  tile(19, "Sky Sports", "Sky Sports news tile", "Red news tile variant.", "sky-media", "default"),
-  // TODO: confirm client/title for the dark cinematic tile variant.
-  tile(20, "Media (TODO)", "Cinematic promo tile", "Dark editorial content tile, variant.", "sky-media", "default"),
-  tile(21, "Toyota", "MyToyota and WWF", "Environmental partnership panel.", "automotive", "default"),
-  tile(22, "A+E Networks", "HISTORY · ancient world", "History Channel documentary promo tile for 'the best of the ancient world'.", "sky-media", "default"),
-  tile(23, "Parrot", "Audio device showcase", "Product page for a Parrot audio device.", "agency-other", "default"),
-  tile(24, "Boux Avenue", "Lingerie campaign", "Retail campaign visual.", "luxury-retail", "default"),
-  tile(25, "SAP Concur", "Global case-study globe", "Interactive night-earth map, 'explore our global case studies'.", "enterprise-sap", "wide"),
-  tile(26, "Momentum ABM", "ABM consultancy", "'The account based marketing consultancy' agency site.", "agency-other", "default"),
-  tile(27, "Honda", "Civic: delivering the dream", "Civic campaign and pitch creative.", "automotive", "default"),
-  tile(28, "Driving.co.uk", "Sell your car", "Sunday Times Driving classifieds landing.", "public-charity", "wide"),
-  tile(29, "iCLP", "Customer devotion, navigation open", "iCLP site with the expanded side navigation.", "agency-other", "default"),
+  tile(11, "Sky", "Sky Store · hero", "Film detail and new-releases rail for the Sky Store video-on-demand front end.", "sky-media", "wide"),
+  tile(12, "Sky", "Sky Store · grid", "Full A to Z film grid for the Sky Store browsing UI.", "sky-media", "wide"),
+  tile(13, "Sky Sports", "Sky Sports promo", "Responsive red news tile for Sky Sports.", "sky-media", "default"),
+  tile(14, "Renault", "Renault ZE", "Renault ZE campaign panel.", "automotive", "default"),
+  // tile 15 (cinematic TODO) removed - unidentified.
+  tile(16, "Toyota", "Goodwood GT86", "GT86 campaign tile for the Goodwood Festival of Speed.", "automotive", "default"),
+  tile(17, "Paymentsense", "Paymentsense", "Phone-led marketing page for the Paymentsense card-payments product.", "agency-other", "default"),
+  // tile 18 (local listings TODO) removed - unidentified.
+  tile(19, "Sky Sports", "Sky Sports news tile", "Red news tile variant for Sky Sports.", "sky-media", "default"),
+  // tile 20 (cinematic TODO variant) removed - unidentified.
+  tile(21, "Toyota", "MyToyota dash", "MyToyota dashboard, environmental partnership panel.", "automotive", "default"),
+  tile(22, "A+E Networks", "HISTORY · ancient", "History Channel documentary promo tile for 'the best of the ancient world'.", "sky-media", "default"),
+  // tile 23 (Parrot) removed - not in Figma archive.
+  tile(24, "Boux Avenue", "Boux Avenue", "Boux Avenue lingerie campaign visual.", "agency-other", "default"),
+  tile(25, "SAP Concur", "Concur globals", "Interactive night-earth map, 'explore our global case studies'.", "enterprise-sap", "wide"),
+  tile(26, "MomentumABM", "MomentumABM", "'The account based marketing consultancy' agency site.", "agency-other", "default"),
+  tile(27, "Honda", "Honda Civic", "Civic campaign and pitch creative.", "automotive", "default"),
+  tile(28, "Driving.co.uk", "Driving.co.uk", "Sunday Times Driving classifieds landing.", "public-charity", "wide"),
+  // tile 29 (iCLP variant) removed - duplicate of tile 10.
 ];
 
 /**

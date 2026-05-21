@@ -13,12 +13,12 @@ type SiteShellProps = {
 export function SiteShell({ children }: SiteShellProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const isLab = pathname === "/lab";
   // Every route renders on the same ink stack now, so the nav is always
   // ink. Section numerals stay the home section index only.
-  // ClosingCtaSection carries its own footer rule + contact metadata, so
-  // routes that render it (home, /lab) skip the global SiteFooter.
-  const showSiteFooter = !isHome && !isLab;
+  // The home page's ClosingCtaSection carries its own footer rule, so
+  // home skips the global SiteFooter. Every other route (including /lab,
+  // which per the Figma source of truth has no closer band) gets it.
+  const showSiteFooter = !isHome;
 
   return (
     <>
