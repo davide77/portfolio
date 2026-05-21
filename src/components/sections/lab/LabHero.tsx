@@ -17,11 +17,9 @@ export function LabHero() {
       <div className={cx("lab-hero__inner", "container-atmosphere")}>
         <p className="lab-hero__eyebrow mono is-orb-glow">{LAB_HERO_COPY.eyebrow}</p>
         <h1 id="lab-hero-title" className="lab-hero__headline is-paper">
-          <span className="lab-hero__line">
-            {LAB_HERO_COPY.headlineLineOne}{" "}
-            <em className="lab-hero__emphasis">{LAB_HERO_COPY.headlineEmphasis}</em>
-          </span>
-          <span className="lab-hero__line">{LAB_HERO_COPY.headlineLineTwo}</span>
+          {LAB_HERO_COPY.headlineBefore}{" "}
+          <em className="lab-hero__emphasis">{LAB_HERO_COPY.headlineEmphasis}</em>
+          {LAB_HERO_COPY.headlineAfter}
         </h1>
         <p className="lab-hero__subhead mono">{LAB_HERO_COPY.subhead}</p>
       </div>

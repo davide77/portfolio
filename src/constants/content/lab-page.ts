@@ -8,9 +8,13 @@ import { ROUTES } from "@/constants/routes";
 
 export const LAB_HERO_COPY = {
   eyebrow: "09 · Lab · long-form archive",
-  headlineLineOne: "Twenty years of",
-  headlineEmphasis: "receipts.",
-  headlineLineTwo: "And a place to keep experimenting.",
+  /**
+   * Headline rendered as a single line in JSX, with `headlineEmphasis`
+   * wrapped in <em> + --orb-glow green. Mirrors Figma single-line layout.
+   */
+  headlineBefore: "Twenty years",
+  headlineEmphasis: "of receipts.",
+  headlineAfter: " And a place to keep experimenting.",
   subhead: "SAP · SKY · MEDIA · AUTOMOTIVE · CHARITY · AGENCY · CREATIVE CODING",
   verticalEdge: "EST · 2006 · CREATIVE CODING + GRASSROOTS",
 } as const;
