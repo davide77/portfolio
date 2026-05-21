@@ -73,7 +73,7 @@ export const CAPABILITIES = [
   {
     title: "WebGL and motion",
     body: "GLSL shaders for the celestial DD orbs on the home hero. Sharp, defined, high-contrast. Render loop paused on visibility change. No bloom, no blur.",
-    stack: "THREE.JS · GLSL · INTERSECTION-OBSERVER",
+    stack: "THREE.JS · GLSL · IO",
   },
   {
     title: "End-to-end delivery",
