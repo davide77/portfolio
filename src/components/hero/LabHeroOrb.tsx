@@ -2,8 +2,13 @@
 
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { Color, ShaderMaterial, type Group, type Mesh } from "three";
-import { createHollowDGeometry } from "@/components/hero/createHollowDGeometry";
+import { Color, ShaderMaterial, type BufferGeometry, type Group, type Mesh } from "three";
+import {
+  createLetterAGeometry,
+  createLetterBGeometry,
+  createLetterLGeometry,
+  type LabLetter,
+} from "@/components/hero/createLabLetterGeometries";
 import noiseGlsl from "@/components/hero/shaders/noise.glsl";
 import orbFrag from "@/components/hero/shaders/orb.frag.glsl";
 import orbVert from "@/components/hero/shaders/orb.vert.glsl";
@@ -43,10 +48,10 @@ function makeMaterial(palette: "warm" | "glow") {
 }
 
 /**
- * /lab variant of HeroOrb. Five orbs arranged as a constellation; two share
- * a brand-sanctioned green-refraction palette, the other three keep the warm
- * liquid-metal ramp. Same geometry and shader as the home hero - only the
- * uniforms and the instance count change.
+ * /lab variant of HeroOrb. Three extruded letters - L, A, B - in different
+ * sizes, one rendered with the brand-sanctioned green-refraction palette and
+ * the other two with the warm liquid-metal ramp. Same shader as the home
+ * hero; only the geometry and instance count change.
  */
 export function LabHeroOrb({ containerRef, scrollProgress }: LabHeroOrbProps) {
   const groupRef = useRef<Group>(null);
@@ -54,10 +59,17 @@ export function LabHeroOrb({ containerRef, scrollProgress }: LabHeroOrbProps) {
   const mouse = useRef({ x: 0, y: 0 });
   const target = useRef({ x: 0, y: 0 });
 
-  const geometry = useMemo(() => createHollowDGeometry(), []);
+  const geometries = useMemo<Record<LabLetter, BufferGeometry>>(
+    () => ({
+      L: createLetterLGeometry(),
+      A: createLetterAGeometry(),
+      B: createLetterBGeometry(),
+    }),
+    [],
+  );
 
-  // One material per palette, shared across orbs that use it. Keeps
-  // GPU state low - five meshes, two shader programs.
+  // One material per palette, shared across letters that use it. Keeps
+  // GPU state low - three meshes, two shader programs.
   const materials = useMemo(
     () => ({
       warm: makeMaterial("warm"),
@@ -68,11 +80,13 @@ export function LabHeroOrb({ containerRef, scrollProgress }: LabHeroOrbProps) {
 
   useEffect(
     () => () => {
-      geometry.dispose();
+      geometries.L.dispose();
+      geometries.A.dispose();
+      geometries.B.dispose();
       materials.warm.dispose();
       materials.glow.dispose();
     },
-    [geometry, materials],
+    [geometries, materials],
   );
 
   useEffect(() => {
@@ -131,11 +145,11 @@ export function LabHeroOrb({ containerRef, scrollProgress }: LabHeroOrbProps) {
     <group ref={groupRef}>
       {LAB_HERO.orbs.map((orb, i) => (
         <mesh
-          key={i}
+          key={orb.letter}
           ref={(el) => {
             meshRefs.current[i] = el;
           }}
-          geometry={geometry}
+          geometry={geometries[orb.letter]}
           material={materials[orb.palette as LabOrbPalette]}
           position={orb.position}
           rotation={[0, 0, orb.rotationZ]}

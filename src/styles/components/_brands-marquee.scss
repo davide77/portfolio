@@ -25,11 +25,19 @@
   margin: 0;
 }
 
-// Override the default marquee size for the brand wall - the brief
-// calls for ~34px DM Sans light. Container-query down on narrow widths.
+// Override the default marquee for the brand wall: the outer section
+// already draws the border, so drop the marquee's own border-block to
+// avoid a doubled line. Also widen the gap between names and use the
+// brief's ~34px DM Sans light treatment.
+.brands-marquee .marquee {
+  border-block: 0;
+}
+
 .brands-marquee .marquee__content {
+  padding-inline: spacer(7);
   font-size: clamp(#{font-size(lg)}, 3.5cqi, 34px);
   font-weight: font-weight(light);
   letter-spacing: -0.02em;
+  text-transform: none;
   color: color(paper);
 }

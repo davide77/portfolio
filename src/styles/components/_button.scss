@@ -1,18 +1,22 @@
 @use '../abstracts' as *;
 
+// Base button - Figma source of truth: Components / Button.
+// 16/24 padding, DM Sans Medium 14px, pill radius. Variants below
+// only change colour/border, never sizing.
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: spacer(3) spacer(5);
+  gap: spacer(3); // 12px between label and trailing glyph (Figma)
+  padding: spacer(4) spacer(5); // 16/24 - Figma spec
   border: 0;
   border-radius: $radius-pill-cta;
   font-family: $font-family-body;
-  font-weight: font-weight(semibold);
-  font-size: font-size(base);
+  font-weight: font-weight(medium);
+  font-size: font-size(sm); // 14px
   line-height: line-height(tight);
   cursor: pointer;
-  transition: background-color $transition-fast, color $transition-fast, transform $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast, transform $transition-fast;
 
   &:focus-visible {
     @include focus-ring;
@@ -36,15 +40,19 @@
   }
 }
 
+// Primary - Figma source of truth: Components / Button / primary.
+// Same on both ink and light surfaces. Hover darkens forest to its
+// dark shade (NOT to pure ink).
 .button--primary {
   background-color: color(forest);
-  color: color(white);
+  color: color(paper);
 
   &:hover:not(:disabled) {
-    background-color: color(ink);
+    background-color: color(forest-dark);
   }
 }
 
+// Secondary on light - bg white, stone border, ink text.
 .button--secondary {
   background-color: color(white);
   color: color(ink);
@@ -53,6 +61,27 @@
   &:hover:not(:disabled) {
     border-color: color(ink);
   }
+}
+
+// Secondary on ink - Figma source of truth: Components / Button /
+// secondary · surface=ink. Transparent fill, 55% cream hairline, paper
+// text. Hover fills with paper and inverts text to ink.
+.button--secondaryInk {
+  background-color: transparent;
+  color: color(paper);
+  border: 1px solid color-mix(in srgb, color(cream) 55%, transparent);
+
+  &:hover:not(:disabled) {
+    background-color: color(paper);
+    color: color(ink);
+    border-color: color(paper);
+  }
+}
+
+// Trailing glyph (arrow) sits next to the button label at regular
+// weight while the label is Medium, mirroring Figma.
+.button__glyph {
+  font-weight: font-weight(regular);
 }
 
 .button--ghost {

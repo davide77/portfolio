@@ -31,14 +31,18 @@
   }
 }
 
+// Nav link on light - Figma source of truth: Components / Nav link.
+// Default = stone at 60% opacity. Hover = full stone (the 60% fade
+// lifts to 100%). NOT a colour change to forest.
 .site-header__nav-link {
   min-height: $control-min-size;
   border-radius: $radius-sm;
   text-decoration: none;
+  color: color-mix(in srgb, color(stone) 60%, transparent);
   transition: color $transition-fast;
 
   &:hover {
-    color: color(forest);
+    color: color(stone);
   }
 
   &:focus-visible {

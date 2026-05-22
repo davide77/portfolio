@@ -2,36 +2,66 @@
 
 import { useEffect, useState } from "react";
 import { cx } from "@/components/cx";
-import { HOME_SECTION_INDEX } from "@/constants/content/hero-section";
+import {
+  HOME_SECTION_ACTIVATION,
+  HOME_SECTION_INDEX,
+} from "@/constants/content/hero-section";
 
 const SECTION_IDS = HOME_SECTION_INDEX.sections.map((s) => s.id);
 
-/** Ambient section counter (e.g. 01 / 06) driven by scroll. */
+function sectionDocumentTop(el: HTMLElement): number {
+  return el.getBoundingClientRect().top + window.scrollY;
+}
+
+function resolveActiveSectionIndex(elements: HTMLElement[]): number {
+  if (window.scrollY <= HOME_SECTION_ACTIVATION.topScrollMaxPx) {
+    return 0;
+  }
+
+  const line =
+    window.scrollY + window.innerHeight * HOME_SECTION_ACTIVATION.viewportFocusRatio;
+  let active = 0;
+
+  for (let i = 0; i < elements.length; i++) {
+    if (sectionDocumentTop(elements[i]) <= line) {
+      active = i;
+    }
+  }
+
+  return active;
+}
+
+/** Ambient section counter (e.g. 01 / 07) driven by scroll. */
 export function SectionNumerals({ className }: { className?: string }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      Boolean,
+    ) as HTMLElement[];
     if (!elements.length) return;
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        const top = visible[0];
-        if (!top) return;
-        const idx = SECTION_IDS.indexOf(top.target.id as (typeof SECTION_IDS)[number]);
-        if (idx >= 0) setActive(idx);
-      },
-      { root: null, threshold: [0.2, 0.45, 0.6] },
-    );
+    let raf = 0;
+    const update = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        setActive(resolveActiveSectionIndex(elements));
+      });
+    };
 
-    elements.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
-  const current = HOME_SECTION_INDEX.sections[active]?.label ?? HOME_SECTION_INDEX.sections[0].label;
+  const current =
+    HOME_SECTION_INDEX.sections[active]?.label ?? HOME_SECTION_INDEX.sections[0].label;
   const total = String(HOME_SECTION_INDEX.total).padStart(2, "0");
 
   return (

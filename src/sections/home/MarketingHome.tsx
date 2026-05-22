@@ -13,33 +13,34 @@ import { SectionDivider } from "@/components/motion/SectionDivider";
 // AISection + ReceiptsSection components stay in the tree (unhooked) in
 // case they return.
 export function MarketingHome() {
-  // Vertical rhythm: compact (spacer 8 = 48px) for the brands/stats setup,
-  // statement (spacer 12 = 128px) for the work / capabilities / about /
-  // closer band.
+  // Vertical rhythm comes from each section's own padding-block. The
+  // wrapper divs only carry the anchor id (and the footer-wash class for
+  // the closer). Do not add has-pt-* here - it stacks on top of the
+  // section's internal padding and opens a 200px+ void above the head.
   return (
     <main id="main" className="home-main">
       <HeroSection />
-      <div id="brands" className="has-pt-8">
+      <div id="brands">
         <BrandsMarquee />
       </div>
       <SectionDivider />
-      <div id="stats" className="has-pt-8">
+      <div id="stats">
         <StatsBand />
       </div>
       <SectionDivider />
-      <div id="work" className="has-pt-12">
+      <div id="work">
         <WorkBento />
       </div>
       <SectionDivider />
-      <div id="capabilities" className="has-pt-12">
+      <div id="capabilities">
         <CapabilitiesSection />
       </div>
       <SectionDivider />
-      <div id="about" className="has-pt-12">
+      <div id="about">
         <AboutStrip />
       </div>
       <SectionDivider />
-      <div id="contact" className="footer-wash-zone has-pt-12">
+      <div id="contact" className="footer-wash-zone">
         <ClosingCtaSection />
       </div>
     </main>

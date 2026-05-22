@@ -1,28 +1,54 @@
-// Font stacks. CSS variables are injected by next/font in src/app/layout.tsx.
-// Replace the var() names per project to match the fonts loaded in layout.tsx.
+// Typography tokens. Mirror Figma source of truth (file bCjl4LmfZrxceEzNOfWH6J).
+// CSS variables --font-body and --font-mono are injected by next/font in
+// src/app/layout.tsx. The accessors here (font-size, font-weight,
+// line-height, tracking) generate matching utility classes via
+// base/_base.scss.
 
-// brand.md Typography is a SINGLE typeface, no second/display face:
-//   DM Sans -> titles, headlines, body, navigation, labels.
-// Hierarchy comes from size and weight contrast, not a second font.
-// $font-family-headline is kept as a semantic alias (components ask
-// for "the headline font") but it resolves to the same DM Sans stack
-// as body, so there is exactly one face site-wide.
+// Two typefaces, per Figma:
+//   DM Sans       -> headlines, body, navigation (default).
+//   JetBrains Mono -> eyebrows, micro caps, vertical tags, dl labels.
 $font-family-body: var(--font-body), system-ui, sans-serif;
 $font-family-headline: $font-family-body;
+$font-family-mono: var(--font-mono), "JetBrains Mono", ui-monospace, "SFMono-Regular",
+  Menlo, Consolas, monospace;
 
+// Numeric keys are kept as semantic names; px values mirror Figma exactly.
+// Scale (rem at 16px root):
+//   xxs   = 11px (mono micro caps, dl labels, vertical EST tag)
+//   xs    = 12px (eyebrow, chip caps)
+//   sm-tight = 13px (stat sub-label)
+//   sm    = 14px (meta body, nav, hero meta)
+//   base  = 16px (body default, dl values)
+//   md    = 18px (intro paragraph, capability tile title)
+//   lg    = 20px (kept; sub-headings on dense pages)
+//   xl    = 24px (kept)
+//   2xl   = 32px (stat unit suffix)
+//   3xl   = 40px (kept)
+//   headline = 38px (section head H2)
+//   4xl   = 48px (kept)
+//   display = 56px (stats + about H2)
+//   5xl   = 64px (kept)
+//   hero  = 80px (hero H1, stat numerals) - was 120px, now matches Figma
+//   6xl   = 80px (semantic alias)
+//   mega  = 88px (closer H1)
 $font-sizes: (
-  xs: 0.75rem,
-  sm: 0.875rem,
-  base: 1rem,
-  md: 1.125rem,
-  lg: 1.25rem,
-  xl: 1.5rem,
-  2xl: 2rem,
-  3xl: 2.5rem,
-  4xl: 3rem,
-  5xl: 4rem,
-  6xl: 5rem,
-  hero: 7.5rem,
+  xxs:      0.6875rem,  // 11px
+  xs:       0.75rem,    // 12px
+  sm-tight: 0.8125rem,  // 13px
+  sm:       0.875rem,   // 14px
+  base:     1rem,       // 16px
+  md:       1.125rem,   // 18px
+  lg:       1.25rem,    // 20px
+  xl:       1.5rem,     // 24px
+  2xl:      2rem,       // 32px
+  headline: 2.375rem,   // 38px
+  3xl:      2.5rem,     // 40px
+  4xl:      3rem,       // 48px
+  display:  3.5rem,     // 56px
+  5xl:      4rem,       // 64px
+  hero:     5rem,       // 80px (Figma hero H1)
+  6xl:      5rem,       // 80px (alias kept for legacy refs)
+  mega:     5.5rem,     // 88px (Figma closer H1)
 );
 
 @function font-size($name) {
@@ -50,12 +76,21 @@ $font-weights: (
   @return map-get($font-weights, $name);
 }
 
+// Line-heights mirror Figma exactly. Crush / crisp / hero / display /
+// hairline are tight ratios for large display headings. Intro is the
+// 1.55 multiplier used by every intro paragraph in Figma.
 $line-heights: (
-  tight: 1,
-  snug: 1.2,
-  normal: 1.5,
-  relaxed: 1.65,
-  loose: 2,
+  crush:    0.9,    // stat numerals
+  crisp:    0.95,   // closer H1
+  hero:     1.02,   // hero H1
+  tight:    1,
+  display:  1.05,   // 56px H2 (stats + about)
+  hairline: 1.1,    // 38px H2 (section head + capabilities)
+  snug:     1.2,
+  normal:   1.5,
+  intro:    1.55,   // 18px intro paragraph
+  relaxed:  1.65,
+  loose:    2,
 );
 
 @function line-height($name) {
@@ -64,4 +99,33 @@ $line-heights: (
   }
 
   @return map-get($line-heights, $name);
+}
+
+// Letter-spacing scale. Values mirror Figma exactly (in px).
+// Negative (display): paired with large headings to tighten optical
+// kerning. Positive (caps): paired with small uppercase text.
+$letter-spacings: (
+  // Negative - display
+  headline:     -0.76px,   // 38px section head H2
+  display:      -1.12px,   // 56px stats / about H2
+  hero-sm:      -1.8px,    // 72px hero glow variant H1
+  hero:         -2px,      // 80px hero H1
+  closer:       -2.64px,   // 88px closer H1
+  stat:         -3.2px,    // 80px stat numerals
+  // Positive - caps
+  chip:         1.2px,     // 12px DM Sans chips
+  meta:         2.2px,     // 11px placeholder caps
+  caps:         2.42px,    // 11/12px JBM micro caps (default)
+  caps-md:      2.64px,    // 12px JBM closer reply caption
+  eyebrow:      3.36px,    // 12px JBM eyebrow (standard)
+  eyebrow-hero: 3.6px,     // 12px JBM hero eyebrow
+  vert:         4.95px,    // 11px JBM vertical EST tag
+);
+
+@function tracking($name) {
+  @if not map-has-key($letter-spacings, $name) {
+    @error 'Letter-spacing `#{$name}` not found.';
+  }
+
+  @return map-get($letter-spacings, $name);
 }

@@ -5,73 +5,76 @@ import {
   WORK_BENTO,
   WORK_BENTO_TILES,
 } from "@/constants/content/work-bento";
-import { cx } from "@/components/cx";
+import { MotionReveal } from "@/components/motion/MotionReveal";
+import { StaggerList, StaggerItem } from "@/components/motion/StaggerList";
 
-/** Selected work - 6-cell bento. Liberty Blume features 4x2. */
+/**
+ * Selected work - uniform 3x2 grid (Figma "Project tile · pattern", 79:2).
+ * Clean screenshot on top with a floating role chip, metadata below. Every
+ * tile is the same size; hierarchy lives in the chip copy, not the layout.
+ */
 export function WorkBento() {
   return (
     <section className="work-bento" aria-labelledby="work-bento-title">
       <div className="container-atmosphere">
-        <EyebrowLabel>{WORK_BENTO.eyebrow}</EyebrowLabel>
-        <h2 id="work-bento-title" className="section-title is-paper has-mt-3">
-          {WORK_BENTO.headline}
-        </h2>
-        <p className="work-bento__intro is-cream has-mt-3">{WORK_BENTO.intro}</p>
-        <ul className="work-bento__grid has-mt-6">
+        <StaggerList as="div" stagger={0.08}>
+          <StaggerItem as="div">
+            <EyebrowLabel>{WORK_BENTO.eyebrow}</EyebrowLabel>
+          </StaggerItem>
+          <StaggerItem as="div">
+            <h2 id="work-bento-title" className="section-title is-paper has-mt-3">
+              {WORK_BENTO.headline}
+            </h2>
+          </StaggerItem>
+        </StaggerList>
+        <StaggerList as="ul" className="work-bento__grid has-mt-6" stagger={0.08}>
           {WORK_BENTO_TILES.map((tile) => {
-            const isText = tile.span === "text";
-            const isPending = "pending" in tile && tile.pending === true;
-            const hasImage = !isText && !isPending && "image" in tile && tile.image;
             const isExternal = tile.href.startsWith("http");
             const Wrapper = isExternal ? "a" : Link;
             const wrapperProps = isExternal
               ? { href: tile.href, rel: "noopener noreferrer", target: "_blank" }
               : { href: tile.href };
             return (
-              <li
+              <StaggerItem
+                as="li"
                 key={tile.slug}
-                className={cx("work-bento__cell", `work-bento__cell--${tile.span}`)}
-                data-span={tile.span}
-                data-pending={isPending ? "true" : undefined}
+                className="work-bento__cell"
+                lift={28}
               >
                 <Wrapper
                   {...(wrapperProps as { href: string })}
                   className="work-bento__link"
                   aria-label={`${tile.title} - ${tile.role}`}
                 >
-                  {hasImage && (
+                  <div className="work-bento__media-well">
                     <Image
-                      src={tile.image as string}
+                      src={tile.image}
                       alt=""
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 33vw"
                       className="work-bento__media"
                     />
-                  )}
-                  {isPending && (
-                    <p className="work-bento__pending mono" aria-hidden>
-                      {WORK_BENTO.pendingLabel}
+                    <p className="work-bento__chip">
+                      <span className="work-bento__chip-dot" aria-hidden />
+                      {tile.role}
                     </p>
-                  )}
-                  <div className="work-bento__label">
-                    <div>
-                      <p className="work-bento__role">{tile.role}</p>
-                      <p className="work-bento__title">{tile.title}</p>
-                      <p className="work-bento__body">{tile.body}</p>
-                    </div>
+                  </div>
+                  <div className="work-bento__meta is-flex is-flex-column has-gap-2 has-p-5">
+                    <p className="work-bento__title">{tile.title}</p>
+                    <p className="work-bento__body">{tile.body}</p>
                     <p className="work-bento__stack mono">{tile.stack}</p>
                   </div>
                 </Wrapper>
-              </li>
+              </StaggerItem>
             );
           })}
-        </ul>
-        <div className="work-bento__footer has-mt-6">
+        </StaggerList>
+        <MotionReveal className="work-bento__footer has-mt-6" lift={16}>
           <p className="is-cream text-sm has-m-0">{WORK_BENTO.archiveLabel}</p>
           <Link href={WORK_BENTO.archiveHref} className="work-bento__archive-cta">
             {WORK_BENTO.archiveCta}
           </Link>
-        </div>
+        </MotionReveal>
       </div>
     </section>
   );

@@ -1,17 +1,42 @@
 @use '../abstracts' as *;
 
-// One heading treatment for every eyebrow-led home section title
-// (Positioning, Selected work, What you get, Work with me). A single
-// fluid clamp keeps them identical across the ink stack instead of the
-// previous mix of text-3xl, a bespoke closing clamp, and display-text.
-// Colour is applied per context (is-cream on the ink home stack), so
-// the class stays reusable on light surfaces too.
+// Default H2 used by every section that opens with a Section head atom
+// (Selected work, Capabilities, etc). Figma spec: DM Sans Light 38px,
+// line-height 1.1, tracking -0.76px, max width 640px.
+//
+// The larger 56px H2 used by Stats band + About strip lives on
+// `.section-title--display`.
 .section-title {
   margin: 0;
   font-family: $font-family-headline;
-  // Capped at 4xl (48px) to sit near monopo's heading (39px) /
-  // heading-lg (54px) range rather than display sizes.
-  font-size: clamp(#{font-size(xl)}, 4vw, #{font-size(4xl)});
-  line-height: line-height(tight);
+  font-size: font-size(headline);
+  font-weight: font-weight(light);
+  line-height: line-height(hairline);
+  letter-spacing: tracking(headline);
+  max-width: 640px;
   text-wrap: balance;
+}
+
+// 56px variant for stats + about. Tighter line-height (1.05), more
+// negative tracking (-1.12px).
+.section-title--display {
+  font-size: font-size(display);
+  line-height: line-height(display);
+  letter-spacing: tracking(display);
+}
+
+// 88px closer H1. Tightest line-height (0.95) and tracking (-2.64px).
+// Always rendered as <h1> via the SectionHead atom.
+.section-title--mega {
+  font-size: font-size(mega);
+  line-height: line-height(crisp);
+  letter-spacing: tracking(closer);
+  max-width: 900px;
+}
+
+// 80px hero H1. Used on the home + lab hero scaffolds.
+.section-title--hero {
+  font-size: font-size(hero);
+  line-height: line-height(hero);
+  letter-spacing: tracking(hero);
 }

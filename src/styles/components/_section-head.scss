@@ -1,0 +1,54 @@
+@use '../abstracts' as *;
+
+// Section head pattern (Figma ③ Patterns / Section head). The atom
+// reused by every home section: eyebrow row, H2 (38px default or 56px
+// display), optional intro paragraph at 18px / 1.55. Surface variant
+// flips the intro colour for ink vs paper backgrounds.
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: spacer(6); // 32px - Figma section head gap.
+  max-width: 640px;
+}
+
+.section-head__title {
+  // Inherits from .section-title; nothing extra unless emphasis appears.
+}
+
+.section-head__emphasis {
+  font-style: italic;
+  font-weight: inherit;
+  // Sanctioned orb-flare carve-out for the single italic emphasis word
+  // (see brand.md). Custom property lets consumers override per surface.
+  color: var(--hero-emphasis-color, #{color(orb-flare)});
+}
+
+.section-head__intro {
+  margin: 0;
+  font-family: $font-family-body;
+  font-size: font-size(md);
+  font-weight: font-weight(regular);
+  line-height: line-height(intro);
+  max-width: 640px;
+}
+
+.section-head--ink {
+  .section-head__title {
+    color: color(paper);
+  }
+
+  .section-head__intro {
+    color: color-mix(in srgb, color(cream) 85%, transparent);
+  }
+}
+
+.section-head--paper {
+  .section-head__title {
+    color: color(ink);
+  }
+
+  .section-head__intro {
+    color: color(stone);
+  }
+}

@@ -1,18 +1,22 @@
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { STATS, STATS_BAND } from "@/constants/content/stats-band";
+import { StaggerList, StaggerItem } from "@/components/motion/StaggerList";
 
-/** By the numbers - 8-stat grid. 4-up x 2 rows on desktop, 2-up tablet, 1-up mobile. */
+/** By the numbers - Figma source of truth: ③ Patterns / Stats band · ink. */
 export function StatsBand() {
   return (
     <section className="stats-band" aria-labelledby="stats-band-title">
       <div className="container-atmosphere">
-        <EyebrowLabel>{STATS_BAND.eyebrow}</EyebrowLabel>
-        <h2 id="stats-band-title" className="section-title is-paper has-mt-3">
-          {STATS_BAND.headline}
-        </h2>
-        <ul className="stats-band__grid">
+        <SectionHead
+          eyebrow={STATS_BAND.eyebrow}
+          headline={STATS_BAND.headline}
+          surface="ink"
+          size="display"
+          headingId="stats-band-title"
+        />
+        <StaggerList as="ul" className="stats-band__grid" stagger={0.08}>
           {STATS.map((stat) => (
-            <li key={stat.label} className="stats-band__tile">
+            <StaggerItem as="li" key={stat.label} className="stats-band__tile" lift={22}>
               <span className="stats-band__num">
                 {stat.value}
                 {stat.suffix && (
@@ -20,9 +24,9 @@ export function StatsBand() {
                 )}
               </span>
               <p className="stats-band__label">{stat.label}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerList>
       </div>
     </section>
   );

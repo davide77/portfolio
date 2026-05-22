@@ -53,30 +53,30 @@ export const WORK_ARCHIVE_HERO = {
 export const ARCHIVE_GROUPS = [
   {
     id: "enterprise-sap",
-    title: "Enterprise · SAP marketing platforms",
-    intro: "Marketing surfaces, microsites and editorial product pages built across SAP and SAP Concur for B2B decision makers.",
+    eyebrow: "01 · SAP",
+    title: "Enterprise marketing platforms",
   },
   {
     id: "sky-media",
-    title: "Sky + media · Sky Store, Sky Sports, History",
-    intro: "Sky Store browsing UI, Sky Sports promo modules, and editorial documentary surfaces for A+E Networks.",
+    eyebrow: "02 · Sky",
+    title: "Broadcast and streaming",
   },
   {
     id: "automotive",
-    title: "Automotive · Toyota, Renault, Honda",
-    intro: "Campaign sites, dashboard work, and pitch creative for Toyota, Renault and Honda.",
+    eyebrow: "03 · Automotive",
+    title: "Automotive campaign sites",
   },
   {
     id: "public-charity",
-    title: "Public + charity · Sunday Times, Driving.co.uk",
-    intro: "Public-facing surfaces with a real reader behind them: Sunday Times Driving classifieds and friends.",
+    eyebrow: "04 · Public",
+    title: "Public sector and charity",
   },
   {
     id: "agency-other",
-    title: "Agency + other · MomentumABM, iCLP, Paymentsense, Boux Avenue",
-    intro: "Loyalty + ABM consultancy sites, fintech product pages, and retail campaign frames.",
+    eyebrow: "05 · Agency",
+    title: "Agency and retail builds",
   },
-] as const satisfies readonly { id: ArchiveGroup; title: string; intro: string }[];
+] as const satisfies readonly { id: ArchiveGroup; eyebrow: string; title: string }[];
 
 const tile = (
   n: number,

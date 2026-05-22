@@ -33,6 +33,7 @@ export function HeroSection() {
       <div className={cx("hero-section__inner", "container-atmosphere")}>
         <p className="hero-section__eyebrow">{HERO_DISPLAY.eyebrow}</p>
         <HeroHeadline ready={headlineReady} />
+        <p className="hero-section__brand-band mono">{HERO_DISPLAY.brandBand}</p>
       </div>
       <VerticalText className="hero-section__edge">{HERO_DISPLAY.verticalEdge}</VerticalText>
       <ScrollBadge />

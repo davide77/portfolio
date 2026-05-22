@@ -16,6 +16,19 @@
   container-name: legacy-gallery;
 }
 
+// Figma ⑤ Lab: section heads are left-aligned eyebrow + display title only.
+.legacy-work-gallery__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: spacer(7);
+}
+
+.legacy-work-gallery__header .section-title {
+  max-width: 640px;
+}
+
 // Each era group gets a head row + its own bento. Spacing between groups
 // gives the eye a beat without losing the single-band ink feel.
 .legacy-work-gallery__group {
@@ -29,29 +42,15 @@
 .legacy-work-gallery__group-head {
   display: flex;
   flex-direction: column;
-  gap: spacer(2);
+  align-items: flex-start;
+  text-align: left;
   margin-bottom: spacer(5);
   padding-bottom: spacer(4);
   border-bottom: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
-}
 
-.legacy-work-gallery__group-title {
-  margin: 0;
-  font-family: $font-family-headline;
-  font-size: clamp(#{font-size(lg)}, 2.5cqi, #{font-size(2xl)});
-  font-weight: font-weight(regular);
-  letter-spacing: -0.015em;
-  line-height: line-height(snug);
-  color: color(paper);
-}
-
-.legacy-work-gallery__group-intro {
-  margin: 0;
-  font-size: font-size(sm);
-  color: color(cream);
-  opacity: 0.72;
-  max-width: 56ch;
-  line-height: line-height(normal);
+  .section-title {
+    max-width: 640px;
+  }
 }
 
 // "Mentioned, no screen kept" - text-only honesty list below the bento.

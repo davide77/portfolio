@@ -30,6 +30,12 @@ $wash-text: color-mix(
   color(paper),
   color(ink) calc(var(--footer-wash, 0) * 100%)
 );
+// Muted body / meta text: cream 70% on ink resolves to ink 70% on cream.
+$wash-text-muted: color-mix(
+  in srgb,
+  color-mix(in srgb, color(cream) 70%, transparent),
+  color-mix(in srgb, color(ink) 70%, transparent) calc(var(--footer-wash, 0) * 100%)
+);
 $wash-hairline: color-mix(
   in srgb,
   color-mix(in srgb, color(paper) 22%, transparent),
@@ -79,5 +85,56 @@ $wash-control-border: color-mix(
   .button--ghostOnInk {
     color: $wash-text;
     border-color: $wash-control-border;
+  }
+
+  // Closer-specific repaint. The closer's text uses cream / paper at
+  // varying alphas; on a cream wash those become invisible. Map each
+  // role to its interpolated ink equivalent so wash 1 reads as a clean
+  // dark-on-cream section instead of low-contrast ghost text.
+  .section-head__intro {
+    color: $wash-text-muted;
+  }
+
+  .eyebrow-label__text {
+    color: $wash-text-muted;
+  }
+
+  .closing-cta-section__meta,
+  .closing-cta-section__footer {
+    color: $wash-text-muted;
+  }
+
+  .closing-cta-section__contact,
+  .closing-cta-section__footer {
+    border-top-color: $wash-hairline;
+  }
+
+  .closing-cta-section__contact-value,
+  .closing-cta-section__link {
+    color: $wash-text;
+  }
+
+  .closing-cta-section__link {
+    border-bottom-color: $wash-control-border;
+
+    &:hover,
+    &:focus-visible {
+      border-bottom-color: $wash-text;
+    }
+  }
+
+  .button--secondaryInk {
+    color: $wash-text;
+    border-color: $wash-control-border;
+
+    &:hover:not(:disabled) {
+      background-color: $wash-text;
+      color: color-mix(
+        in srgb,
+        color(ink),
+        color(paper) calc(var(--footer-wash, 0) * 100%)
+      );
+      border-color: $wash-text;
+    }
   }
 }

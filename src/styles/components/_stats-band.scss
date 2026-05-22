@@ -1,7 +1,12 @@
 @use '../abstracts' as *;
 
+// Stats band - Figma source of truth: ③ Patterns / Stats band · ink.
+// Section padding 96px block. Section head 56px / 1.05 / -1.12px on
+// ink. Stat row: border-top cream/16, gap 32px, 4 stat tiles. Each
+// numeral: DM Sans Light 80px / 0.9 / -3.2px with the unit suffix in
+// signal at 32px.
 .stats-band {
-  padding-block: spacer(11);
+  padding-block: spacer(11); // 96px
   container-type: inline-size;
   container-name: stats;
 }
@@ -9,11 +14,11 @@
 .stats-band__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: spacer(7);
-  margin: spacer(8) 0 0;
-  padding: spacer(7) 0 0;
+  gap: spacer(6); // 32px - Figma stat row gap
+  margin: spacer(7) 0 0; // 40px stack from section head
+  padding: spacer(7) 0 0; // 40px to clear the border-top hairline
   list-style: none;
-  border-top: 1px solid color-mix(in srgb, color(paper) 16%, transparent);
+  border-top: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
 
   @include container-min(stats, 640px) {
     grid-template-columns: repeat(2, 1fr);
@@ -27,32 +32,34 @@
 .stats-band__tile {
   display: flex;
   flex-direction: column;
-  gap: spacer(3);
+  gap: spacer(4); // 16px between numeral and caption (Figma)
 }
 
 .stats-band__num {
   display: flex;
   align-items: baseline;
   gap: spacer(1);
-  font-size: clamp(48px, 6cqi, 96px);
+  font-size: font-size(hero); // 80px
   font-weight: font-weight(light);
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+  letter-spacing: tracking(stat); // -3.2px
+  line-height: line-height(crush); // 0.9
   color: color(paper);
   font-variant-numeric: tabular-nums;
 }
 
 .stats-band__suffix {
-  font-size: 0.45em;
-  color: color(cream);
-  font-weight: font-weight(regular);
+  font-size: font-size(2xl); // 32px (Figma stat unit)
+  color: color(signal);
+  font-weight: font-weight(light);
+  letter-spacing: 0;
+  line-height: line-height(normal);
 }
 
 .stats-band__label {
   margin: 0;
-  font-size: font-size(sm);
-  color: color(cream);
-  max-width: 22ch;
+  font-size: font-size(sm-tight); // 13px
+  font-weight: font-weight(regular);
   line-height: line-height(normal);
-  opacity: 0.78;
+  color: color-mix(in srgb, color(cream) 75%, transparent);
+  max-width: 22ch;
 }

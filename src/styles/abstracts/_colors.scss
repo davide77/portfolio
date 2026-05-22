@@ -7,6 +7,7 @@ $theme-colors: (
   ink:            #101214,  // Hero bands, footer, high-contrast panels.
   ink-2:          #1a1d20,  // Lifted card surface on ink bands. Mirrors Figma `colour/ink-2`.
   forest:         #2a6b5e,  // Primary actions and selection on light backgrounds.
+  forest-dark:    #1f5147,  // Primary button hover (Figma source of truth). Darker forest.
   paper:          #f5f1ea,  // Default page background.
   white:          #ffffff,  // Cards and raised surfaces.
 
@@ -26,6 +27,11 @@ $theme-colors: (
   orb-amber:      #d07a25,
   orb-flare:      #ffc080,
   orb-glow:       #a8d66a,
+
+  // Hero scaffold backdrop (display only, not for UI / type / washes).
+  // Mirrors the Figma Hero scaffold root colour. Used behind the WebGL
+  // and Grainient layers; do not paint type or chrome with this.
+  hero-void:      #020100,
 );
 
 @function color($name) {

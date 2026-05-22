@@ -1,21 +1,20 @@
 /**
- * Selected work - 6-cell bento. Each card answers role / stack / scale / status.
- * Liberty Blume features 4x2 to anchor the eye. Layout values feed CSS grid
- * spans via data-attributes on the component.
+ * Selected work - uniform 3x2 grid. Each tile answers role / stack / scale /
+ * status. All tiles carry equal weight: the screenshot stays clean (no scrim,
+ * no overlay), a chip floats top-left with role + year, and the metadata sits
+ * below the image. Hierarchy lives in the chip copy, not in tile size.
  *
- * Body + role copy mirrors the Figma source of truth (③ Home / Desktop).
- * Short one-liners on purpose - the bento communicates breadth at a glance.
+ * Body + role copy mirrors the Figma source of truth (Project tile · pattern,
+ * node 79:2). Short one-liners on purpose - the grid communicates breadth at
+ * a glance.
  */
 
 export const WORK_BENTO = {
   eyebrow: "04 · Selected work",
   headline: "Six pieces. Each answers role, stack, scale, status.",
-  intro:
-    "Same template, every time. The bento is sized so one project always anchors the eye.",
   archiveLabel: "Everything else lives at /lab · twenty years of receipts, no longer crowding the hero.",
   archiveCta: "Open the archive",
   archiveHref: "/lab",
-  pendingLabel: "Screen pending",
 } as const;
 
 export const WORK_BENTO_TILES = [
@@ -25,8 +24,7 @@ export const WORK_BENTO_TILES = [
     title: "Liberty Blume",
     body: "12-step regulated lending journey. Live.",
     stack: "REACT · TS · SCSS · GCP",
-    image: "/images/projects/liberty-blume.jpg",
-    span: "feat", // 4x2
+    image: "/images/projects/liberty-blume.png",
     href: "/work/liberty-blume",
   },
   {
@@ -35,8 +33,7 @@ export const WORK_BENTO_TILES = [
     title: "Striver.Football",
     body: "Brand to shipped site.",
     stack: "NEXT · WP",
-    pending: true, // real Striver screen not yet captured; see PR 11
-    span: "tall", // 2x2
+    image: "/images/projects/striver-football.jpg",
     href: "/work/striver-football",
   },
   {
@@ -46,7 +43,6 @@ export const WORK_BENTO_TILES = [
     body: "7 brands, FR + DE rollouts.",
     stack: "REACT · DRUPAL",
     image: "/images/projects/estee-lauder.jpg",
-    span: "reg", // 2x1
     href: "/work/estee-lauder",
   },
   {
@@ -56,7 +52,6 @@ export const WORK_BENTO_TILES = [
     body: "500k+ residents.",
     stack: "REACT · DOCUSAURUS",
     image: "/images/projects/bristol.jpg",
-    span: "reg", // 2x1
     href: "/work/bristol-gov-uk",
   },
   {
@@ -65,8 +60,7 @@ export const WORK_BENTO_TILES = [
     title: "Cheam Sports FC",
     body: "Full-stack solo build.",
     stack: "NEXT · DRIZZLE · STRIPE",
-    pending: true, // current asset is a placeholder, not a real Cheam screen
-    span: "wide", // 3x1
+    image: "/images/projects/cheam-sports-fc.jpg",
     href: "/work/cheam-sports-fc",
   },
   {
@@ -75,7 +69,7 @@ export const WORK_BENTO_TILES = [
     title: "Nannynow",
     body: "Concept to MVP, solo.",
     stack: "NEXT · TS",
-    span: "text", // text-only cell
+    image: "/images/projects/nannynow.jpg",
     href: "https://nannynow.co.uk",
   },
 ] as const;

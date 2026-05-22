@@ -1,17 +1,28 @@
 @use '../abstracts' as *;
 
+// Capabilities grid - Figma source of truth: ③ Patterns / Capabilities · paper.
+// Paper surface, full-width 96px section padding. 6 white tiles in a
+// 3x2 grid joined by a 1px hairline (the ink/0.1 wrapper background
+// shows through the 1px gap between tiles). Each tile renders an
+// 11px JBM numeral, an 18px DM Sans title, a flexible spacer and an
+// 11px JBM Medium stack chip pinned to the bottom.
 .capabilities-section {
-  padding-block: spacer(8);
+  padding-block: spacer(11); // 96px
+  background-color: color(paper);
   container-type: inline-size;
   container-name: capabilities;
 }
 
 .capabilities-section__grid {
   display: grid;
-  gap: spacer(4);
-  margin-top: spacer(6);
-  list-style: none;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin-top: spacer(7); // 40px stack from section head
   padding: 0;
+  list-style: none;
+  background-color: color-mix(in srgb, color(ink) 10%, transparent);
+  border: 1px solid color-mix(in srgb, color(ink) 12%, transparent);
+  border-radius: $radius-card-glass; // 10px - Figma
 
   @include container-min(capabilities, 600px) {
     grid-template-columns: repeat(2, 1fr);
@@ -22,49 +33,48 @@
   }
 }
 
-// Frosted tile on the ink home stack: same language as the project
-// cards on the featured-work band (translucent white fill, cream-on-
-// transparent hairline) so the section reads dark, not as light cards
-// punched into ink.
-.capabilities-section__tile {
-  padding: spacer(5);
-  border: 1px solid color-mix(in srgb, color(paper) 22%, transparent);
-  border-radius: $radius-card;
-  background-color: color-mix(in srgb, color(white) 8%, transparent);
-}
-
-// Eyebrow ships as is-stone-gray (meta on light). On ink, brand.md
-// rule 90 mandates cream for meta instead.
-.capabilities-section .eyebrow-label {
-  color: color-mix(in srgb, color(paper) 58%, transparent);
-}
-
-// Tile heading ships with no colour class, so it inherits the default
-// ink text colour (#101214) and disappears on the ink stack. brand.md
-// rule 91: text on ink is paper/white. Use full-strength cream to match
-// the section's cream-on-ink language.
-.capabilities-section__tile h3 {
-  color: color(paper);
-}
-
-// is-text-muted (#6f6a63) fails on ink; use cream-on-transparent body
-// meta, matching the featured-work intro treatment.
-.capabilities-section__tile p {
-  color: color-mix(in srgb, color(paper) 78%, transparent);
-}
-
-// Stack chip: small mono caps row at the bottom of each tile naming
-// the kit. Brand voice: capability + receipt + kit.
-.capabilities-section__stack {
-  margin-top: auto;
-  padding-top: spacer(3);
-  font-size: font-size(xs);
-  color: color(cream);
-  letter-spacing: 0.05em;
-}
-
 .capabilities-section__tile {
   display: flex;
   flex-direction: column;
-  gap: spacer(2);
+  gap: spacer(3); // 10px-ish, Figma uses 10px gap between tile rows
+  min-height: 180px;
+  padding: spacer(5); // 24px
+  background-color: color(white);
+
+  // Round only the corners that hit the wrapper edge so the inner
+  // hairline grid stays square. The wrapper clips overflow, so simple
+  // overflow:hidden on the wrapper is enough; tiles stay square here.
+}
+
+.capabilities-section__num {
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xxs); // 11px
+  font-weight: font-weight(regular);
+  line-height: line-height(normal);
+  color: color(stone);
+}
+
+.capabilities-section__title {
+  margin: 0;
+  font-family: $font-family-body;
+  font-size: font-size(md); // 18px
+  font-weight: font-weight(regular);
+  line-height: line-height(snug);
+  color: color(ink);
+}
+
+.capabilities-section__spacer {
+  flex: 1 0 auto;
+}
+
+.capabilities-section__stack {
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xxs); // 11px
+  font-weight: font-weight(medium);
+  line-height: line-height(normal);
+  letter-spacing: tracking(caps);
+  text-transform: uppercase;
+  color: color(signal-strong);
 }

@@ -1,24 +1,31 @@
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { CAPABILITIES } from "@/constants/content/profile";
 import { HOME_SECTIONS } from "@/constants/content/home";
+import { StaggerList, StaggerItem } from "@/components/motion/StaggerList";
 
+const TILE_NUMBERS = ["01", "02", "03", "04", "05", "06"] as const;
+
+/** Capabilities grid - Figma source of truth: ③ Patterns / Capabilities · paper. */
 export function CapabilitiesSection() {
   return (
-    <section className={"capabilities-section"} aria-labelledby="capabilities-title">
+    <section className="capabilities-section" aria-labelledby="capabilities-title">
       <div className="container-atmosphere">
-        <EyebrowLabel>{HOME_SECTIONS.capabilities.eyebrow}</EyebrowLabel>
-        <h2 id="capabilities-title" className="section-title is-paper has-mt-3">
-          {HOME_SECTIONS.capabilities.title}
-        </h2>
-        <ul className={"capabilities-section__grid"}>
-          {CAPABILITIES.map((item) => (
-            <li key={item.title} className={"capabilities-section__tile"}>
-              <h3 className="text-lg has-font-semibold">{item.title}</h3>
-              <p className="text-base leading-relaxed has-m-0">{item.body}</p>
-              <p className="capabilities-section__stack mono">{item.stack}</p>
-            </li>
+        <SectionHead
+          eyebrow={HOME_SECTIONS.capabilities.eyebrow}
+          headline={HOME_SECTIONS.capabilities.title}
+          surface="paper"
+          headingId="capabilities-title"
+        />
+        <StaggerList as="ul" className="capabilities-section__grid" stagger={0.07}>
+          {CAPABILITIES.map((item, i) => (
+            <StaggerItem as="li" key={item.title} className="capabilities-section__tile" lift={22}>
+              <p className="capabilities-section__num">{TILE_NUMBERS[i] ?? `0${i + 1}`}</p>
+              <h3 className="capabilities-section__title">{item.title}</h3>
+              <span className="capabilities-section__spacer" aria-hidden />
+              <p className="capabilities-section__stack">{item.stack}</p>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerList>
       </div>
     </section>
   );

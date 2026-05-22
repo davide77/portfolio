@@ -1,7 +1,13 @@
 @use '../abstracts' as *;
 
+// About strip - Figma source of truth: ③ Patterns / About strip · ink.
+// Portrait (320x400, ink-2 placeholder bg) left, copy column right.
+// Copy stack uses the SectionHead atom for eyebrow + 56px H2, then
+// two 18px paragraphs, three pill chips, and a 4-column meta strip
+// of JBM Medium 11px labels + 14px DM Sans bodies.
 .about-strip {
-  padding-block: spacer(11);
+  padding-block: spacer(11); // 96px
+  background-color: color(ink);
   container-type: inline-size;
   container-name: about;
 }
@@ -9,21 +15,23 @@
 .about-strip__row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: spacer(8);
+  gap: spacer(9); // 64px - Figma column gap
   align-items: start;
 
   @include container-min(about, 720px) {
-    grid-template-columns: minmax(220px, 320px) 1fr;
+    grid-template-columns: 320px 1fr;
   }
 }
 
 .about-strip__portrait {
   position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: $radius-card;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 320 / 400;
+  border-radius: $radius-card-glass; // 10px
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, color(paper) 18%, transparent);
-  background-color: color(ink);
+  border: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
+  background-color: color(ink-2);
 }
 
 .about-strip__portrait-img {
@@ -35,23 +43,27 @@
 .about-strip__copy {
   display: flex;
   flex-direction: column;
+  gap: spacer(6); // 32px between stacked blocks
+  max-width: 960px;
 }
 
 .about-strip__paragraph {
   margin: 0;
-  font-size: font-size(md);
-  line-height: line-height(normal);
-  max-width: 62ch;
-  opacity: 0.9;
+  font-family: $font-family-body;
+  font-size: font-size(md); // 18px
+  font-weight: font-weight(regular);
+  line-height: line-height(intro); // 1.55
+  color: color-mix(in srgb, color(cream) 90%, transparent);
+  max-width: 640px;
 
   & + & {
-    opacity: 0.82;
+    color: color-mix(in srgb, color(cream) 85%, transparent);
   }
 }
 
 .about-strip__chips {
   display: flex;
-  gap: spacer(3);
+  gap: spacer(3); // 12px
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
@@ -61,35 +73,36 @@
 .about-strip__chip {
   display: inline-flex;
   align-items: center;
-  gap: spacer(2);
   padding: 8px 16px;
   border-radius: $radius-full;
-  border: 1px solid color-mix(in srgb, color(paper) 38%, transparent);
-  font-size: font-size(xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, color(paper) 45%, transparent);
+  font-family: $font-family-body;
+  font-size: font-size(xs); // 12px
   font-weight: font-weight(medium);
+  letter-spacing: tracking(chip); // 1.2px
+  text-transform: uppercase;
   color: color(paper);
   text-decoration: none;
-  transition: background-color 240ms, color 240ms;
+  transition: border-color 240ms ease;
 
+  // Figma chip hover (ink surface): only the border opacity steps up
+  // from 45% to 90%. Background stays transparent, text stays paper.
   &:hover,
   &:focus-visible {
-    background-color: color(paper);
-    color: color(ink);
+    border-color: color-mix(in srgb, color(paper) 90%, transparent);
   }
 }
 
-// 4-column meta strip beneath the chips. Mirrors Figma's CURRENTLY /
-// SPECIALISM / COACHING / BASED row. Collapses 4->2->1 via container
-// queries on the about strip.
+// 4-column meta strip beneath the chips. Figma: hairline top, 32px gap,
+// JBM Medium 11px label tracking-caps + 14px DM Sans body. Collapses
+// 4 -> 2 -> 1 via container queries on the about strip.
 .about-strip__meta {
   display: grid;
   grid-template-columns: 1fr;
-  gap: spacer(5);
+  gap: spacer(6); // 32px - Figma column gap
   margin: 0;
-  padding-top: spacer(6);
-  border-top: 1px solid color-mix(in srgb, color(paper) 14%, transparent);
+  padding-top: spacer(6); // 32px above the body labels
+  border-top: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
 
   @include container-min(about, 560px) {
     grid-template-columns: 1fr 1fr;
@@ -107,14 +120,21 @@
 }
 
 .about-strip__meta-label {
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.7;
   margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xxs); // 11px
+  font-weight: font-weight(medium);
+  line-height: line-height(normal);
+  letter-spacing: tracking(caps); // 2.42px
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 65%, transparent);
 }
 
 .about-strip__meta-body {
-  font-size: font-size(sm);
+  margin: 0;
+  font-family: $font-family-body;
+  font-size: font-size(sm); // 14px
+  font-weight: font-weight(regular);
   line-height: line-height(normal);
-  opacity: 0.85;
+  color: color(paper);
 }

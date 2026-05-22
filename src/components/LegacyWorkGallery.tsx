@@ -16,11 +16,10 @@ export function LegacyWorkGallery() {
     <section id={ARCHIVE_SECTION.id} className={"legacy-work-gallery__section"} aria-labelledby="lab-archive-title">
       <div className={cx("legacy-work-gallery__inner", "container-atmosphere")}>
         <header className="legacy-work-gallery__header">
-          <EyebrowLabel className="is-orb-glow">{LAB_ARCHIVE_SECTION.eyebrow}</EyebrowLabel>
-          <h2 id="lab-archive-title" className="section-title is-paper has-mt-3">
+          <EyebrowLabel className="eyebrow-label--lab-group">{LAB_ARCHIVE_SECTION.eyebrow}</EyebrowLabel>
+          <h2 id="lab-archive-title" className="section-title section-title--display is-paper has-mt-3">
             {LAB_ARCHIVE_SECTION.headline}
           </h2>
-          <p className="legacy-work-gallery__lead is-cream has-mt-3">{LAB_ARCHIVE_SECTION.intro}</p>
         </header>
         {ARCHIVE_GROUPS.map((group) => {
           const tiles = ARCHIVE_TILES.filter((t) => t.group === group.id);
@@ -28,8 +27,10 @@ export function LegacyWorkGallery() {
           return (
             <div key={group.id} className="legacy-work-gallery__group">
               <header className="legacy-work-gallery__group-head">
-                <h3 className="legacy-work-gallery__group-title">{group.title}</h3>
-                <p className="legacy-work-gallery__group-intro">{group.intro}</p>
+                <EyebrowLabel className="eyebrow-label--lab-group">{group.eyebrow}</EyebrowLabel>
+                <h3 className="section-title section-title--display is-paper has-mt-3">
+                  {group.title}
+                </h3>
               </header>
               <div className={cx("legacy-work-gallery__bento", "is-grid has-gap-3")}>
                 {tiles.map((tile, index) => (

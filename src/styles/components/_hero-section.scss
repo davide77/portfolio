@@ -1,6 +1,9 @@
 @use '../abstracts' as *;
 
-// Ink hero typography: DM Sans throughout, weight contrast for hierarchy (see brand.md).
+// Hero scaffold - Figma source of truth: ③ Patterns / Hero scaffold ·
+// signal. 1440 × 900 frame, hero-void (#020100) backdrop, three radial
+// gradients painted by HeroGrainient and HeroWebGLLayer (live), and a
+// centred eyebrow + 80px H1 + brand caps row.
 
 .hero-section {
   position: relative;
@@ -10,6 +13,7 @@
   justify-content: center;
   padding-block: spacer(10) spacer(8);
   overflow: hidden;
+  background-color: color(hero-void);
 }
 
 // Layer order inside the hero: grainient backdrop (0) < metal Ds canvas (1)
@@ -41,23 +45,24 @@
 
 .hero-section__eyebrow {
   margin: 0;
-  font-family: $font-family-body;
-  font-size: font-size(xs);
+  font-family: $font-family-mono;
+  font-size: font-size(xs); // 12px
   font-weight: font-weight(regular);
-  letter-spacing: 0.32em;
+  line-height: line-height(normal);
+  letter-spacing: tracking(eyebrow-hero); // 3.6px (Figma hero eyebrow)
   text-transform: uppercase;
-  color: color-mix(in srgb, color(paper) 50%, transparent);
+  color: color-mix(in srgb, color(cream) 60%, transparent);
 }
 
 .hero-section__headline {
   margin: 0;
-  color: color(white);
-  max-width: 18ch;
+  color: color(paper);
+  max-width: 980px;
   font-family: $font-family-headline;
-  font-size: clamp(#{font-size(2xl)}, 5vw, 2.75rem);
-  font-weight: font-weight(regular);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-size: font-size(hero); // 80px
+  font-weight: font-weight(light);
+  line-height: line-height(hero); // 1.02
+  letter-spacing: tracking(hero); // -2px
   text-wrap: balance;
 }
 
@@ -80,6 +85,16 @@
   // on the hero headline. Wired via custom property so consuming surfaces can
   // override without inline styles.
   color: var(--hero-emphasis-color, #{color(orb-flare)});
+}
+
+// Figma brand band: six clients, mono caps, 12px / 0.22em under the H1.
+.hero-section__brand-band {
+  margin: 0;
+  max-width: 72ch;
+  font-size: font-size(xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 70%, transparent);
 }
 
 .hero-section__edge {

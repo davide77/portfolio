@@ -1,13 +1,12 @@
 import { BRAND_COLORS } from "@/constants/brand-colors";
+import type { LabLetter } from "@/components/hero/createLabLetterGeometries";
 
 /**
- * /lab hero - 5-orb constellation. Two palettes:
+ * /lab hero - L A B constellation. Three extruded letters in different sizes,
+ * arranged left-to-right with parallax z-offset. Two palettes:
  * - warm: same liquid-metal ramp as the home hero (orb-amber / orb-flare).
  * - glow: brand.md-sanctioned green refraction (orb-glow). Carved out for
  *   the lab cluster only, never for the home hero, type, UI, or washes.
- *
- * Orbs are spread across the canvas with varied z-offset for parallax depth.
- * Two of the five render with the glow palette; the other three keep warm.
  */
 
 export const LAB_HERO_PALETTE_WARM = {
@@ -27,6 +26,7 @@ export const LAB_HERO_PALETTE_GLOW = {
 export type LabOrbPalette = "warm" | "glow";
 
 export type LabOrbInstance = {
+  letter: LabLetter;
   position: readonly [number, number, number];
   rotationZ: number;
   scale: number;
@@ -42,39 +42,28 @@ export const LAB_HERO = {
   canvasFadeMs: 1000,
   orbs: [
     {
-      position: [-2.4, 0.8, 0.4] as const,
-      rotationZ: 0.22,
-      scale: 1.4,
+      letter: "L",
+      position: [-2.6, 0.4, 0.3] as const,
+      rotationZ: 0.12,
+      scale: 1.55,
       palette: "warm",
       wobbleSeed: 0.0,
     },
     {
-      position: [-0.6, -0.9, -0.6] as const,
-      rotationZ: -0.32,
-      scale: 1.1,
+      letter: "A",
+      position: [-0.1, -0.5, -0.4] as const,
+      rotationZ: -0.08,
+      scale: 1.0,
       palette: "glow",
-      wobbleSeed: 1.7,
+      wobbleSeed: 2.3,
     },
     {
-      position: [0.9, 1.1, 0.2] as const,
-      rotationZ: 0.08,
-      scale: 0.9,
+      letter: "B",
+      position: [2.3, 0.7, -0.1] as const,
+      rotationZ: 0.18,
+      scale: 1.3,
       palette: "warm",
-      wobbleSeed: 3.1,
-    },
-    {
-      position: [2.2, -0.3, -0.3] as const,
-      rotationZ: -0.18,
-      scale: 1.25,
-      palette: "glow",
       wobbleSeed: 4.6,
-    },
-    {
-      position: [0.2, 0.1, -1.2] as const,
-      rotationZ: 0.4,
-      scale: 0.7,
-      palette: "warm",
-      wobbleSeed: 6.2,
     },
   ] as const satisfies readonly LabOrbInstance[],
 } as const;

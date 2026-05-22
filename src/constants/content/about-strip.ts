@@ -11,6 +11,7 @@ export const ABOUT_STRIP = {
     "I'm a senior front-end engineer and founder with twenty-plus years building scalable, high-performance web applications for Sky, Estée Lauder, Liberty Global, Bristol City Council, EE and A+E Networks. I specialise in React, Next.js and TypeScript, and I love the moment a complex multi-step product finally feels effortless to use.",
     "What sets me apart is range. I architect a 12-step financial lending platform one day and prototype an experimental WebGL interface the next. I lead front-end on enterprise revenue platforms, mentor juniors onto modern practice, and I'm currently building Nannynow.co.uk end to end. Shipping product is the senior bar.",
   ],
+  portraitSrc: "/images/about/portrait.jpg",
   portraitAlt: "Portrait of Davide Domenghini",
   chips: [
     { label: "Download CV", href: "/davide-domenghini-cv.pdf" },

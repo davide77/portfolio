@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { PLAUSIBLE_DOMAIN } from "@/constants/config";
 import { rootMetadata } from "@/lib/seo";
@@ -16,6 +16,15 @@ const dmSans = DM_Sans({
   style: ["normal", "italic"],
 });
 
+// JetBrains Mono powers every eyebrow, micro-caps label, vertical tag,
+// and dl key across the design system (per Figma source of truth).
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
@@ -24,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-GB" className={dmSans.variable} data-theme="paper">
+    <html lang="en-GB" className={`${dmSans.variable} ${jetBrainsMono.variable}`} data-theme="paper">
       {/* suppressHydrationWarning: Grammarly + other extensions inject
           data-* attributes on <body> after SSR. Per Next.js docs, the
           recommended fix is to suppress hydration warnings on the

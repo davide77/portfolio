@@ -58,6 +58,10 @@
   }
 }
 
+.mobile-nav-menu--lab .mobile-nav-menu__link--active {
+  color: color(orb-glow);
+}
+
 .mobile-nav-menu__cta {
   margin-top: spacer(2);
 }

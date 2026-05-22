@@ -9,6 +9,19 @@
   min-height: 100svh;
 }
 
+// Hero sits flush under the fixed nav (same as home-main). Avoids doubling
+// main#main padding-top with the hero band's own top padding. Flat ink only:
+// no atmospheric ::before / ::after washes (those come from _app-sticky-nav).
+main#main.lab-page {
+  padding-top: 0;
+
+  &::before,
+  &::after {
+    content: none;
+    display: none;
+  }
+}
+
 // Tile typography on the ink lab page reads against the frosted dark surface
 // rather than the white card it assumes by default.
 .lab-page {

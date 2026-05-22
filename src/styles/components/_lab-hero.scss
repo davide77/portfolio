@@ -1,16 +1,16 @@
 @use '../abstracts' as *;
 
-// /lab hero - same architecture as the home hero, but a constellation
-// of five orbs instead of two and a green-refraction accent line on
-// the eyebrow + right-edge text.
+// /lab hero - Figma ⑤ Lab / Desktop: centred H1 + caps row over the orb
+// field. Archive and era bands below stay left-aligned in the content well.
+// WebGL canvas is unchanged (see LabHeroCanvas).
 
 .lab-hero {
   position: relative;
-  min-height: 80svh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: spacer(10) spacer(8);
+  padding-block: spacer(8);
   overflow: hidden;
 }
 
@@ -24,33 +24,34 @@
 .lab-hero__inner {
   position: relative;
   z-index: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: spacer(5);
+  min-height: 70svh;
+  text-align: center;
 }
 
 .lab-hero__eyebrow {
-  font-size: font-size(xs);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
   margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: color(orb-glow);
 }
 
 .lab-hero__headline {
-  display: flex;
-  flex-direction: column;
-  gap: spacer(2);
-  font-family: $font-family-headline;
-  font-size: clamp(2.5rem, 6cqi, 5rem);
-  font-weight: font-weight(light);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
   margin: 0;
-  max-width: 24ch;
-}
-
-.lab-hero__line {
-  display: block;
+  max-width: 980px;
+  font-family: $font-family-headline;
+  font-size: font-size(hero);
+  font-weight: font-weight(light);
+  line-height: line-height(hero);
+  letter-spacing: tracking(hero);
+  text-wrap: balance;
 }
 
 // Brand.md-sanctioned: single italic emphasis on the lab hero in
@@ -63,6 +64,8 @@
 
 .lab-hero__subhead {
   margin: 0;
+  max-width: 72ch;
+  font-family: $font-family-mono;
   font-size: font-size(xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -70,6 +73,16 @@
 }
 
 .lab-hero__edge {
+  position: absolute;
+  right: spacer(2);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  @include max(bp(md)) {
+    display: none;
+  }
+
   color: color(orb-glow);
   opacity: 0.5;
 }

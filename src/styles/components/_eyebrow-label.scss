@@ -1,6 +1,58 @@
 @use '../abstracts' as *;
 
+// Numbered eyebrow row. Figma source of truth: ③ Patterns / Section head.
+// JetBrains Mono Medium 12px, tracking 3.36px, uppercase. Two-tone:
+// accent number + muted label. Surface variant swaps the palette.
 .eyebrow-label {
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: spacer(3); // Figma uses 10px; spacer(3)=12px is the closest token.
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xs);
+  font-weight: font-weight(medium);
+  line-height: line-height(normal);
+  letter-spacing: tracking(eyebrow);
+  text-transform: uppercase;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+
+.eyebrow-label--ink {
+  .eyebrow-label__num {
+    color: color(orb-flare);
+  }
+
+  .eyebrow-label__text {
+    color: color-mix(in srgb, color(cream) 70%, transparent);
+  }
+}
+
+.eyebrow-label--paper {
+  .eyebrow-label__num {
+    color: color(signal);
+  }
+
+  .eyebrow-label__text {
+    color: color(stone);
+  }
+}
+
+// /lab archive bands: full eyebrow in orb-glow (brand.md /lab carve-out).
+.eyebrow-label--orb-glow {
+  .eyebrow-label__num,
+  .eyebrow-label__text {
+    color: color(orb-glow);
+  }
+}
+
+// Figma ⑤ Lab group heads: peach index + green label (e.g. 01 · SAP).
+.eyebrow-label--lab-group {
+  .eyebrow-label__num {
+    color: color(orb-flare);
+  }
+
+  .eyebrow-label__text {
+    color: color(orb-glow);
+  }
 }

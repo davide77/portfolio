@@ -8,7 +8,7 @@ import {
   MOBILE_NAV,
   PRIMARY_NAV,
 } from "@/constants/nav";
-import { isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
+import { isLabRoute, isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
 
 type MobileNavMenuProps = {
   open: boolean;
@@ -26,12 +26,13 @@ const itemVariants: Variants = {
 
 export function MobileNavMenu({ open, onClose }: MobileNavMenuProps) {
   const { pathname, hash } = useNavHash();
+  const onLab = isLabRoute(pathname);
 
   return (
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="mobile-nav-menu"
+          className={cx("mobile-nav-menu", onLab && "mobile-nav-menu--lab")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

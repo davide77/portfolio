@@ -84,6 +84,21 @@ a {
   }
 }
 
+// Tracking (letter-spacing) utilities. Mirror Figma's named pairings -
+// `.tracking-eyebrow` for the 12px JBM eyebrow row, `.tracking-hero`
+// for the 80px hero H1, etc. See abstracts/_typography.scss for the map.
+@each $name, $value in $letter-spacings {
+  .tracking-#{$name} {
+    letter-spacing: $value;
+  }
+}
+
+// Font family utility. Adds JetBrains Mono on top of the DM Sans default
+// so eyebrows + meta caps can opt in without component CSS.
+.font-mono {
+  font-family: $font-family-mono;
+}
+
 // Text alignment utilities
 $text-aligns: (left, center, right, justify);
 

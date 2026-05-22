@@ -1,43 +1,61 @@
 @use '../abstracts' as *;
 
+// Closer block - Figma source of truth: ③ Patterns / Closer · ink.
+// 160px top / 80px bottom block padding. Section head (88px H1, italic
+// orb-flare emphasis, 18px intro at 1.55) sits above a CTA row with
+// the email pill, a 3-column dl of contacts and a footer rule.
 .closing-cta-section {
-  padding-block: spacer(10);
+  padding-block: spacer(13) spacer(10); // 160px top, 80px bottom
   background-color: color(ink);
   container-type: inline-size;
   container-name: closer;
 }
 
-// Type, weight and colour now come from the shared .section-title +
-// is-cream classes. Only the component-specific measure cap stays.
-.closing-cta-section__headline {
-  max-width: 18ch;
-
-  // Sanctioned orb-ramp carve-out, per brand.md. Single italic emphasis word
-  // on the closer headline. Same custom-property pattern as the hero.
-  em {
-    font-style: italic;
-    color: var(--hero-emphasis-color, #{color(orb-flare)});
-  }
+.closing-cta-section__inner {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(8); // 48px between major blocks
 }
 
-.closing-cta-section__body {
-  max-width: 62ch;
+.closing-cta-section__head {
+  // 40px between H1 and intro is handled by .section-head's own gap
+  // (32px). The 8px extra to reach Figma's 40 spacing is intentional
+  // slack so the larger 88px H1 + ink emphasis read calmly.
+  max-width: 900px;
+}
+
+.closing-cta-section__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: spacer(4);
+  padding-bottom: spacer(8); // 48px before the dl border
 }
 
 .closing-cta-section__meta {
-  opacity: 0.7;
-  letter-spacing: 0.14em;
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xs); // 12px
+  font-weight: font-weight(regular);
+  letter-spacing: tracking(caps-md); // 2.64px
   text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 60%, transparent);
 }
 
 .closing-cta-section__contact {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: spacer(6);
+  gap: spacer(6); // 32px
+  margin: 0;
+  padding-top: spacer(6); // 32px above the dl items
+  padding-bottom: spacer(12); // 128px below before the footer rule
+  border-top: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
 
   @container closer (max-width: 640px) {
     grid-template-columns: 1fr;
-    gap: spacer(4);
+    gap: spacer(5);
+    padding-bottom: spacer(9);
   }
 }
 
@@ -47,10 +65,22 @@
   gap: spacer(2);
 }
 
-.closing-cta-section__contact dt {
-  opacity: 0.6;
-  letter-spacing: 0.14em;
+.closing-cta-section__contact-label {
+  margin: 0;
+  font-family: $font-family-mono;
+  font-size: font-size(xxs); // 11px
+  font-weight: font-weight(medium);
+  letter-spacing: tracking(caps); // 2.42px
   text-transform: uppercase;
+  color: color(stone);
+}
+
+.closing-cta-section__contact-value {
+  margin: 0;
+  font-family: $font-family-body;
+  font-size: font-size(base); // 16px
+  font-weight: font-weight(regular);
+  color: color(paper);
 }
 
 .closing-cta-section__link {
@@ -65,19 +95,17 @@
   }
 }
 
-.closing-cta-section__rule {
-  border: 0;
-  border-top: 1px solid color-mix(in srgb, color(paper) 20%, transparent);
-  margin: spacer(4) 0 0;
-  width: 100%;
-}
-
 .closing-cta-section__footer {
   display: flex;
   justify-content: space-between;
   gap: spacer(4);
   flex-wrap: wrap;
-  color: color(cream);
-  opacity: 0.7;
-  letter-spacing: 0.08em;
+  padding-top: spacer(5); // 24px above the rule (border-top below)
+  border-top: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
+  font-family: $font-family-mono;
+  font-size: font-size(xxs); // 11px
+  font-weight: font-weight(regular);
+  letter-spacing: tracking(caps); // 2.42px
+  text-transform: uppercase;
+  color: color-mix(in srgb, color(cream) 55%, transparent);
 }

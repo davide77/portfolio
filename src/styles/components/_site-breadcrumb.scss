@@ -1,0 +1,55 @@
+@use '../abstracts' as *;
+
+// Figma nav breadcrumb (⑤ Lab / Desktop): `dd` in orb-flare, name + page
+// segment in white on ink. Home link is the first list item; current page
+// is the second with a generated ` / ` separator.
+
+.site-breadcrumb__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-breadcrumb__home {
+  font-family: $font-family-body;
+  font-size: font-size(sm);
+  font-weight: font-weight(regular);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  text-transform: lowercase;
+  white-space: nowrap;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Figma: warm peach `dd` on ink. Paper nav uses signal (light-surface accent).
+.site-breadcrumb__prefix--ink {
+  color: color(orb-flare);
+}
+
+.site-breadcrumb__prefix--paper {
+  color: color(signal);
+}
+
+.site-breadcrumb__current {
+  display: inline-flex;
+  align-items: baseline;
+
+  &::before {
+    content: " / ";
+  }
+}
+
+.site-breadcrumb--ink .site-breadcrumb__current {
+  color: color(white);
+}
+
+.site-breadcrumb--paper .site-breadcrumb__current {
+  color: color(ink);
+}
+
+.site-breadcrumb__segment {
+  text-transform: lowercase;
+}

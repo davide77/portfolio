@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cx } from "@/components/cx";
 
-type Variant = "primary" | "ghost" | "ghostOnInk";
+type Variant = "primary" | "secondary" | "secondaryInk" | "ghost" | "ghostOnInk";
 
 type MagneticButtonProps = {
   href: string;

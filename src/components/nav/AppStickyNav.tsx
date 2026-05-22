@@ -6,13 +6,9 @@ import { useEffect, useState } from "react";
 import { cx } from "@/components/cx";
 import { SectionNumerals } from "@/components/ui/SectionNumerals";
 import { MobileNavMenu } from "@/components/nav/MobileNavMenu";
-import { isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
-import {
-  MOBILE_NAV,
-  NAV_WORDMARK,
-  PRIMARY_NAV,
-} from "@/constants/nav";
-import { ROUTES } from "@/constants/routes";
+import { isLabRoute, isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
+import { SiteBreadcrumb } from "@/components/nav/SiteBreadcrumb";
+import { MOBILE_NAV, PRIMARY_NAV, resolveNavCenterMeta } from "@/constants/nav";
 
 type NavSurface = "paper" | "ink";
 
@@ -31,6 +27,8 @@ export function AppStickyNav({
   showSectionNumerals = false,
 }: AppStickyNavProps) {
   const { pathname, hash } = useNavHash();
+  const navCenterMeta = resolveNavCenterMeta(pathname);
+  const onLab = isLabRoute(pathname);
   const ink = surface === "ink";
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,6 +64,7 @@ export function AppStickyNav({
         className={cx(
           "app-sticky-nav",
           ink && "app-sticky-nav--ink",
+          onLab && "app-sticky-nav--lab",
           (!visible || hidden) && "app-sticky-nav--inactive",
         )}
         initial={false}
@@ -80,29 +79,17 @@ export function AppStickyNav({
         // control. Supersedes aria-hidden + pointer-events:none.
         inert={!visible || hidden}
       >
-        <div className="app-sticky-nav__inner is-flex is-justify-between is-align-start has-gap-3">
+        <div className="app-sticky-nav__inner">
           <div className="app-sticky-nav__left is-flex is-flex-column has-gap-2">
             {showSectionNumerals ? <SectionNumerals className="app-sticky-nav__numerals" /> : null}
-            <Link
-              href={ROUTES.home}
-              className="app-sticky-nav__wordmark"
-              aria-label={NAV_WORDMARK.homeAriaLabel}
-            >
-              <span
-                className={cx(
-                  "app-sticky-nav__wordmark-prefix",
-                  // accent on the ink nav is 4.42:1 (just under AA for
-                  // 14px text); brand.md rule 89 says use cream for meta
-                  // on ink. accent stays on the light/paper nav.
-                  ink ? "is-paper" : "is-signal",
-                )}
-              >
-                {NAV_WORDMARK.prefix}
-              </span>
-              <span className="app-sticky-nav__wordmark-sep"> {NAV_WORDMARK.separator} </span>
-              <span className={ink ? "is-white" : "is-ink"}>{NAV_WORDMARK.suffix}</span>
-            </Link>
+            <SiteBreadcrumb pathname={pathname} surface={surface} />
           </div>
+
+          {navCenterMeta ? (
+            <p className="app-sticky-nav__center mono" aria-hidden>
+              {navCenterMeta}
+            </p>
+          ) : null}
 
           <div className="app-sticky-nav__right">
             <nav className="app-sticky-nav__nav is-flex is-align-center" aria-label="Primary">

@@ -20,10 +20,8 @@ export const LAB_HERO_COPY = {
 } as const;
 
 export const LAB_ARCHIVE_SECTION = {
-  eyebrow: "10 · Lab / long-form archive",
+  eyebrow: "10 · Long-form archive",
   headline: "Forty receipts. Grouped by era, not lost to time.",
-  intro:
-    "The home page shows six current projects. The archive lives here. For the hiring lead who scrolls long enough to see the breadth.",
 } as const;
 
 export const LAB_MENTIONED_SECTION = {
