@@ -75,8 +75,9 @@ function dShape({
 }
 
 /**
- * "DD": two D's facing the same way, set side by side. Each glyph's spine sits
- * on the left, bowl bulges right, reading as "DD".
+ * "DD": two D's stacked so the front one sits over the back one in
+ * perspective. Both face the camera; the front D is pushed toward the camera
+ * along Z and nudged up + sideways so the back D's outline reads beneath it.
  */
 export function createDoubleDGeometry({
   height,
@@ -84,30 +85,33 @@ export function createDoubleDGeometry({
   depth,
   bowlWeight,
 }: DGeometryOptions): BufferGeometry {
-  const width = height / 2;
-  const gap = stroke * 0.6;
-
-  const first = new ExtrudeGeometry(
+  const back = new ExtrudeGeometry(
     dShape({ height, stroke, bowlWeight }),
     dExtrudeOptions(depth),
   );
-  const second = new ExtrudeGeometry(
+  const front = new ExtrudeGeometry(
     dShape({ height, stroke, bowlWeight }),
     dExtrudeOptions(depth),
   );
 
-  first.translate(-(width + gap / 2), 0, 0);
-  second.translate(gap / 2, 0, 0);
+  // Back D sits centred on the origin, raised + nudged right. Front D stays
+  // forward of it on Z but lower + further left, so it reads as resting in
+  // front of the back D in perspective.
+  const offsetX = stroke * 1.2;
+  const offsetY = height * 0.18;
+  const offsetZ = depth * 1.6;
+  back.translate(offsetX, offsetY, 0);
+  front.translate(0, 0, offsetZ);
 
-  const merged = mergeGeometries([first, second], false);
+  const merged = mergeGeometries([back, front], false);
   if (!merged) {
-    first.dispose();
-    second.dispose();
+    back.dispose();
+    front.dispose();
     throw new Error("Failed to merge DD geometries");
   }
   merged.center();
   merged.computeVertexNormals();
-  first.dispose();
-  second.dispose();
+  back.dispose();
+  front.dispose();
   return merged;
 }

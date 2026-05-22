@@ -7,7 +7,7 @@ export const MONOPO_SCENE = {
   maxDevicePixelRatio: 2,
   cameraFov: 50,
   cameraZ: 1.3,
-  clearColor: "#eeeeee",
+  clearColor: "#16181a",
   backgroundRadius: 1.5,
   backgroundDetail: 20,
 } as const;
@@ -16,9 +16,9 @@ export const MONOPO_BACKGROUND = {
   patternScale: 0.1,
   patternBias1: 0.5,
   patternBias2: 0.1,
-  firstColor: "#789e71",
-  secondColor: "#e09442",
-  accentColor: "#000000",
+  firstColor: "#b8c4a8",
+  secondColor: "#8a6a52",
+  accentColor: "#1a1d22",
   timeStep: 0.01,
 } as const;
 
