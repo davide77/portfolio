@@ -19,7 +19,7 @@ export function ClosingCtaSection() {
           emphasisWord={PROFILE.closingEmphasisWord}
           surface="ink"
           size="mega"
-          as="h1"
+          as="h2"
           headingId="closing-cta"
           className="closing-cta-section__head"
         />

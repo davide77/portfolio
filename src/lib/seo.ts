@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE } from "@/constants/site";
 
-export const SITE_URL = "https://domenghini.com";
+export const SITE_URL = "https://www.domenghini.com";
 
 /** Stable last-modified dates for sitemap (ISO date strings). */
 export const SITEMAP_LAST_MODIFIED: Record<string, string> = {

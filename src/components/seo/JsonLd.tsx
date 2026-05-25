@@ -1,5 +1,5 @@
 import type { CaseStudy } from "@/constants/content/projects";
-import { SITE, SOCIAL_PROFILES } from "@/constants/site";
+import { SITE, SITE_EXPERTISE, SOCIAL_PROFILES } from "@/constants/site";
 import { ROUTES } from "@/constants/routes";
 import { siteUrl } from "@/lib/seo";
 
@@ -26,13 +26,15 @@ export function HomeJsonLd() {
             "@type": "Person",
             name: SITE.name,
             jobTitle: SITE.role,
+            description: SITE.oneLineDescription,
             email: SITE.email,
             url: siteUrl(),
+            knowsAbout: [...SITE_EXPERTISE],
             sameAs: SOCIAL_PROFILES.map((profile) => profile.href),
             address: {
               "@type": "PostalAddress",
               addressLocality: "London",
-              addressCountry: "UK",
+              addressCountry: "GB",
             },
           },
           {

@@ -1,0 +1,61 @@
+# Davide Domenghini
+
+> Senior front-end engineer and founder based in London, UK. Twenty years
+> (since 2006) shipping the front end of products people use. Specialises in
+> React, Next.js, and TypeScript, with depth in accessibility, design systems,
+> and WebGL. Available for senior individual-contributor and lead front-end
+> roles, contract or permanent, in London or remote, from discovery to deploy.
+
+## About
+
+Davide Domenghini is a senior front-end engineer and founder with twenty-plus
+years building scalable, high-performance web applications. He has shipped work
+for Sky, Estee Lauder, Liberty Global, Bristol City Council, EE, and A+E
+Networks, across enterprise lending, luxury retail, public sector, and consumer
+products. He architects multi-step regulated platforms and prototypes
+experimental WebGL interfaces, leads front-end on enterprise revenue platforms,
+mentors junior engineers, and is currently building Nannynow.co.uk end to end.
+
+## Specialisms
+
+- Front-end architecture: Next.js, React, TypeScript, SCSS
+- Accessibility: axe, NVDA, VoiceOver, Lighthouse
+- Performance: Lighthouse, WebPageTest, Core Web Vitals
+- Design systems: Figma, Style Dictionary, SCSS
+- WebGL and motion: Three.js, GLSL
+- End-to-end delivery: Vercel, GitHub Actions, Stripe
+
+## Selected work
+
+- Liberty Blume (Liberty Global), senior FE lead, 2025-now: 12-step regulated
+  lending journey, live. https://www.domenghini.com/work/liberty-blume
+- Estee Lauder EMEA, senior FE, 2022-25: front-end modernisation across brands
+  with FR and DE rollouts. https://www.domenghini.com/work/estee-lauder-emea
+- Bristol City Council, senior FE, 2021-22: GOV.UK-aligned design system serving
+  500k+ residents. https://www.domenghini.com/work/bristol-city-council
+- Striver.Football, design and FE lead, 2026: brand to a shipped Next.js site.
+  https://www.domenghini.com/work/striver-football
+- Cheam Sports FC, founder, 2024-now: solo full-stack build with payments.
+  https://www.domenghini.com/work/cheam-sports-fc
+- Nannynow.co.uk, founder, currently building: concept to MVP, solo.
+  https://www.domenghini.com/work/nannynow
+
+## Outcomes
+
+- 500k+ Bristol residents served by the bristol.gov.uk design system
+- 40% dev-time reduction across Squiz engagements
+- 12-step regulated lending journey shipped and live at Liberty Blume
+
+## Links
+
+- Site: https://www.domenghini.com/
+- Work archive: https://www.domenghini.com/lab
+- LinkedIn: https://www.linkedin.com/in/davidedomenghini
+- GitHub: https://github.com/davide77
+- Email: davide@domenghini.com
+
+## Contact
+
+Hiring a senior IC or lead front-end engineer, or want a technical partner from
+discovery to deploy? Email davide@domenghini.com. Replies within 48 hours.
+London, GMT.

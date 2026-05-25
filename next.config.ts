@@ -28,6 +28,30 @@ const nextConfig: NextConfig = {
       { source: "/archive", destination: "/lab", permanent: true },
     ];
   },
+  // Baseline security headers. HSTS is widened to cover subdomains and
+  // request preload-list inclusion. A Content-Security-Policy is left out
+  // for now: it needs the Plausible origin and the self-hosted next/font
+  // assets enumerated and tested in Report-Only first before enforcing.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

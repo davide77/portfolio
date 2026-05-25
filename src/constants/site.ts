@@ -12,6 +12,23 @@ export const SITE = {
   phoneTel: "tel:+447752829119",
 } as const;
 
+/**
+ * Areas of expertise for the Person JSON-LD `knowsAbout` field. Helps search
+ * and AI engines understand the entity. Mirrors the capabilities on home.
+ */
+export const SITE_EXPERTISE = [
+  "Front-end architecture",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "User experience design",
+  "Web accessibility (WCAG 2.1 AA)",
+  "Web performance and Core Web Vitals",
+  "Design systems",
+  "WebGL and GLSL",
+  "End-to-end product delivery",
+] as const;
+
 /** Personal profiles (used in JSON-LD sameAs and footer/contact links). */
 export const SOCIAL_PROFILES = [
   {

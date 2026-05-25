@@ -1,0 +1,103 @@
+{
+  "_comment": "JSON-LD for the positioning page. Person + Service + FAQPage + BreadcrumbList. NO AggregateRating/Review: there are no published reviews, and fabricating ratings would breach the skill's accuracy rule and brand.md's 'no superlatives without evidence'. Add a Review/AggregateRating block ONLY when real, attributable testimonials exist. URLs assume the route /hire-a-front-end-engineer; if built as a home anchor instead, point @id/url at https://domenghini.com/#work-with-me.",
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://domenghini.com/#davide",
+      "name": "Davide Domenghini",
+      "jobTitle": "Senior front-end engineer",
+      "description": "London-based senior front-end engineer with 20+ years shipping products end to end, from UX through to deploy, for Sky, Estée Lauder, Liberty Global and Liberty Blume.",
+      "url": "https://domenghini.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/davidedomenghini",
+        "https://github.com/davide77",
+        "https://x.com/ddomenghini"
+      ],
+      "knowsAbout": [
+        "Front-end architecture",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Web accessibility (WCAG 2.1 AA)",
+        "Web performance and Core Web Vitals",
+        "Design systems",
+        "WebGL and GLSL"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://domenghini.com/hire-a-front-end-engineer#service",
+      "name": "Senior front-end engineering, UX to deploy",
+      "serviceType": "Front-end engineering and product UX",
+      "provider": { "@id": "https://domenghini.com/#davide" },
+      "areaServed": [
+        { "@type": "Place", "name": "London" },
+        { "@type": "Place", "name": "Remote / GMT" }
+      ],
+      "description": "One accountable senior owner who designs the UX and ships the production build, from technical discovery to live deploy. WCAG 2.1 AA in the definition of done, performance budgets on every pull request, and a documented design system in code.",
+      "url": "https://domenghini.com/hire-a-front-end-engineer"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://domenghini.com/hire-a-front-end-engineer#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Should I hire a design agency or a single senior front-end engineer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hire an agency when you need several workstreams running in parallel with cover when someone is off. Agencies buy you breadth and capacity, with a blended rate and an account layer between you and the people doing the work. Hire a single senior owner when the brief needs design judgement and a production build owned by one accountable person, with senior output from week one and no recruitment lag."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a design-only freelancer and a front-end engineer who also designs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A design-only freelancer hands you Figma files that someone still has to turn into production code, so the final fidelity depends on that translation. A front-end engineer who owns the UX takes the work from sketch to live deploy with no handoff gap, so the design that ships is the design that was signed off."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I hire a full-time front-end engineer instead of a contractor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hire full-time when the work is permanent and continuous and you want long-term ownership of the roadmap, mentoring and the codebase after launch. The trade-offs are recruitment lead time of weeks to months and a fixed headcount cost. A senior contractor gives you the same level of output this week, with no permanent commitment, which suits time-boxed or project work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the risk of relying on one person to design and build a product front end?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The single-owner risk is bus factor and continuity. It is managed by shipping documented, type-safe, accessible code: a performance budget measured on every pull request, accessibility in the definition of done, and a versioned design system in code. When the engagement ends, the team inherits maintainable code rather than a black box."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://domenghini.com/hire-a-front-end-engineer#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://domenghini.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Work with me",
+          "item": "https://domenghini.com/hire-a-front-end-engineer"
+        }
+      ]
+    }
+  ]
+}
