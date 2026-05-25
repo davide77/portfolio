@@ -59,7 +59,9 @@
   color: color(paper);
   max-width: 980px;
   font-family: $font-family-headline;
-  font-size: font-size(hero); // 80px
+  // Fluid: holds the 80px Figma size on desktop (caps at ~889px wide) and
+  // shrinks on phones so the ten-word line stays inside the mobile fold.
+  font-size: clamp(#{font-size(2xl)}, 9vw, #{font-size(hero)}); // 32 -> 80px
   font-weight: font-weight(light);
   line-height: line-height(hero); // 1.02
   letter-spacing: tracking(hero); // -2px

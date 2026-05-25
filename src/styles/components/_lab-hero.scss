@@ -47,7 +47,9 @@
   margin: 0;
   max-width: 980px;
   font-family: $font-family-headline;
-  font-size: font-size(hero);
+  // Fluid: caps at the 80px Figma size, shrinks on phones so the line
+  // stays inside the mobile fold.
+  font-size: clamp(#{font-size(2xl)}, 9vw, #{font-size(hero)}); // 32 -> 80px
   font-weight: font-weight(light);
   line-height: line-height(hero);
   letter-spacing: tracking(hero);

@@ -9,7 +9,8 @@
 .section-title {
   margin: 0;
   font-family: $font-family-headline;
-  font-size: font-size(headline);
+  // Fluid: caps at the 38px Figma size, shrinks on small viewports.
+  font-size: clamp(#{font-size(xl)}, 6vw, #{font-size(headline)}); // 24 -> 38px
   font-weight: font-weight(light);
   line-height: line-height(hairline);
   letter-spacing: tracking(headline);
@@ -20,7 +21,7 @@
 // 56px variant for stats + about. Tighter line-height (1.05), more
 // negative tracking (-1.12px).
 .section-title--display {
-  font-size: font-size(display);
+  font-size: clamp(#{font-size(2xl)}, 8vw, #{font-size(display)}); // 32 -> 56px
   line-height: line-height(display);
   letter-spacing: tracking(display);
 }
@@ -28,7 +29,7 @@
 // 88px closer H1. Tightest line-height (0.95) and tracking (-2.64px).
 // Always rendered as <h1> via the SectionHead atom.
 .section-title--mega {
-  font-size: font-size(mega);
+  font-size: clamp(#{font-size(3xl)}, 11vw, #{font-size(mega)}); // 40 -> 88px
   line-height: line-height(crisp);
   letter-spacing: tracking(closer);
   max-width: 900px;
@@ -36,7 +37,7 @@
 
 // 80px hero H1. Used on the home + lab hero scaffolds.
 .section-title--hero {
-  font-size: font-size(hero);
+  font-size: clamp(#{font-size(2xl)}, 9vw, #{font-size(hero)}); // 32 -> 80px
   line-height: line-height(hero);
   letter-spacing: tracking(hero);
 }
