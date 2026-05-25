@@ -115,7 +115,6 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
           <MagneticButton
             href={project.liveUrl}
             variant="ghostOnInk"
-            cursorText={CASE_STUDY.liveCursorText}
             external
           >
             {project.liveLabel}

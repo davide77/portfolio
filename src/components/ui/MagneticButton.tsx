@@ -10,7 +10,6 @@ type MagneticButtonProps = {
   href: string;
   children: ReactNode;
   variant?: Variant;
-  cursorText?: string;
   className?: string;
   external?: boolean;
 };
@@ -19,12 +18,11 @@ function isExternal(href: string) {
   return href.startsWith("http") || href.startsWith("mailto:");
 }
 
-/** CTA with magnetic cursor API. */
+/** Styled CTA link with primary/secondary/ghost variants. */
 export function MagneticButton({
   href,
   children,
   variant = "primary",
-  cursorText,
   className,
   external,
 }: MagneticButtonProps) {
@@ -34,17 +32,12 @@ export function MagneticButton({
     "magnetic-button",
     className,
   );
-  const data = {
-    "data-magnetic": true,
-    "data-cursor-text": cursorText,
-  };
 
   if (external || isExternal(href)) {
     return (
       <a
         href={href}
         className={cls}
-        {...data}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         target={href.startsWith("http") ? "_blank" : undefined}
       >
@@ -54,7 +47,7 @@ export function MagneticButton({
   }
 
   return (
-    <Link href={href} className={cls} {...data}>
+    <Link href={href} className={cls}>
       {children}
     </Link>
   );

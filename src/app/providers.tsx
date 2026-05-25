@@ -1,7 +1,6 @@
 "use client";
 
 import { type ReactNode, useCallback, useLayoutEffect, useState } from "react";
-import { Cursor } from "@/components/motion/Cursor";
 import { Loader } from "@/components/motion/Loader";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -34,7 +33,6 @@ export function Providers({ children }: ProvidersProps) {
       <SmoothScroll>
         {!loaderDone && checked ? <Loader onComplete={onLoaderComplete} /> : null}
         <PageTransition>{children}</PageTransition>
-        <Cursor />
       </SmoothScroll>
     </ThemeProvider>
   );

@@ -25,12 +25,12 @@ export const HERO_ORB = {
   cameraZ: 8,
   meshPrimary: {
     position: [-1.3, 0.4, 0.3] as const,
-    rotationZ: 0.18,
+    rotationZ: 0.08,
     scale: 2.3,
   },
   meshSecondary: {
     position: [1.7, -0.5, -0.4] as const,
-    rotationZ: -0.28,
+    rotationZ: -0.12,
     scale: 1.8,
   },
 } as const;

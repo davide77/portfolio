@@ -7,7 +7,6 @@ export const CASE_STUDY = {
   technologiesAriaLabel: "Technologies",
   artefactsAriaLabel: "Selected artefacts",
   nextProjectLabel: "Next project",
-  liveCursorText: "Live",
   viewCaseStudyLabel: "View case study",
   viewCaseStudyAriaPrefix: "View case study:",
   sections: {

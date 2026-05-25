@@ -62,7 +62,7 @@ export function AboutPageContent() {
         </ul>
       </section>
 
-      <MagneticButton href={ROUTES.contact} cursorText="Talk">
+      <MagneticButton href={ROUTES.contact}>
         {ABOUT_PAGE.cta}
       </MagneticButton>
     </div>

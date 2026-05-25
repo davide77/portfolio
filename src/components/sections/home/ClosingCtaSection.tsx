@@ -24,7 +24,7 @@ export function ClosingCtaSection() {
           className="closing-cta-section__head"
         />
         <MotionReveal className="closing-cta-section__cta-row" lift={18}>
-          <MagneticButton href={`mailto:${SITE.email}`} variant="secondaryInk" cursorText="Email">
+          <MagneticButton href={`mailto:${SITE.email}`} variant="secondaryInk">
             <span>{PROFILE.primaryCta}</span>
             <span aria-hidden className="button__glyph">↗</span>
           </MagneticButton>

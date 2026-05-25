@@ -1,29 +1,138 @@
 @use '../abstracts' as *;
 
+// Intro splash: a brand moment shown once per tab session before the home
+// hero. The backdrop mirrors the hero grainient palette so the slide-up exit
+// resolves *into* the hero rather than cutting to black. Palette + progress
+// scale arrive as per-instance custom properties from Loader.tsx.
+
 .loader__overlay {
   position: fixed;
   inset: 0;
-  z-index: z(modal);
+  z-index: z(tooltip);
   overflow: hidden;
+  background-color: var(--intro-base, #{color(hero-void)});
+  will-change: transform;
 }
 
-.loader__name {
-  font-family: $font-family-headline;
-  font-size: clamp(#{font-size(3xl)}, 8vw, #{font-size(hero)});
-  font-weight: font-weight(regular);
-  line-height: line-height(tight);
-  letter-spacing: -0.02em;
+// Slow-drifting grainy gradient. Bleeds past the edges so the scale/rotate
+// drift never exposes a seam.
+.loader__grainient {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 30% 28%, var(--intro-mid) 0%, transparent 55%),
+    radial-gradient(circle at 72% 70%, var(--intro-hi) 0%, transparent 50%),
+    var(--intro-base);
+  will-change: transform;
 }
 
-.loader__counter {
-  margin-top: spacer(4);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.2em;
-}
-
-.loader__curtain {
+// Film grain. A static fractal-noise tile at low opacity, blended over the
+// gradient - the same texture cue the WebGL grainient carries on the hero.
+.loader__grain {
   position: absolute;
   inset: 0;
-  background-color: color(ink);
-  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.loader__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 42%, transparent 38%, var(--intro-base) 100%);
+  pointer-events: none;
+}
+
+.loader__stage {
+  position: relative;
+  z-index: 2;
+}
+
+.loader__kicker {
+  letter-spacing: 0.32em;
+}
+
+.loader__monogram {
+  font-family: $font-family-headline;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-size: clamp(#{font-size(hero)}, 24vw, 17rem);
+}
+
+// Each letter rides up out of a clipped mask. Vertical padding keeps the
+// type from being shaved by overflow:hidden.
+.loader__letter-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-block: 0.08em;
+}
+
+.loader__letter {
+  display: inline-block;
+}
+
+.loader__sep {
+  color: color(signal);
+  margin-inline: spacer(1);
+}
+
+// Progress hairline, pinned to the bottom edge.
+.loader__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: spacer(4) spacer(5);
+}
+
+.loader__progress-track {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  overflow: hidden;
+  background-color: color(stone);
+}
+
+.loader__progress-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform: scaleX(var(--loader-progress, 0));
+  background-color: color(signal);
+}
+
+.loader__progress-num {
+  min-width: 3ch;
+  text-align: right;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+}
+
+// Skip control: brand chrome, kept in SCSS (component composition).
+.loader__skip {
+  position: absolute;
+  top: spacer(4);
+  right: spacer(5);
+  z-index: 3;
+  background-color: transparent;
+  border: 1px solid color(stone);
+  border-radius: $radius-full;
+  color: color(cream);
+  padding: spacer(2) spacer(4);
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: color(ink);
+    background-color: color(paper);
+    border-color: color(paper);
+  }
 }

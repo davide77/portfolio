@@ -244,8 +244,6 @@ export function ContactForm() {
         type="submit"
         className="contact-form__submit"
         disabled={isSubmitting}
-        data-magnetic
-        data-cursor-text="Send"
       >
         {FORM.submitLabel}
       </button>

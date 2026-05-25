@@ -21,7 +21,7 @@ export default function StyleguidePage() {
           <EyebrowLabel>01 - Component preview</EyebrowLabel>
           <DisplayText as="h2">{PROFILE.headline}</DisplayText>
           <StatusPill label={PROFILE.availabilityLabel} tone="ink" />
-          <MagneticButton href={`mailto:${SITE.email}`} cursorText="Email">
+          <MagneticButton href={`mailto:${SITE.email}`}>
             Email Davide
           </MagneticButton>
           <VerticalText>{PROFILE.verticalStrip}</VerticalText>

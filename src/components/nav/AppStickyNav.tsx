@@ -106,7 +106,6 @@ export function AppStickyNav({
                           active && "app-sticky-nav__nav-link--active",
                           ink ? "app-sticky-nav__nav-link--ink" : "app-sticky-nav__nav-link--paper",
                         )}
-                        data-magnetic
                         aria-current={active ? "page" : undefined}
                       >
                         {active ? <span className="app-sticky-nav__active-dot" aria-hidden /> : null}
