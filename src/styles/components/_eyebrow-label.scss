@@ -16,6 +16,15 @@
   text-transform: uppercase;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+
+  // Desktop keeps the Figma single-line spec. Below md the long eyebrows
+  // (e.g. "06 · About · the one-paragraph version") are wider than a
+  // narrow column and force horizontal page overflow, so allow them to
+  // wrap. Viewport query rather than container: the atom is used in
+  // contexts with no container-type ancestor (hero, footer, section heads).
+  @include max(bp(md)) {
+    white-space: normal;
+  }
 }
 
 .eyebrow-label--ink {

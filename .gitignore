@@ -50,3 +50,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local working files: portfolio archive, CV backups, reference PDFs
+documents/old-portfolio-archive/
+documents/*.backup-*.docx
+documents/F_ck-Being-Humble*

@@ -5,7 +5,7 @@ export const SITE = {
   founderLine: "Founder, Nannynow.co.uk",
   location: "London, UK",
   oneLineDescription:
-    "Senior front-end engineer and founder. React, Next.js, TypeScript. Enterprise lending, luxury retail, public sector, and consumer products.",
+    "Front-end engineer who designs and ships, end to end. 20 years for Sky, Estée Lauder and Liberty Global, now Liberty Blume. React, Next.js, TypeScript.",
   email: "davide@domenghini.com",
   emailDisplay: "davide@domenghini.com",
   phoneDisplay: "07752 829119",
