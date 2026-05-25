@@ -57,6 +57,11 @@
 }
 
 .app-sticky-nav__right {
+  // Pin to the last grid column. The centre meta is display:none below
+  // bp(md) (and absent on pages with no centre meta), which leaves only
+  // two grid items; without this, auto-placement drops the burger into
+  // the middle track and it reads as screen-centred instead of top-right.
+  grid-column: 3;
   justify-self: end;
   display: flex;
   align-items: flex-start;
