@@ -4,7 +4,9 @@ export type ProjectIndustry =
   | "public"
   | "luxury"
   | "fintech"
-  | "sports";
+  | "sports"
+  | "commerce"
+  | "studio";
 
 export type CaseStudy = {
   slug: string;
@@ -16,6 +18,7 @@ export type CaseStudy = {
   role: string;
   industry: ProjectIndustry;
   order: number;
+  /** Empty string when the project has no public live site (hides the live button). */
   liveUrl: string;
   liveLabel: string;
   imageSrc: string;
@@ -33,6 +36,111 @@ export type CaseStudy = {
 // `featured` = appears on the home page. Keep it to 3-4 (the latest by recency).
 // `/work` shows all case studies via getSortedCaseStudies() regardless of this flag.
 export const CASE_STUDIES = [
+  {
+    slug: "origin-social",
+    client: "Origin Social",
+    title: "Origin Social",
+    tagline: "Product engineering for founders, idea to launch.",
+    outcome: "Product strategy, architecture and delivery across a portfolio of digital products.",
+    period: "2026 - present",
+    role: "Product Engineer",
+    industry: "studio",
+    order: 0,
+    liveUrl: "https://origin.social",
+    liveLabel: "Open live site",
+    imageSrc: "/images/projects/origin-social.svg",
+    imageAlt: "Origin Social product studio",
+    tags: ["Product strategy", "Next.js", "TypeScript", "Ecommerce", "AI-native"],
+    summary:
+      "A venture and product studio helping founders turn ambitious ideas into scalable digital businesses. I lead product strategy, technical architecture, UX, frontend engineering, ecommerce and AI-assisted delivery.",
+    brief:
+      "Founders need one senior partner who can take an idea through positioning, product strategy, engineering, ecommerce and launch. Origin Social works as an extension of the founding team, building products people love and businesses built to grow.",
+    workPoints: [
+      {
+        title: "Idea to launch",
+        body: "I work directly with founders and leadership teams to shape products from concept through discovery, design, engineering and launch.",
+      },
+      {
+        title: "Full-spectrum ownership",
+        body: "Product strategy, technical architecture, UX, frontend engineering, ecommerce and AI-assisted delivery, all held by one senior owner.",
+      },
+      {
+        title: "AI as a force multiplier",
+        body: "AI embedded across the delivery loop so a senior engineer moves at startup speed, with the final calls kept in the loop.",
+      },
+    ],
+    highlights: [
+      "Product strategy, architecture and design direction across a portfolio of products.",
+      "One senior owner spanning discovery, design, engineering and launch.",
+      "Brand-as-code and AI-native delivery as the standard, not the exception.",
+    ],
+    sections: [
+      {
+        heading: "How it works",
+        body: "Every engagement is different, but the objective is always the same: create products people love using and businesses built to grow. One week is architecting a regulated lending platform, the next is designing a brand system, then building a Shopify storefront ready for launch. The through-line is senior judgement applied end to end, not handed off between silos.",
+      },
+      {
+        heading: "Recent engagements",
+        body: "Nannynow.co.uk (founder and product lead), LOVA (technical director on a Shopify DTC wellness brand), and Striver.Football (design and frontend lead). Each is a different problem space held to the same bar: shipped product, not tickets.",
+      },
+    ],
+    artefacts: [
+      {
+        src: "/images/projects/origin-social.svg",
+        alt: "Origin Social studio",
+        caption: "Product studio spanning strategy, design, engineering and launch.",
+      },
+    ],
+    featured: true,
+  },
+  {
+    slug: "lova",
+    client: "LOVA",
+    title: "LOVA",
+    tagline: "DTC women's wellness brand on Shopify.",
+    outcome: "Storefront architecture, design-token system and launch-ready performance strategy.",
+    period: "2026 - present",
+    role: "Technical director and front-end lead",
+    industry: "commerce",
+    order: 7,
+    liveUrl: "https://lova.lifestyle",
+    liveLabel: "Open live site",
+    imageSrc: "/images/projects/lova.svg",
+    imageAlt: "LOVA direct-to-consumer wellness storefront",
+    tags: ["Shopify", "React", "TypeScript", "SCSS", "Ecommerce"],
+    summary:
+      "Led technical direction and frontend delivery for a new direct-to-consumer women's wellness brand launching on Shopify: ecommerce architecture, customer journeys, design system, performance strategy and launch readiness.",
+    brief:
+      "A new DTC wellness brand needed to launch on Shopify with a storefront that ships consistent, on-brand surfaces at speed, with performance and conversion built in from the start.",
+    workPoints: [
+      {
+        title: "Storefront architecture",
+        body: "Defined the Shopify storefront architecture and a component and design-token system so the brand ships consistent, on-brand surfaces at speed.",
+      },
+      {
+        title: "Conversion-focused UX",
+        body: "Set the performance and conversion-focused UX approach ahead of launch, aligning engineering decisions directly to commercial outcomes.",
+      },
+    ],
+    highlights: [
+      "Shopify DTC storefront with a codified design-token system.",
+      "Performance and conversion strategy aligned to commercial outcomes.",
+    ],
+    sections: [
+      {
+        heading: "Ecommerce as commercial engineering",
+        body: "Owning the storefront architecture, customer journeys, design system, performance strategy and launch readiness. Every engineering decision maps to a commercial outcome: faster stores convert, on-brand components ship faster, and a token system keeps a growing catalogue consistent.",
+      },
+    ],
+    artefacts: [
+      {
+        src: "/images/projects/lova.svg",
+        alt: "LOVA storefront",
+        caption: "Shopify DTC storefront with a tokenised design system.",
+      },
+    ],
+    featured: false,
+  },
   {
     slug: "liberty-blume",
     client: "Liberty Global",
@@ -386,8 +494,10 @@ export type CaseStudySlug = (typeof CASE_STUDIES)[number]["slug"];
 
 export const PROJECT_FILTERS = [
   { id: "all", label: "All" },
+  { id: "studio", label: "Studio" },
   { id: "enterprise", label: "Enterprise" },
   { id: "founder", label: "Founder" },
+  { id: "commerce", label: "Ecommerce" },
   { id: "public", label: "Public sector" },
   { id: "luxury", label: "Luxury" },
   { id: "fintech", label: "Fintech" },

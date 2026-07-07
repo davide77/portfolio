@@ -171,14 +171,16 @@ function PanelInner({ project }: { project: CaseStudy }) {
         >
           {CASE_STUDY.viewCaseStudyLabel}
         </Link>
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={"selected-work__link selected-work__link--secondary"}
-        >
-          {project.liveLabel}
-        </a>
+        {project.liveUrl ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={"selected-work__link selected-work__link--secondary"}
+          >
+            {project.liveLabel}
+          </a>
+        ) : null}
       </div>
     </div>
   );

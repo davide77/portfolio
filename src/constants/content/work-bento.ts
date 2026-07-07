@@ -7,17 +7,55 @@
  * Body + role copy mirrors the Figma source of truth (Project tile · pattern,
  * node 79:2). Short one-liners on purpose - the grid communicates breadth at
  * a glance.
+ *
+ * Links: an internal tile declares only its case-study `slug` and the href is
+ * derived via `ROUTES.work(slug)`, so a tile can never drift out of sync with
+ * the real /work/<slug> route the way a hand-typed href can. An external tile
+ * declares an absolute `external` URL instead. Never hard-code `/work/...`.
  */
+
+import { ROUTES } from "@/constants/routes";
 
 export const WORK_BENTO = {
   eyebrow: "04 · Selected work",
-  headline: "Six pieces. Each answers role, stack, scale, status.",
+  headline: "Work I shipped. Work I would stand behind in the room.",
   archiveLabel: "Everything else lives at /lab · twenty years of receipts, no longer crowding the hero.",
   archiveCta: "Open the archive",
   archiveHref: "/lab",
 } as const;
 
-export const WORK_BENTO_TILES = [
+type InternalTile = {
+  /** Case-study slug; the href is derived via ROUTES.work(slug). */
+  slug: string;
+  role: string;
+  title: string;
+  body: string;
+  stack: string;
+  image: string;
+};
+
+type ExternalTile = InternalTile & {
+  /** Absolute URL; opens in a new tab. Set for off-site work only. */
+  external: string;
+};
+
+type WorkBentoSource = InternalTile | ExternalTile;
+
+/** A tile ready to render: href resolved, external flag decided. */
+export type WorkBentoTile = InternalTile & {
+  href: string;
+  isExternal: boolean;
+};
+
+const WORK_BENTO_SOURCE: readonly WorkBentoSource[] = [
+  {
+    slug: "origin-social",
+    role: "Product Engineer · 2026 - now",
+    title: "Origin Social",
+    body: "Idea to launch, across a portfolio.",
+    stack: "STRATEGY · NEXT · TS",
+    image: "/images/projects/origin-social.svg",
+  },
   {
     slug: "liberty-blume",
     role: "Senior FE lead · 2025 - now",
@@ -25,7 +63,6 @@ export const WORK_BENTO_TILES = [
     body: "12-step regulated lending journey. Live.",
     stack: "REACT · TS · SCSS · GCP",
     image: "/images/projects/liberty-blume.png",
-    href: "/work/liberty-blume",
   },
   {
     slug: "striver-football",
@@ -34,25 +71,22 @@ export const WORK_BENTO_TILES = [
     body: "Brand to shipped site.",
     stack: "NEXT · WP",
     image: "/images/projects/striver-football.jpg",
-    href: "/work/striver-football",
   },
   {
-    slug: "estee-lauder",
+    slug: "estee-lauder-emea",
     role: "Senior FE · 2022 - 25",
     title: "Estée Lauder",
     body: "7 brands, FR + DE rollouts.",
     stack: "REACT · DRUPAL",
     image: "/images/projects/estee-lauder.jpg",
-    href: "/work/estee-lauder",
   },
   {
-    slug: "bristol-gov-uk",
+    slug: "bristol-city-council",
     role: "Senior FE · 2021 - 22",
     title: "bristol.gov.uk",
     body: "500k+ residents.",
     stack: "REACT · DOCUSAURUS",
     image: "/images/projects/bristol.jpg",
-    href: "/work/bristol-gov-uk",
   },
   {
     slug: "cheam-sports-fc",
@@ -61,7 +95,6 @@ export const WORK_BENTO_TILES = [
     body: "Full-stack solo build.",
     stack: "NEXT · DRIZZLE · STRIPE",
     image: "/images/projects/cheam-sports-fc.jpg",
-    href: "/work/cheam-sports-fc",
   },
   {
     slug: "nannynow",
@@ -70,6 +103,13 @@ export const WORK_BENTO_TILES = [
     body: "Concept to MVP, solo.",
     stack: "NEXT · TS",
     image: "/images/projects/nannynow.jpg",
-    href: "https://nannynow.co.uk",
+    external: "https://nannynow.co.uk",
   },
-] as const;
+];
+
+export const WORK_BENTO_TILES: readonly WorkBentoTile[] = WORK_BENTO_SOURCE.map(
+  (tile) =>
+    "external" in tile
+      ? { ...tile, href: tile.external, isExternal: true }
+      : { ...tile, href: ROUTES.work(tile.slug), isExternal: false },
+);

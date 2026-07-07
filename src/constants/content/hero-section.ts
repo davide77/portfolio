@@ -1,13 +1,17 @@
-import { PROFILE, TRUSTED_BY_CLIENTS } from "./profile";
+import { PROFILE } from "./profile";
 
-/** Figma ③ Home / Desktop brand band: six clients, mono caps, one line under H1. */
-export const HERO_BRAND_BAND = TRUSTED_BY_CLIENTS.slice(0, 6).join(" · ");
+/**
+ * Mono line under H1. Positioning, not a client list: the hero is about the
+ * work I own, not the brands I passed through. Clients still appear lower down
+ * in the brands marquee (section 02) as proof.
+ */
+export const HERO_BRAND_BAND = "BUILDING DIGITAL PRODUCTS FROM IDEA TO LAUNCH";
 
 export const HERO_DISPLAY = {
   eyebrow: PROFILE.eyebrow,
-  /** Word-level hero line; "shipping" is emphasised in JSX */
-  words: ["Twenty", "years", "shipping", "the", "front", "end", "of", "products", "people", "use."] as const,
-  emphasisWord: "shipping",
+  /** Word-level hero line; "briefs" is emphasised in JSX */
+  words: ["Twenty", "years", "turning", "hard", "briefs", "into", "products", "people", "use."] as const,
+  emphasisWord: "briefs",
   brandBand: HERO_BRAND_BAND,
   verticalEdge: "EST · 2006 · BASED IN LONDON",
 } as const;

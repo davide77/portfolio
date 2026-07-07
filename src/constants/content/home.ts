@@ -3,12 +3,12 @@ import { CONTACT_PAGE } from "./contact-page";
 
 export const HOME_SECTIONS = {
   work: {
-    eyebrow: "01 - Selected work",
+    eyebrow: "01 · Selected work",
     title: "Selected work",
     cta: "Read the case studies",
   },
   caseStudies: {
-    eyebrow: "02 - Case studies",
+    eyebrow: "02 · Case studies",
     title: "Case studies in depth",
     intro:
       "The full story behind the work above: the brief, what I did, and what it delivered.",

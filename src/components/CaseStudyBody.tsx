@@ -69,9 +69,11 @@ export function CaseStudyBody({ project }: CaseStudyBodyProps) {
           ))}
 
           <div className={cx("case-study-body__actions", "is-flex has-gap-3 has-pt-4")}>
-            <ButtonLink href={project.liveUrl} variant="primary">
-              {project.liveLabel}
-            </ButtonLink>
+            {project.liveUrl ? (
+              <ButtonLink href={project.liveUrl} variant="primary">
+                {project.liveLabel}
+              </ButtonLink>
+            ) : null}
             <ButtonLink href={ROUTES.hash.work} variant="secondary">
               {CASE_STUDY.moreWorkLabel}
             </ButtonLink>

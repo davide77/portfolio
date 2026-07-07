@@ -45,7 +45,7 @@ export const MOBILE_NAV = {
 
 /** Figma nav centre meta (③ Home, ⑤ Lab). Hidden when no match. */
 export const NAV_CENTER_META = {
-  home: "Senior front-end · London",
+  home: "Product Engineer · London",
   lab: "Experiments + archive",
 } as const;
 

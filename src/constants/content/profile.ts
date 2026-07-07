@@ -1,8 +1,8 @@
 export const PROFILE = {
-  eyebrow: "01 · Senior front-end · Founder",
-  headline: "Twenty years shipping the front end of products people use.",
+  eyebrow: "01 · Product Engineer · Origin Social",
+  headline: "Twenty years turning hard briefs into products people use.",
   subhead:
-    "London-based. Twenty years in high-traffic web work for Sky, Estée Lauder and Liberty Global. Now leading frontend at Liberty Blume and building Nannynow with the same rigour as enterprise lending and luxury retail.",
+    "I lead product, engineering and design end to end, now through my own studio, Origin Social. Discovery to deploy, the whole path, answering to no one but the work.",
   verticalStrip: "EST · 2006 · BASED IN LONDON",
   primaryCta: "Email Davide",
   secondaryCta: "See selected work",
@@ -14,7 +14,7 @@ export const PROFILE = {
 
 export const BRANDS_MARQUEE = {
   eyebrow: "02 · Brands shipped for",
-  meta: "20 of 60+ · 2006-2026",
+  meta: "22 of 60+ · 2006-2026",
   ariaLabel: "Brands shipped for",
 } as const;
 
@@ -25,6 +25,8 @@ export const TRUSTED_BY_CLIENTS = [
   "Bristol City Council",
   "EE",
   "A+E Networks",
+  "Home Office",
+  "News UK",
   "SAP",
   "Boring Money",
   "Toyota",
@@ -76,8 +78,8 @@ export const CAPABILITIES = [
     stack: "THREE.JS · GLSL · IO",
   },
   {
-    title: "End-to-end delivery",
-    body: "From technical discovery to live deploy. Comfortable owning the API contract, the build pipeline and the analytics that prove the thing worked.",
-    stack: "VERCEL · GH ACTIONS · STRIPE",
+    title: "Ecommerce and delivery",
+    body: "Shopify DTC storefronts and end-to-end product, from technical discovery to live deploy. Comfortable owning the API contract, the build pipeline, and the conversion metrics that prove the thing worked.",
+    stack: "SHOPIFY · VERCEL · STRIPE",
   },
 ] as const;

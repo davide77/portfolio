@@ -6,7 +6,6 @@
 export const ROUTES = {
   home: "/",
   workIndex: "/#work",
-  archive: "/#archive",
   about: "/#about",
   contact: "/#contact",
   lab: "/lab",

@@ -6,29 +6,29 @@
  */
 
 export const STATS_BAND = {
-  eyebrow: "03 · By the numbers · 2006-2026",
-  headline: "The shape of twenty years, on one line.",
+  eyebrow: "03 · The count · 2006-2026",
+  headline: "Twenty years, and I have the receipts.",
 } as const;
 
 export const STATS = [
   {
     value: "20",
     suffix: "+yrs",
-    label: "Senior front-end practice. Started 2006.",
+    label: "Front-end I have led since 2006. No gaps.",
   },
   {
-    value: "500",
-    suffix: "k+",
-    label: "Bristol residents on bristol.gov.uk.",
+    value: "60",
+    suffix: "+brands",
+    label: "Shipped for, from Sky to grassroots clubs.",
   },
   {
-    value: "12",
-    suffix: "steps",
-    label: "Regulated lending journey live at Liberty Blume.",
+    value: "1",
+    suffix: "studio",
+    label: "Origin Social. Every product shipped through it.",
   },
   {
-    value: "40",
-    suffix: "%",
-    label: "Dev-time reduction across Squiz engagements.",
+    value: "1",
+    suffix: "owner",
+    label: "Me. Discovery to deploy, no hand-offs.",
   },
 ] as const;

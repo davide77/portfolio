@@ -21,7 +21,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
   return (
     <main id="main" className="case-study-page" aria-labelledby="case-study-title">
       <div className="container-atmosphere has-py-4">
-        <MagneticButton href={ROUTES.home} variant="ghostOnInk">
+        <MagneticButton href={ROUTES.home} variant="primary">
           {CASE_STUDY.backToHomeLabel}
         </MagneticButton>
       </div>
@@ -111,15 +111,17 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
             ))}
           </ul>
         </section>
-        <div className="is-flex is-flex-wrap has-gap-3">
-          <MagneticButton
-            href={project.liveUrl}
-            variant="ghostOnInk"
-            external
-          >
-            {project.liveLabel}
-          </MagneticButton>
-        </div>
+        {project.liveUrl ? (
+          <div className="is-flex is-flex-wrap has-gap-3">
+            <MagneticButton
+              href={project.liveUrl}
+              variant="ghostOnInk"
+              external
+            >
+              {project.liveLabel}
+            </MagneticButton>
+          </div>
+        ) : null}
       </div>
 
       <div className="container-sm case-study-page__footer is-flex is-flex-column has-gap-6 has-mt-9">
@@ -135,7 +137,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
           </Link>
         ) : null}
         <div>
-          <MagneticButton href={ROUTES.home} variant="ghostOnInk">
+          <MagneticButton href={ROUTES.home} variant="primary">
             {CASE_STUDY.backToHomeLabel}
           </MagneticButton>
         </div>

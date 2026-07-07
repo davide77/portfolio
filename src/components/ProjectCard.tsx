@@ -59,14 +59,16 @@ export function ProjectCard({ project, tone = "paper" }: ProjectCardProps) {
           <Link href={studyHref} className={cx("project-card__link-primary", "has-font-semibold text-sm is-forest")}>
             {CASE_STUDY.viewCaseStudyLabel}
           </Link>
-          <a
-            href={project.liveUrl}
-            className={cx("project-card__link-secondary", "text-sm is-stone")}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {project.liveLabel}
-          </a>
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              className={cx("project-card__link-secondary", "text-sm is-stone")}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {project.liveLabel}
+            </a>
+          ) : null}
         </div>
       </div>
     </motion.article>

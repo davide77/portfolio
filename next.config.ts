@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Some project cover art (Origin Social, LOVA) ships as first-party static
+  // SVG. next/image refuses SVG unless explicitly opted in. These are our own
+  // hand-authored files with no scripts; the CSP + sandbox below keep any SVG
+  // served through the optimiser inert (no script execution, no external refs).
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
   turbopack: {
     rules: {
       "*.glsl": {

@@ -1,13 +1,13 @@
 /**
- * Three proofs / from the CV. Ink surface, signal accents.
- * Real project evidence until named LinkedIn quotes land.
+ * The receipts. Ink surface, signal accents.
+ * Three live projects, each with a claim the reader can go and verify.
  */
 
 export const RECEIPTS_BAND = {
-  eyebrow: "07 · Three proofs · from the CV",
-  headline: "Three projects. Three specific receipts. Pick any one to verify.",
+  eyebrow: "07 · The receipts",
+  headline: "Three projects. Three claims you can go and check.",
   intro:
-    "Final site will replace these with named LinkedIn quotes. Until then, the evidence is the work.",
+    "No testimonials theatre. The work is live, the outcomes are real, and every one of them has my name on it.",
 } as const;
 
 export const RECEIPTS = [

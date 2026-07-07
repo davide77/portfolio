@@ -47,6 +47,7 @@ export function AboutStrip() {
                   {...(chip.href.startsWith("http")
                     ? { rel: "noopener noreferrer", target: "_blank" }
                     : {})}
+                  {...("download" in chip && chip.download ? { download: true } : {})}
                 >
                   {chip.label}
                 </a>

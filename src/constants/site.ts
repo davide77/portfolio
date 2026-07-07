@@ -1,11 +1,11 @@
 export const SITE = {
   name: "Davide Domenghini",
   monogram: "DD",
-  role: "Senior front-end engineer",
-  founderLine: "Founder, Nannynow.co.uk",
+  role: "Product Engineer",
+  founderLine: "Product Engineer, Origin Social",
   location: "London, UK",
   oneLineDescription:
-    "Front-end engineer who designs and ships, end to end. 20 years for Sky, Estée Lauder and Liberty Global, now Liberty Blume. React, Next.js, TypeScript.",
+    "Product Engineer building digital products from idea to launch. Twenty years leading product, engineering and design end to end, now through my own studio, Origin Social. React, Next.js, TypeScript, Shopify.",
   email: "davide@domenghini.com",
   emailDisplay: "davide@domenghini.com",
   phoneDisplay: "07752 829119",
@@ -18,6 +18,7 @@ export const SITE = {
  */
 export const SITE_EXPERTISE = [
   "Front-end architecture",
+  "Product engineering",
   "React",
   "Next.js",
   "TypeScript",
@@ -25,6 +26,7 @@ export const SITE_EXPERTISE = [
   "Web accessibility (WCAG 2.1 AA)",
   "Web performance and Core Web Vitals",
   "Design systems",
+  "Ecommerce and Shopify",
   "WebGL and GLSL",
   "End-to-end product delivery",
 ] as const;

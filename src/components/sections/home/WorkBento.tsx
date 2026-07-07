@@ -29,9 +29,8 @@ export function WorkBento() {
         </StaggerList>
         <StaggerList as="ul" className="work-bento__grid has-mt-6" stagger={0.08}>
           {WORK_BENTO_TILES.map((tile) => {
-            const isExternal = tile.href.startsWith("http");
-            const Wrapper = isExternal ? "a" : Link;
-            const wrapperProps = isExternal
+            const Wrapper = tile.isExternal ? "a" : Link;
+            const wrapperProps = tile.isExternal
               ? { href: tile.href, rel: "noopener noreferrer", target: "_blank" }
               : { href: tile.href };
             return (
