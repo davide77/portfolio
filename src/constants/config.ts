@@ -30,8 +30,9 @@ export const INTRO = {
 
 /**
  * Footer wash: how far before the bottom of the page the cream
- * transition starts, measured in viewport heights. 1.1 means the page
- * has fully washed to cream by the time you reach the bottom, with the
- * ramp spanning roughly the last viewport-and-a-bit of scroll.
+ * transition starts, measured in viewport heights. 0.45 keeps the page
+ * dark and legible until the footer itself scrolls into view, then
+ * washes to cream fast over the last stretch of scroll so the contrast
+ * flip lands right as you reach the bottom rather than a screen early.
  */
-export const FOOTER_WASH_RAMP_VH = 1.1;
+export const FOOTER_WASH_RAMP_VH = 0.45;

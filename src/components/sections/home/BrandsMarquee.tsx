@@ -22,7 +22,7 @@ export function BrandsMarquee() {
       </div>
       <Marquee
         items={TRUSTED_BY_CLIENTS}
-        separator="     "
+        separator="·"
         ariaLabel={BRANDS_MARQUEE.ariaLabel}
       />
     </section>

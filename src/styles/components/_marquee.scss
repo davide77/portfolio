@@ -35,13 +35,19 @@
 
 .marquee__content {
   flex-shrink: 0;
-  padding-inline: spacer(4);
   font-size: font-size(sm);
   font-weight: font-weight(medium);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color(stone);
   white-space: nowrap;
+}
+
+// Divider dot in its own accent colour, with the spacing that used to be
+// baked into the separator string now driven by symmetric inline margins.
+.marquee__sep {
+  margin-inline: 0.4em;
+  color: color(signal);
 }
 
 @keyframes marquee {

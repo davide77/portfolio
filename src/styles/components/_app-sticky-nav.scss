@@ -11,6 +11,12 @@
   transition:
     background-color $transition-base,
     backdrop-filter $transition-base;
+  // The bar spans the full viewport width but is mostly transparent empty
+  // space. Left as-is it sits at z(sticky) over the top strip of every page
+  // and swallows clicks meant for content directly beneath it (e.g. the
+  // case study "Back to home" button). Make the chrome click-through and
+  // re-enable pointer events only on the actual interactive controls below.
+  pointer-events: none;
 
   @include min(bp(lg)) {
     padding: spacer(4) spacer(5);
@@ -28,6 +34,13 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: start;
   gap: spacer(3);
+}
+
+// Re-arm pointer events for the interactive columns only, so the empty grid
+// tracks stay click-through and never block content beneath the bar.
+.app-sticky-nav__left,
+.app-sticky-nav__right {
+  pointer-events: auto;
 }
 
 // Figma nav centre meta (③ Home, ⑤ Lab).

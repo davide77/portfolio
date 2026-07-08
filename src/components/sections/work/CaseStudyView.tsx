@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { RevealImage } from "@/components/motion/RevealImage";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { BackToHomeButton } from "@/components/ui/BackToHomeButton";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { cx } from "@/components/cx";
 import { CASE_STUDY } from "@/constants/content/case-study";
@@ -21,9 +22,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
   return (
     <main id="main" className="case-study-page" aria-labelledby="case-study-title">
       <div className="container-atmosphere has-py-4">
-        <MagneticButton href={ROUTES.home} variant="primary">
-          {CASE_STUDY.backToHomeLabel}
-        </MagneticButton>
+        <BackToHomeButton />
       </div>
 
       <div className="container-atmosphere">
@@ -137,9 +136,7 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
           </Link>
         ) : null}
         <div>
-          <MagneticButton href={ROUTES.home} variant="primary">
-            {CASE_STUDY.backToHomeLabel}
-          </MagneticButton>
+          <BackToHomeButton />
         </div>
       </div>
     </main>

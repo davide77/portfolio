@@ -34,7 +34,6 @@
 }
 
 .brands-marquee .marquee__content {
-  padding-inline: spacer(7);
   font-size: clamp(#{font-size(lg)}, 3.5cqi, 34px);
   font-weight: font-weight(light);
   letter-spacing: -0.02em;
