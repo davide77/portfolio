@@ -35,6 +35,84 @@ export const HERO_ORB = {
   },
 } as const;
 
+/**
+ * Flow-field hero variant (monopo.vn technique, re-skinned to this brand).
+ * Set HERO_VARIANT to "flowfield" to render the marbling plane + glass-D
+ * monogram + film grain instead of the liquid-metal orb. The orb stays the
+ * default and fully reachable; this is an in-repo A/B, not a replacement.
+ */
+export const HERO_VARIANT: "orb" | "flowfield" = "flowfield";
+
+/**
+ * Flow-field plane palette. Reuses the sanctioned WebGL-orb carve-out tokens
+ * (never type/UI/CSS): sage ridges + amber accents over near-black valleys.
+ * Sampled to echo monopo.vn's marbling without importing its olive/amber.
+ */
+export const HERO_FLOWFIELD_PALETTE = {
+  baseFirst: BRAND_COLORS.orbVoid, // dark valleys, keeps the Ds legible
+  baseSecond: BRAND_COLORS.orbGlow, // sage flowing band
+  accent: BRAND_COLORS.orbAmber, // amber ridge accents
+} as const;
+
+/**
+ * Flow-field shader dials - restrained, dark, filmic register (matches the
+ * real monopo.vn hero: amber/sage glow bleeding out of near-black, mostly at
+ * the edges, centre nearly black). accentOpacity is pulled well below 1 and
+ * opacityBackground kept low so the marbling reads as a subtle wash over
+ * hero-void, not a full-bleed lava lamp.
+ */
+export const HERO_FLOWFIELD = {
+  baseFrequency: 2.6,
+  accentOpacity: 0.55,
+  noiseIntensity: 0,
+  opacityBackground: 0.6,
+  /** Crush the marbling toward black (0 = full colour, 1 = fully squared). */
+  darkness: 0.72,
+  /** Radial vignette strength - sinks the centre so glow lives at the edges. */
+  vignette: 0.85,
+  zoom: 0.2,
+  /** uTime advance per second (frame-rate independent). */
+  timeSpeed: 0.42,
+  /** On-load bloom timeline (seconds): 0->0.25 then 0.25->1. */
+  bloomStageSec: 2,
+  /** Film-grain opacity for the postprocessing Noise pass. */
+  grainOpacity: 0.06,
+} as const;
+
+/** Glass-D monogram (refraction letters) transform + material dials. */
+export const HERO_GLASS_MONOGRAM = {
+  /** MeshTransmissionMaterial dials - frosted warm glass. */
+  transmission: 0.92,
+  thickness: 1.6,
+  roughness: 0.28,
+  ior: 1.45,
+  chromaticAberration: 0.06,
+  /** Refraction quality + distortion (frosted-glass depth). */
+  samples: 6,
+  resolution: 512,
+  anisotropy: 0.4,
+  distortion: 0.35,
+  distortionScale: 0.4,
+  temporalDistortion: 0.15,
+  /** Dark backdrop the glass samples where the flow-field is not behind it. */
+  background: BRAND_COLORS.orbVoid,
+  /** Group base position. Offset down + right so both D's clear the headline
+   *  and read as a distinct "DD", echoing monopo's off-text glass mark while
+   *  staying subtle. */
+  groupPosition: [0.95, -1.05, 0] as const,
+  /** Two D's as a clear "DD": separation must EXCEED the glyph width (~0.71 at
+   *  this scale) so they sit side-by-side with a small gap, not occluding each
+   *  other. Small z-offset so the front D still overlaps the back one's edge. */
+  separationX: 0.92,
+  separationZ: 0.22,
+  scale: 0.42,
+  revealSec: 1.5,
+  idleYaw: 0.07,
+  idleFloat: 0.012,
+  parallaxTilt: 0.12,
+  parallaxShift: 0.05,
+} as const;
+
 /** @deprecated Use HERO_ORB */
 export const HERO_WEBGL = {
   maxDevicePixelRatio: HERO_ORB.maxDevicePixelRatio,

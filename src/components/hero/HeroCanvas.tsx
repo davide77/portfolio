@@ -1,9 +1,14 @@
 "use client";
 
+import { EffectComposer, Noise } from "@react-three/postprocessing";
 import { Canvas } from "@react-three/fiber";
+import { BlendFunction } from "postprocessing";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { HeroFlowField } from "@/components/hero/HeroFlowField";
+import { HeroGlassMonogram } from "@/components/hero/HeroGlassMonogram";
 import { HeroOrb } from "@/components/hero/HeroOrb";
-import { HERO_ORB } from "@/constants/hero-webgl";
+import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
+import { HERO_FLOWFIELD, HERO_ORB, HERO_VARIANT } from "@/constants/hero-webgl";
 import { useVisibility } from "@/hooks/useVisibility";
 
 type HeroCanvasProps = {
@@ -33,6 +38,7 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [tabVisible, setTabVisible] = useState(true);
   const maxDpr = useMaxDpr();
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onVis = () => setTabVisible(document.visibilityState === "visible");
@@ -65,7 +71,23 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
         }}
       >
         <Suspense fallback={null}>
-          <HeroOrb containerRef={wrapRef} scrollProgress={scrollProgress} />
+          {HERO_VARIANT === "flowfield" ? (
+            <>
+              <HeroFlowField reduceMotion={reduceMotion} />
+              <HeroGlassMonogram containerRef={wrapRef} reduceMotion={reduceMotion} />
+              {!reduceMotion && (
+                <EffectComposer>
+                  <Noise
+                    premultiply
+                    blendFunction={BlendFunction.SCREEN}
+                    opacity={HERO_FLOWFIELD.grainOpacity}
+                  />
+                </EffectComposer>
+              )}
+            </>
+          ) : (
+            <HeroOrb containerRef={wrapRef} scrollProgress={scrollProgress} />
+          )}
         </Suspense>
       </Canvas>
     </div>
