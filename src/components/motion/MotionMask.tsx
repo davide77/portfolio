@@ -1,9 +1,10 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cx } from "@/components/cx";
 import { DURATION_HERO, EASE_EDITORIAL } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type Direction = "up" | "down" | "left" | "right";
 
@@ -37,7 +38,7 @@ export function MotionMask({
   className,
   children,
 }: MotionMaskProps) {
-  const reduce = useReducedMotion();
+  const reduce = useSkipEntrance();
 
   if (reduce) {
     return <div className={className}>{children}</div>;

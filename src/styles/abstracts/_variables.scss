@@ -61,6 +61,12 @@ $duration-curtain: 1100ms;
 $ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 $ease-snappy: cubic-bezier(0.33, 1, 0.68, 1);
 
+// Press feedback (apple-design: respond on pointer-down, instantly).
+// Controls shrink a touch more than whole cards, which only need a hint.
+$press-scale: 0.97;
+$press-scale-card: 0.985;
+$press-duration: 100ms;
+
 // Focus ring
 $focus-ring-width: 3px;
 $focus-ring-color: rgba(color(forest), 0.5);

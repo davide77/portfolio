@@ -87,9 +87,14 @@
 
   // Figma chip hover (ink surface): only the border opacity steps up
   // from 45% to 90%. Background stays transparent, text stays paper.
-  &:hover,
   &:focus-visible {
     border-color: color-mix(in srgb, color(paper) 90%, transparent);
+  }
+
+  @include hover-capable {
+    &:hover {
+      border-color: color-mix(in srgb, color(paper) 90%, transparent);
+    }
   }
 }
 

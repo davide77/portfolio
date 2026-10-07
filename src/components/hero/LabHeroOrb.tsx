@@ -116,7 +116,6 @@ export function LabHeroOrb({ containerRef, scrollProgress }: LabHeroOrbProps) {
     const t = state.clock.elapsedTime;
     // eslint-disable-next-line react-hooks/immutability
     materials.warm.uniforms.uTime.value = t;
-    // eslint-disable-next-line react-hooks/immutability
     materials.glow.uniforms.uTime.value = t;
 
     target.current.x +=

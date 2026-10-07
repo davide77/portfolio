@@ -9,8 +9,10 @@
   overflow: hidden;
   transition: border-color $transition-base;
 
-  &:hover {
-    border-color: color(forest);
+  @include hover-capable {
+    &:hover {
+      border-color: color(forest);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -21,19 +23,24 @@
 .project-card__card--ink {
   background-color: color-mix(in srgb, color(white) 8%, transparent);
   backdrop-filter: blur(16px);
+  @include glass-fallback;
   border-radius: $radius-card-glass;
   border: 1px solid color-mix(in srgb, color(paper) 28%, transparent);
   box-shadow: none;
 
-  &:hover {
-    border-color: color-mix(in srgb, color(paper) 48%, transparent);
+  @include hover-capable {
+    &:hover {
+      border-color: color-mix(in srgb, color(paper) 48%, transparent);
+    }
   }
 
   .project-card__title-link {
     color: color(paper);
 
-    &:hover {
-      color: color-mix(in srgb, color(paper) 88%, color(forest));
+    @include hover-capable {
+      &:hover {
+        color: color-mix(in srgb, color(paper) 88%, color(forest));
+      }
     }
   }
 
@@ -53,16 +60,20 @@
   .project-card__link-primary {
     color: color-mix(in srgb, color(paper) 92%, color(forest));
 
-    &:hover {
-      color: color(paper);
+    @include hover-capable {
+      &:hover {
+        color: color(paper);
+      }
     }
   }
 
   .project-card__link-secondary {
     color: color-mix(in srgb, color(paper) 62%, transparent);
 
-    &:hover {
-      color: color(paper);
+    @include hover-capable {
+      &:hover {
+        color: color(paper);
+      }
     }
   }
 }
@@ -101,8 +112,10 @@
   text-decoration: none;
   cursor: pointer;
 
-  &:hover {
-    color: color(forest);
+  @include hover-capable {
+    &:hover {
+      color: color(forest);
+    }
   }
 
   &:focus-visible {
@@ -114,9 +127,11 @@
   text-decoration: none;
   cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
-    text-underline-offset: $underline-offset;
+  @include hover-capable {
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: $underline-offset;
+    }
   }
 
   &:focus-visible {
@@ -129,8 +144,10 @@
   text-underline-offset: $underline-offset;
   cursor: pointer;
 
-  &:hover {
-    color: color(forest);
+  @include hover-capable {
+    &:hover {
+      color: color(forest);
+    }
   }
 
   &:focus-visible {

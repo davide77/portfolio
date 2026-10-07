@@ -4,40 +4,26 @@ import { useRouter } from "next/navigation";
 import { cx } from "@/components/cx";
 import { CASE_STUDY } from "@/constants/content/case-study";
 import { ROUTES } from "@/constants/routes";
+import { getPreviousPath } from "@/lib/page-transition";
 
 /**
  * Closing / opening CTA on a case study page. A case study is its own
  * route (/work/<slug>), but reads to the visitor like an overlay opened
  * from the home page. So "Back to home" should feel like *closing* it:
- * when the visitor arrived from within the site we go back in history,
- * which restores the home page exactly as they left it (scroll position
- * kept, sections already revealed, no reveal animations replaying).
+ * when the visitor got here from the home page within this session we go
+ * back in history, which restores home where they left it and lets
+ * PageTransition collapse the page back into its tile.
  *
- * When there is no in-app history to return to (the case study was
- * opened directly, e.g. from a shared link or a new tab) we fall back to
- * a normal push to `/`. The leading arrow signals the "back" direction.
+ * Otherwise (opened cold from a shared link, a new tab, a reload, or from
+ * another in-site page) we push `/` instead. `document.referrer` is not
+ * usable for this: it never changes on client-side navigation, so a
+ * visitor who arrived from a search engine kept getting a push.
  */
 export function BackToHomeButton() {
   const router = useRouter();
 
   const onClick = () => {
-    // Decide back-vs-push at click time (client only). history.length is
-    // unreliable (it counts entries from before our site, so it can be > 1
-    // even on a cold open and send router.back() off-site). The referrer
-    // is the trustworthy signal: a same-origin referrer means the visitor
-    // reached this case study from within the site, so going back restores
-    // that page as they left it. Otherwise they opened it cold (shared
-    // link, new tab, direct URL), so push home instead.
-    let cameFromSite = false;
-    try {
-      cameFromSite =
-        !!document.referrer &&
-        new URL(document.referrer).origin === window.location.origin;
-    } catch {
-      cameFromSite = false;
-    }
-
-    if (cameFromSite) {
+    if (getPreviousPath() === ROUTES.home) {
       router.back();
     } else {
       router.push(ROUTES.home);

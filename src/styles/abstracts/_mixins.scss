@@ -75,6 +75,25 @@
   border: $glass-border-width solid color-mix(in srgb, color(paper) #{$alpha}, transparent);
 }
 
+/// Solid fallback for any translucent / blurred surface. Honours the OS
+/// "reduce transparency" and "increase contrast" settings: the glass turns
+/// into an opaque fill (and, for contrast, a full-strength hairline) so
+/// text never sits on a shifting, low-contrast backdrop.
+@mixin glass-fallback($solid: color(ink-2), $edge: color(paper)) {
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: $solid;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  @media (prefers-contrast: more) {
+    background-color: $solid;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: $edge;
+  }
+}
+
 /// Full frosted-glass surface: backdrop blur + hairline border.
 /// Use on translucent ink panels. Set the panel background separately
 /// (typically `color-mix(in srgb, color(paper) 6-8%, transparent)`).
@@ -82,6 +101,33 @@
   backdrop-filter: blur($glass-blur);
   -webkit-backdrop-filter: blur($glass-blur);
   @include glass-border($border-alpha);
+  @include glass-fallback;
+}
+
+/// Instant pressed state. Feedback lands on pointer-down, before the
+/// click commits, so taps never feel dead. Uses the standalone `scale`
+/// property so it composes with (and is never overridden by) a transform
+/// that framer-motion or the component already sets. List `scale` in the
+/// element's transition so the release eases back.
+@mixin press-feedback($scale: $press-scale) {
+  &:active {
+    scale: $scale;
+    transition-duration: $press-duration;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:active {
+      scale: none;
+    }
+  }
+}
+
+/// Hover-only effects. Touch screens fire :hover on tap and then leave it
+/// stuck, so hover styling is scoped to devices with a real pointer.
+@mixin hover-capable {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
 }
 
 /// Horizontal atmospheric band: maps monopo "Deep Ocean" *role* to Forest, Paper, Signal only (no foreign RGB).

@@ -1,10 +1,18 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 
 export type SiteTheme = "paper" | "ink";
 
 const STORAGE_KEY = "dd-site-theme";
+const DEFAULT_THEME: SiteTheme = "paper";
 
 type ThemeContextValue = {
   theme: SiteTheme;
@@ -13,31 +21,50 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<SiteTheme>("paper");
+// The stored theme is an external store (localStorage), read through
+// useSyncExternalStore rather than copied into state from an effect.
+// `memoryTheme` keeps toggling working when storage is unavailable.
+const listeners = new Set<() => void>();
+let memoryTheme: SiteTheme = DEFAULT_THEME;
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY) as SiteTheme | null;
-      if (stored === "paper" || stored === "ink") {
-        setTheme(stored);
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    listeners.delete(onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
+function readTheme(): SiteTheme {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "paper" || stored === "ink") return stored;
+  } catch {
+    /* storage blocked: fall through to memory */
+  }
+  return memoryTheme;
+}
+
+function writeTheme(theme: SiteTheme) {
+  memoryTheme = theme;
+  try {
+    localStorage.setItem(STORAGE_KEY, theme);
+  } catch {
+    /* ignore */
+  }
+  listeners.forEach((notify) => notify());
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const theme = useSyncExternalStore(subscribe, readTheme, () => DEFAULT_THEME);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    try {
-      localStorage.setItem(STORAGE_KEY, theme);
-    } catch {
-      /* ignore */
-    }
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((t) => (t === "paper" ? "ink" : "paper"));
+    writeTheme(readTheme() === "paper" ? "ink" : "paper");
   }, []);
 
   return (

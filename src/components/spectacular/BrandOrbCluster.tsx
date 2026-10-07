@@ -18,6 +18,7 @@ import {
   BRAND_ORB_SATELLITES,
   BRAND_ORB_SCENE,
 } from "@/constants/content/brand-orbs";
+import { seededRandom } from "@/lib/random";
 
 type BrandOrbClusterProps = {
   /** Word refracted through the main glass orb. Stays soft + illegible-by-design. */
@@ -85,7 +86,6 @@ function BrandOrbScene({ word, reduceMotion }: BrandOrbSceneProps) {
   const groupRef = useRef<Group>(null);
 
   // Very slow ambient sway on the whole cluster. Off for reduced-motion users.
-  // eslint-disable-next-line react-hooks/immutability
   useFrame((state) => {
     if (reduceMotion) return;
     const t = state.clock.elapsedTime;
@@ -194,7 +194,6 @@ function BackgroundWord({ word }: BackgroundWordProps) {
 
   // Slow colour cross-fade + a gentle independent drift so the lens sweeps
   // across different letters over time.
-  // eslint-disable-next-line react-hooks/immutability
   useFrame((state) => {
     const mat = matRef.current;
     const grp = groupRef.current;
@@ -279,8 +278,8 @@ function MainOrb({ reduceMotion }: MainOrbProps) {
 
 type FloatingSatelliteProps = { slotIndex: number; reduceMotion: boolean };
 
-function rand(min: number, max: number) {
-  return min + Math.random() * (max - min);
+function rangeFrom(random: () => number) {
+  return (min: number, max: number) => min + random() * (max - min);
 }
 
 /**
@@ -294,26 +293,28 @@ function FloatingSatellite({ slotIndex, reduceMotion }: FloatingSatelliteProps) 
 
   // Stable random params per slot - the orbit, scale wave, and rotation all
   // get their own random rate + phase so the two satellites desync naturally.
+  // Seeded per slot so render stays pure (no Math.random in render).
   const params = useMemo(() => {
     const cfg = BRAND_ORB_SATELLITES;
+    const random = seededRandom(slotIndex + 1);
+    const rand = rangeFrom(random);
     return {
       baseRadius: rand(...cfg.baseRadiusRange),
       orbitRadius: rand(...cfg.orbitRadiusRange),
       // Alternate orbit direction per slot so they pass each other.
       orbitSpeed: rand(...cfg.orbitSpeedRange) * (slotIndex % 2 === 0 ? 1 : -1),
-      orbitPhase: Math.random() * Math.PI * 2,
+      orbitPhase: random() * Math.PI * 2,
       yLag: rand(...cfg.orbitYLagRange),
       zBobAmp: rand(...cfg.zBobAmpRange),
       zBobSpeed: rand(...cfg.zBobSpeedRange),
       waxSpeed: rand(...cfg.waxSpeedRange),
       // Anti-phase the wax so when one is full the other tends to be small.
-      waxPhase: slotIndex * Math.PI + Math.random() * 0.5,
+      waxPhase: slotIndex * Math.PI + random() * 0.5,
     };
   }, [slotIndex]);
 
   // Per-frame orbital + breathing. Mutating ref + Object3D in useFrame is the
-  // canonical r3f pattern; the compiler immutability rule doesn't model it.
-  // eslint-disable-next-line react-hooks/immutability
+  // canonical r3f pattern.
   useFrame((state) => {
     const group = groupRef.current;
     if (!group) return;

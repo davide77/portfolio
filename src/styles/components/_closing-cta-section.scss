@@ -89,9 +89,14 @@
   border-bottom: 1px solid color-mix(in srgb, color(paper) 30%, transparent);
   transition: border-color 200ms ease;
 
-  &:hover,
   &:focus-visible {
     border-bottom-color: color(paper);
+  }
+
+  @include hover-capable {
+    &:hover {
+      border-bottom-color: color(paper);
+    }
   }
 }
 

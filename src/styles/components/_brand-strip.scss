@@ -39,17 +39,21 @@
   box-shadow: 0 4px 18px color-mix(in srgb, color(ink) 4%, transparent);
   transition: border-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
 
-  &:hover {
-    border-color: color(forest);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px color-mix(in srgb, color(ink) 5%, transparent);
+  @include hover-capable {
+    &:hover {
+      border-color: color(forest);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px color-mix(in srgb, color(ink) 5%, transparent);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     transition: border-color $transition-fast;
 
-    &:hover {
-      transform: none;
+    @include hover-capable {
+      &:hover {
+        transform: none;
+      }
     }
   }
 }

@@ -19,6 +19,11 @@ export const HERO_ORB = {
   // Bumped to 3 for sharpness - DO NOT lower (see davide-hero-final.html)
   maxDevicePixelRatio: 3,
   canvasFadeMs: 1200,
+  // Headline word reveal waits this long after the canvas reports ready,
+  // so the words land as the orb fades in rather than after it.
+  headlineAfterCanvasMs: 600,
+  // Safety net if the canvas never reports ready (WebGL off, slow GPU).
+  headlineFallbackMs: 1600,
   scrollScaleEnd: 0.85,
   mobileBreakpoint: 768,
   cameraFov: 35,
@@ -49,9 +54,10 @@ export const HERO_VARIANT: "orb" | "flowfield" = "flowfield";
  * Sampled to echo monopo.vn's marbling without importing its olive/amber.
  */
 export const HERO_FLOWFIELD_PALETTE = {
-  baseFirst: BRAND_COLORS.orbVoid, // dark valleys, keeps the Ds legible
-  baseSecond: BRAND_COLORS.orbGlow, // sage flowing band
-  accent: BRAND_COLORS.orbAmber, // amber ridge accents
+  // Monopo hero exact palette: olive + amber marbling (screenshot 1 target).
+  baseFirst: "#789E71", // olive - monopo uBaseFirstColor
+  baseSecond: "#E09442", // amber flowing band - monopo uBaseSecondColor
+  accent: "#000000", // black ridge accents - monopo uAccentColor
 } as const;
 
 /**
@@ -63,13 +69,15 @@ export const HERO_FLOWFIELD_PALETTE = {
  */
 export const HERO_FLOWFIELD = {
   baseFrequency: 2.6,
-  accentOpacity: 0.55,
+  // Monopo hero exact dials (screenshot 1): full-colour vivid marbling, not the
+  // crushed-dark filmic wash. accentOpacity/opacityBackground match the original.
+  accentOpacity: 1,
   noiseIntensity: 0,
-  opacityBackground: 0.6,
+  opacityBackground: 0.8,
   /** Crush the marbling toward black (0 = full colour, 1 = fully squared). */
-  darkness: 0.72,
+  darkness: 0,
   /** Radial vignette strength - sinks the centre so glow lives at the edges. */
-  vignette: 0.85,
+  vignette: 0,
   zoom: 0.2,
   /** uTime advance per second (frame-rate independent). */
   timeSpeed: 0.42,
@@ -96,16 +104,35 @@ export const HERO_GLASS_MONOGRAM = {
   temporalDistortion: 0.15,
   /** Dark backdrop the glass samples where the flow-field is not behind it. */
   background: BRAND_COLORS.orbVoid,
-  /** Group base position. Offset down + right so both D's clear the headline
-   *  and read as a distinct "DD", echoing monopo's off-text glass mark while
-   *  staying subtle. */
-  groupPosition: [0.95, -1.05, 0] as const,
-  /** Two D's as a clear "DD": separation must EXCEED the glyph width (~0.71 at
-   *  this scale) so they sit side-by-side with a small gap, not occluding each
-   *  other. Small z-offset so the front D still overlaps the back one's edge. */
+  /** Group base position, in world units. The camera has a fixed vertical fov
+   *  (35 at z 8), so it always shows 5.04 world units of height whatever the
+   *  viewport: world y = (0.5 - screenFraction) * 5.04, and the mark's height
+   *  as a share of the viewport is constant. That is what makes one value
+   *  safe across breakpoints.
+   *
+   *  The mark crowns the text block instead of sitting behind it. At
+   *  lower-right it fell through the last two headline lines and the brand
+   *  band, so it read as a smudge behind the type rather than a mark.
+   *
+   *  The band it has to fit is measured from the topbar's CENTRE column, not
+   *  the topbar's full height: only the "Product Engineer · London" tagline is
+   *  centred (bottom ~5%), while the wordmark and nav links sit hard left and
+   *  right, so a centred mark never meets them. Clear band by viewport:
+   *  1440x900 5.3-34.4%, 1280x720 5.3-30.5%, 390x844 4.1-37.3%. Centring the
+   *  mark at 18.5% clears every one, tightest being 720px-tall laptops. */
+  groupPosition: [0, 1.59, 0] as const,
+  /** The two D's interlock rather than sitting apart. The glyph is 1.7 world
+   *  units wide before scale and the meshes sit at +/-0.46, so the front D
+   *  overlaps the back one's bowl by ~0.39 either side. That is the intended
+   *  lockup, not a gap: push separationX past 1.7 and they separate into two
+   *  loose letters. separationZ keeps the front D reading as the nearer form. */
   separationX: 0.92,
   separationZ: 0.22,
-  scale: 0.42,
+  /** Geometry is 2.4 world units tall before scale, so the mark takes
+   *  2.4 * scale / 5.04 of the viewport height. 0.36 puts it at 17.1%, which
+   *  fits the 25.2% band on the tightest viewport with room either side.
+   *  Raising this past ~0.45 starts clipping the eyebrow at 1280x720. */
+  scale: 0.36,
   revealSec: 1.5,
   idleYaw: 0.07,
   idleFloat: 0.012,

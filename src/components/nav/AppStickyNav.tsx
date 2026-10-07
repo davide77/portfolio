@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cx } from "@/components/cx";
 import { SectionNumerals } from "@/components/ui/SectionNumerals";
-import { MobileNavMenu } from "@/components/nav/MobileNavMenu";
+import { MobileNavMenu, type MenuOrigin } from "@/components/nav/MobileNavMenu";
 import { isLabRoute, isNavItemActive, useNavHash } from "@/components/nav/useNavHash";
 import { SiteBreadcrumb } from "@/components/nav/SiteBreadcrumb";
+import { NAV_AUTOHIDE } from "@/constants/config";
 import { MOBILE_NAV, PRIMARY_NAV, resolveNavCenterMeta } from "@/constants/nav";
+import { SPRING_UI } from "@/lib/motion";
 
 type NavSurface = "paper" | "ink";
 
@@ -17,9 +19,6 @@ type AppStickyNavProps = {
   surface?: NavSurface;
   showSectionNumerals?: boolean;
 };
-
-// Below this scroll position the nav is always shown (hero in view).
-const SCROLL_REVEAL_TOP_PX = 80;
 
 export function AppStickyNav({
   visible,
@@ -32,19 +31,34 @@ export function AppStickyNav({
   const ink = surface === "ink";
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOrigin, setMenuOrigin] = useState<MenuOrigin | null>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  const openMenu = () => {
+    const rect = burgerRef.current?.getBoundingClientRect();
+    setMenuOrigin(
+      rect ? { top: rect.top, left: rect.left, width: rect.width, height: rect.height } : null,
+    );
+    setMenuOpen(true);
+  };
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
-    let lastY = window.scrollY;
+    // `anchorY` is where the current scroll direction started. The bar
+    // only changes state once the scroll has travelled the threshold from
+    // there, so smooth-scroll tails and trackpad jitter cannot flicker it.
+    let anchorY = window.scrollY;
+    let lastY = anchorY;
     const onScroll = () => {
       const y = window.scrollY;
-      // Always visible near the top (over the hero); otherwise hide when
-      // scrolling down and reveal when scrolling up.
-      if (y <= SCROLL_REVEAL_TOP_PX) {
+      if (y <= NAV_AUTOHIDE.revealTopPx) {
         setHidden(false);
-      } else if (y > lastY) {
-        setHidden(true);
-      } else if (y < lastY) {
-        setHidden(false);
+        anchorY = y;
+      } else {
+        if (Math.sign(y - lastY) !== Math.sign(lastY - anchorY)) anchorY = lastY;
+        const travelled = y - anchorY;
+        if (travelled > NAV_AUTOHIDE.directionThresholdPx) setHidden(true);
+        else if (travelled < -NAV_AUTOHIDE.directionThresholdPx) setHidden(false);
       }
       lastY = y;
     };
@@ -72,7 +86,9 @@ export function AppStickyNav({
           opacity: visible && !hidden ? 1 : 0,
           y: visible && !hidden ? 0 : "-100%",
         }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        // Spring, not a tween: a quick direction change re-targets from the
+        // bar's current position and velocity instead of restarting.
+        transition={SPRING_UI}
         // When the bar is hidden (scrolled away or not visible) `inert`
         // takes its links out of the tab order and hides them from
         // assistive tech, so focus can never land on an off-screen
@@ -117,16 +133,22 @@ export function AppStickyNav({
               </ul>
             </nav>
             <button
+              ref={burgerRef}
               type="button"
               className="app-sticky-nav__burger"
-              onClick={() => setMenuOpen(true)}
+              onClick={openMenu}
               aria-expanded={menuOpen}
               aria-label={MOBILE_NAV.openLabel}
             />
           </div>
         </div>
       </motion.header>
-      <MobileNavMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileNavMenu
+        open={menuOpen}
+        onClose={closeMenu}
+        origin={menuOrigin}
+        returnFocusRef={burgerRef}
+      />
     </>
   );
 }

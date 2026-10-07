@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cx } from "./cx";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -19,7 +20,7 @@ export function ScrollReveal({
   delay = 0,
   y = 16,
 }: ScrollRevealProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSkipEntrance();
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>;

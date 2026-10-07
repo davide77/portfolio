@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cx } from "../cx";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type SectionDividerProps = {
   className?: string;
@@ -13,7 +14,7 @@ type SectionDividerProps = {
  * reduced-motion by rendering the line at full width with no animation.
  */
 export function SectionDivider({ className }: SectionDividerProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSkipEntrance();
 
   if (reduceMotion) {
     return <div className={cx("section-divider", className)} aria-hidden="true" />;

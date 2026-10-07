@@ -41,7 +41,7 @@
   gap: spacer(1);
   font-size: font-size(hero); // 80px
   font-weight: font-weight(light);
-  letter-spacing: tracking(stat); // -3.2px
+  letter-spacing: tracking(stat); // -0.04em (-3.2px at 80px)
   line-height: line-height(crush); // 0.9
   color: color(paper);
   font-variant-numeric: tabular-nums;

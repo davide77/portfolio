@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { HeroGrainient } from "@/components/hero/HeroGrainient";
 import { HeroWebGLLayer } from "@/components/hero/HeroWebGLLayer";
+import { useIntroDone } from "@/components/motion/intro-context";
 import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
 import { HeroHeadline } from "@/components/sections/home/HeroHeadline";
 import { FloatingAccentDot } from "@/components/ui/FloatingAccentDot";
@@ -14,15 +15,19 @@ import { cx } from "@/components/cx";
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
-  const [headlineReady, setHeadlineReady] = useState(reduceMotion);
+  const introDone = useIntroDone();
+  const [canvasSettled, setCanvasSettled] = useState(false);
+  // The word reveal needs both: the loader gone (otherwise it plays out of
+  // sight on a first visit) and the orb far enough into its fade-in.
+  const headlineReady = reduceMotion || (introDone && canvasSettled);
 
   const handleCanvasReady = () => {
-    window.setTimeout(() => setHeadlineReady(true), HERO_ORB.canvasFadeMs);
+    window.setTimeout(() => setCanvasSettled(true), HERO_ORB.headlineAfterCanvasMs);
   };
 
   useEffect(() => {
     if (reduceMotion) return;
-    const fallback = window.setTimeout(() => setHeadlineReady(true), HERO_ORB.canvasFadeMs + 400);
+    const fallback = window.setTimeout(() => setCanvasSettled(true), HERO_ORB.headlineFallbackMs);
     return () => window.clearTimeout(fallback);
   }, [reduceMotion]);
 

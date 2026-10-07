@@ -64,7 +64,7 @@
   font-size: clamp(#{font-size(2xl)}, 9vw, #{font-size(hero)}); // 32 -> 80px
   font-weight: font-weight(light);
   line-height: line-height(hero); // 1.02
-  letter-spacing: tracking(hero); // -2px
+  letter-spacing: tracking(hero); // -0.025em (-2px at 80px)
   text-wrap: balance;
 }
 

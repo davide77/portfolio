@@ -23,8 +23,10 @@
   text-underline-offset: $underline-offset;
   transition: color $transition-base;
 
-  &:hover {
-    color: color(signal);
+  @include hover-capable {
+    &:hover {
+      color: color(signal);
+    }
   }
 
   &:focus-visible {
@@ -137,8 +139,10 @@
   transition: transform $duration-hero $ease-editorial;
 }
 
-.selected-work__row:hover .selected-work__image {
-  transform: scale(1.03);
+@include hover-capable {
+  .selected-work__row:hover .selected-work__image {
+    transform: scale(1.03);
+  }
 }
 
 .selected-work__toggle {
@@ -155,14 +159,17 @@
   border-radius: $radius-full;
   background-color: color-mix(in srgb, color(ink) 55%, transparent);
   backdrop-filter: blur(6px);
+  @include glass-fallback(color(ink));
   color: color(paper);
   cursor: pointer;
   transition:
     border-color $transition-base,
     background-color $transition-base;
 
-  &:hover {
-    border-color: color(paper);
+  @include hover-capable {
+    &:hover {
+      border-color: color(paper);
+    }
   }
 
   &:focus-visible {
@@ -269,16 +276,20 @@
     color: color(paper);
     text-decoration: underline;
 
-    &:hover {
-      color: color(signal);
+    @include hover-capable {
+      &:hover {
+        color: color(signal);
+      }
     }
   }
 
   &--secondary {
     color: color-mix(in srgb, color(paper) 64%, transparent);
 
-    &:hover {
-      color: color(paper);
+    @include hover-capable {
+      &:hover {
+        color: color(paper);
+      }
     }
   }
 }

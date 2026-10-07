@@ -1,8 +1,9 @@
 "use client";
 
 import { type ReactNode, type HTMLAttributes } from "react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { EASE_EDITORIAL, STAGGER_CHILD } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type ListTag = "ul" | "ol" | "dl" | "div";
 type ItemTag = "li" | "div" | "dt" | "dd";
@@ -37,7 +38,7 @@ export function StaggerList({
   children,
   ...rest
 }: StaggerListProps) {
-  const reduce = useReducedMotion();
+  const reduce = useSkipEntrance();
 
   if (reduce) {
     const Tag = as;
@@ -67,7 +68,7 @@ export function StaggerItem({
   children,
   ...rest
 }: StaggerItemProps) {
-  const reduce = useReducedMotion();
+  const reduce = useSkipEntrance();
 
   if (reduce) {
     const Tag = as;

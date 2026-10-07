@@ -17,11 +17,11 @@ export const LOADER_STORAGE_KEY = "dd-portfolio-loader-v2";
  */
 export const INTRO = {
   /** ms for the progress meter to fill 0 -> 100. */
-  loadDurationMs: 1200,
+  loadDurationMs: 800,
   /** ms to hold at 100 before the curtain lifts. */
-  dwellAfterFullMs: 260,
+  dwellAfterFullMs: 120,
   /** seconds for the slide-up reveal (framer-motion). */
-  exitSeconds: 0.85,
+  exitSeconds: 0.7,
   /** per-letter stagger for the monogram mask reveal, in seconds. */
   letterStagger: 0.08,
   /** label on the skip control. */
@@ -36,3 +36,14 @@ export const INTRO = {
  * flip lands right as you reach the bottom rather than a screen early.
  */
 export const FOOTER_WASH_RAMP_VH = 0.45;
+
+/**
+ * Sticky nav auto-hide. Always shown above `revealTopPx` (hero in view).
+ * Below it, the scroll has to travel `directionThresholdPx` in one
+ * direction before the bar hides or returns, so smooth-scroll tails and
+ * trackpad jitter do not make it flicker.
+ */
+export const NAV_AUTOHIDE = {
+  revealTopPx: 80,
+  directionThresholdPx: 10,
+} as const;

@@ -193,7 +193,6 @@ function Letterform({ config }: LetterformProps) {
     [config.emissive],
   );
 
-  // eslint-disable-next-line react-hooks/immutability
   useFrame((state) => {
     const group = groupRef.current;
     if (!group) return;
@@ -235,7 +234,6 @@ function StaticGlassDisc({ config, bufferTexture }: StaticGlassDiscProps) {
   const isPrimary = config.role !== "satellite";
   const tx = isPrimary ? DISC_TRANSMISSION.primary : DISC_TRANSMISSION.satellite;
 
-  // eslint-disable-next-line react-hooks/immutability
   useFrame(() => {
     const group = groupRef.current;
     if (!group) return;

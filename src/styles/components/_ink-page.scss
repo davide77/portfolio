@@ -60,6 +60,7 @@ main#main:not(.home-main) {
     background: color-mix(in srgb, color(white) 8%, transparent);
     border-color: color-mix(in srgb, color(paper) 22%, transparent);
     backdrop-filter: blur(12px);
+    @include glass-fallback;
   }
 
   // Pills/tags: drop the cream fill, take the same frosted hairline.
@@ -120,7 +121,9 @@ main#main:not(.home-main) {
   }
 
   // Next-project hover used forest; cream reads on ink.
-  .case-study-template__next-link:hover {
-    color: color(paper);
+  @include hover-capable {
+    .case-study-template__next-link:hover {
+      color: color(paper);
+    }
   }
 }

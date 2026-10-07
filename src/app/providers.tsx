@@ -1,6 +1,7 @@
 "use client";
 
-import { type ReactNode, useCallback, useLayoutEffect, useState } from "react";
+import { type ReactNode, useCallback, useState, useSyncExternalStore } from "react";
+import { IntroContext } from "@/components/motion/intro-context";
 import { Loader } from "@/components/motion/Loader";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -11,29 +12,37 @@ type ProvidersProps = {
   children: ReactNode;
 };
 
+// "Has the intro already played this tab session?" lives in
+// sessionStorage, an external store. Read it with useSyncExternalStore:
+// null on the server (unknown, so no loader is rendered yet), the real
+// answer on the client. Blocked storage counts as seen, so the loader
+// never traps a visitor it cannot remember.
+const noSubscribe = () => () => {};
+
+function readIntroSeen(): boolean {
+  try {
+    return sessionStorage.getItem(LOADER_STORAGE_KEY) === "1";
+  } catch {
+    return true;
+  }
+}
+
 export function Providers({ children }: ProvidersProps) {
-  const [loaderDone, setLoaderDone] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const introSeen = useSyncExternalStore(noSubscribe, readIntroSeen, () => null);
+  const [finished, setFinished] = useState(false);
+  const checked = introSeen !== null;
+  const loaderDone = introSeen === true || finished;
 
-  useLayoutEffect(() => {
-    try {
-      if (sessionStorage.getItem(LOADER_STORAGE_KEY) === "1") {
-        setLoaderDone(true);
-      }
-    } catch {
-      setLoaderDone(true);
-    }
-    setChecked(true);
-  }, []);
-
-  const onLoaderComplete = useCallback(() => setLoaderDone(true), []);
+  const onLoaderComplete = useCallback(() => setFinished(true), []);
 
   return (
     <ThemeProvider>
-      <SmoothScroll>
-        {!loaderDone && checked ? <Loader onComplete={onLoaderComplete} /> : null}
-        <PageTransition>{children}</PageTransition>
-      </SmoothScroll>
+      <IntroContext.Provider value={loaderDone}>
+        <SmoothScroll>
+          {!loaderDone && checked ? <Loader onComplete={onLoaderComplete} /> : null}
+          <PageTransition>{children}</PageTransition>
+        </SmoothScroll>
+      </IntroContext.Provider>
     </ThemeProvider>
   );
 }

@@ -16,22 +16,16 @@
   font-size: font-size(sm); // 14px
   line-height: line-height(tight);
   cursor: pointer;
-  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast, transform $transition-fast;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast, transform $transition-fast, scale $transition-fast;
 
   &:focus-visible {
     @include focus-ring;
   }
 
-  &:active {
-    transform: translateY(1px);
-  }
+  @include press-feedback;
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-
-    &:active {
-      transform: none;
-    }
   }
 
   &:disabled {
@@ -47,8 +41,10 @@
   background-color: color(forest);
   color: color(paper);
 
-  &:hover:not(:disabled) {
-    background-color: color(forest-dark);
+  @include hover-capable {
+    &:hover:not(:disabled) {
+      background-color: color(forest-dark);
+    }
   }
 }
 
@@ -58,8 +54,10 @@
   color: color(ink);
   border: 1.5px solid color(stone);
 
-  &:hover:not(:disabled) {
-    border-color: color(ink);
+  @include hover-capable {
+    &:hover:not(:disabled) {
+      border-color: color(ink);
+    }
   }
 }
 
@@ -71,10 +69,12 @@
   color: color(paper);
   border: 1px solid color-mix(in srgb, color(cream) 55%, transparent);
 
-  &:hover:not(:disabled) {
-    background-color: color(paper);
-    color: color(ink);
-    border-color: color(paper);
+  @include hover-capable {
+    &:hover:not(:disabled) {
+      background-color: color(paper);
+      color: color(ink);
+      border-color: color(paper);
+    }
   }
 }
 
@@ -88,8 +88,10 @@
   background-color: transparent;
   color: color(ink);
 
-  &:hover:not(:disabled) {
-    background-color: color(paper);
+  @include hover-capable {
+    &:hover:not(:disabled) {
+      background-color: color(paper);
+    }
   }
 }
 
@@ -99,8 +101,10 @@
   @include glass-border;
   border-radius: $radius-pill-cta;
 
-  &:hover:not(:disabled) {
-    background-color: color-mix(in srgb, color(white) 8%, transparent);
+  @include hover-capable {
+    &:hover:not(:disabled) {
+      background-color: color-mix(in srgb, color(white) 8%, transparent);
+    }
   }
 
   &:focus-visible {

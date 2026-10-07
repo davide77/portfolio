@@ -10,6 +10,7 @@ import { SELECTED_WORK_SECTION } from "@/constants/content/home";
 import type { CaseStudy } from "@/constants/content/projects";
 import { ROUTES } from "@/constants/routes";
 import { DURATION_HERO, DURATION_UI, EASE_EDITORIAL } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type SelectedWorkListProps = {
   projects: readonly CaseStudy[];
@@ -18,6 +19,7 @@ type SelectedWorkListProps = {
 export function SelectedWorkList({ projects }: SelectedWorkListProps) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
+  const skipEntrance = useSkipEntrance();
 
   const toggle = (slug: string) => {
     setOpenSlug((current) => (current === slug ? null : slug));
@@ -47,8 +49,8 @@ export function SelectedWorkList({ projects }: SelectedWorkListProps) {
               <div className={"selected-work__media is-flex is-flex-column has-gap-3"}>
                 <motion.div
                   className={"selected-work__frame"}
-                  initial={reduceMotion ? false : { opacity: 0, y: 32 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  initial={skipEntrance ? false : { opacity: 0, y: 32 }}
+                  whileInView={skipEntrance ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-12%" }}
                   transition={{ duration: DURATION_HERO, ease: EASE_EDITORIAL }}
                 >
@@ -171,16 +173,6 @@ function PanelInner({ project }: { project: CaseStudy }) {
         >
           {CASE_STUDY.viewCaseStudyLabel}
         </Link>
-        {project.liveUrl ? (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={"selected-work__link selected-work__link--secondary"}
-          >
-            {project.liveLabel}
-          </a>
-        ) : null}
       </div>
     </div>
   );

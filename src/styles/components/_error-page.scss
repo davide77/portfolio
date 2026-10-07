@@ -38,8 +38,10 @@
     cursor: pointer;
     transition: background-color $transition-base;
 
-    &:hover {
-      background: color(ink);
+    @include hover-capable {
+      &:hover {
+        background: color(ink);
+      }
     }
 
     &:focus-visible {
@@ -54,8 +56,10 @@
     cursor: pointer;
     transition: color $transition-fast;
 
-    &:hover {
-      color: color(ink);
+    @include hover-capable {
+      &:hover {
+        color: color(ink);
+      }
     }
 
     &:focus-visible {

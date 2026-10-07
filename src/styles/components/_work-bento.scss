@@ -32,12 +32,20 @@
   border-radius: $radius-card-glass;
   background-color: color(ink-2);
   border: 1px solid color-mix(in srgb, color(cream) 12%, transparent);
-  transition: transform 240ms $ease-editorial,
+  transition: scale 240ms $ease-editorial,
               border-color 240ms $ease-editorial;
 
-  &:hover,
+  // The whole tile is the link: it gives under the finger on press.
+  @include press-feedback($press-scale-card);
+
   &:focus-within {
     border-color: color-mix(in srgb, color(cream) 28%, transparent);
+  }
+
+  @include hover-capable {
+    &:hover {
+      border-color: color-mix(in srgb, color(cream) 28%, transparent);
+    }
   }
 }
 
@@ -52,6 +60,11 @@
 // 01 · IMAGE - top of the tile, own clipping frame. The screenshot is the
 // work: no scrim, no overlay. The well colour only shows before the image
 // paints (a touch lighter than the card to read as a recessed surface).
+//
+// The image is a full-length page capture rendered at its natural height and
+// top-anchored, so at rest the frame shows the top of the site (the
+// "placeholder" view). On hover the scroller gently pans top -> bottom, then
+// settles back to the top on leave: a screen-recording feel, no JS.
 .work-bento__media-well {
   position: relative;
   aspect-ratio: 480 / 317;
@@ -59,14 +72,56 @@
   background-color: color-mix(in srgb, color(ink-2) 94%, color(paper) 6%);
 }
 
-.work-bento__media {
-  object-fit: cover;
-  transition: transform 600ms $ease-editorial;
+// The scroller is exactly the frame height and clips the full image. It is a
+// size container so the image inside can read the frame's height as `100cqh`,
+// which is what makes the pan land pixel-accurately for a capture of any
+// height, with no JS and no per-image data.
+.work-bento__scroller {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
 }
 
-.work-bento__cell:hover .work-bento__media,
-.work-bento__cell:focus-within .work-bento__media {
-  transform: scale(1.04);
+// Full image, top-anchored. width:100% + height:auto => the element is as tall
+// as the capture, so translateY(-100%) equals -(image height). To land the
+// image's bottom edge at the frame's bottom we translate by -(H - F), i.e.
+// calc(-100% + 100cqh) where 100cqh is the frame (scroller) height.
+.work-bento__media {
+  display: block;
+  width: 100%;
+  height: auto;
+  // Rest: top of the capture is flush with the top of the frame.
+  transform: translateY(0);
+  // Rest-state transition = the return trip. Leaving mid-pan settles back
+  // to the top quickly; the long 7s pan is set on the hover rule below,
+  // so it only applies on the way down.
+  transition: transform 600ms $ease-editorial;
+  will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// HOVER: pan the whole capture up until its bottom edge meets the frame bottom.
+// If the capture is shorter than the frame, calc(-100% + 100cqh) is >= 0 and
+// clamps to no movement, so short images and logo cards simply hold still.
+// Pointer devices only: on touch, a tap navigates, so a pan would just
+// start and get cut off by the page change.
+@include hover-capable {
+  .work-bento__cell:hover .work-bento__media,
+  .work-bento__cell:focus-within .work-bento__media {
+    transform: translateY(min(0px, calc(-100% + 100cqh)));
+    transition-duration: 7000ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-bento__cell:hover .work-bento__media,
+  .work-bento__cell:focus-within .work-bento__media {
+    transform: translateY(0);
+  }
 }
 
 // 02 · CHIP - floats top-left, 14/14 inset (rounded to spacer(3)=12px).
@@ -84,6 +139,7 @@
   background-color: color-mix(in srgb, color(ink) 72%, transparent);
   border: 1px solid color-mix(in srgb, color(cream) 18%, transparent);
   backdrop-filter: blur(4px);
+  @include glass-fallback(color(ink));
   font-size: font-size(xxs);
   font-weight: font-weight(medium);
   letter-spacing: 0.06em;
@@ -151,11 +207,19 @@
   font-weight: font-weight(medium);
   color: color(paper);
   text-decoration: none;
-  transition: background-color 240ms, color 240ms;
+  transition: background-color 240ms, color 240ms, scale 240ms $ease-editorial;
 
-  &:hover,
+  @include press-feedback;
+
   &:focus-visible {
     background-color: color(paper);
     color: color(ink);
+  }
+
+  @include hover-capable {
+    &:hover {
+      background-color: color(paper);
+      color: color(ink);
+    }
   }
 }

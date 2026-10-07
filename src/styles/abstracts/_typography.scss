@@ -101,17 +101,21 @@ $line-heights: (
   @return map-get($line-heights, $name);
 }
 
-// Letter-spacing scale. Values mirror Figma exactly (in px).
+// Letter-spacing scale. Values mirror Figma.
 // Negative (display): paired with large headings to tighten optical
-// kerning. Positive (caps): paired with small uppercase text.
+// kerning. These are in `em` so they scale with fluid (clamp) type: a
+// fixed -2px is right at 80px but far too tight once the hero shrinks
+// to 32px on a phone. Each em value equals the Figma px at its design size.
+// Positive (caps): paired with small uppercase text at fixed sizes, so
+// they stay in px.
 $letter-spacings: (
-  // Negative - display
-  headline:     -0.76px,   // 38px section head H2
-  display:      -1.12px,   // 56px stats / about H2
-  hero-sm:      -1.8px,    // 72px hero glow variant H1
-  hero:         -2px,      // 80px hero H1
-  closer:       -2.64px,   // 88px closer H1
-  stat:         -3.2px,    // 80px stat numerals
+  // Negative - display (em; Figma px / design size in comments)
+  headline:     -0.02em,   // -0.76px at 38px section head H2
+  display:      -0.02em,   // -1.12px at 56px stats / about H2
+  hero-sm:      -0.025em,  // -1.8px at 72px hero glow variant H1
+  hero:         -0.025em,  // -2px at 80px hero H1
+  closer:       -0.03em,   // -2.64px at 88px closer H1
+  stat:         -0.04em,   // -3.2px at 80px stat numerals
   // Positive - caps
   chip:         1.2px,     // 12px DM Sans chips
   meta:         2.2px,     // 11px placeholder caps

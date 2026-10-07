@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { cx } from "@/components/cx";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { EASE_EDITORIAL, STAGGER_CHILD } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type SectionHeadSurface = "ink" | "paper";
 type SectionHeadSize = "default" | "display" | "mega" | "hero";
@@ -70,7 +71,7 @@ export function SectionHead({
   disableMotion = false,
 }: SectionHeadProps) {
   const Tag = as;
-  const reduce = useReducedMotion();
+  const reduce = useSkipEntrance();
   const animate = !disableMotion && !reduce;
 
   const titleClass = cx(

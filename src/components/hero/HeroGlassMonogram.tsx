@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { Color, Vector3, type Group } from "three";
 import { createHollowDGeometry } from "@/components/hero/createHollowDGeometry";
-import { HERO_FLOWFIELD_PALETTE, HERO_GLASS_MONOGRAM } from "@/constants/hero-webgl";
+import { HERO_GLASS_MONOGRAM } from "@/constants/hero-webgl";
 
 type HeroGlassMonogramProps = {
   containerRef: RefObject<HTMLElement | null>;
@@ -29,7 +29,10 @@ export function HeroGlassMonogram({ containerRef, reduceMotion = false }: HeroGl
   const startRef = useRef(-1);
 
   const geometry = useMemo(() => createHollowDGeometry(), []);
-  const attenuation = useMemo(() => new Color(HERO_FLOWFIELD_PALETTE.accent), []);
+  // Monopo glass material (screenshot 1): warm amber tint through the glass +
+  // faint warm cream body, so the DD reads orange regardless of the field hue.
+  const attenuation = useMemo(() => new Color(0xd98f3c), []);
+  const bodyColor = useMemo(() => new Color(0xf2e6d2), []);
   const background = useMemo(() => new Color(HERO_GLASS_MONOGRAM.background), []);
 
   useEffect(() => () => geometry.dispose(), [geometry]);
@@ -119,6 +122,7 @@ export function HeroGlassMonogram({ containerRef, reduceMotion = false }: HeroGl
             temporalDistortion={HERO_GLASS_MONOGRAM.temporalDistortion}
             attenuationColor={attenuation}
             attenuationDistance={1.4}
+            color={bodyColor}
             background={background}
             transparent
             opacity={reduceMotion ? 1 : 0}

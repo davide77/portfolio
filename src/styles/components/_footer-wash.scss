@@ -117,9 +117,14 @@ $wash-control-border: color-mix(
   .closing-cta-section__link {
     border-bottom-color: $wash-control-border;
 
-    &:hover,
     &:focus-visible {
       border-bottom-color: $wash-text;
+    }
+
+    @include hover-capable {
+      &:hover {
+        border-bottom-color: $wash-text;
+      }
     }
   }
 
@@ -127,14 +132,16 @@ $wash-control-border: color-mix(
     color: $wash-text;
     border-color: $wash-control-border;
 
-    &:hover:not(:disabled) {
-      background-color: $wash-text;
-      color: color-mix(
-        in srgb,
-        color(ink),
-        color(paper) calc(var(--footer-wash, 0) * 100%)
-      );
-      border-color: $wash-text;
+    @include hover-capable {
+      &:hover:not(:disabled) {
+        background-color: $wash-text;
+        color: color-mix(
+          in srgb,
+          color(ink),
+          color(paper) calc(var(--footer-wash, 0) * 100%)
+        );
+        border-color: $wash-text;
+      }
     }
   }
 }

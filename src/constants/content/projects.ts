@@ -1,3 +1,15 @@
+/**
+ * Case studies deliberately carry no link to a client's live site.
+ *
+ * A live URL points at whatever that site is today, which is not what I built
+ * and not mine to present as current work: several of these engagements have
+ * ended, and the sites have moved on since. The screenshots in `imageSrc` and
+ * `artefacts` are the evidence instead - captures of the work as delivered,
+ * which is the honest version. Every tile, card and CTA routes inward to
+ * /work/<slug>, never off-site.
+ *
+ * Do not reintroduce a `liveUrl` field here.
+ */
 export type ProjectIndustry =
   | "enterprise"
   | "founder"
@@ -18,9 +30,6 @@ export type CaseStudy = {
   role: string;
   industry: ProjectIndustry;
   order: number;
-  /** Empty string when the project has no public live site (hides the live button). */
-  liveUrl: string;
-  liveLabel: string;
   imageSrc: string;
   imageAlt: string;
   tags: readonly string[];
@@ -46,8 +55,6 @@ export const CASE_STUDIES = [
     role: "Product Engineer",
     industry: "studio",
     order: 0,
-    liveUrl: "https://origin.social",
-    liveLabel: "Open live site",
     imageSrc: "/images/projects/origin-social.svg",
     imageAlt: "Origin Social product studio",
     tags: ["Product strategy", "Next.js", "TypeScript", "Ecommerce", "AI-native"],
@@ -103,8 +110,6 @@ export const CASE_STUDIES = [
     role: "Technical director and front-end lead",
     industry: "commerce",
     order: 7,
-    liveUrl: "https://lova.lifestyle",
-    liveLabel: "Open live site",
     imageSrc: "/images/projects/lova.svg",
     imageAlt: "LOVA direct-to-consumer wellness storefront",
     tags: ["Shopify", "React", "TypeScript", "SCSS", "Ecommerce"],
@@ -151,8 +156,6 @@ export const CASE_STUDIES = [
     role: "Senior front-end engineer",
     industry: "fintech",
     order: 1,
-    liveUrl: "https://www.libertyglobal.com",
-    liveLabel: "Open live site",
     imageSrc: "/images/projects/liberty-blume/confirm-your-package.png",
     imageAlt: "Liberty Blume lending journey confirm your package step",
     tags: ["React", "Context API", "SCSS", "GCP", "Docker"],
@@ -222,8 +225,6 @@ export const CASE_STUDIES = [
     role: "Founder and front-end lead",
     industry: "founder",
     order: 2,
-    liveUrl: "https://nannynow.co.uk",
-    liveLabel: "Open nannynow.co.uk",
     imageSrc: "/images/projects/nannynow.jpg",
     imageAlt: "Screenshot of the Nannynow website homepage",
     tags: ["Next.js", "React", "TypeScript", "Product"],
@@ -271,8 +272,6 @@ export const CASE_STUDIES = [
     role: "Design and front-end lead",
     industry: "sports",
     order: 3,
-    liveUrl: "https://striver.football",
-    liveLabel: "Open striver.football",
     imageSrc: "/images/projects/striver-football.jpg",
     imageAlt: "Screenshot of the Striver.Football marketing site",
     tags: ["Next.js", "SCSS tokens", "WordPress", "Motion"],
@@ -319,8 +318,6 @@ export const CASE_STUDIES = [
     role: "Senior front-end engineer, EMEA",
     industry: "luxury",
     order: 4,
-    liveUrl: "https://www.esteelauder.co.uk",
-    liveLabel: "Open live site",
     imageSrc: "/images/projects/estee-lauder-emea/estee-lauder-uk.jpg",
     imageAlt: "Estée Lauder UK ecommerce homepage",
     tags: ["React", "Luxury retail", "i18n", "Design systems"],
@@ -398,12 +395,10 @@ export const CASE_STUDIES = [
     title: "Cheam Sports FC",
     tagline: "Production platform for 100+ families.",
     outcome: "Single config file makes the codebase forkable for other grassroots clubs.",
-    period: "2024 - present",
+    period: "2024 - 2026",
     role: "Founder engineer",
     industry: "sports",
     order: 5,
-    liveUrl: "https://cheamsportsfc.com",
-    liveLabel: "Open cheamsportsfc.com",
     imageSrc: "/images/projects/cheam-sports-fc.jpg",
     imageAlt: "Screenshot of the Cheam Sports FC club website",
     tags: ["Next.js", "Stripe", "Drizzle", "PWA"],
@@ -450,8 +445,6 @@ export const CASE_STUDIES = [
     role: "Senior front-end engineer",
     industry: "public",
     order: 6,
-    liveUrl: "https://www.bristol.gov.uk",
-    liveLabel: "Open live site",
     imageSrc: "/images/projects/bristol.jpg",
     imageAlt: "Bristol City Council website homepage",
     tags: ["React", "Docusaurus", "GOV.UK", "Accessibility"],

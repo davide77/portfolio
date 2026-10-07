@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import {
@@ -29,30 +28,35 @@ export function WorkBento() {
         </StaggerList>
         <StaggerList as="ul" className="work-bento__grid has-mt-6" stagger={0.08}>
           {WORK_BENTO_TILES.map((tile) => {
-            const Wrapper = tile.isExternal ? "a" : Link;
-            const wrapperProps = tile.isExternal
-              ? { href: tile.href, rel: "noopener noreferrer", target: "_blank" }
-              : { href: tile.href };
             return (
               <StaggerItem
                 as="li"
                 key={tile.slug}
                 className="work-bento__cell"
                 lift={28}
+                data-transition-slug={tile.slug}
               >
-                <Wrapper
-                  {...(wrapperProps as { href: string })}
+                <Link
+                  href={tile.href}
                   className="work-bento__link"
                   aria-label={`${tile.title} - ${tile.role}`}
                 >
                   <div className="work-bento__media-well">
-                    <Image
-                      src={tile.image}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 33vw"
-                      className="work-bento__media"
-                    />
+                    <div className="work-bento__scroller">
+                      {/* Full-length screenshot, top-anchored at rest. On hover
+                          it gently scrolls top -> bottom, then settles back to
+                          the top (the placeholder view) on leave. Plain <img>
+                          so it renders at natural height and the pure-CSS
+                          translateY(-100%) scroll trick works for any capture. */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={tile.image}
+                        alt={tile.imageAlt}
+                        loading="lazy"
+                        decoding="async"
+                        className="work-bento__media"
+                      />
+                    </div>
                     <p className="work-bento__chip">
                       <span className="work-bento__chip-dot" aria-hidden />
                       {tile.role}
@@ -63,7 +67,7 @@ export function WorkBento() {
                     <p className="work-bento__body">{tile.body}</p>
                     <p className="work-bento__stack mono">{tile.stack}</p>
                   </div>
-                </Wrapper>
+                </Link>
               </StaggerItem>
             );
           })}

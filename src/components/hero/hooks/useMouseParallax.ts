@@ -22,11 +22,12 @@ export function useMouseParallax(
 ) {
   const target = useRef({ x: 0, y: 0 });
   const mouse = useRef({ x: 0, y: 0 });
-  const lastMove = useRef(performance.now());
+  const lastMove = useRef(0);
   const idle = useRef(false);
 
   useEffect(() => {
     if (!enabled) return;
+    lastMove.current = performance.now();
 
     const onMove = (e: PointerEvent) => {
       const w = window.innerWidth || 1;

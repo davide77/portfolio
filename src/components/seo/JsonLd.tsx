@@ -26,7 +26,7 @@ export function HomeJsonLd() {
             "@type": "Person",
             name: SITE.name,
             jobTitle: SITE.role,
-            description: SITE.oneLineDescription,
+            description: SITE.longDescription,
             email: SITE.email,
             url: siteUrl(),
             knowsAbout: [...SITE_EXPERTISE],

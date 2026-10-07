@@ -15,9 +15,14 @@
     transparent 100%
   );
 
-  &:hover .marquee__track,
   &:focus-within .marquee__track {
     animation-play-state: paused;
+  }
+
+  @include hover-capable {
+    &:hover .marquee__track {
+      animation-play-state: paused;
+    }
   }
 }
 

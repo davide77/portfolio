@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { createElement, type ElementType, type ReactNode } from "react";
 import { cx } from "@/components/cx";
 import { DURATION_HERO, EASE_EDITORIAL, STAGGER_CHILD } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type DisplayTextProps = {
   as?: "h1" | "h2" | "h3" | "p";
@@ -13,7 +14,7 @@ type DisplayTextProps = {
 
 /** Split-line display reveal using framer-motion. */
 export function DisplayText({ as: Tag = "h1", children, className }: DisplayTextProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSkipEntrance();
   const lines = children.split("\n").filter(Boolean);
 
   if (reduceMotion) {

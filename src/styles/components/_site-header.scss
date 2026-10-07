@@ -7,6 +7,7 @@
   background-color: rgba(color(white), 0.92);
   border-bottom: 1.5px solid color(cream);
   backdrop-filter: blur(10px);
+  @include glass-fallback(color(white), color(ink));
 }
 
 .site-header__inner {
@@ -41,8 +42,10 @@
   color: color-mix(in srgb, color(stone) 60%, transparent);
   transition: color $transition-fast;
 
-  &:hover {
-    color: color(stone);
+  @include hover-capable {
+    &:hover {
+      color: color(stone);
+    }
   }
 
   &:focus-visible {

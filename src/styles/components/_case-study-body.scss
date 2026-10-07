@@ -16,9 +16,11 @@
 .case-study-body__back {
   cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
-    text-underline-offset: $underline-offset;
+  @include hover-capable {
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: $underline-offset;
+    }
   }
 
   &:focus-visible {

@@ -10,4 +10,21 @@
   z-index: z(modal);
   background-color: color(ink);
   pointer-events: none;
+  will-change: transform, clip-path, opacity;
+}
+
+// Tile -> case study open. The element itself is a transparent window;
+// its huge ink spread shadow paints everything outside it. Animating its
+// box from the tile rect to the viewport widens the window onto the new
+// page, rounded corners included. Hidden at all other times.
+.page-transition__window {
+  display: none;
+  position: fixed;
+  z-index: z(modal);
+  pointer-events: none;
+  box-shadow: 0 0 0 200vmax color(ink);
+
+  &[data-active="true"] {
+    display: block;
+  }
 }

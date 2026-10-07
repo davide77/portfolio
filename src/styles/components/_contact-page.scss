@@ -43,6 +43,7 @@
   background-color: color-mix(in srgb, color(white) 8%, transparent);
   border: 1px solid color-mix(in srgb, color(paper) 28%, transparent);
   backdrop-filter: blur(18px);
+  @include glass-fallback;
   color: color(paper);
 }
 
@@ -60,8 +61,10 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 
-  &:hover {
-    color: color(paper);
+  @include hover-capable {
+    &:hover {
+      color: color(paper);
+    }
   }
 
   &:focus-visible {
@@ -75,8 +78,10 @@
   text-decoration: underline;
   text-underline-offset: $underline-offset;
 
-  &:hover {
-    color: color(paper);
+  @include hover-capable {
+    &:hover {
+      color: color(paper);
+    }
   }
 
   &:focus-visible {
@@ -93,8 +98,10 @@
     text-decoration: underline;
     text-underline-offset: $underline-offset;
 
-    &:hover {
-      color: color(paper);
+    @include hover-capable {
+      &:hover {
+        color: color(paper);
+      }
     }
 
     &:focus-visible {

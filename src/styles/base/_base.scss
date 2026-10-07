@@ -46,8 +46,10 @@ body {
 a {
   transition: color $transition-fast;
 
-  &:hover {
-    color: color(forest);
+  @include hover-capable {
+    &:hover {
+      color: color(forest);
+    }
   }
 }
 

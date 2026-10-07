@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { RevealImage } from "@/components/motion/RevealImage";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import { BackToHomeButton } from "@/components/ui/BackToHomeButton";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { cx } from "@/components/cx";
@@ -110,17 +109,6 @@ export function CaseStudyView({ project, nextProject }: CaseStudyViewProps) {
             ))}
           </ul>
         </section>
-        {project.liveUrl ? (
-          <div className="is-flex is-flex-wrap has-gap-3">
-            <MagneticButton
-              href={project.liveUrl}
-              variant="ghostOnInk"
-              external
-            >
-              {project.liveLabel}
-            </MagneticButton>
-          </div>
-        ) : null}
       </div>
 
       <div className="container-sm case-study-page__footer is-flex is-flex-column has-gap-6 has-mt-9">

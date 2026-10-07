@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cx } from "@/components/cx";
 import { HERO_DISPLAY } from "@/constants/content/hero-section";
 import { STAGGER_CHILD } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 const WORD_DELAY_MS = 60;
 
@@ -13,7 +14,7 @@ type HeroHeadlineProps = {
 };
 
 export function HeroHeadline({ className, ready = true }: HeroHeadlineProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = useSkipEntrance();
 
   if (reduceMotion) {
     return (

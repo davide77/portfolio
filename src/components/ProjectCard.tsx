@@ -29,7 +29,7 @@ export function ProjectCard({ project, tone = "paper" }: ProjectCardProps) {
         <div className={"project-card__media"}>
           <Image
             src={project.imageSrc}
-            alt=""
+            alt={project.imageAlt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={"project-card__image"}
@@ -59,16 +59,6 @@ export function ProjectCard({ project, tone = "paper" }: ProjectCardProps) {
           <Link href={studyHref} className={cx("project-card__link-primary", "has-font-semibold text-sm is-forest")}>
             {CASE_STUDY.viewCaseStudyLabel}
           </Link>
-          {project.liveUrl ? (
-            <a
-              href={project.liveUrl}
-              className={cx("project-card__link-secondary", "text-sm is-stone")}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {project.liveLabel}
-            </a>
-          ) : null}
         </div>
       </div>
     </motion.article>

@@ -1,8 +1,9 @@
 "use client";
 
 import { type HTMLAttributes, type ReactNode } from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import { EASE_EDITORIAL } from "@/lib/motion";
+import { useSkipEntrance } from "@/components/motion/return-context";
 
 type MotionRevealProps = Omit<HTMLMotionProps<"div">, "children"> & {
   children?: ReactNode;
@@ -31,7 +32,7 @@ export function MotionReveal({
   children,
   ...rest
 }: MotionRevealProps) {
-  const reduce = useReducedMotion();
+  const reduce = useSkipEntrance();
 
   if (reduce) {
     return <div {...(rest as unknown as HTMLAttributes<HTMLDivElement>)}>{children}</div>;

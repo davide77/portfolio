@@ -121,6 +121,7 @@
   border: 1px solid color-mix(in srgb, color(paper) 22%, transparent);
   background-color: color-mix(in srgb, color(white) 8%, transparent);
   backdrop-filter: blur(12px);
+  @include glass-fallback;
   min-height: 140px;
   box-shadow: none;
 
@@ -179,15 +180,19 @@
   object-fit: cover;
   transition: transform $transition-slow;
 
-  .legacy-work-gallery__tile:hover & {
-    transform: scale(1.04);
+  @include hover-capable {
+    .legacy-work-gallery__tile:hover & {
+      transform: scale(1.04);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
 
-    .legacy-work-gallery__tile:hover & {
-      transform: none;
+    @include hover-capable {
+      .legacy-work-gallery__tile:hover & {
+        transform: none;
+      }
     }
   }
 }

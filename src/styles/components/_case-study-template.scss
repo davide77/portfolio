@@ -58,7 +58,9 @@
   text-decoration: none;
   color: inherit;
 
-  &:hover {
-    color: color(forest);
+  @include hover-capable {
+    &:hover {
+      color: color(forest);
+    }
   }
 }

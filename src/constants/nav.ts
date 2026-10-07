@@ -41,6 +41,8 @@ export function resolveBreadcrumbLabel(pathname: string): string | null {
 export const MOBILE_NAV = {
   openLabel: "Open menu",
   closeLabel: "Close menu",
+  dialogLabel: "Site menu",
+  listLabel: "Mobile",
 } as const;
 
 /** Figma nav centre meta (③ Home, ⑤ Lab). Hidden when no match. */
