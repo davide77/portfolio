@@ -1,65 +1,24 @@
 @use '../abstracts' as *;
 
-// Stats band - Figma source of truth: ③ Patterns / Stats band · ink.
-// Section padding 96px block. Section head 56px / 1.05 / -1.12px on
-// ink. Stat row: border-top cream/16, gap 32px, 4 stat tiles. Each
-// numeral: DM Sans Light 80px / 0.9 / -3.2px with the unit suffix in
-// signal at 32px.
+// Stats band - one display-size sentence on ink. The connective words
+// sit in dimmed cream, the facts (.stats-band__fact) step up to paper,
+// so a skim still picks out 2006 / 60 brands / every part myself.
 .stats-band {
   padding-block: spacer(11); // 96px
-  container-type: inline-size;
-  container-name: stats;
 }
 
-.stats-band__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: spacer(6); // 32px - Figma stat row gap
-  margin: spacer(7) 0 0; // 40px stack from section head
-  padding: spacer(7) 0 0; // 40px to clear the border-top hairline
-  list-style: none;
-  border-top: 1px solid color-mix(in srgb, color(cream) 16%, transparent);
-
-  @include container-min(stats, 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include container-min(stats, 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stats-band__tile {
-  display: flex;
-  flex-direction: column;
-  gap: spacer(4); // 16px between numeral and caption (Figma)
-}
-
-.stats-band__num {
-  display: flex;
-  align-items: baseline;
-  gap: spacer(1);
-  font-size: font-size(hero); // 80px
+.stats-band__statement {
+  max-width: 28ch;
+  font-family: $font-family-headline;
+  font-size: clamp(#{font-size(xl)}, 5vw, #{font-size(display)}); // 24 -> 56px
   font-weight: font-weight(light);
-  letter-spacing: tracking(stat); // -0.04em (-3.2px at 80px)
-  line-height: line-height(crush); // 0.9
+  line-height: line-height(snug);
+  letter-spacing: tracking(display);
+  color: color-mix(in srgb, color(cream) 60%, transparent);
+  text-wrap: pretty;
+}
+
+.stats-band__fact {
+  font-weight: inherit;
   color: color(paper);
-  font-variant-numeric: tabular-nums;
-}
-
-.stats-band__suffix {
-  font-size: font-size(2xl); // 32px (Figma stat unit)
-  color: color(signal);
-  font-weight: font-weight(light);
-  letter-spacing: 0;
-  line-height: line-height(normal);
-}
-
-.stats-band__label {
-  margin: 0;
-  font-size: font-size(sm-tight); // 13px
-  font-weight: font-weight(regular);
-  line-height: line-height(normal);
-  color: color-mix(in srgb, color(cream) 75%, transparent);
-  max-width: 22ch;
 }

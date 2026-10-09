@@ -1,32 +1,24 @@
-import { SectionHead } from "@/components/ui/SectionHead";
-import { STATS, STATS_BAND } from "@/constants/content/stats-band";
-import { StaggerList, StaggerItem } from "@/components/motion/StaggerList";
+import { STATS_BAND, STATS_STATEMENT } from "@/constants/content/stats-band";
+import { MotionReveal } from "@/components/motion/MotionReveal";
 
-/** By the numbers - Figma source of truth: ③ Patterns / Stats band · ink. */
+/** Twenty years in one sentence. The facts carry full brightness, the connective text sits back. */
 export function StatsBand() {
   return (
-    <section className="stats-band" aria-labelledby="stats-band-title">
+    <section className="stats-band" aria-label={STATS_BAND.ariaLabel}>
       <div className="container-atmosphere">
-        <SectionHead
-          eyebrow={STATS_BAND.eyebrow}
-          headline={STATS_BAND.headline}
-          surface="ink"
-          size="display"
-          headingId="stats-band-title"
-        />
-        <StaggerList as="ul" className="stats-band__grid" stagger={0.08}>
-          {STATS.map((stat) => (
-            <StaggerItem as="li" key={stat.label} className="stats-band__tile" lift={22}>
-              <span className="stats-band__num">
-                {stat.value}
-                {stat.suffix && (
-                  <span className="stats-band__suffix">{stat.suffix}</span>
-                )}
-              </span>
-              <p className="stats-band__label">{stat.label}</p>
-            </StaggerItem>
-          ))}
-        </StaggerList>
+        <MotionReveal lift={28} duration={0.9}>
+          <p className="stats-band__statement">
+            {STATS_STATEMENT.map((segment) =>
+              segment.strong ? (
+                <strong key={segment.text} className="stats-band__fact">
+                  {segment.text}
+                </strong>
+              ) : (
+                segment.text
+              ),
+            )}
+          </p>
+        </MotionReveal>
       </div>
     </section>
   );

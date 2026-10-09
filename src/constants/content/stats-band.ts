@@ -1,34 +1,25 @@
 /**
- * Stats band - by the numbers / 2006-2026.
- * 4 stat tiles, 4-up on desktop, 2-up on mobile.
- * Numbers from the CV. Suffix renders in --signal on paper, --cream on ink.
- * Mirrors the Figma source of truth (③ Home / Desktop).
+ * Stats band - the twenty years, said as one sentence instead of a
+ * stat grid. Segments with `strong: true` render at full paper
+ * brightness, the rest sits back in dimmed cream so the facts lead.
+ * Numbers from the CV.
  */
 
+export type StatsStatementSegment = {
+  text: string;
+  strong?: boolean;
+};
+
 export const STATS_BAND = {
-  eyebrow: "03 · The count · 2006-2026",
-  headline: "Twenty years, and I have the receipts.",
+  ariaLabel: "Twenty years of front-end work",
 } as const;
 
-export const STATS = [
-  {
-    value: "20",
-    suffix: "+yrs",
-    label: "Front-end I have led since 2006. No gaps.",
-  },
-  {
-    value: "60",
-    suffix: "+brands",
-    label: "Shipped for, from Sky to grassroots clubs.",
-  },
-  {
-    value: "1",
-    suffix: "studio",
-    label: "Origin Social. Every product shipped through it.",
-  },
-  {
-    value: "1",
-    suffix: "owner",
-    label: "Me. Discovery to deploy, no hand-offs.",
-  },
-] as const;
+export const STATS_STATEMENT: readonly StatsStatementSegment[] = [
+  { text: "I've built front-ends " },
+  { text: "since 2006", strong: true },
+  { text: " for " },
+  { text: "more than 60 brands", strong: true },
+  { text: ", from Sky to grassroots clubs. Today the work runs through Origin Social, my own studio, and I still do " },
+  { text: "every part of it myself", strong: true },
+  { text: "." },
+];
