@@ -58,22 +58,33 @@ export const HERO_VARIANT: "orb" | "flowfield" | "glass" = "glass";
  */
 export const HERO_GLASS_FIELD_PALETTE = {
   void: "#050504",
-  olive: "#56694a",
-  amber: "#c08d4e",
+  olive: "#647c56",
+  amber: "#c8964f",
   highlight: "#e2c08a",
 } as const;
 
 export const HERO_GLASS_FIELD = {
   /** Field sits behind the glass so the plane never slices through the DD. */
   planeZ: -3,
-  /** Noise space per unit of viewport height. Lower = larger, slower forms. */
-  scale: 0.42,
+  /** Three.js layer the field also sits on, for the field-only refraction
+   *  pass behind the back glass D. */
+  layer: 1,
+  /** Noise space per unit of viewport height. Lower = larger forms.
+   *  monopo.vn's forms span most of the screen; small shapes pop in and out
+   *  between frames and read as fast and busy, even at a low time speed. */
+  scale: 0.32,
+  /** Domain-warp strength. Scale it with `scale`: the warp displaces the
+   *  pattern in noise units, and the viewport spans only ~0.5 noise units at
+   *  scale 0.32, so a strong warp swings forms across the whole screen and
+   *  reads as fast however slow timeSpeed is. */
+  warp: 0.72,
   /** uTime advance per second. */
-  timeSpeed: 0.11,
+  timeSpeed: 0.035,
   /** smoothstep range on the warped noise that becomes black pools. Raise the
-   *  low edge for more black. ~40% of the frame should read near-black. */
-  poolLow: 0.44,
-  poolHigh: 0.74,
+   *  low edge for more black. Keep the range wide: a narrow one gives hard
+   *  edges that flick on and off as the field moves. */
+  poolLow: 0.36,
+  poolHigh: 0.8,
   /** How far the pointer pushes the warp. */
   pointerWarp: 0.22,
   pointerLerp: 0.03,
@@ -112,10 +123,9 @@ export const HERO_GLASS_DD = {
     /** Depth gap between the D centres. Each D is ~1.1 thick including
      *  bevels, so below that they intersect. */
     separationZ: 1.15,
-    /** The back D is mostly seen through the front one, so its refraction
-     *  buffer can be cheaper. */
-    backResolution: 1024,
-    extrude: { curveSegments: 72 },
+    /** The back D refracts a field-only pass at this share of the canvas
+     *  size. The field is soft, so half resolution loses nothing visible. */
+    fieldBufferScale: 0.5,
   },
   fused: {
     /** Distance between the D centres. At ~1.25 the strokes fuse where they
@@ -125,14 +135,17 @@ export const HERO_GLASS_DD = {
     /** Samples per curve segment when the outline is flattened for the union. */
     outlineDivisions: 96,
   },
-  /** Rounded bevel: the curved edge is where the glass bends the field and
-   *  catches its rim. Kept moderate because the fused outline has tight
-   *  inside corners where the strokes cross, and a wide bevel folds there. */
+  /** Pillow profile: a thin flat core with a deep, rounded bevel, so most of
+   *  each letter's face is curved and bends the field like a solid glass
+   *  piece. A big flat cap reads as a tinted acrylic sheet. bevelSize stays
+   *  under a third of the DM Sans stem (~0.41) or the counter closes up.
+   *  curveSegments only affects the glyph's quadratic curves. */
   extrude: {
-    depth: 0.5,
-    bevelSize: 0.12,
-    bevelThickness: 0.3,
-    bevelSegments: 16,
+    depth: 0.16,
+    bevelSize: 0.11,
+    bevelThickness: 0.42,
+    bevelSegments: 20,
+    curveSegments: 24,
   },
   /** Vertex weld distance for smooth normals, in glyph units. */
   weldTolerance: 1e-4,
@@ -162,16 +175,19 @@ export const HERO_GLASS_DD = {
     { form: "rect", intensity: 2.4, color: "#fff3e0", position: [-5, 4, 4], scale: [8, 1.2, 1] },
     { form: "rect", intensity: 1.2, color: "#e3b072", position: [6, -3, 3], scale: [6, 1, 1] },
     { form: "circle", intensity: 0.8, color: "#b9c9a4", position: [0, 6, -4], scale: [4, 4, 1] },
+    /** Low rim from below-right: without it the bottom and right edges go
+     *  dark and the letters lose their outline against the field. */
+    { form: "rect", intensity: 1.6, color: "#f1d9b0", position: [5, -6, 2], scale: [10, 0.8, 1] },
   ],
   /** Rendered once. At 256 the thin rim highlight steps visibly. */
   envResolution: 1024,
-  revealSec: 2.4,
+  revealSec: 3.2,
   /** Starting yaw for the reveal turn, radians. */
   revealYaw: -0.45,
-  idleYaw: 0.1,
-  idleSpeed: 0.18,
-  parallaxTilt: 0.14,
-  pointerLerp: 0.04,
+  idleYaw: 0.08,
+  idleSpeed: 0.09,
+  parallaxTilt: 0.12,
+  pointerLerp: 0.022,
   /** Lighter refraction on small screens. */
   mobile: { samples: 4, resolution: undefined },
 } as const;

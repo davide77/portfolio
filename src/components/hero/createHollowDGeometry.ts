@@ -1,5 +1,6 @@
 import polygonClipping, { type Polygon, type Ring } from "polygon-clipping";
-import { ExtrudeGeometry, Path, Shape, Vector2, type BufferGeometry } from "three";
+import { ExtrudeGeometry, Path, Shape, ShapePath, Vector2, type BufferGeometry } from "three";
+import { DM_SANS_D_GLYPH } from "@/constants/dm-sans-d-glyph";
 
 /**
  * Exact extrude from documents/davide-hero-final.html.
@@ -68,8 +69,12 @@ function fromRing(ring: Ring): Vector2[] {
  * tighter spacing chops them into slivers. `divisions` is the sample count
  * per curve segment.
  */
-export function createFusedDDShapes(separationX: number, divisions: number): Shape[] {
-  const d = makeDShape();
+export function createFusedDDShapes(
+  separationX: number,
+  divisions: number,
+  makeShape: () => Shape = makeDShape,
+): Shape[] {
+  const d = makeShape();
   const outer = d.getPoints(divisions);
   const counter = d.holes[0].getPoints(divisions);
   const letter = (dx: number): Polygon => [toRing(outer, dx), toRing(counter, dx)];
@@ -87,9 +92,83 @@ export function createFusedDDGeometry(
   separationX: number,
   divisions: number,
   overrides: HollowDExtrude = {},
+  makeShape: () => Shape = makeDShape,
 ): BufferGeometry {
-  const shapes = createFusedDDShapes(separationX, divisions);
+  const shapes = createFusedDDShapes(separationX, divisions, makeShape);
   const geometry = new ExtrudeGeometry(shapes, { ...EXTRUDE, ...overrides });
+  geometry.center();
+  return geometry;
+}
+
+/** Glyph height in world units before scale, matching the hand-drawn D so
+ *  spacing values carry over between the two. */
+const GLYPH_HEIGHT = 2.4;
+
+/**
+ * The DM Sans "D" (see DM_SANS_D_GLYPH) as a three Shape, centred on the
+ * origin and scaled to GLYPH_HEIGHT. Parses the absolute M / H / V / L / Q / Z
+ * commands the extractor emits; anything else throws, so a re-extraction with
+ * a different pen cannot fail silently.
+ */
+export function makeDMSansDShape(): Shape {
+  const { path, capHeight, xMin, xMax } = DM_SANS_D_GLYPH;
+  const k = GLYPH_HEIGHT / capHeight;
+  const cx = (xMin + xMax) / 2;
+  const cy = capHeight / 2;
+  const X = (x: number) => (x - cx) * k;
+  const Y = (y: number) => (y - cy) * k;
+
+  const shapePath = new ShapePath();
+  const tokens = path.match(/[A-Za-z]|-?\d*\.?\d+/g) ?? [];
+  let i = 0;
+  let x = 0;
+  let y = 0;
+  const num = () => Number(tokens[i++]);
+  while (i < tokens.length) {
+    const cmd = tokens[i++];
+    switch (cmd) {
+      case "M":
+        x = num();
+        y = num();
+        shapePath.moveTo(X(x), Y(y));
+        break;
+      case "L":
+        x = num();
+        y = num();
+        shapePath.lineTo(X(x), Y(y));
+        break;
+      case "H":
+        x = num();
+        shapePath.lineTo(X(x), Y(y));
+        break;
+      case "V":
+        y = num();
+        shapePath.lineTo(X(x), Y(y));
+        break;
+      case "Q": {
+        const qx = num();
+        const qy = num();
+        x = num();
+        y = num();
+        shapePath.quadraticCurveTo(X(qx), Y(qy), X(x), Y(y));
+        break;
+      }
+      case "Z":
+        break;
+      default:
+        throw new Error(`Unsupported glyph path command: ${cmd}`);
+    }
+  }
+
+  // TrueType draws outer contours clockwise, which toShapes(false) reads as
+  // solid, with the counter as a hole.
+  const [shape] = shapePath.toShapes(false);
+  return shape;
+}
+
+/** The DM Sans D extruded, centred like createHollowDGeometry. */
+export function createDMSansDGeometry(overrides: HollowDExtrude = {}): BufferGeometry {
+  const geometry = new ExtrudeGeometry(makeDMSansDShape(), { ...EXTRUDE, ...overrides });
   geometry.center();
   return geometry;
 }

@@ -1,6 +1,7 @@
-// Glass-hero field. Two levels of domain warping over simplex fbm give the
-// slow, organic pooling of the monopo.vn hero: olive and amber forms that
-// fade into large near-black pools, never straight bands.
+// Glass-hero field. Two levels of domain warping over two-octave simplex fbm
+// give the slow, organic pooling of the monopo.vn hero: very large, soft
+// olive and amber forms fading into near-black pools. Only two octaves on
+// purpose: finer detail pops in and out between frames and reads as busy.
 //
 // snoise() comes from noise.glsl, prepended at build time.
 // Coordinates come from the plane's own UVs, not gl_FragCoord, so the field
@@ -17,6 +18,7 @@ uniform vec3 uHighlight;
 uniform float uTime;
 uniform float uAspect;
 uniform float uScale;
+uniform float uWarp;        // domain-warp strength, in noise units
 uniform float uPoolLow;
 uniform float uPoolHigh;
 uniform float uReveal;
@@ -29,7 +31,7 @@ uniform float uFocusOuter;
 float fbm(vec3 p) {
   float sum = 0.0;
   float amp = 0.5;
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 2; i++) {
     sum += amp * snoise(p);
     p = p * 2.03 + vec3(1.7, 9.2, 0.0);
     amp *= 0.5;
@@ -46,13 +48,15 @@ void main() {
     fbm(vec3(uv + vec2(5.2, 1.3), t * 0.9))
   );
   vec2 r = vec2(
-    fbm(vec3(uv + 1.2 * q + vec2(1.7, 9.2) + uPointer, t * 0.8)),
-    fbm(vec3(uv + 1.2 * q + vec2(8.3, 2.8), t * 0.7))
+    fbm(vec3(uv + uWarp * q + vec2(1.7, 9.2) + uPointer, t * 0.8)),
+    fbm(vec3(uv + uWarp * q + vec2(8.3, 2.8), t * 0.7))
   );
-  float f = fbm(vec3(uv + 1.3 * r, t * 0.6)) * 0.5 + 0.5;
+  float f = fbm(vec3(uv + uWarp * 1.1 * r, t * 0.6)) * 0.5 + 0.5;
 
-  // Hue: olive where the first warp is calm, amber where it folds.
-  float hue = smoothstep(0.15, 0.75, length(q) * 0.9 + r.x * 0.45);
+  // Hue: olive where the first warp is calm, amber where it folds. The
+  // range is biased low so amber and olive share the frame about evenly,
+  // as in monopo.vn's hero.
+  float hue = smoothstep(-0.05, 0.62, length(q) * 0.9 + r.x * 0.45);
   vec3 col = mix(uOlive, uAmber, hue);
 
   // Luminance: the warped value decides what falls into black pools.

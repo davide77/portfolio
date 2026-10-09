@@ -1,15 +1,23 @@
 "use client";
 
-import { Environment, Lightformer, MeshTransmissionMaterial } from "@react-three/drei";
+import { Environment, Lightformer, MeshTransmissionMaterial, useFBO } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { BufferGeometry, Float32BufferAttribute, Vector3, type Group } from "three";
+import {
+  BufferGeometry,
+  Float32BufferAttribute,
+  NoToneMapping,
+  Vector3,
+  type Group,
+  type Texture,
+} from "three";
 import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import {
+  createDMSansDGeometry,
   createFusedDDGeometry,
-  createHollowDGeometry,
+  makeDMSansDShape,
 } from "@/components/hero/createHollowDGeometry";
-import { HERO_GLASS_DD } from "@/constants/hero-webgl";
+import { HERO_GLASS_DD, HERO_GLASS_FIELD } from "@/constants/hero-webgl";
 
 type HeroGlassDDProps = {
   containerRef: RefObject<HTMLElement | null>;
@@ -62,7 +70,8 @@ function smoothForGlass(source: BufferGeometry): BufferGeometry {
   return glyph;
 }
 
-/** "fused": both letters unioned into one outline and extruded as a single
+/** Both lockups use the DM Sans D, the same letter as the wordmark.
+ *  "fused": both letters unioned into one outline and extruded as a single
  *  solid. "layered": one D geometry, used twice, the second D set behind the
  *  first in depth. */
 function createLockupGeometry(): BufferGeometry {
@@ -72,25 +81,28 @@ function createLockupGeometry(): BufferGeometry {
         HERO_GLASS_DD.fused.separationX,
         HERO_GLASS_DD.fused.outlineDivisions,
         HERO_GLASS_DD.extrude,
+        makeDMSansDShape,
       ),
     );
   }
-  return smoothForGlass(
-    createHollowDGeometry({ ...HERO_GLASS_DD.extrude, ...HERO_GLASS_DD.layered.extrude }),
-  );
+  return smoothForGlass(createDMSansDGeometry(HERO_GLASS_DD.extrude));
 }
 
 type GlassMaterialProps = {
   samples: number;
-  resolution: number | undefined;
+  resolution?: number;
+  /** A prepared refraction texture. When set, the material skips its own
+   *  scene pass and refracts this instead. */
+  buffer?: Texture;
 };
 
-function GlassMaterial({ samples, resolution }: GlassMaterialProps) {
+function GlassMaterial({ samples, resolution, buffer }: GlassMaterialProps) {
   const m = HERO_GLASS_DD.material;
   return (
     <MeshTransmissionMaterial
       samples={samples}
       resolution={resolution}
+      buffer={buffer}
       transmission={1}
       thickness={m.thickness}
       roughness={m.roughness}
@@ -114,9 +126,9 @@ const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
  * the first D sits in front and the second behind it, each its own glass
  * mesh, so the front D refracts the back one and the two slide against each
  * other as the mark tilts. Each transmission material renders the scene into
- * its own refraction buffer, so layered costs one extra pass per frame; the
- * back D's buffer runs at a lower resolution since it is mostly seen through
- * the front. A faint warm attenuation dims the glass body against the open
+ * its own refraction buffer: the front D renders the full scene, the back D
+ * gets a cheap field-only pass, so layered costs about one extra half-size
+ * render per frame. A faint warm attenuation dims the glass body against the open
  * counters so the holes read as holes. A few soft Lightformers give the
  * glass its thin bright rim without loading an HDR file.
  *
@@ -128,7 +140,15 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
   const pointer = useRef({ x: 0, y: 0 });
   const pointerTarget = useRef({ x: 0, y: 0 });
   const startRef = useRef(-1);
-  const { viewport, camera } = useThree();
+  const { viewport, camera, size } = useThree();
+  // Field-only refraction buffer for the back D. If the back D rendered the
+  // whole scene, its buffer would hold the front D, which samples the back D,
+  // and the loop darkens the back letter to near-black. The field is soft, so
+  // a fraction of the canvas resolution is plenty.
+  const fieldBuffer = useFBO(
+    Math.max(1, Math.round(size.width * HERO_GLASS_DD.layered.fieldBufferScale)),
+    Math.max(1, Math.round(size.height * HERO_GLASS_DD.layered.fieldBufferScale)),
+  );
 
   const { geometry, width, height } = useMemo(() => {
     const glyph = createLockupGeometry();
@@ -176,6 +196,19 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
     };
   }, [containerRef, reduceMotion]);
 
+  useFrame(({ gl, scene, camera: cam }) => {
+    if (HERO_GLASS_DD.lockup !== "layered") return;
+    const mask = cam.layers.mask;
+    const tone = gl.toneMapping;
+    cam.layers.set(HERO_GLASS_FIELD.layer);
+    gl.toneMapping = NoToneMapping;
+    gl.setRenderTarget(fieldBuffer);
+    gl.render(scene, cam);
+    gl.setRenderTarget(null);
+    gl.toneMapping = tone;
+    cam.layers.mask = mask;
+  }, -1);
+
   // Transform mutation in useFrame is the r3f frame-loop pattern; the React
   // Compiler immutability rule does not model it.
   useFrame((state) => {
@@ -204,7 +237,7 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
   });
 
   const quality = isMobile ? HERO_GLASS_DD.mobile : HERO_GLASS_DD.material;
-  const { separationX: sx, separationZ: sz, backResolution } = HERO_GLASS_DD.layered;
+  const { separationX: sx, separationZ: sz } = HERO_GLASS_DD.layered;
   // Perspective compensation: the depth gap would otherwise draw the front D
   // larger and the back D smaller, so they stop reading as a matched pair.
   // Each D is scaled (and its x offset spread) by its distance to the camera
@@ -241,7 +274,7 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
               position={[(sx / 2) * backFit, 0, -sz / 2]}
               scale={backFit}
             >
-              <GlassMaterial samples={quality.samples} resolution={backResolution} />
+              <GlassMaterial samples={quality.samples} buffer={fieldBuffer.texture} />
             </mesh>
             <mesh
               geometry={geometry}

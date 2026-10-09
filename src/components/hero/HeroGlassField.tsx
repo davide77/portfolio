@@ -43,6 +43,7 @@ export function HeroGlassField({
           uTime: { value: 0 },
           uAspect: { value: 1 },
           uScale: { value: HERO_GLASS_FIELD.scale },
+          uWarp: { value: HERO_GLASS_FIELD.warp },
           uPoolLow: { value: HERO_GLASS_FIELD.poolLow },
           uPoolHigh: { value: HERO_GLASS_FIELD.poolHigh },
           uReveal: { value: reduceMotion ? 1 : 0 },
@@ -109,7 +110,14 @@ export function HeroGlassField({
   });
 
   return (
-    <mesh material={material} scale={[scaleX, scaleY, 1]} position={[0, 0, HERO_GLASS_FIELD.planeZ]}>
+    <mesh
+      material={material}
+      scale={[scaleX, scaleY, 1]}
+      position={[0, 0, HERO_GLASS_FIELD.planeZ]}
+      // Also on the field-only layer, so the back glass D can refract the
+      // field without the front D in its buffer (see HeroGlassDD).
+      onUpdate={(mesh) => mesh.layers.enable(HERO_GLASS_FIELD.layer)}
+    >
       <planeGeometry args={[1, 1]} />
     </mesh>
   );
