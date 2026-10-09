@@ -5,7 +5,10 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { BufferGeometry, Float32BufferAttribute, Vector3, type Group } from "three";
 import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { createFusedDDGeometry } from "@/components/hero/createHollowDGeometry";
+import {
+  createFusedDDGeometry,
+  createHollowDGeometry,
+} from "@/components/hero/createHollowDGeometry";
 import { HERO_GLASS_DD } from "@/constants/hero-webgl";
 
 type HeroGlassDDProps = {
@@ -34,20 +37,14 @@ function extractGroup(source: BufferGeometry, materialIndex: number): BufferGeom
 }
 
 /**
- * The glass DD: both letters fused into one outline and extruded as a single
- * solid, so they read as one integrated mark with both counters open, not two
- * slabs stacked in depth. ExtrudeGeometry is non-indexed, so every triangle
- * carries a flat normal and the curves refract in visible steps. The bevels and sides are
- * welded and re-normalled so they bend the field smoothly. The caps stay flat
- * on purpose: smoothing them too tilts the whole face into one big lens that
- * magnifies a single patch of the field into a flat wash of colour.
+ * Smooth a glass extrusion for refraction. ExtrudeGeometry is non-indexed, so
+ * every triangle carries a flat normal and the curves refract in visible
+ * steps. The bevels and sides are welded and re-normalled so they bend the
+ * field smoothly. The caps stay flat on purpose: smoothing them too tilts the
+ * whole face into one big lens that magnifies a single patch of the field
+ * into a flat wash of colour.
  */
-function createGlassDD(): BufferGeometry {
-  const source = createFusedDDGeometry(
-    HERO_GLASS_DD.separationX,
-    HERO_GLASS_DD.outlineDivisions,
-    HERO_GLASS_DD.extrude,
-  );
+function smoothForGlass(source: BufferGeometry): BufferGeometry {
   const caps = extractGroup(source, 0);
   const rawSides = extractGroup(source, 1);
   source.dispose();
@@ -65,14 +62,63 @@ function createGlassDD(): BufferGeometry {
   return glyph;
 }
 
+/** "fused": both letters unioned into one outline and extruded as a single
+ *  solid. "layered": one D geometry, used twice, the second D set behind the
+ *  first in depth. */
+function createLockupGeometry(): BufferGeometry {
+  if (HERO_GLASS_DD.lockup === "fused") {
+    return smoothForGlass(
+      createFusedDDGeometry(
+        HERO_GLASS_DD.fused.separationX,
+        HERO_GLASS_DD.fused.outlineDivisions,
+        HERO_GLASS_DD.extrude,
+      ),
+    );
+  }
+  return smoothForGlass(
+    createHollowDGeometry({ ...HERO_GLASS_DD.extrude, ...HERO_GLASS_DD.layered.extrude }),
+  );
+}
+
+type GlassMaterialProps = {
+  samples: number;
+  resolution: number | undefined;
+};
+
+function GlassMaterial({ samples, resolution }: GlassMaterialProps) {
+  const m = HERO_GLASS_DD.material;
+  return (
+    <MeshTransmissionMaterial
+      samples={samples}
+      resolution={resolution}
+      transmission={1}
+      thickness={m.thickness}
+      roughness={m.roughness}
+      ior={m.ior}
+      chromaticAberration={m.chromaticAberration}
+      anisotropicBlur={m.anisotropicBlur}
+      distortion={0}
+      envMapIntensity={m.envMapIntensity}
+      clearcoat={m.clearcoat}
+      clearcoatRoughness={m.clearcoatRoughness}
+      attenuationColor={m.attenuationColor}
+      attenuationDistance={m.attenuationDistance}
+    />
+  );
+}
+
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 /**
- * Hero-size glass DD. One mesh, so the transmission material renders the
- * scene into its refraction buffer once per frame. A faint warm attenuation
- * dims the glass body slightly against the open counters, so the holes read
- * as holes; everything else it shows is the field, bent through the bevels. A couple of soft
- * Lightformers give it the thin bright rim without loading an HDR file.
+ * Hero-size glass DD, Davide Domenghini's initials. In the "layered" lockup
+ * the first D sits in front and the second behind it, each its own glass
+ * mesh, so the front D refracts the back one and the two slide against each
+ * other as the mark tilts. Each transmission material renders the scene into
+ * its own refraction buffer, so layered costs one extra pass per frame; the
+ * back D's buffer runs at a lower resolution since it is mostly seen through
+ * the front. A faint warm attenuation dims the glass body against the open
+ * counters so the holes read as holes. A few soft Lightformers give the
+ * glass its thin bright rim without loading an HDR file.
  *
  * No `backside` pass: it renders the back faces over the field in the
  * refraction buffer and the glass comes out solid black.
@@ -82,15 +128,16 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
   const pointer = useRef({ x: 0, y: 0 });
   const pointerTarget = useRef({ x: 0, y: 0 });
   const startRef = useRef(-1);
-  const { viewport } = useThree();
+  const { viewport, camera } = useThree();
 
   const { geometry, width, height } = useMemo(() => {
-    const merged = createGlassDD();
-    merged.computeBoundingBox();
-    const box = merged.boundingBox!;
+    const glyph = createLockupGeometry();
+    glyph.computeBoundingBox();
+    const box = glyph.boundingBox!;
+    const extraWidth = HERO_GLASS_DD.lockup === "layered" ? HERO_GLASS_DD.layered.separationX : 0;
     return {
-      geometry: merged,
-      width: box.max.x - box.min.x,
+      geometry: glyph,
+      width: box.max.x - box.min.x + extraWidth,
       height: box.max.y - box.min.y,
     };
   }, []);
@@ -104,10 +151,10 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
     (HERO_GLASS_DD.heightFrac * vh) / height,
     (HERO_GLASS_DD.widthFrac * vw) / width,
   );
-  const base = useMemo(
-    () => new Vector3(HERO_GLASS_DD.offset[0] * vw, HERO_GLASS_DD.offset[1] * vh, 0),
-    [vw, vh],
-  );
+  const base = useMemo(() => {
+    const [ox, oy] = isMobile ? HERO_GLASS_DD.mobileOffset : HERO_GLASS_DD.offset;
+    return new Vector3(ox * vw, oy * vh, 0);
+  }, [vw, vh, isMobile]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -156,8 +203,17 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
     group.rotation.x = p.y * HERO_GLASS_DD.parallaxTilt * 0.6;
   });
 
-  const m = HERO_GLASS_DD.material;
-  const quality = isMobile ? HERO_GLASS_DD.mobile : m;
+  const quality = isMobile ? HERO_GLASS_DD.mobile : HERO_GLASS_DD.material;
+  const { separationX: sx, separationZ: sz, backResolution } = HERO_GLASS_DD.layered;
+  // Perspective compensation: the depth gap would otherwise draw the front D
+  // larger and the back D smaller, so they stop reading as a matched pair.
+  // Each D is scaled (and its x offset spread) by its distance to the camera
+  // over the lockup plane's, so both project at the same size, while the real
+  // depth still makes them slide against each other as the mark tilts.
+  const camZ = camera.position.z;
+  const depth = (sz / 2) * scale;
+  const frontFit = (camZ - depth) / camZ;
+  const backFit = (camZ + depth) / camZ;
 
   return (
     <>
@@ -174,24 +230,28 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
         ))}
       </Environment>
       <group ref={groupRef} scale={scale}>
-        <mesh geometry={geometry}>
-          <MeshTransmissionMaterial
-            samples={quality.samples}
-            resolution={quality.resolution}
-            transmission={1}
-            thickness={m.thickness}
-            roughness={m.roughness}
-            ior={m.ior}
-            chromaticAberration={m.chromaticAberration}
-            anisotropicBlur={m.anisotropicBlur}
-            distortion={0}
-            envMapIntensity={m.envMapIntensity}
-            clearcoat={m.clearcoat}
-            clearcoatRoughness={m.clearcoatRoughness}
-            attenuationColor={m.attenuationColor}
-            attenuationDistance={m.attenuationDistance}
-          />
-        </mesh>
+        {HERO_GLASS_DD.lockup === "fused" ? (
+          <mesh geometry={geometry}>
+            <GlassMaterial samples={quality.samples} resolution={quality.resolution} />
+          </mesh>
+        ) : (
+          <>
+            <mesh
+              geometry={geometry}
+              position={[(sx / 2) * backFit, 0, -sz / 2]}
+              scale={backFit}
+            >
+              <GlassMaterial samples={quality.samples} resolution={backResolution} />
+            </mesh>
+            <mesh
+              geometry={geometry}
+              position={[(-sx / 2) * frontFit, 0, sz / 2]}
+              scale={frontFit}
+            >
+              <GlassMaterial samples={quality.samples} resolution={quality.resolution} />
+            </mesh>
+          </>
+        )}
       </group>
     </>
   );

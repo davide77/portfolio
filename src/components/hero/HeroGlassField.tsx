@@ -11,6 +11,7 @@ import { HERO_GLASS_DD, HERO_GLASS_FIELD, HERO_GLASS_FIELD_PALETTE } from "@/con
 type HeroGlassFieldProps = {
   containerRef: RefObject<HTMLElement | null>;
   reduceMotion?: boolean;
+  isMobile?: boolean;
 };
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -20,7 +21,11 @@ const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
  * the glass sits wholly in front of it, running a domain-warped fbm shader.
  * Opens out of black on load, drifts slowly, and leans toward the pointer.
  */
-export function HeroGlassField({ containerRef, reduceMotion = false }: HeroGlassFieldProps) {
+export function HeroGlassField({
+  containerRef,
+  reduceMotion = false,
+  isMobile = false,
+}: HeroGlassFieldProps) {
   const { size, camera } = useThree();
   const startRef = useRef(-1);
   const pointerTarget = useRef(new Vector2());
@@ -90,7 +95,8 @@ export function HeroGlassField({ containerRef, reduceMotion = false }: HeroGlass
     u.uAspect.value = aspect;
     // DD offset is a share of viewport width / height; the shader works in
     // viewport-height units, so x scales by aspect.
-    (u.uFocus.value as Vector2).set(HERO_GLASS_DD.offset[0] * aspect, HERO_GLASS_DD.offset[1]);
+    const [fx, fy] = isMobile ? HERO_GLASS_DD.mobileOffset : HERO_GLASS_DD.offset;
+    (u.uFocus.value as Vector2).set(fx * aspect, fy);
     if (reduceMotion) return;
     if (startRef.current < 0) startRef.current = state.clock.elapsedTime;
     const elapsed = state.clock.elapsedTime - startRef.current;

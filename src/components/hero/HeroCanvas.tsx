@@ -91,7 +91,7 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
           {HERO_VARIANT === "glass" ? (
             <>
               <PerformanceMonitor onDecline={() => setDegraded(true)} />
-              <HeroGlassField containerRef={wrapRef} reduceMotion={reduceMotion} />
+              <HeroGlassField containerRef={wrapRef} reduceMotion={reduceMotion} isMobile={isMobile} />
               <HeroGlassDD containerRef={wrapRef} reduceMotion={reduceMotion} isMobile={isMobile} />
               <EffectComposer>
                 <FilmGrain amount={HERO_GRAIN.amount} fps={HERO_GRAIN.fps} />

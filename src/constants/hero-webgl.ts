@@ -92,16 +92,39 @@ export const HERO_GLASS_DD = {
    *  viewport width. On portrait screens the width cap wins and the whole DD
    *  stays readable; cropping it there left only loose arcs. */
   heightFrac: 0.76,
-  widthFrac: 1.02,
+  widthFrac: 0.9,
   /** Lockup centre, as a share of the viewport from the middle. */
   offset: [0.1, -0.03] as const,
-  /** Distance between the two D centres, in glyph units (a D is 1.7 wide).
-   *  The letters are unioned into one outline. At ~1.25 the strokes fuse
-   *  where they cross and both counters stay open; at 0.92 the overlap chops
-   *  the counters into slivers. */
-  separationX: 1.25,
-  /** Samples per curve segment when the outline is flattened for the union. */
-  outlineDivisions: 96,
+  /** Phones centre the mark: the desktop right shift pushes the second D
+   *  off a portrait screen. */
+  mobileOffset: [0, -0.03] as const,
+  /** How the two initials combine.
+   *  - "layered": the first D in front, the second set back in depth. Each is
+   *    its own glass, so the front D refracts the back one and they slide
+   *    against each other as the mark tilts. Reads as two letters, D then D.
+   *  - "fused": both outlines unioned into one solid, like a ligature. */
+  lockup: "layered" as "layered" | "fused",
+  layered: {
+    /** Distance between the D centres, in glyph units (a D is 1.7 wide). At
+     *  ~1.15 the back D's stem sits in the front D's counter and its bowl
+     *  clears the front bowl enough to read as the second letter. */
+    separationX: 1.15,
+    /** Depth gap between the D centres. Each D is ~1.1 thick including
+     *  bevels, so below that they intersect. */
+    separationZ: 1.15,
+    /** The back D is mostly seen through the front one, so its refraction
+     *  buffer can be cheaper. */
+    backResolution: 1024,
+    extrude: { curveSegments: 72 },
+  },
+  fused: {
+    /** Distance between the D centres. At ~1.25 the strokes fuse where they
+     *  cross and both counters stay open; at 0.92 the overlap chops the
+     *  counters into slivers. */
+    separationX: 1.25,
+    /** Samples per curve segment when the outline is flattened for the union. */
+    outlineDivisions: 96,
+  },
   /** Rounded bevel: the curved edge is where the glass bends the field and
    *  catches its rim. Kept moderate because the fused outline has tight
    *  inside corners where the strokes cross, and a wide bevel folds there. */
