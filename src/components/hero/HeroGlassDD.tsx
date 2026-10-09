@@ -5,7 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { BufferGeometry, Float32BufferAttribute, Vector3, type Group } from "three";
 import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { createHollowDGeometry } from "@/components/hero/createHollowDGeometry";
+import { createFusedDDGeometry } from "@/components/hero/createHollowDGeometry";
 import { HERO_GLASS_DD } from "@/constants/hero-webgl";
 
 type HeroGlassDDProps = {
@@ -34,14 +34,20 @@ function extractGroup(source: BufferGeometry, materialIndex: number): BufferGeom
 }
 
 /**
- * One glass D. ExtrudeGeometry is non-indexed, so every triangle carries a flat
- * normal and the curves refract in visible steps. The bevels and sides are
+ * The glass DD: both letters fused into one outline and extruded as a single
+ * solid, so they read as one integrated mark with both counters open, not two
+ * slabs stacked in depth. ExtrudeGeometry is non-indexed, so every triangle
+ * carries a flat normal and the curves refract in visible steps. The bevels and sides are
  * welded and re-normalled so they bend the field smoothly. The caps stay flat
  * on purpose: smoothing them too tilts the whole face into one big lens that
  * magnifies a single patch of the field into a flat wash of colour.
  */
-function createGlassGlyph(): BufferGeometry {
-  const source = createHollowDGeometry(HERO_GLASS_DD.extrude);
+function createGlassDD(): BufferGeometry {
+  const source = createFusedDDGeometry(
+    HERO_GLASS_DD.separationX,
+    HERO_GLASS_DD.outlineDivisions,
+    HERO_GLASS_DD.extrude,
+  );
   const caps = extractGroup(source, 0);
   const rawSides = extractGroup(source, 1);
   source.dispose();
@@ -62,10 +68,10 @@ function createGlassGlyph(): BufferGeometry {
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 /**
- * Hero-size clear-glass DD. Both letters are merged into one mesh so the
- * transmission material renders the scene into its refraction buffer once per
- * frame, not once per letter. The glass carries no tint: everything it shows
- * is the field behind it, bent through the bevels. A couple of soft
+ * Hero-size glass DD. One mesh, so the transmission material renders the
+ * scene into its refraction buffer once per frame. A faint warm attenuation
+ * dims the glass body slightly against the open counters, so the holes read
+ * as holes; everything else it shows is the field, bent through the bevels. A couple of soft
  * Lightformers give it the thin bright rim without loading an HDR file.
  *
  * No `backside` pass: it renders the back faces over the field in the
@@ -79,15 +85,7 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
   const { viewport } = useThree();
 
   const { geometry, width, height } = useMemo(() => {
-    const sx = HERO_GLASS_DD.separationX;
-    const sz = HERO_GLASS_DD.separationZ;
-    const back = createGlassGlyph();
-    const front = createGlassGlyph();
-    back.translate(sx / 2, 0, -sz / 2);
-    front.translate(-sx / 2, 0, sz / 2);
-    const merged = mergeGeometries([back, front]);
-    back.dispose();
-    front.dispose();
+    const merged = createGlassDD();
     merged.computeBoundingBox();
     const box = merged.boundingBox!;
     return {
@@ -190,6 +188,8 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
             envMapIntensity={m.envMapIntensity}
             clearcoat={m.clearcoat}
             clearcoatRoughness={m.clearcoatRoughness}
+            attenuationColor={m.attenuationColor}
+            attenuationDistance={m.attenuationDistance}
           />
         </mesh>
       </group>

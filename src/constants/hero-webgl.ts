@@ -91,22 +91,25 @@ export const HERO_GLASS_DD = {
   /** Lockup height as a share of viewport height, capped by widthFrac of the
    *  viewport width. On portrait screens the width cap wins and the whole DD
    *  stays readable; cropping it there left only loose arcs. */
-  heightFrac: 0.84,
+  heightFrac: 0.76,
   widthFrac: 1.02,
   /** Lockup centre, as a share of the viewport from the middle. */
   offset: [0.1, -0.03] as const,
-  /** D + D interlock, in glyph units (glyph is ~1.9 wide before scale). */
-  separationX: 0.92,
-  separationZ: 0.3,
-  /** Deep, pillowy bevel: most of each letter's face is curved, so the
-   *  whole glyph bends the field like monopo's ring, not just its edges.
-   *  A shallow bevel leaves a flat front that reads as a tinted pane. */
+  /** Distance between the two D centres, in glyph units (a D is 1.7 wide).
+   *  The letters are unioned into one outline. At ~1.25 the strokes fuse
+   *  where they cross and both counters stay open; at 0.92 the overlap chops
+   *  the counters into slivers. */
+  separationX: 1.25,
+  /** Samples per curve segment when the outline is flattened for the union. */
+  outlineDivisions: 96,
+  /** Rounded bevel: the curved edge is where the glass bends the field and
+   *  catches its rim. Kept moderate because the fused outline has tight
+   *  inside corners where the strokes cross, and a wide bevel folds there. */
   extrude: {
-    depth: 0.4,
-    bevelSize: 0.2,
-    bevelThickness: 0.34,
+    depth: 0.5,
+    bevelSize: 0.12,
+    bevelThickness: 0.3,
     bevelSegments: 16,
-    curveSegments: 72,
   },
   /** Vertex weld distance for smooth normals, in glyph units. */
   weldTolerance: 1e-4,
@@ -117,13 +120,17 @@ export const HERO_GLASS_DD = {
      *  the bevel rims step visibly. */
     resolution: undefined,
     thickness: 1.4,
-    roughness: 0.04,
+    roughness: 0.06,
     ior: 1.32,
     chromaticAberration: 0.05,
     anisotropicBlur: 0.08,
     envMapIntensity: 0.55,
     clearcoat: 1,
     clearcoatRoughness: 0.12,
+    /** Faint warm dimming through the body so the open counters read as
+     *  holes against it. Lower distance = darker glass. */
+    attenuationColor: "#bdb1a0",
+    attenuationDistance: 4.5,
   },
   /** Soft studio lights baked into the environment map: they give the glass
    *  its thin bright rim. Warm key top-left, amber fill bottom-right, a faint
