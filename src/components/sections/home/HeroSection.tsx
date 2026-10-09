@@ -14,7 +14,8 @@ import { HERO_ORB, HERO_VARIANT } from "@/constants/hero-webgl";
 import { cx } from "@/components/cx";
 
 // The glass hero brings its own field, and wants the glass to carry the frame:
-// no Grainient underneath, and only the headline over it.
+// no Grainient underneath, and only the headline and scroll badge over it
+// (monopo.vn's own hero carries nothing else).
 const IS_GLASS = HERO_VARIANT === "glass";
 
 export function HeroSection() {
@@ -44,9 +45,11 @@ export function HeroSection() {
         <HeroHeadline ready={headlineReady} />
         {!IS_GLASS && <p className="hero-section__brand-band mono">{HERO_DISPLAY.brandBand}</p>}
       </div>
-      <VerticalText className="hero-section__edge">{HERO_DISPLAY.verticalEdge}</VerticalText>
+      {!IS_GLASS && (
+        <VerticalText className="hero-section__edge">{HERO_DISPLAY.verticalEdge}</VerticalText>
+      )}
       <ScrollBadge />
-      <FloatingAccentDot />
+      {!IS_GLASS && <FloatingAccentDot />}
     </section>
   );
 }

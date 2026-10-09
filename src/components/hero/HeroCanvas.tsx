@@ -1,5 +1,6 @@
 "use client";
 
+import { PerformanceMonitor } from "@react-three/drei";
 import { EffectComposer, Noise } from "@react-three/postprocessing";
 import { Canvas } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
@@ -14,6 +15,7 @@ import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
 import {
   HERO_FLOWFIELD,
   HERO_GLASS_MAX_DPR,
+  HERO_GLASS_MIN_DPR,
   HERO_GRAIN,
   HERO_ORB,
   HERO_VARIANT,
@@ -49,6 +51,10 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [tabVisible, setTabVisible] = useState(true);
   const { maxDpr, isMobile } = useViewportProfile();
+  // Glass hero only: if the device cannot hold the frame rate, drop pixel
+  // density rather than stutter. Never climbs back, so it cannot oscillate.
+  const [degraded, setDegraded] = useState(false);
+  const dprCap = degraded ? HERO_GLASS_MIN_DPR : maxDpr;
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -72,7 +78,7 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
   return (
     <div ref={wrapRef} className={className}>
       <Canvas
-        dpr={[1, maxDpr]}
+        dpr={[1, dprCap]}
         frameloop={frameLoop}
         camera={{ position: [0, 0, HERO_ORB.cameraZ], fov: HERO_ORB.cameraFov }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
@@ -84,6 +90,7 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
         <Suspense fallback={null}>
           {HERO_VARIANT === "glass" ? (
             <>
+              <PerformanceMonitor onDecline={() => setDegraded(true)} />
               <HeroGlassField containerRef={wrapRef} reduceMotion={reduceMotion} />
               <HeroGlassDD containerRef={wrapRef} reduceMotion={reduceMotion} isMobile={isMobile} />
               <EffectComposer>

@@ -21,6 +21,10 @@ uniform float uPoolLow;
 uniform float uPoolHigh;
 uniform float uReveal;
 uniform vec2 uPointer;
+uniform vec2 uFocus;       // DD centre, in viewport-height units from the middle
+uniform float uFocusLift;
+uniform float uFocusInner;
+uniform float uFocusOuter;
 
 float fbm(vec3 p) {
   float sum = 0.0;
@@ -53,6 +57,11 @@ void main() {
 
   // Luminance: the warped value decides what falls into black pools.
   float lum = smoothstep(uPoolLow, uPoolHigh, f);
+
+  // Keep a glow under the glass so it always has colour to refract.
+  float focusDist = length(vUv.xy * vec2(uAspect, 1.0) - uFocus);
+  float focus = 1.0 - smoothstep(uFocusInner, uFocusOuter, focusDist);
+  lum = max(lum, focus * uFocusLift * (0.75 + 0.25 * f));
   col = mix(uVoid, col, lum);
 
   // A thin warm sheen on the brightest folds.

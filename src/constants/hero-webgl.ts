@@ -79,6 +79,12 @@ export const HERO_GLASS_FIELD = {
   pointerLerp: 0.03,
   /** Load reveal: the field opens out of black over this many seconds. */
   revealSec: 2.6,
+  /** Soft glow kept behind the DD so the glass always has colour to bend,
+   *  even when a black pool drifts across it. Centre comes from
+   *  HERO_GLASS_DD.offset; radius is in viewport heights. */
+  focusLift: 0.38,
+  focusInner: 0.08,
+  focusOuter: 0.62,
 } as const;
 
 export const HERO_GLASS_DD = {
@@ -92,16 +98,25 @@ export const HERO_GLASS_DD = {
   /** D + D interlock, in glyph units (glyph is ~1.9 wide before scale). */
   separationX: 0.92,
   separationZ: 0.3,
-  /** Rounder, deeper bevel than the metal D: the bevel is where the glass
-   *  catches its bright rim and bends the field hardest. */
-  extrude: { depth: 0.62, bevelSize: 0.14, bevelThickness: 0.16, bevelSegments: 12 },
+  /** Deep, pillowy bevel: most of each letter's face is curved, so the
+   *  whole glyph bends the field like monopo's ring, not just its edges.
+   *  A shallow bevel leaves a flat front that reads as a tinted pane. */
+  extrude: {
+    depth: 0.4,
+    bevelSize: 0.2,
+    bevelThickness: 0.34,
+    bevelSegments: 16,
+    curveSegments: 72,
+  },
+  /** Vertex weld distance for smooth normals, in glyph units. */
+  weldTolerance: 1e-4,
   material: {
     samples: 8,
     /** Refraction buffer size. undefined = match the canvas pixel for pixel.
      *  Any fixed square (even 2048) gets magnified onto a wide 2x canvas and
      *  the bevel rims step visibly. */
     resolution: undefined,
-    thickness: 1.8,
+    thickness: 1.4,
     roughness: 0.04,
     ior: 1.32,
     chromaticAberration: 0.05,
@@ -141,6 +156,10 @@ export const HERO_GRAIN = {
 
 /** DPR cap for the glass hero. Full-screen transmission at 3x is too heavy. */
 export const HERO_GLASS_MAX_DPR = 2;
+
+/** DPR the glass hero falls back to when PerformanceMonitor reports the
+ *  device cannot hold the frame rate. */
+export const HERO_GLASS_MIN_DPR = 1.25;
 
 /**
  * Flow-field plane palette. Reuses the sanctioned WebGL-orb carve-out tokens

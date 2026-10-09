@@ -3,8 +3,8 @@
 import { Environment, Lightformer, MeshTransmissionMaterial } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { Vector3, type Group } from "three";
-import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import { BufferGeometry, Float32BufferAttribute, Vector3, type Group } from "three";
+import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { createHollowDGeometry } from "@/components/hero/createHollowDGeometry";
 import { HERO_GLASS_DD } from "@/constants/hero-webgl";
 
@@ -13,6 +13,51 @@ type HeroGlassDDProps = {
   reduceMotion?: boolean;
   isMobile?: boolean;
 };
+
+/** Copy one ExtrudeGeometry group (0 = front/back caps, 1 = bevels + sides)
+ *  into its own geometry, position + normal only. */
+function extractGroup(source: BufferGeometry, materialIndex: number): BufferGeometry {
+  const parts = source.groups
+    .filter((g) => g.materialIndex === materialIndex)
+    .map((g) => {
+      const part = new BufferGeometry();
+      for (const name of ["position", "normal"] as const) {
+        const attr = source.getAttribute(name);
+        const array = attr.array.slice(g.start * 3, (g.start + g.count) * 3);
+        part.setAttribute(name, new Float32BufferAttribute(array, 3));
+      }
+      return part;
+    });
+  const merged = mergeGeometries(parts);
+  parts.forEach((part) => part.dispose());
+  return merged;
+}
+
+/**
+ * One glass D. ExtrudeGeometry is non-indexed, so every triangle carries a flat
+ * normal and the curves refract in visible steps. The bevels and sides are
+ * welded and re-normalled so they bend the field smoothly. The caps stay flat
+ * on purpose: smoothing them too tilts the whole face into one big lens that
+ * magnifies a single patch of the field into a flat wash of colour.
+ */
+function createGlassGlyph(): BufferGeometry {
+  const source = createHollowDGeometry(HERO_GLASS_DD.extrude);
+  const caps = extractGroup(source, 0);
+  const rawSides = extractGroup(source, 1);
+  source.dispose();
+
+  rawSides.deleteAttribute("normal");
+  const welded = mergeVertices(rawSides, HERO_GLASS_DD.weldTolerance);
+  rawSides.dispose();
+  welded.computeVertexNormals();
+  const sides = welded.toNonIndexed();
+  welded.dispose();
+
+  const glyph = mergeGeometries([caps, sides]);
+  caps.dispose();
+  sides.dispose();
+  return glyph;
+}
 
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
@@ -36,8 +81,8 @@ export function HeroGlassDD({ containerRef, reduceMotion = false, isMobile = fal
   const { geometry, width, height } = useMemo(() => {
     const sx = HERO_GLASS_DD.separationX;
     const sz = HERO_GLASS_DD.separationZ;
-    const back = createHollowDGeometry(HERO_GLASS_DD.extrude);
-    const front = createHollowDGeometry(HERO_GLASS_DD.extrude);
+    const back = createGlassGlyph();
+    const front = createGlassGlyph();
     back.translate(sx / 2, 0, -sz / 2);
     front.translate(-sx / 2, 0, sz / 2);
     const merged = mergeGeometries([back, front]);

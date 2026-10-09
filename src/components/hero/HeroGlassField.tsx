@@ -6,7 +6,7 @@ import { Color, ShaderMaterial, Vector2 } from "three";
 import noiseGlsl from "@/components/hero/shaders/noise.glsl";
 import fieldFrag from "@/components/hero/shaders/glassfield.frag.glsl";
 import flowVert from "@/components/hero/shaders/flowfield.vert.glsl";
-import { HERO_GLASS_FIELD, HERO_GLASS_FIELD_PALETTE } from "@/constants/hero-webgl";
+import { HERO_GLASS_DD, HERO_GLASS_FIELD, HERO_GLASS_FIELD_PALETTE } from "@/constants/hero-webgl";
 
 type HeroGlassFieldProps = {
   containerRef: RefObject<HTMLElement | null>;
@@ -42,6 +42,10 @@ export function HeroGlassField({ containerRef, reduceMotion = false }: HeroGlass
           uPoolHigh: { value: HERO_GLASS_FIELD.poolHigh },
           uReveal: { value: reduceMotion ? 1 : 0 },
           uPointer: { value: new Vector2() },
+          uFocus: { value: new Vector2() },
+          uFocusLift: { value: HERO_GLASS_FIELD.focusLift },
+          uFocusInner: { value: HERO_GLASS_FIELD.focusInner },
+          uFocusOuter: { value: HERO_GLASS_FIELD.focusOuter },
         },
       }),
     [reduceMotion],
@@ -84,6 +88,9 @@ export function HeroGlassField({ containerRef, reduceMotion = false }: HeroGlass
     const u = material.uniforms;
     // eslint-disable-next-line react-hooks/immutability
     u.uAspect.value = aspect;
+    // DD offset is a share of viewport width / height; the shader works in
+    // viewport-height units, so x scales by aspect.
+    (u.uFocus.value as Vector2).set(HERO_GLASS_DD.offset[0] * aspect, HERO_GLASS_DD.offset[1]);
     if (reduceMotion) return;
     if (startRef.current < 0) startRef.current = state.clock.elapsedTime;
     const elapsed = state.clock.elapsedTime - startRef.current;
