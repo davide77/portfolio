@@ -62,6 +62,15 @@ const WORK_BENTO_SOURCE: readonly WorkBentoSource[] = [
     imageAlt: "Origin Social studio logo mark on a dark cover",
   },
   {
+    slug: "gafferboard",
+    role: "Founder · 2026 - now",
+    title: "Gafferboard",
+    body: "Matchday board for coaches. Live.",
+    stack: "NEXT · REACT 19 · TS",
+    image: "/images/projects/gafferboard/pick.jpg",
+    imageAlt: "Gafferboard on a phone, picking a 4-3-3 line-up on the pitch",
+  },
+  {
     slug: "liberty-blume",
     role: "Senior FE lead · 2025 - now",
     title: "Liberty Blume",
