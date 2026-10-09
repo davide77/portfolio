@@ -11,7 +11,7 @@ const EXTRUDE = {
   bevelSize: 0.06,
   bevelThickness: 0.06,
   curveSegments: 40,
-} as const;
+};
 
 /** D outline + counter, verbatim from documents/davide-hero-final.html. */
 function makeDShape(): Shape {
@@ -35,8 +35,12 @@ function makeDShape(): Shape {
   return shape;
 }
 
-export function createHollowDGeometry(): BufferGeometry {
-  const geometry = new ExtrudeGeometry(makeDShape(), EXTRUDE);
+export type HollowDExtrude = Partial<Omit<typeof EXTRUDE, "bevelEnabled">>;
+
+/** `overrides` exists for the glass hero, whose refraction needs a rounder,
+ *  deeper bevel than the metal D. The metal D keeps the default. */
+export function createHollowDGeometry(overrides: HollowDExtrude = {}): BufferGeometry {
+  const geometry = new ExtrudeGeometry(makeDShape(), { ...EXTRUDE, ...overrides });
   geometry.center();
   return geometry;
 }

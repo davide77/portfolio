@@ -46,7 +46,101 @@ export const HERO_ORB = {
  * monogram + film grain instead of the liquid-metal orb. The orb stays the
  * default and fully reachable; this is an in-repo A/B, not a replacement.
  */
-export const HERO_VARIANT: "orb" | "flowfield" = "flowfield";
+export const HERO_VARIANT: "orb" | "flowfield" | "glass" = "glass";
+
+/**
+ * Glass hero (monopo.vn register): a domain-warped field of olive and amber
+ * pooling into near-black, a hero-size clear-glass DD refracting it, and a
+ * device-pixel film grain over the lot. The glass carries no tint of its own;
+ * every colour it shows is the field bent through it.
+ *
+ * Palette sampled from monopo.vn's hero frames. WebGL-only, like the orb ramp.
+ */
+export const HERO_GLASS_FIELD_PALETTE = {
+  void: "#050504",
+  olive: "#56694a",
+  amber: "#c08d4e",
+  highlight: "#e2c08a",
+} as const;
+
+export const HERO_GLASS_FIELD = {
+  /** Field sits behind the glass so the plane never slices through the DD. */
+  planeZ: -3,
+  /** Noise space per unit of viewport height. Lower = larger, slower forms. */
+  scale: 0.42,
+  /** uTime advance per second. */
+  timeSpeed: 0.11,
+  /** smoothstep range on the warped noise that becomes black pools. Raise the
+   *  low edge for more black. ~40% of the frame should read near-black. */
+  poolLow: 0.44,
+  poolHigh: 0.74,
+  /** How far the pointer pushes the warp. */
+  pointerWarp: 0.22,
+  pointerLerp: 0.03,
+  /** Load reveal: the field opens out of black over this many seconds. */
+  revealSec: 2.6,
+} as const;
+
+export const HERO_GLASS_DD = {
+  /** Lockup height as a share of viewport height, capped by widthFrac of the
+   *  viewport width. On portrait screens the width cap wins and the whole DD
+   *  stays readable; cropping it there left only loose arcs. */
+  heightFrac: 0.84,
+  widthFrac: 1.02,
+  /** Lockup centre, as a share of the viewport from the middle. */
+  offset: [0.1, -0.03] as const,
+  /** D + D interlock, in glyph units (glyph is ~1.9 wide before scale). */
+  separationX: 0.92,
+  separationZ: 0.3,
+  /** Rounder, deeper bevel than the metal D: the bevel is where the glass
+   *  catches its bright rim and bends the field hardest. */
+  extrude: { depth: 0.62, bevelSize: 0.14, bevelThickness: 0.16, bevelSegments: 12 },
+  material: {
+    samples: 8,
+    /** Refraction buffer size. undefined = match the canvas pixel for pixel.
+     *  Any fixed square (even 2048) gets magnified onto a wide 2x canvas and
+     *  the bevel rims step visibly. */
+    resolution: undefined,
+    thickness: 1.8,
+    roughness: 0.04,
+    ior: 1.32,
+    chromaticAberration: 0.05,
+    anisotropicBlur: 0.08,
+    envMapIntensity: 0.55,
+    clearcoat: 1,
+    clearcoatRoughness: 0.12,
+  },
+  /** Soft studio lights baked into the environment map: they give the glass
+   *  its thin bright rim. Warm key top-left, amber fill bottom-right, a faint
+   *  olive bounce from behind. */
+  lights: [
+    { form: "rect", intensity: 2.4, color: "#fff3e0", position: [-5, 4, 4], scale: [8, 1.2, 1] },
+    { form: "rect", intensity: 1.2, color: "#e3b072", position: [6, -3, 3], scale: [6, 1, 1] },
+    { form: "circle", intensity: 0.8, color: "#b9c9a4", position: [0, 6, -4], scale: [4, 4, 1] },
+  ],
+  /** Rendered once. At 256 the thin rim highlight steps visibly. */
+  envResolution: 1024,
+  revealSec: 2.4,
+  /** Starting yaw for the reveal turn, radians. */
+  revealYaw: -0.45,
+  idleYaw: 0.1,
+  idleSpeed: 0.18,
+  parallaxTilt: 0.14,
+  pointerLerp: 0.04,
+  /** Lighter refraction on small screens. */
+  mobile: { samples: 4, resolution: undefined },
+} as const;
+
+/** Film grain over the whole WebGL hero: one device pixel, single-colour,
+ *  added in display space so blacks carry it as much as highlights.
+ *  amount 0.08 measures ~8 neighbour-diff sd at 2x, matching monopo.vn. */
+export const HERO_GRAIN = {
+  amount: 0.08,
+  fps: 24,
+} as const;
+
+/** DPR cap for the glass hero. Full-screen transmission at 3x is too heavy. */
+export const HERO_GLASS_MAX_DPR = 2;
 
 /**
  * Flow-field plane palette. Reuses the sanctioned WebGL-orb carve-out tokens

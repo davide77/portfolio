@@ -10,8 +10,12 @@ import { FloatingAccentDot } from "@/components/ui/FloatingAccentDot";
 import { ScrollBadge } from "@/components/ui/ScrollBadge";
 import { VerticalText } from "@/components/ui/VerticalText";
 import { HERO_DISPLAY } from "@/constants/content/hero-section";
-import { HERO_ORB } from "@/constants/hero-webgl";
+import { HERO_ORB, HERO_VARIANT } from "@/constants/hero-webgl";
 import { cx } from "@/components/cx";
+
+// The glass hero brings its own field, and wants the glass to carry the frame:
+// no Grainient underneath, and only the headline over it.
+const IS_GLASS = HERO_VARIANT === "glass";
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
@@ -33,12 +37,12 @@ export function HeroSection() {
 
   return (
     <section id="hero" className={cx("hero-section", "bg-ink")} aria-labelledby="hero-heading">
-      <HeroGrainient className="hero-section__backdrop" />
+      {!IS_GLASS && <HeroGrainient className="hero-section__backdrop" />}
       <HeroWebGLLayer className="hero-section__canvas" onCanvasReady={handleCanvasReady} />
       <div className={cx("hero-section__inner", "container-atmosphere")}>
-        <p className="hero-section__eyebrow">{HERO_DISPLAY.eyebrow}</p>
+        {!IS_GLASS && <p className="hero-section__eyebrow">{HERO_DISPLAY.eyebrow}</p>}
         <HeroHeadline ready={headlineReady} />
-        <p className="hero-section__brand-band mono">{HERO_DISPLAY.brandBand}</p>
+        {!IS_GLASS && <p className="hero-section__brand-band mono">{HERO_DISPLAY.brandBand}</p>}
       </div>
       <VerticalText className="hero-section__edge">{HERO_DISPLAY.verticalEdge}</VerticalText>
       <ScrollBadge />

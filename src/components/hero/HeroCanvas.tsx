@@ -4,11 +4,20 @@ import { EffectComposer, Noise } from "@react-three/postprocessing";
 import { Canvas } from "@react-three/fiber";
 import { BlendFunction } from "postprocessing";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { FilmGrain } from "@/components/hero/FilmGrain";
 import { HeroFlowField } from "@/components/hero/HeroFlowField";
+import { HeroGlassDD } from "@/components/hero/HeroGlassDD";
+import { HeroGlassField } from "@/components/hero/HeroGlassField";
 import { HeroGlassMonogram } from "@/components/hero/HeroGlassMonogram";
 import { HeroOrb } from "@/components/hero/HeroOrb";
 import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
-import { HERO_FLOWFIELD, HERO_ORB, HERO_VARIANT } from "@/constants/hero-webgl";
+import {
+  HERO_FLOWFIELD,
+  HERO_GLASS_MAX_DPR,
+  HERO_GRAIN,
+  HERO_ORB,
+  HERO_VARIANT,
+} from "@/constants/hero-webgl";
 import { useVisibility } from "@/hooks/useVisibility";
 
 type HeroCanvasProps = {
@@ -18,18 +27,20 @@ type HeroCanvasProps = {
 
 // Brief: setPixelRatio(Math.min(devicePixelRatio, 3)); mobile (<640px) caps DPR at 2.
 // matchMedia so the cap reacts to viewport changes (rotate, resize).
-function useMaxDpr(): number {
-  const [maxDpr, setMaxDpr] = useState<number>(HERO_ORB.maxDevicePixelRatio);
+// The glass hero caps lower: full-screen transmission at 3x is too heavy.
+function useViewportProfile(): { maxDpr: number; isMobile: boolean } {
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
-    const update = () => setMaxDpr(mq.matches ? 2 : HERO_ORB.maxDevicePixelRatio);
+    const update = () => setIsMobile(mq.matches);
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  return maxDpr;
+  const desktopDpr = HERO_VARIANT === "glass" ? HERO_GLASS_MAX_DPR : HERO_ORB.maxDevicePixelRatio;
+  return { maxDpr: isMobile ? 2 : desktopDpr, isMobile };
 }
 
 export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
@@ -37,7 +48,7 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
   const visible = useVisibility(wrapRef, { threshold: 0.05 });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [tabVisible, setTabVisible] = useState(true);
-  const maxDpr = useMaxDpr();
+  const { maxDpr, isMobile } = useViewportProfile();
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -71,7 +82,15 @@ export function HeroCanvas({ className, onReady }: HeroCanvasProps) {
         }}
       >
         <Suspense fallback={null}>
-          {HERO_VARIANT === "flowfield" ? (
+          {HERO_VARIANT === "glass" ? (
+            <>
+              <HeroGlassField containerRef={wrapRef} reduceMotion={reduceMotion} />
+              <HeroGlassDD containerRef={wrapRef} reduceMotion={reduceMotion} isMobile={isMobile} />
+              <EffectComposer>
+                <FilmGrain amount={HERO_GRAIN.amount} fps={HERO_GRAIN.fps} />
+              </EffectComposer>
+            </>
+          ) : HERO_VARIANT === "flowfield" ? (
             <>
               <HeroFlowField reduceMotion={reduceMotion} />
               <HeroGlassMonogram containerRef={wrapRef} reduceMotion={reduceMotion} />
