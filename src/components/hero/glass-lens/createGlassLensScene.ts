@@ -37,10 +37,14 @@ type Options = {
   maxDpr: number;
   /** Called once, after the first frame has been drawn. */
   onFirstFrame?: () => void;
+  /** The headline's box, so the Ds can be laid out around it. */
+  getAvoidRect?: () => AvoidRect | null;
 };
 
 export type GlassLensScene = {
   setRunning: (running: boolean) => void;
+  /** Re-run the layout, e.g. when the headline changes size. */
+  relayout: () => void;
   dispose: () => void;
 };
 
@@ -90,29 +94,73 @@ function letterGeometry(H: number): BufferGeometry {
   return geo;
 }
 
+/** A box to keep clear, as fractions of the canvas (0,0 top-left, 1,1 bottom-right). */
+export type AvoidRect = { left: number; top: number; right: number; bottom: number };
+
+/** Letter width over cap height, bevel included. */
+const D_ASPECT = 0.8;
+/** Screen fraction kept clear for the nav along the top. */
+const NAV_CLEARANCE = 0.11;
+
 /**
- * Where the two Ds sit for a given aspect. The camera looks down +z, so +x is
- * the left of the screen. Wide screens put one either side of the headline,
- * the left one a touch further back; tall screens stack them above and below.
+ * Where the Ds sit. The camera looks down +z, so +x is the left of the screen.
+ *
+ * Two Ds, one either side of the headline, when they fit beside it touching at
+ * most the edge of their bowls. Otherwise a layered DD monogram, the left D in
+ * front of and overlapping the right, centred in the space above the headline;
+ * only if even that is too cramped does it sit behind the headline.
  */
-function layout(aspect: number, camera: PerspectiveCamera) {
+function layout(aspect: number, camera: PerspectiveCamera, avoid: AvoidRect | null) {
   const halfTan = Math.tan((camera.fov * Math.PI) / 360);
-  if (aspect >= 1.2) {
-    const halfW = 3 * halfTan * aspect;
-    // Sized and spread so the headline, centred between them, only grazes the bowls.
-    const scale = Math.min(0.8, (0.42 * halfW) / 1.08);
-    const x = 0.68 * halfW;
-    return { scale, positions: [new Vector3(x * 1.04, 0.05, -0.8), new Vector3(-x, 0.05, -0.9)] };
+
+  // Pair: the left D sits a touch further back than the right one.
+  const pairHalfW = 3 * halfTan * aspect;
+  const pairScale = Math.min(0.8, (0.42 * pairHalfW) / 1.08);
+  const pairX = 0.68 * pairHalfW;
+  const pairW = L.letterHeight * D_ASPECT * pairScale;
+  const innerEdge = 0.5 - (pairX - pairW / 2) / (2 * pairHalfW);
+  // How far the left D's inner edge reaches into the headline (both mirror).
+  const overlap = avoid ? innerEdge - avoid.left : 0;
+  const pairFits = aspect >= 1.2 && overlap <= 0.3 * (pairW / (2 * pairHalfW));
+  if (pairFits) {
+    return {
+      scale: pairScale,
+      layered: false,
+      positions: [new Vector3(pairX * 1.04, 0.05, -0.8), new Vector3(-pairX, 0.05, -0.9)],
+    };
   }
-  // Each D about a quarter of the height, clear of the nav above and of the
-  // headline, which sits a little below centre.
-  const halfH = 3 * halfTan;
-  const halfW = halfH * aspect;
-  const scale = Math.min(0.42, (1.2 * halfW) / 1.08);
-  return {
-    scale,
-    positions: [new Vector3(0, halfH * 0.52, -0.8), new Vector3(0, -halfH * 0.6, -0.9)],
+
+  // Layered DD, sized in screen fractions at its mid depth.
+  const z = -0.8;
+  const fullH = 2 * (z - camera.position.z) * halfTan;
+  const fullW = fullH * aspect;
+  // The back D peeks out by half a letter, so the pair is 1.5 letters wide.
+  const fitWidth = (h: number) => Math.min(h, (0.8 * fullW) / (1.5 * D_ASPECT * fullH));
+  // Left D in front, right D behind, far enough apart in depth that the sway
+  // never touches. Each is placed at the same screen height for its own depth
+  // (perspective would otherwise lift the nearer one), and sized so the front
+  // one, which reads larger, is the one that fits.
+  const frontZ = z - 0.2;
+  const backZ = z + 0.2;
+  const fullHAt = (depthZ: number) => 2 * (depthZ - camera.position.z) * halfTan;
+  const monogram = (h: number, fy: number) => {
+    const scale = (h * fullHAt(frontZ)) / L.letterHeight;
+    const shift = 0.25 * L.letterHeight * D_ASPECT * scale;
+    return {
+      scale,
+      layered: true,
+      positions: [
+        new Vector3(shift, (0.5 - fy) * fullHAt(frontZ), frontZ),
+        new Vector3(-shift, (0.5 - fy) * fullHAt(backZ), backZ),
+      ],
+    };
   };
+
+  const headTop = avoid ? avoid.top : 0.4;
+  const space = headTop - 0.04 - NAV_CLEARANCE;
+  // 80% of the gap, so it breathes between the nav and the headline.
+  if (space >= 0.17) return monogram(fitWidth(Math.min(space * 0.8, 0.4)), NAV_CLEARANCE + space / 2);
+  return monogram(fitWidth(0.55), avoid ? (avoid.top + avoid.bottom) / 2 : 0.5);
 }
 
 export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): GlassLensScene {
@@ -162,6 +210,8 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
   });
   const cubeCamera = new CubeCamera(0.1, 10, cubeTarget);
   const screenTarget = new WebGLRenderTarget(1, 1, { type: HalfFloatType });
+  // Layered DD only: the field plus the back D, for the front D to refract.
+  const screenTargetBack = new WebGLRenderTarget(1, 1, { type: HalfFloatType });
 
   const glassUniforms = {
     uScreen: { value: screenTarget.texture },
@@ -179,6 +229,13 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     fragmentShader: glassFrag,
     transparent: true,
   });
+  // Same uniforms, except it sees the back D through itself.
+  const frontMaterial = new ShaderMaterial({
+    uniforms: { ...glassUniforms, uScreen: { value: screenTargetBack.texture } },
+    vertexShader: glassVert,
+    fragmentShader: glassFrag,
+    transparent: true,
+  });
   const letterGeo = letterGeometry(L.letterHeight);
   const letters = [0, 1].map((i) => {
     const mesh = new Mesh(letterGeo, glassMaterial);
@@ -188,6 +245,7 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     return mesh;
   });
   let letterScale = 1;
+  let layered = false;
   const cubeCentre = new Vector3();
 
   // ---- Grain ----------------------------------------------------------------
@@ -204,6 +262,15 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     fragmentShader: grainFrag,
   });
   composer.addPass(grainPass);
+
+  const placeLetters = () => {
+    const result = layout(camera.aspect, camera, opts.getAvoidRect?.() ?? null);
+    letterScale = result.scale;
+    layered = result.layered;
+    letters.forEach((m, i) => m.userData.base.copy(result.positions[i]));
+    letters[0].material = layered ? frontMaterial : glassMaterial;
+    cubeCentre.copy(result.positions[0]).add(result.positions[1]).multiplyScalar(0.5);
+  };
 
   // ---- Size -----------------------------------------------------------------
   const resize = () => {
@@ -222,11 +289,9 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     fieldUniforms.uRes.value.copy(buffer);
     glassUniforms.uRes.value.copy(buffer);
     screenTarget.setSize(buffer.x, buffer.y);
+    screenTargetBack.setSize(buffer.x, buffer.y);
 
-    const { scale, positions } = layout(camera.aspect, camera);
-    letterScale = scale;
-    letters.forEach((m, i) => m.userData.base.copy(positions[i]));
-    cubeCentre.copy(positions[0]).add(positions[1]).multiplyScalar(0.5);
+    placeLetters();
   };
   const ro = new ResizeObserver(resize);
   ro.observe(canvas);
@@ -284,6 +349,11 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     cubeCamera.update(renderer, scene);
     renderer.setRenderTarget(screenTarget);
     renderer.render(scene, camera);
+    if (layered) {
+      letters[1].visible = true;
+      renderer.setRenderTarget(screenTargetBack);
+      renderer.render(scene, camera);
+    }
     renderer.setRenderTarget(null);
     letters.forEach((m) => (m.visible = true));
 
@@ -315,11 +385,13 @@ export function createGlassLensScene(canvas: HTMLCanvasElement, opts: Options): 
     fieldMaterial.dispose();
     letterGeo.dispose();
     glassMaterial.dispose();
+    frontMaterial.dispose();
+    screenTargetBack.dispose();
     cubeTarget.dispose();
     screenTarget.dispose();
     composer.dispose();
     renderer.dispose();
   };
 
-  return { setRunning, dispose };
+  return { setRunning, relayout: placeLetters, dispose };
 }

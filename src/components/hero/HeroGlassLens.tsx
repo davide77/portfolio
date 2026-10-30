@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   createGlassLensScene,
+  type AvoidRect,
   type GlassLensScene,
 } from "@/components/hero/glass-lens/createGlassLensScene";
 import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
@@ -43,6 +44,23 @@ export function HeroGlassLens({ className, onReady }: HeroGlassLensProps) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    // The Ds are laid out around the headline, so read where it actually sits.
+    const heading = document.getElementById("hero-heading");
+    const getAvoidRect = (): AvoidRect | null => {
+      if (!heading) return null;
+      const c = canvas.getBoundingClientRect();
+      // The text itself, not the h1 box: the line is centred in a wider box.
+      const range = document.createRange();
+      range.selectNodeContents(heading);
+      const h = range.getBoundingClientRect();
+      if (!c.width || !c.height || !h.width) return null;
+      return {
+        left: (h.left - c.left) / c.width,
+        right: (h.right - c.left) / c.width,
+        top: (h.top - c.top) / c.height,
+        bottom: (h.bottom - c.top) / c.height,
+      };
+    };
     let scene: GlassLensScene;
     try {
       scene = createGlassLensScene(canvas, {
@@ -50,13 +68,18 @@ export function HeroGlassLens({ className, onReady }: HeroGlassLensProps) {
         isMobile,
         maxDpr: HERO_GLASS_MAX_DPR,
         onFirstFrame: () => onReadyRef.current?.(),
+        getAvoidRect,
       });
     } catch {
       // No WebGL: the placeholder stays up and the headline falls back on its timer.
       return;
     }
     sceneRef.current = scene;
+    // Web fonts and wrapping change the headline's box after first paint.
+    const headingObserver = new ResizeObserver(() => scene.relayout());
+    if (heading) headingObserver.observe(heading);
     return () => {
+      headingObserver.disconnect();
       scene.dispose();
       sceneRef.current = null;
     };
