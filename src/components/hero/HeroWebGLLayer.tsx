@@ -5,11 +5,19 @@ import { useState } from "react";
 import { HeroPlaceholder } from "@/components/hero/HeroPlaceholder";
 import { useReducedMotion } from "@/components/hero/hooks/useReducedMotion";
 import { cx } from "@/components/cx";
+import { HERO_VARIANT } from "@/constants/hero-webgl";
 
 const HeroCanvas = dynamic(
   () => import("@/components/hero/HeroCanvas").then((m) => m.HeroCanvas),
   { ssr: false },
 );
+
+const HeroGlassLens = dynamic(
+  () => import("@/components/hero/HeroGlassLens").then((m) => m.HeroGlassLens),
+  { ssr: false },
+);
+
+const Canvas = HERO_VARIANT === "lens" ? HeroGlassLens : HeroCanvas;
 
 type HeroWebGLLayerProps = {
   className?: string;
@@ -28,7 +36,7 @@ export function HeroWebGLLayer({ className, onCanvasReady }: HeroWebGLLayerProps
   return (
     <div className={cx("hero-webgl-layer", className)}>
       <HeroPlaceholder visible={!canvasReady} />
-      <HeroCanvas
+      <Canvas
         className={cx("hero-webgl-layer__canvas", canvasReady && "hero-webgl-layer__canvas--ready")}
         onReady={() => {
           window.setTimeout(() => {

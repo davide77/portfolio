@@ -16,7 +16,7 @@ import { cx } from "@/components/cx";
 // The glass hero brings its own field, and wants the glass to carry the frame:
 // no Grainient underneath, and only the headline and scroll badge over it
 // (monopo.vn's own hero carries nothing else).
-const IS_GLASS = HERO_VARIANT === "glass";
+const IS_GLASS = HERO_VARIANT === "glass" || HERO_VARIANT === "lens";
 
 export function HeroSection() {
   const reduceMotion = useReducedMotion();

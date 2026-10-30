@@ -46,7 +46,7 @@ export const HERO_ORB = {
  * monogram + film grain instead of the liquid-metal orb. The orb stays the
  * default and fully reachable; this is an in-repo A/B, not a replacement.
  */
-export const HERO_VARIANT: "orb" | "flowfield" | "glass" = "glass";
+export const HERO_VARIANT: "orb" | "flowfield" | "glass" | "lens" = "lens";
 
 /**
  * Glass hero (monopo.vn register): a domain-warped field of olive and amber
@@ -206,6 +206,48 @@ export const HERO_GLASS_MAX_DPR = 2;
 /** DPR the glass hero falls back to when PerformanceMonitor reports the
  *  device cannot hold the frame rate. */
 export const HERO_GLASS_MIN_DPR = 1.25;
+
+/**
+ * Lens hero: a D either side of the headline, in clear glass, over a field of
+ * soft sage and amber bands pooling into black. The field follows monopo.vn's
+ * register (bands from a noise-rotated coordinate, dark accent bands over
+ * them); the glass bends a screen copy of the field, so flat faces read as
+ * clear and the bevels split it into RGB.
+ *
+ * Colours go to the screen as written (no sRGB conversion), so these values
+ * are the values you see. WebGL-only, like the orb ramp.
+ */
+export const HERO_GLASS_LENS_PALETTE = {
+  sage: [120, 158, 113],
+  amber: [224, 148, 66],
+  shadow: [0, 0, 0],
+} as const;
+
+export const HERO_GLASS_LENS = {
+  /** Field: noise warp frequency, band density, speed (noise units/second). */
+  frequency: 2.6,
+  zoom: 0.2,
+  zoomMobile: 0.1,
+  speed: 0.126,
+  /** Noise runs this much faster at the start of the intro, then settles. */
+  introSpeedBoost: 2.3,
+  /** Field opacity over black: the main brightness control. */
+  brightness: 0.8,
+  shadowAmount: 1,
+  introSec: 2.5,
+  /** Letter: cap height in world units, before the per-layout scale. */
+  letterHeight: 1.5,
+  /** Glass: bevel refraction, RGB split, centre magnification, body lift. */
+  refraction: 0.09,
+  dispersion: 0.12,
+  magnify: 0.07,
+  body: 0.12,
+  envResolution: 1024,
+  envResolutionMobile: 512,
+  grain: 0.075,
+  /** Camera drift toward the pointer, as a fraction of the pointer offset. */
+  parallax: { x: 0.6, y: 0.3, lerp: 0.06 },
+} as const;
 
 /**
  * Flow-field plane palette. Reuses the sanctioned WebGL-orb carve-out tokens
